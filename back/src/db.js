@@ -3,10 +3,10 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  DB_USER, DB_PASSWORD, DB_HOST,DB_NAME
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -30,10 +30,26 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const {} = sequelize.models;
+const {BranchOffice, LessonDetail, Lessons, Membership, User, StatusMemberships} = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
+
+User.hasOne(Membership);
+Membership.belongsToMany(User);
+User.hasOne(StatusMemberships);
+StatusMemberships.hasOne(User);
+User.belongsToMany(Lessons, {through: "User_Lessons"});
+Lessons.hasMany(User, {through: "User_Lessons"});
+Lessons.hasOne(LessonDetail);
+LessonDetail.hasOne(Lessons);
+Lessons.belongsToMany(BranchOffice, {through: "Lessons_BranchOffice"});
+BranchOffice.hasMany(Lessons, {through:"Lessons_BranchOffice"});
+StatusMemberships.belongsToMany(BranchOffice, {through:"Status_Branch"});
+BranchOffice.belongsToMany(StatusMemberships, {through:"Status_Branch"});
+
+
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
