@@ -1,0 +1,10 @@
+.DivContainer {
+    height: 100vh;
+    width: 100vw;
+}
+.ImageContainer {
+    height: 100%;
+    width: 100%;
+    background-image: url(../../assets/images/home/Hombre-sin-camisa.jpg);
+    background-size: cover;
+}
