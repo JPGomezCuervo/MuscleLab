@@ -5,6 +5,14 @@
 // const lessons = [
 //     {
 //         name: 'Zumba',
-//         duration: ''
+//         duration: '',
+//          id:
+//            details: {
+//                id:
+//              effort:
+//                goals:
+//                description
+//                shcedule
+//            }
 //     }
 // ];
