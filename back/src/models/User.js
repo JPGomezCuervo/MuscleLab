@@ -4,6 +4,7 @@ module.exports=(sequelize) => {
     sequelize.define("user", {
         id:{
             type:DataTypes.UUID,
+            allowNull:false,
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4
         },
@@ -29,7 +30,7 @@ module.exports=(sequelize) => {
             }
         },
         phone:{
-            type:DataTypes.NUMBER,
+            type:DataTypes.INTEGER,
             allowNull:false,
             validate:{
                 isNumeric:true
