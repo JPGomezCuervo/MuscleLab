@@ -1,5 +1,5 @@
 import React from "react";
-
+import logo from "../../assets/icons/Muscle.png"
 import style from "./NavBar.module.css"
 
 const NavBar = ()=>{
@@ -9,7 +9,11 @@ const NavBar = ()=>{
         <>
         <nav className={style.nav}>
         
-            <div><img src="" alt="" /></div>
+            <div>
+            <img src={logo} alt="logo" className={style.img}
+            />
+           
+            </div>
 
             <div>
             <button className={style.button}>Sedes</button>
