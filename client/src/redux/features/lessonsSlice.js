@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { PORT, URL } from "../../utils/constants";
+import { PORT, URL, pending, rejected, fulfilled } from "../../utils/constants";
 import  axios  from 'axios';
 
 
@@ -47,30 +47,30 @@ const lessonsSlice = createSlice({
         builder
             .addCase(fetchLessons.fulfilled, (state, action) => {
                 state.error = '';
-                state.status = 'succeeded';
+                state.status = fulfilled;
                 state.lessons = state.lessons.push(action.payload);
             }
             )
             .addCase(fetchLessons.pending, (state, action) => {
-                state.status = 'loading';
+                state.status = pending;
                 state.error = '';
             })
             .addCase(fetchLessons.rejected, (state, action) => {
-                state.status = 'failed';
+                state.status = rejected;
                 //revisar sintaxis del error
                 state.error = action.error;
             })
             .addCase(fetchLesonsByID.fulfilled, (state, action) => {
                 state.lesson = action.payload;
                 state.error = '';
-                state.status = 'succeeded';
+                state.status = fulfilled;
             })
             .addCase(fetchLesonsByID.pending, (state, action) => {
-                state.status = 'loading';
+                state.status = pending;
                 state.error = '' 
             })
             .addCase (fetchLesonsByID.rejected, (state, action) => {
-                state.status = 'failed';
+                state.status = rejected;
                 //revisar sintaxis del error
                 state.error = action.error
             })
