@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 const {Router}=require('express');
 
 
@@ -8,14 +8,6 @@ const server=Router();
  * 
  *      get All y get Detail         
  */
-
-server.get('/', async (req,res)=>{
-    res.status(200).json({msg:'Hola'});
-})
-
-server.get('/:id', async (req,res)=>{
-    res.status(200).json({msg:'Hola'})
-})
 /**     create clase */
 server.post('/', async(req,res)=>{
     res.status(200).json({msg:'Hola'})
@@ -33,20 +25,23 @@ server.delete('/', async (req,res)=>{
     res.status(200).json({msg:'Hola'})
 =======
 const { Router } = require('express');
+const {getAllLessonsHandler, getDetailLessonHandler}=require('../handlers/lessonsHandler');
 
 const server=Router();
 
 server.post('/', async (req,res)=>{
     res.status(200);
-})
-
-server.get('/', async (req,res)=>{
-    res.status(200);
 });
 
+
+server.get('/', getAllLessonsHandler);
+
+server.get('/:id', getDetailLessonHandler);
+=======
 server.get('/:id', async (req,res)=>{
     res.status(200);
->>>>>>> f73914104b97675ad92d3103a3628935971e5068
+
 })
+
 
 module.exports=server;
