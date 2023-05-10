@@ -1,32 +1,23 @@
-const {Router}=require('express');
+const { Router } = require("express");
+const server = Router();
+
+const createNewUser = require("../Handlers/Users/createUserHandler");
+const deleteMyUser = require("../Handlers/Users/deleteUserHandler");
 
 
-const server=Router();
-/** Rutas de Usuarios
- *          get All y get by ID*/
-server.get('/', async (req,res)=>{
-    res.status(200).json({msg:'Hola'});
+server.get("/ping", (req, res) => {
+  res.send("pong");
 });
 
-server.get('/:id', async (req,res)=>{
-    res.status(200).json({msg:'Hola'});
-})
+server.get("/", async (req, res) => {
+  res.status(200);
+});
 
-/**         create user */
+server.get("/:id", async (req, res) => {
+  res.status(200);
+});
+server.post("/create", createNewUser);
 
-server.post('/', async (req,res)=>{
-    res.status(200).json({msg:'Hola'});
-})
+server.delete("/delete/:id", deleteMyUser);
 
-/**          update user*/
-
-server.put('/:id', async (req,res)=>{
-    res.status(200).json({msg:'Hola'});
-})
-
-/**   delete from DB an user*/
-
-server.delete('/:id', async (req,res)=>{
-    res.status(200).json({msg:'Hola'});
-})
-module.exports=server;
+module.exports = server;
