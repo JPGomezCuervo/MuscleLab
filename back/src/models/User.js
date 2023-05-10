@@ -11,16 +11,13 @@ module.exports=(sequelize) => {
         fullName: {
             type:DataTypes.STRING,
             allowNull:false,
-            validate:{
-                isAlpha:true
-            }
+            
         },
         password: {
             type:DataTypes.STRING,
             allowNull:false,
-            validate:{
-                is: ["^(?=.*[0-9])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{6,32}$","i"]
-            }
+            
+            
         },
         email: {
             type:DataTypes.STRING,
