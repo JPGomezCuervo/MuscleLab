@@ -45,7 +45,7 @@ const usersSlice = createSlice ({
             .addCase(fetchAllUsers.fulfilled, ( state, action) => {
                 state.status = fulfilled;
                 state.error = '';
-                state.users = state.users.push(action.payload);
+                state.users = action.payload
  
             })
             .addCase(fetchAllUsers.pending, (state, action) => {
