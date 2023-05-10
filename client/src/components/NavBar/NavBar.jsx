@@ -1,6 +1,8 @@
-import React from "react";
-import logo from "../../assets/icons/Muscle.png"
-import style from "./NavBar.module.css"
+import React from 'react';
+import style from './NavBar.module.css';
+import iconMan from './../../assets/icons/man-silhouette.png';
+import iconWeight from '../../assets/icons/dumbbell.png';
+import { Link } from 'react-router-dom';
 
 const NavBar = ()=>{
 
@@ -8,41 +10,35 @@ const NavBar = ()=>{
      return (
         <>
         <nav className={style.nav}>
-        
-            <div>
-            <img src={logo} alt="logo" className={style.img}
-            />
-           
+            <div className={style.IconContainer}>
+                <img className={style.IconMan} src={iconMan} alt='Icono silueta de hombre' />
+                <h2>Muscle Lab</h2>
+                <img className={style.IconWeight} src={iconWeight} alt='Icono de pesa' />
+                
             </div>
+            <div className={style.OpcionsContainer}>
+                <Link to = {'/sedes'}>
+                    <p className={style.Navbutton}>Sedes</p>
+                </Link>
 
-            <div>
-            <button className={style.button}>Sedes</button>
+                <Link to = {'/sedes'}>
+                    <p className={style.Navbutton}>Clases</p>
+                </Link>
+
+                <Link to = {'/sedes'}>
+                    <p className={style.Navbutton}>Nosotros</p>
+                </Link>
+
+                <Link to = {'/sedes'}>
+                    <p className={style.Navbutton}>Contáctanos</p>
+                </Link>
+
             </div>
-
-            <div>
-            <button className={style.button}>Clases</button>
-            </div>
-
-            <div>
-            <button className={style.button}>Nosotros</button>
-            </div>
-
-            <div>
-            <button className={style.button}>Contactanos</button>
-            </div>
-            
-
-            
-            <div>
             <button className={style.btnPlanes}>Planes</button>
-            </div>
 
-            <div>
-            <button className={style.button}>Iniciar sesión</button>
-            </div>
-
-            <div>
-            <button className={style.btnRegistro}>Registrate</button>
+            <div className={style.LogOpcions}>
+                <button className={style.btnInicioSesion}>Iniciar sesión</button>
+                <button className={style.btnRegistro}>Regístrate</button>
             </div>
             
         </nav>
