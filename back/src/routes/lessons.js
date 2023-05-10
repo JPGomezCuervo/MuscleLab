@@ -1,11 +1,8 @@
-
 const { Router } = require("express");
 const server = Router();
 const createNewLesson = require("../Handlers/Lessons/createLessonHandler");
 const deleteMyLesson = require("../Handlers/Lessons/deleteLessonHandler");
-const {getAllLessonsHandler, getDetailLessonHandler}=require('../handlers/lessonsHandler');
-
-
+const {getAllLessonsHandler, getDetailLessonHandler}=require('../Handlers/lessons/lessonsHandler');
 
 server.put('/', async (req,res)=>{
     res.status(200).json({msg:'Hola'})

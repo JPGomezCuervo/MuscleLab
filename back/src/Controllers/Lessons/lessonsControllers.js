@@ -1,4 +1,4 @@
-const {Lessons, LessonDetail}=require('../db');
+const {Lessons, LessonDetail}=require('../../db');
 
 const getLessons= async ()=>{
     const lessons= await Lessons.findAll();
