@@ -36,15 +36,15 @@ const {BranchOffice, LessonDetail, Lessons, Membership, User, StatusMemberships}
 // Product.hasMany(Reviews);
 
 User.hasOne(Membership);
-Membership.belongsToMany(User);
+Membership.belongsToMany(User, {through:"User_Membership"});
 User.hasOne(StatusMemberships);
 StatusMemberships.hasOne(User);
 User.belongsToMany(Lessons, {through: "User_Lessons"});
-Lessons.hasMany(User, {through: "User_Lessons"});
+Lessons.belongsToMany(User, {through: "User_Lessons"});
 Lessons.hasOne(LessonDetail);
 LessonDetail.hasOne(Lessons);
 Lessons.belongsToMany(BranchOffice, {through: "Lessons_BranchOffice"});
-BranchOffice.hasMany(Lessons, {through:"Lessons_BranchOffice"});
+BranchOffice.belongsToMany(Lessons, {through:"Lessons_BranchOffice"});
 StatusMemberships.belongsToMany(BranchOffice, {through:"Status_Branch"});
 BranchOffice.belongsToMany(StatusMemberships, {through:"Status_Branch"});
 
