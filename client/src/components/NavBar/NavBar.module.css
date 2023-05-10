@@ -116,3 +116,12 @@
     width: 9rem;
     height: 2rem;
 }
+
+.img{
+    background-image: url(../../assets/icons/Muscle.png) ;
+    background-repeat: no-repeat;  
+    max-height: 60px;
+    max-width: 140px;
+    border: none;
+    
+}
