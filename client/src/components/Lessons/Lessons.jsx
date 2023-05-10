@@ -10,8 +10,8 @@ const Lessons = () => {
     console.log(lessons);
     return (
         <div className={style.Frame}>  
-            {lessons.map((lesson)=> {
-                return <Lesson key={lesson.id} lesson={lesson} />
+            {lessons.map((lesson, index)=> {
+                return <Lesson key={lesson.id} lesson={lesson} index={index} />
             })}
         </div>
     );
