@@ -1,8 +1,8 @@
-import React from "react";
-import style from "./NavBar.module.css";
-import iconMan from "./../../assets/icons/man-silhouette.png";
-import iconWeight from "../../assets/icons/dumbbell.png";
-import { Link } from "react-router-dom";
+import React from 'react';
+import style from './NavBar.module.css';
+import iconMan from './../../assets/icons/man-silhouette.png';
+import iconWeight from '../../assets/icons/dumbbell.png';
+import { Link } from 'react-router-dom';
 
 const NavBar = ()=>{
 
@@ -11,9 +11,9 @@ const NavBar = ()=>{
         <>
         <nav className={style.nav}>
             <div className={style.IconContainer}>
-                <img className={style.IconMan} src={iconMan} alt="" />
+                <img className={style.IconMan} src={iconMan} alt='Icono silueta de hombre' />
                 <h2>Muscle Lab</h2>
-                <img className={style.IconWeight} src={iconWeight} alt="" />
+                <img className={style.IconWeight} src={iconWeight} alt='Icono de pesa' />
                 
             </div>
             <div className={style.OpcionsContainer}>
