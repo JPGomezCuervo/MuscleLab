@@ -5,10 +5,14 @@
   font-style: normal;
 }
 
+body{
+  overflow-x: hidden;
+}
+
 @font-face{
   font-family: 'Montserrat-Light';
   src: url('assets/fonts/Montserrat-Light.ttf');
-  font-weight: normal;
+  font-weight: lighter;
   font-style: normal;
 }
 

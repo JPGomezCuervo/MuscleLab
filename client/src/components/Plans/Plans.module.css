@@ -1,0 +1,175 @@
+
+
+.TitleContainer h1{
+    color: #ffc300;
+    text-align: center;
+    font-family: 'Montserrat-Bold';
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+
+}
+
+.TitleContainer h2{
+    color: #2b567d;
+    font-family: 'Montserrat-Light';
+    font-size: 1.2rem;
+    width: 45rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.PlansContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+}
+
+.PlanContainer1{
+    border: #bababa solid .1rem;
+    padding-bottom: 1rem;
+}
+
+.PlanContainer2{
+    border: #bababa solid .1rem;
+    border-right: 0;
+    border-left: 0;
+    padding-bottom: 1rem;
+}
+.PlanContainer3{
+    border: #7c7b7b solid .15rem;
+    border-top: white;
+    height: 30.5rem;
+    padding-bottom: .4rem;
+}
+
+.Plan{
+    width: 18rem;
+    height: 30rem;
+    box-shadow: #d6d5d5 0 .4rem .2rem ;
+}
+
+.Plan .Title{
+    width: 100%;
+    color: white;
+    text-align: center;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 1.4rem;
+    font-family: "Montserrat-Regular";
+}
+.Plan1{
+    height: 100%;
+}
+
+.Plan2{
+    height: 100%;
+}
+
+.Plan3{
+    width: 20rem;
+    height: 100%;
+}
+
+.Plan1 .Title{
+    background-color: #0996dd;
+}
+
+.Plan2 .Title{
+    background-color: #8233ff;
+}
+
+.Plan3 .Title{
+    background-color: #391c76;
+}
+
+.Plan .MainIcon{
+    display: block;
+    height: 6rem;
+    margin: 0 auto;
+    padding-top: 2rem;
+}
+
+.Plan3 .MainIcon{
+    height: 8rem;
+}
+
+.Plan h2{
+    text-align: center;
+    color: #003566;
+    font-family: 'Montserrat-Medium';
+    font-weight: 100;
+}
+.Plan h3{
+    text-align: center;
+    color: #003566 ;
+    font-family: 'Montserrat-SemiBold';
+}
+
+.Plan h4{
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.Plan button{
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.Plan .OpcionsContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.Plan .OpcionsContainer h3{
+    margin: 0;
+    font-family: "Montserrat-Regular";
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.Plan .CheckIcon{
+    height: 1rem;
+    margin-right: 1rem;
+}
+
+.Plan button{
+    border: 0;
+    height: 2.4rem;
+    font-size: 1.1rem;
+    width: 10rem;
+    font-family:'Montserrat-Regular';
+    border-radius: .4rem;
+    color: white;
+}
+
+.Plan1 button{
+    background-color: #0996dd;
+}
+
+.Plan2 button{
+    background-color: #8233ff;
+}
+
+.Plan3 button{
+    background-color: #391c76;
+    height: 2.7rem;
+}
+
+.Plan3 h2{
+    font-size: 1.6rem;
+}
+
+.Plan3 .OpcionsContainer h3{
+    font-size: 1.1rem;
+}
+
+.Plan3 h4{
+    font-size: 1.2rem;
+}
+

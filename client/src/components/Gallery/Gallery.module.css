@@ -1,13 +1,15 @@
 .DivContainer {
-    height: 100vh;
+    height: fit-content;
     width: 100vw;
+    padding-top: 7.3rem;
 }
 .ImageContainer {
-    height: 85%;
-    width: 100%;
-    background-image: url(../../assets/images/home/Hombre-sin-camisa.jpg);
+    height: 80vh;
+    background-image: url(../../assets/images/home/hombre-joven-fitness-estudio.jpg);
+    width: 120vw;
     background-size: cover;
-    background-position-y: -10rem;
+    background-repeat: no-repeat;
+    background-position-y: -33rem;
 
 }
 .messageContainer{
@@ -21,12 +23,12 @@
     color: #ffc300;
     font-size: 8rem;
     text-align: end;
-    width: 72%;
+    width: 60%;
 }
 .btnPlanes{
     margin: auto auto;
     height: fit-content;
-    width: 65%;
+    width: 43%;
     padding: 1.3rem;
     color: #ffffff;
     background-color: #ffc300;
@@ -46,12 +48,14 @@
     width: 3rem;
     transform: rotate(90deg);
     padding-left: 1rem;
+    cursor: pointer;
 }
 .ArrowRight{
     height: 3rem;
     width: 3rem;
     transform: rotate(-90deg);
     padding-right: 1rem;
+    cursor: pointer;
 }
 .Arrows h2{
     color: #ffffff;
@@ -59,5 +63,5 @@
     margin: 0;
     width: fit-content;
     display: inline;
-    font-size: 4rem;
+    font-size: 3rem;
 }
