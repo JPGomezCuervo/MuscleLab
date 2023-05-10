@@ -18,8 +18,6 @@ module.exports = (sequelize) => {
         countRemain: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            // autoIncrement: true,
-
         }
     })
 }
