@@ -11,7 +11,7 @@ const NewLessons= ()=>{
         <input id="name" type="text" class="form-control"name="lesson name" placeholder="Lesson name..."></input>
 
         <h3>Effort</h3>
-        <input id="effort" type="text" class="form-control"name="effort" placeholder="effort.."></input>
+        <input id="effort" type="text" class="form-control"name="effort" placeholder="effort..."></input>
 
         <h3>Goals</h3>
         <input id="goals" type="text" class="form-control"name="goals" placeholder="Goals..."></input>
