@@ -77,6 +77,13 @@
     top: 37rem;
     left: 10rem;
 }
+.btnPlanes:hover{
+    background-color: #f3aa00;
+}
+
+.btnPlanes:active{
+    background-color: #ffd754;
+}
 .Arrows{
     margin-bottom: 1rem;
     position: absolute;
