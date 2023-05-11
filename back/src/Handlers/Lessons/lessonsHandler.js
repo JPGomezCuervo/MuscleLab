@@ -1,5 +1,6 @@
 
-const {getLessons, getDetailLesson} = require("../../Controllers/Lessons/lessonsControllers")
+const {getLessons} = require("../../Controllers/Lessons/getAllLessons")
+const {getDetailLesson} = require("../../Controllers/Lessons/getDetail")
 const getAllLessonsHandler= async (req,res)=>{
     try {
         let lessons= await getLessons();
