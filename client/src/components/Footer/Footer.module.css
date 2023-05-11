@@ -9,13 +9,18 @@
 .InfoContainer{
     display: flex;
     margin: 0 auto;
-    width: 60%;
+    width: 70%;
     justify-content: center;
     padding-top: 5rem;
 }
+.Container {
+    border-top: .2rem solid #ffc300;
+    width: 100%;
+    display: flex;
 
+}
 .Info{
     width: 33%;
-    height: 23rem;
+    height: 10rem;
     text-align: center;
 }
