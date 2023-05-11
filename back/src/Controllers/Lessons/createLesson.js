@@ -1,5 +1,5 @@
 const { Lessons, LessonDetail } = require("../../db");
-let createLesson = async (id, name, effort, goals, description, scheduleDays, scheduleHours) => {
+let createLesson = async (id, name, effort, goals, description, scheduleDays, scheduleHours, image) => {
   const foundedClass = await Lessons.findOne({ where: { name: name } });
   if (foundedClass) {
     throw new Error("That class already exist");
@@ -9,7 +9,8 @@ let createLesson = async (id, name, effort, goals, description, scheduleDays, sc
     }
     const newLesson = await Lessons.create({
       id,
-      name
+      name,
+      image
     });
     const details = await LessonDetail.create({
       id,
