@@ -7,9 +7,11 @@ const getAllUsers = require("../Handlers/Users/getAllUsersHandler");
 const getAllMonitor = require("../Handlers/Users/getAllMonitorHandler");
 const loginUser = require("../Handlers/Users/loginUserHandler");
 const getUserDetail = require("../Handlers/Users/getUserDetailHandler");
+const getDeletedUsers = require("../Handlers/Users/getDeletedusersHandler");
 
 server.get("/", getAllUsers);
 server.get("/monitor", getAllMonitor);
+server.get("/deleted", getDeletedUsers);
 server.get("/:id", getUserDetail);
 server.post("/create", createNewUser);
 server.delete("/delete/:id", deleteMyUser);
