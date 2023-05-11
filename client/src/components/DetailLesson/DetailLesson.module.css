@@ -1,19 +1,21 @@
 
 .conteinerTodo{
-    background-color: #013565;
-    height: 300px;
+    background-color:white;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
 }
 
 
 .h1{
-    margin-left: 130px;
+    margin-top: 150px;
     font-family:'Montserrat-Bold';
     color: #ffc300;
-    font-size: 8rem;
+    font-size: 7rem;
 }
 
 
@@ -23,15 +25,15 @@
     align-items: center;
     justify-content: center;
     font-family:'Montserrat-Bold';
-    color:#ffc300;
+    color:#013565;
     font-size: 2rem;
     
 }
 
 .txt{
     font-family:'Montserrat-Bold';
-    color: white;
-    font-size: 2rem;
+    color:#013565;
+    font-size: 1.8rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -51,7 +53,7 @@ margin-left: 35px;
     background-color: #ffc300;
     width: 260px;
     height: 360px;
-    margin-left: 40px;
+    margin-left: 350px;
 }
 
 .instructor{
@@ -65,15 +67,16 @@ margin-left: 35px;
 }
 
 .contentHorarios{
-    background-color: #013565;
-    height: 200px;
-    width: 800px;
+    background-color: #ffffff;
+    height: 300px;
+    width: 700px;
     margin-top: 2rem;
     margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .fonditoImgyLetras{
-    background-color: #013565;
+    background-color: #ffffff;
     display: flex;
     justify-content: space-around;
     
@@ -86,15 +89,26 @@ margin-left: 35px;
     justify-content: center;
     padding-top: 10px;
     padding-left: 10px;
+    
 }
 
 .fondoMujer{
     background-color: #ffc300;
     width: 650px;
     height: 380px;   
+    margin-right: 45px;
 }
 
 .conjuntoMujerycaja{
-    background-color: #013565;
+    background-color: #ffffff;
     width: 800px;
+}
+
+.detalleparrafo{
+    background-color: white;
+    width: fit-content;
+    height: 200px;
+    display: flex;    
+    margin-left: 80px;
+    margin-right: 40px;
 }

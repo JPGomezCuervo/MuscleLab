@@ -4,13 +4,14 @@ import brad from "../../assets/images/detail/brad.jpeg"
 import mujer from "../../assets/images/lessons/mujer-boxeando.jpg"
 import NavBar from "../NavBar/NavBar";
 
+
 const DetailLesson = ()=> {
 
     return(
 
         <div>
             <NavBar/>
-            <hr />
+            
             <div className={style.conteinerTodo}>
 
                 <h1 className={style.h1}>Body Combat</h1>
@@ -22,7 +23,8 @@ const DetailLesson = ()=> {
                             <h2 className={style.instructor}>Brad Pitt</h2>
                         </div>
                         <div className={style.contentHorarios}>
-                            <h2 className={style.text}>Lunes, miercoles y viernes 18hs a 19hs</h2>
+                            <h2 className={style.text}>Lunes, miercoles y viernes</h2>
+                            <h2 className={style.text}>18hs a 19hs</h2>
                             <h2 className={style.text}>Duración de clase: 50 minutos</h2>
                             <h2 className={style.text}>Intensidad: media</h2>
                         </div>
@@ -32,11 +34,13 @@ const DetailLesson = ()=> {
                             </div>
                         </div>
                     </div>
-
+                <div className={style.detalleparrafo}>
                 <p className={style.txt}>Durante esta sesión de entrenamiento, los participantes tendrán la oportunidad de mejorar su fuerza, resistencia, coordinación y habilidades de boxeo. 
                 La clase se centrará en una combinación de técnicas de boxeo y acondicionamiento físico para proporcionar una experiencia de entrenamiento integral.</p>
+                </div>
 
             </div>
+
 
         </div>
     )
