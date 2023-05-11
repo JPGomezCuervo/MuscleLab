@@ -1,5 +1,4 @@
 const { Lessons, LessonDetail } = require("../../db");
-let lessons=0;
 let createLesson = async (id, name, effort, goals, description, scheduleDays, scheduleHours) => {
   const foundedClass = await Lessons.findOne({ where: { name: name } });
   if (foundedClass) {
