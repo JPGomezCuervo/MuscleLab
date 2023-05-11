@@ -1,6 +1,7 @@
 import style from './FilterBar.module.css';
 
-const FilterBar = () => {
+const FilterBar = ({lessonsAtributtes}) => {
+    
 return (
     <div className= {style.BarContainer}>
         <div className={style.FilterBar}>
@@ -9,7 +10,22 @@ return (
                 <button className={style.BtnOption}>Alfabeto</button>
                 <button className={style.BtnOption}>Intensidad</button>
                 <button className={style.BtnOption}>Clase</button>
-                <button className={style.BtnOption}>Tipo de ejercicio</button>
+                <ul className={style.BtnOption1}>Tipo de ejercicio
+                <div className={style.DropMenuContainer}>
+                    <ul className={style.DropMenu}>
+                        {lessonsAtributtes.map((atribute, index) => {
+                            return(
+                                <li key={index}>
+                                    <button className={`${style.DropMenuBtn} ${style.Active}`}>
+                                        {atribute}
+                                    </button>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                    <button className={style.FilterButton}>filtrar</button>
+                </div>
+                </ul>
             </div>
         </div>
     </div>

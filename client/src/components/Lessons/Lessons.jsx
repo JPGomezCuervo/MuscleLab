@@ -4,17 +4,19 @@ import { selectAllLessons } from '../../redux/features/lessonsSlice';
 import FilterBar from '../FilterBar/FilterBar';
 import Lesson from '../Lesson/Lesson';
 import lessons from '../../utils/lessons';
-
+import tiposClase from '../../utils/tiposClase';
 const Lessons = () => {
     //cuando se funcionen las rutas del server descomenta esto:
 //   const lessons = useSelector(selectAllLessons);
-    console.log(lessons);
+    
     return (
             <div className={style.Frame}>  
-            <FilterBar/>
+            <FilterBar lessonsAtributtes= {tiposClase}/>
+            <div className={style.Container}>
                 {lessons.map((lesson, index)=> {
                     return <Lesson key={lesson.id} lesson={lesson} index={index} />
                 })}
+            </div>
             </div>
     );
 };

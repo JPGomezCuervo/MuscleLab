@@ -13,3 +13,5 @@ const tiposClase = [
     'Relajación',
 
 ];
+
+export default tiposClase;
