@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         effort: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 isAlpha: true
