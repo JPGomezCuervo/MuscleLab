@@ -56,7 +56,7 @@ StatusMemberships.hasOne(User);
 User.belongsToMany(Lessons, { through: "User_Lesson" });
 Lessons.belongsToMany(User, { through: "User_Lesson" });
 Lessons.hasOne(LessonDetail);
-LessonDetail.hasOne(Lessons);
+LessonDetail.belongsTo(Lessons);
 Lessons.belongsToMany(BranchOffice, { through: "Lesson_BranchOffice" });
 BranchOffice.belongsToMany(Lessons, { through: "Lesson_BranchOffice" });
 StatusMemberships.belongsToMany(BranchOffice, {
