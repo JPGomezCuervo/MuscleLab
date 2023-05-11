@@ -4,9 +4,7 @@ const getLessons= async ()=>{
     const lessons= await Lessons.findAll();
     return lessons;
 }
-
 const getDetailLesson= async (id)=>{
-
     const details= await Lessons.findAll({
         include:[{
             model:LessonDetail,
