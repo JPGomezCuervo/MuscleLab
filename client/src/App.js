@@ -4,6 +4,8 @@ import NavBar from './components/NavBar/NavBar';
 import Home from './components/Home/Home';
 import Lessons from './components/Lessons/Lessons';
 import Footer from './components/Footer/Footer';
+import DetailLesson from './components/DetailLesson/DetailLesson';
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
       <Route path='/clases' element={<Lessons/>}/>
     </Routes>
     <Footer/>
+   <DetailLesson/>
    </> 
   );
 }
