@@ -8,6 +8,7 @@ const getAllMonitor = require("../Handlers/Users/getAllMonitorHandler");
 const loginUser = require("../Handlers/Users/loginUserHandler");
 const getUserDetail = require("../Handlers/Users/getUserDetailHandler");
 const getDeletedUsers = require("../Handlers/Users/getDeletedusersHandler");
+const restoreDeletedUser = require("../Handlers/Users/restoreDeletedUserHandler");
 
 server.get("/", getAllUsers);
 server.get("/monitor", getAllMonitor);
@@ -16,4 +17,5 @@ server.get("/:id", getUserDetail);
 server.post("/create", createNewUser);
 server.delete("/delete/:id", deleteMyUser);
 server.post("/login", loginUser);
+server.put("/restore/:id", restoreDeletedUser);
 module.exports = server;
