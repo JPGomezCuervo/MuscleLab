@@ -6,7 +6,6 @@ const getLessons= async ()=>{
 }
 
 const getDetailLesson= async (id)=>{
-    console.log('aca');
     const details= await Lessons.findAll({
         include:[{
             model:LessonDetail,
