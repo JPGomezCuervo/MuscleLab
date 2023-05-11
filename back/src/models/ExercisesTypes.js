@@ -33,6 +33,7 @@ module.exports=(sequelize)=>{
         types.forEach(async (t)=>{
             await ExercisesTypes.findOrCreate({where: {name:t}});
         });
+        
     })();
 
     return ExercisesTypes;
