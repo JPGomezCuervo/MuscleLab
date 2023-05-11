@@ -4,7 +4,6 @@ const getLessons= async ()=>{
     const lessons= await Lessons.findAll();
     return lessons;
 }
-
 const getDetailLesson= async (id)=>{
     const lesson= await Lessons.findAll({where:{id:id}});
     const detail= await LessonDetail.findAll({where:{lessonId:id}});

@@ -51,14 +51,20 @@ const {
 
 User.hasOne(Membership);
 Membership.belongsToMany(User, { through: "membership_user" });
+
 User.hasOne(StatusMemberships, { foreignKey: "user_id" });
 StatusMemberships.hasOne(User);
+
 User.belongsToMany(Lessons, { through: "User_Lesson" });
 Lessons.belongsToMany(User, { through: "User_Lesson" });
+
 Lessons.hasOne(LessonDetail);
+
 LessonDetail.belongsTo(Lessons);
+
 Lessons.belongsToMany(BranchOffice, { through: "Lesson_BranchOffice" });
 BranchOffice.belongsToMany(Lessons, { through: "Lesson_BranchOffice" });
+
 StatusMemberships.belongsToMany(BranchOffice, {
   through: "Status_BranchOffice",
 });
