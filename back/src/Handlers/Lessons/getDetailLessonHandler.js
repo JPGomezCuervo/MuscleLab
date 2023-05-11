@@ -1,14 +1,4 @@
-
-const {getLessons} = require("../../Controllers/Lessons/getAllLessons")
 const {getDetailLesson} = require("../../Controllers/Lessons/getDetail")
-const getAllLessonsHandler= async (req,res)=>{
-    try {
-        let lessons= await getLessons();
-        res.status(200).json(lessons); 
-    } catch (error) {
-        res.status(400).json({err:error.msg});
-    }
-}
 
 const getDetailLessonHandler= async (req,res)=>{
     const {id}=req.params;
@@ -21,6 +11,5 @@ const getDetailLessonHandler= async (req,res)=>{
 }
 
 module.exports={
-    getAllLessonsHandler,
     getDetailLessonHandler
 }
