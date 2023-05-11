@@ -151,14 +151,32 @@
 .Plan1 button{
     background-color: #0996dd;
 }
+.Plan1 button:hover{
+    background-color: #0e7fc2;
+}
+.Plan1 button:active{
+    background-color: #0996dd;
+}
 
 .Plan2 button{
+    background-color: #8233ff;
+}
+.Plan2 button:hover{
+    background-color: #6b2dd6;
+}
+.Plan2 button:active{
     background-color: #8233ff;
 }
 
 .Plan3 button{
     background-color: #391c76;
     height: 2.7rem;
+}
+.Plan3 button:hover{
+    background-color: #5b3f97;
+}
+.Plan3 button:active{
+    background-color: #391c76;
 }
 
 .Plan3 h2{

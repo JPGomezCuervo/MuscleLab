@@ -4,15 +4,7 @@
     padding-top: 7.3rem;
     background-color: black;
 }
-/* .ImageContainer {
-    height: 80vh;
-    background-image: url(../../assets/images/home/hombre-joven-fitness-estudio.jpg);
-    width: 120vw;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position-y: -33rem;
 
-} */
 .SlideShow {
     display: flex;
     flex-wrap: nowrap;
@@ -73,9 +65,16 @@
     font-family:'Montserrat-Bold';
     font-size: 2rem;
     cursor: pointer;
-    transition: .3s;
+    transition: .2s;
     top: 37rem;
     left: 10rem;
+}
+.btnPlanes:hover{
+    background-color: #FFAF00;
+}
+
+.btnPlanes:active{
+    background-color: #ffc300;
 }
 .Arrows{
     margin-bottom: 1rem;

@@ -6,7 +6,7 @@ import img3 from '../../assets/images/home/hombre-brazos-extendidos.jpg';
 import { useRef } from 'react';
 
 
-const Gallery = () => {
+const Gallery = ({handleOnclick}) => {
     const slideShow = useRef(null);
 
     const nextSlide = () => {
@@ -44,7 +44,8 @@ const Gallery = () => {
         }
       };
        
-    
+
+
     return (
         <div className={style.DivContainer}>
             <div className={style.SlideShow} ref={slideShow}>
@@ -52,7 +53,7 @@ const Gallery = () => {
                 <div className={style.Slide}>
                     <div className={style.TextImg}>
                         <h2 className={style.TextImg}>Supera tus límites</h2>
-                        <button className={`${style.btnPlanes} ${style.TextImg}`}>Mira nuestros planes</button>
+                        <button className={`${style.btnPlanes} ${style.TextImg}`} onClick={handleOnclick}>Mira nuestros planes</button>
                     </div>
                     <img src={img1} alt='Imagen de hombre haciendo ejercicio' className={style.ImageContainer1}/>
 
