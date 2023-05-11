@@ -1,14 +1,58 @@
 .DivContainer {
-    height: 100vh;
+    height: fit-content;
     width: 100vw;
+    padding-top: 7.3rem;
+    background-color: black;
 }
-.ImageContainer {
-    height: 85%;
-    width: 100%;
-    background-image: url(../../assets/images/home/Hombre-sin-camisa.jpg);
+/* .ImageContainer {
+    height: 80vh;
+    background-image: url(../../assets/images/home/hombre-joven-fitness-estudio.jpg);
+    width: 120vw;
     background-size: cover;
-    background-position-y: -10rem;
+    background-repeat: no-repeat;
+    background-position-y: -33rem;
 
+} */
+.SlideShow {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 350rem ;
+    height: 50.5rem;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.Slide {
+    width: 100%;
+    
+}
+
+.Slide img {
+    width: 140rem;
+
+}
+.TextImg h2{
+    font-size: 7rem;
+    color: #ffc300;
+    position: absolute;
+    font-weight: bolder;
+    z-index: 1;
+    width: 40rem;
+    left: 10rem;
+    top: 4rem;
+
+}
+
+.ImageContainer1 {
+    transform: translateY(-25rem);
+
+    
+}
+.ImageContainer2 {
+    transform: translateY(-26rem);
+}
+.ImageContainer3{
+    transform: translateY(.6rem) scale(1.25);
 }
 .messageContainer{
  width: 45%;
@@ -16,18 +60,12 @@
  display: flex;
  flex-direction: column;
 }
-.messageContainer h2 {
-    margin: auto auto;
-    color: #ffc300;
-    font-size: 8rem;
-    text-align: end;
-    width: 72%;
-}
+
 .btnPlanes{
-    margin: auto auto;
-    height: fit-content;
-    width: 65%;
-    padding: 1.3rem;
+    width: 30rem;
+    padding: 1rem;
+    position: absolute;
+    z-index: 1;
     color: #ffffff;
     background-color: #ffc300;
     border: 0;
@@ -36,22 +74,29 @@
     font-size: 2rem;
     cursor: pointer;
     transition: .3s;
-    display: block;
+    top: 37rem;
+    left: 10rem;
 }
 .Arrows{
     margin-bottom: 1rem;
+    position: absolute;
+    z-index: 1;
+    top: 52.5rem;
+    left: 2rem;
 }
 .ArrowLeft{
     height: 3rem;
     width: 3rem;
     transform: rotate(90deg);
     padding-left: 1rem;
+    cursor: pointer;
 }
 .ArrowRight{
     height: 3rem;
     width: 3rem;
     transform: rotate(-90deg);
     padding-right: 1rem;
+    cursor: pointer;
 }
 .Arrows h2{
     color: #ffffff;
@@ -59,5 +104,5 @@
     margin: 0;
     width: fit-content;
     display: inline;
-    font-size: 4rem;
+    font-size: 3rem;
 }

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { PORT, URL, pending, rejected, fulfilled } from "../../utils/constants";
+import lessons from "../../utils/lessons";
 import  axios  from 'axios';
 
 
@@ -31,7 +32,7 @@ const fetchLesonsByID = createAsyncThunk(
 
 
 const initialState = {
-    lessons: [],
+    lessons: lessons,
     lesson: {},
     status: 'idle',
     error: ''
@@ -48,7 +49,7 @@ const lessonsSlice = createSlice({
             .addCase(fetchLessons.fulfilled, (state, action) => {
                 state.error = '';
                 state.status = fulfilled;
-                state.lessons = state.lessons.push(action.payload);
+                state.lessons = action.payload;
             }
             )
             .addCase(fetchLessons.pending, (state, action) => {
