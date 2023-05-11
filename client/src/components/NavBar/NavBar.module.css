@@ -61,17 +61,17 @@
     font-family:'Montserrat-Bold';
     font-size: 2rem;
     cursor: pointer;
-    transition: .3s;
+    transition: .2s;
     margin-right: 3%;
 
 }
 
 .btnPlanes:hover{
-    background-color: #f3aa00;
+    background-color: #FFAF00;
 }
 
 .btnPlanes:active{
-    background-color: #ffd754;
+    background-color: #ffc300;
 }
 
 .Navbutton{
