@@ -1,3 +1,5 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 import style from './Lesson.module.css';
 
 const Lesson = ({lesson, index}) => {
@@ -16,7 +18,9 @@ const Lesson = ({lesson, index}) => {
               <div className={style.InfoContainer}>
                 <h2>{name}</h2>
                 <p>{description}</p>
+                <Link to={"/detail"}>
                 <button>Más info</button>
+                </Link>
               </div>
             </>
           ) : (
