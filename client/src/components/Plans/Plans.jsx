@@ -41,7 +41,7 @@ const Plans = () =>{
                 </div>
 
                 <div className={`${style.Plan} ${style.Plan2}`}>
-                    <div className={style.Title}>Plan Standard</div>
+                    <div className={style.Title}>Plan Plus</div>
                     <div className={style.PlanContainer2}>
                         <img className={style.MainIcon} src={muscleIcon} alt="" />
                         <h2>Muscle Plus</h2>
@@ -67,7 +67,7 @@ const Plans = () =>{
                 </div>
 
                 <div className={`${style.Plan} ${style.Plan3}`}>
-                    <div className={style.Title}>Plan Standard</div>
+                    <div className={style.Title}>Plan Premium</div>
                     <div className={style.PlanContainer3}>
                         <img className={style.MainIcon} src={muscleManIcon} alt="" />
                         <h2>Muscle Premium</h2>
