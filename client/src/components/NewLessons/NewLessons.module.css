@@ -29,7 +29,7 @@ input{
     
     
 }
-button {
+.button button {
 
     background-color: #FFC300;
     border: none;
@@ -43,19 +43,19 @@ button {
     height: 2.8rem;
    }
    
-   button:active {
+  .button :active {
     color: white;
     box-shadow: 0 0.2rem #dfd9d9;
     transform: translateY(0.2rem);
    }
    
-   button:hover:not(:disabled) {
+  .button :hover:not(:disabled) {
     background: #003566;
     color: white;
     text-shadow: 0 0.1rem #bcb4b4;
    }
    
-   button:disabled {
+   .button:disabled {
     cursor: auto;
     color: grey;
    }
