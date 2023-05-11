@@ -18,7 +18,7 @@ const Gallery = ({handleOnclick}) => {
             const firstElement = slideShow.current.children[0];
             const sizeSlide = firstElement.offsetWidth;
             
-            slideShow.current.style.transition = `400ms ease-out all`;
+            slideShow.current.style.transition = `300ms ease-out all`;
             slideShow.current.style.transform = `translateX(-${sizeSlide}px)`;
     
             const transition = () => {
@@ -43,7 +43,7 @@ const Gallery = ({handleOnclick}) => {
           slideShow.current.style.transform = `translateX(-${sizeSlide}px)`;
       
           setTimeout(() => {
-            slideShow.current.style.transition = `500ms ease-out all`;
+            slideShow.current.style.transition = `300ms ease-out all`;
             slideShow.current.style.transform = `translateX(0)`;
           }, 50);
           setCurrentSlide(currentSlide === 1 ? totalSlides : currentSlide - 1);
