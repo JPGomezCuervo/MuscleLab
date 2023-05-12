@@ -1,6 +1,6 @@
 import style from './Lessons.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectAllLessons, selectStatus, fetchAllLessons } from '../../redux/features/lessonsSlice';
+import { selectAllLessons, selectStatus, fetchAllLessons, fetchLesonsByID } from '../../redux/features/lessonsSlice';
 import { useEffect } from 'react';
 import FilterBar from '../FilterBar/FilterBar';
 import Lesson from '../Lesson/Lesson';
@@ -10,11 +10,13 @@ const Lessons = () => {
     const dispatch = useDispatch();
     const lessons = useSelector(selectAllLessons);
     const status = useSelector(selectStatus);
+    
     console.log(lessons);
     console.log(status);
     useEffect(() => {
         window.scrollTo({top: 0, left:0, behavior: 'auto'})
         dispatch(fetchAllLessons());
+        
     }, [dispatch]);
     
     return (
