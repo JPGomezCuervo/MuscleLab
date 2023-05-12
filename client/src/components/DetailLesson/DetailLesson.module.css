@@ -53,7 +53,8 @@ margin-left: 27px;
     background-color: #ffc300;
     width: 230px;
     height: 360px;
-    margin-left: 350px;
+    margin-left: 3px;
+    margin-right: 430px;
 }
 
 .instructor{
@@ -67,18 +68,18 @@ margin-left: 27px;
 }
 
 .contentHorarios{
-    background-color: #ffffff;
-    height: 300px;
-    width: 700px;
+    background-color: #f18d8d;
+    height: 340px;
+    width: 600px;
     margin-top: 2rem;
-    margin-left: 1rem;
+    
     margin-right: 1rem;
 }
 
-.fonditoImgyLetras{
+.fondoinstrYHor{
     background-color: #ffffff;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     
 }
 
@@ -96,12 +97,12 @@ margin-left: 27px;
     background-color: #ffc300;
     width: 550px;
     height: 380px;   
-    margin-right: 45px;
+    margin-left: 240px;
 }
 
 .conjuntoMujerycaja{
-    background-color: #ffffff;
-    width: 800px;
+    background-color: #75e011;
+    width: 900px;
 }
 
 .detalleparrafo{

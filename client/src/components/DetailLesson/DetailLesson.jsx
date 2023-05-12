@@ -31,12 +31,14 @@ const DetailLesson = ()=> {
 
                 <h1 className={style.h1}>{lesson.name}</h1>
 
-                    <div className={style.fonditoImgyLetras}>
-                        <div className={style.fondoBrad}>
-                            <img src={brad} alt="instructor" className={style.img} />
-                            <h2 className={style.instructor}>Instructor:</h2>
-                            <h2 className={style.instructor}>Brad Pitt</h2>
+                    <div className={style.fondoinstrYHor}>
+
+                    <div className={style.conjuntoMujerycaja}>
+                            <div className={style.fondoMujer}>
+                            <img src={lesson.image} alt="mujer boxeando" className={style.mujerBox} />
+                            </div>
                         </div>
+
                         <div className={style.contentHorarios}>
                             <h2 className={style.text}>{lesson.scheduleDays.join(" , ")}</h2>
                             <h2 className={style.text}>{lesson.scheduleHours}</h2>
@@ -44,12 +46,17 @@ const DetailLesson = ()=> {
                             <h2 className={style.text}>{lesson.effort}</h2>
                             <h2 className={style.text}>{lesson.category}</h2>
                         </div>
-                        <div className={style.conjuntoMujerycaja}>
-                            <div className={style.fondoMujer}>
-                            <img src={lesson.image} alt="mujer boxeando" className={style.mujerBox} />
-                            </div>
+
+                        
+
+                        <div className={style.fondoBrad}>
+                            <img src={brad} alt="instructor" className={style.img} />
+                            <h2 className={style.instructor}>Instructor:</h2>
+                            <h2 className={style.instructor}>Brad Pitt</h2>
                         </div>
+
                     </div>
+
                 <div className={style.detalleparrafo}>
                 <p className={style.txt}>{lesson.description}</p>
                 </div>
