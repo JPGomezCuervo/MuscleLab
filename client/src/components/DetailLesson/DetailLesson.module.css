@@ -46,12 +46,12 @@
 .img{
  width: 180px; 
  margin-top: 20px;
-margin-left: 35px;
+margin-left: 27px;
 }
 
 .fondoBrad{
     background-color: #ffc300;
-    width: 260px;
+    width: 230px;
     height: 360px;
     margin-left: 350px;
 }
@@ -83,7 +83,7 @@ margin-left: 35px;
 }
 
 .mujerBox{
-    width: 630px;
+    width: 530px;
     height: 360px;
     display: flex;
     justify-content: center;
@@ -94,7 +94,7 @@ margin-left: 35px;
 
 .fondoMujer{
     background-color: #ffc300;
-    width: 650px;
+    width: 550px;
     height: 380px;   
     margin-right: 45px;
 }

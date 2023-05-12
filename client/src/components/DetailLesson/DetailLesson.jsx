@@ -1,12 +1,17 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {selectLesson} from "../../redux/features/lessonsSlice"
 import style from "./DetailLesson.module.css";
 import brad from "../../assets/images/detail/brad.jpeg"
 import mujer from "../../assets/images/lessons/mujer-boxeando.jpg"
 import NavBar from "../NavBar/NavBar";
 
 
+
 const DetailLesson = ()=> {
 
+    const lesson = useSelector(selectLesson)
+console.log(lesson)
     return(
 
         <div>
