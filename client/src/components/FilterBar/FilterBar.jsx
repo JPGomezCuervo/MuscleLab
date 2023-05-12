@@ -1,6 +1,7 @@
 import style from './FilterBar.module.css';
 
 const FilterBar = ({lessonsAtributtes}) => {
+
     
 return (
     <div className= {style.BarContainer}>
@@ -13,11 +14,11 @@ return (
                 <ul className={style.BtnOption1}>Tipo de ejercicio
                 <div className={style.DropMenuContainer}>
                     <ul className={style.DropMenu}>
-                        {lessonsAtributtes.map((atribute, index) => {
+                        {lessonsAtributtes.map((atribute) => {
                             return(
-                                <li key={index}>
+                                <li key={atribute.id}>
                                     <button className={`${style.DropMenuBtn} ${style.Active}`}>
-                                        {atribute}
+                                        {atribute.name}
                                     </button>
                                 </li>
                             )
