@@ -5,20 +5,21 @@ import  axios  from 'axios';
 
 
 
-const fetchLessons = createAsyncThunk(
-    'lessons/fetchLessons', async () => {
+const fetchAllLessons = createAsyncThunk(
+    'lessons/fetchAllLessons', async () => {
+        console.log('entre');
         try {
-            const response = await axios.get(`${URL}+${PORT}/lessons`);
+            const response = await axios.get(`${URL}${PORT}/lessons`);
+
             return response.data
         } catch (error){
-            // revisar como el back envia los errores
             throw new Error (error.response) 
         }
 
     }
 )
 const fetchLesonsByID = createAsyncThunk(
-    'lessons/fetchLessonsByID', async () => {
+    'lessons/fetchAllLessonsByID', async () => {
         try {
             const response = await axios.get(`${URL}+${PORT}/lessons/:id`);
             return response.data
@@ -32,7 +33,7 @@ const fetchLesonsByID = createAsyncThunk(
 
 
 const initialState = {
-    lessons: lessons,
+    lessons: [],
     lesson: {},
     status: 'idle',
     error: ''
@@ -46,17 +47,17 @@ const lessonsSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchLessons.fulfilled, (state, action) => {
+            .addCase(fetchAllLessons.fulfilled, (state, action) => {
                 state.error = '';
                 state.status = fulfilled;
                 state.lessons = action.payload;
             }
             )
-            .addCase(fetchLessons.pending, (state, action) => {
+            .addCase(fetchAllLessons.pending, (state, action) => {
                 state.status = pending;
                 state.error = '';
             })
-            .addCase(fetchLessons.rejected, (state, action) => {
+            .addCase(fetchAllLessons.rejected, (state, action) => {
                 state.status = rejected;
                 //revisar sintaxis del error
                 state.error = action.error;
@@ -79,9 +80,9 @@ const lessonsSlice = createSlice({
 })
 
 
-export const selectAllLessons = (state) => state.lessons;
-export const selectLesson = (state) => state.lesson;
-export const selectStatus = (state) => state.status;
-export const selectError = (state) => state.error;
+export const selectAllLessons = (state) => state.lessons.lessons;
+export const selectLesson = (state) => state.lessons.lesson;
+export const selectStatus = (state) => state.lessons.status;
+export const selectError = (state) => state.lessons.error;
 export default lessonsSlice.reducer;
-export { fetchLessons, fetchLesonsByID }
+export { fetchAllLessons, fetchLesonsByID }
