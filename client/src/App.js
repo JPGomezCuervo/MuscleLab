@@ -17,7 +17,7 @@ function App() {
       <Route path='/crearclase' element={<NewLessons/>}/>
       <Route path="/" element={<Home/>}/>
       <Route path='/clases' element={<Lessons/>}/>
-      <Route path= '/detalles' element={<DetailLesson/>}/>
+      <Route path= '/clases/detalles' element={<DetailLesson/>}/>
     </Routes>
     <Footer/>
    

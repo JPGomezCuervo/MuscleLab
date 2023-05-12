@@ -18,7 +18,7 @@ const fetchAllLessons = createAsyncThunk(
 
     }
 )
-const fetchLesonsByID = createAsyncThunk(
+const fetchLessonsByID = createAsyncThunk(
     'lessons/fetchAllLessonsByID', async (id) => {
         try {
             const response = await axios.get(`${URL}${PORT}/lessons/:id`);
@@ -62,16 +62,16 @@ const lessonsSlice = createSlice({
                 //revisar sintaxis del error
                 state.error = action.error;
             })
-            .addCase(fetchLesonsByID.fulfilled, (state, action) => {
+            .addCase(fetchLessonsByID.fulfilled, (state, action) => {
                 state.lesson = action.payload;
                 state.error = '';
                 state.status = fulfilled;
             })
-            .addCase(fetchLesonsByID.pending, (state, action) => {
+            .addCase(fetchLessonsByID.pending, (state, action) => {
                 state.status = pending;
                 state.error = '' 
             })
-            .addCase (fetchLesonsByID.rejected, (state, action) => {
+            .addCase (fetchLessonsByID.rejected, (state, action) => {
                 state.status = rejected;
                 //revisar sintaxis del error
                 state.error = action.error
@@ -84,4 +84,4 @@ export const selectAllLessons = (state) => state.lessons.lessons;
 export const selectStatus = (state) => state.lessons.status;
 export const selectError = (state) => state.lessons.error;
 export default lessonsSlice.reducer;
-export { fetchAllLessons, fetchLesonsByID }
+export { fetchAllLessons, fetchLessonsByID }
