@@ -13,27 +13,7 @@ module.exports=(sequelize)=>{
         }
     },{timestamps:false});
 
-    (async ()=>{
-        let types=[
-            'Fuerza',
-            'Cardio',
-            'Flexibilidad',
-            'Equilibrio',
-            'Coordinación',
-            'Velocidad',
-            'Resistencia',
-            'Agilidad',
-            'Potencia',
-            'Movilidad',
-            'Estiramiento',
-            'Relajación',
-        
-        ];
-
-        types.forEach(async (t)=>{
-            await ExercisesTypes.findOrCreate({where: {name:t}});
-        });
-    })();
+    
 
     return ExercisesTypes;
 }
