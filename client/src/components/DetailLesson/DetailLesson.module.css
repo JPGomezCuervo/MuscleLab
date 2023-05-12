@@ -68,11 +68,10 @@ margin-left: 27px;
 }
 
 .contentHorarios{
-    background-color: #f18d8d;
+    background-color: #ffffff;
     height: 340px;
     width: 600px;
-    margin-top: 2rem;
-    
+    margin-top: 2rem;    
     margin-right: 1rem;
 }
 
@@ -97,12 +96,12 @@ margin-left: 27px;
     background-color: #ffc300;
     width: 550px;
     height: 380px;   
-    margin-left: 240px;
+    margin-left: 150px;
 }
 
 .conjuntoMujerycaja{
-    background-color: #75e011;
-    width: 900px;
+    background-color: #ffffff;
+    width: 700px;
 }
 
 .detalleparrafo{
@@ -112,4 +111,39 @@ margin-left: 27px;
     display: flex;    
     margin-left: 80px;
     margin-right: 40px;
+}
+
+.div1{
+background-color: red;
+width: fit-content;
+height: fit-content;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+padding: 30px;
+}
+
+.div2{
+background-color: aqua;
+width: 100px;
+height: 100px;
+margin-left: 30px;
+margin-left: 30px;
+}
+
+.div3{
+background-color: greenyellow;
+width: 100px;
+height: 100px;
+margin-left: 30px;
+margin-left: 30px;
+}
+
+.div4{
+background-color: blueviolet;
+width: 100px;
+height: 100px;
+margin-left: 30px;
+margin-left: 30px;
 }

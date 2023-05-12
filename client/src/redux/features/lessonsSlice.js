@@ -95,6 +95,7 @@ const lessonsSlice = createSlice({
 
 
 export const selectAllLessons = (state) => state.lessons.lessons;
+
 export const selectStatus = (state) => state.lessons.status;
 export const selectError = (state) => state.lessons.error;
 export default lessonsSlice.reducer;

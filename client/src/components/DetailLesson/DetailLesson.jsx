@@ -61,6 +61,15 @@ const DetailLesson = ()=> {
                 <p className={style.txt}>{lesson.description}</p>
                 </div>
 
+                <div>
+                    <h2 className={style.text}>Elegi tu clase ideal </h2>
+                </div>
+                <div className={style.div1}>
+                    <div className={style.div2}> 3 </div>
+                    <div className={style.div3}>5</div>
+                    <div className={style.div4}>3 </div>
+                </div>
+
             </div>
 
 
