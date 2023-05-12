@@ -1,6 +1,6 @@
 import style from './Lessons.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectAllLessons, selectStatus, fetchAllLessons, fetchLesonsByID } from '../../redux/features/lessonsSlice';
+import { selectAllLessons, selectStatus, fetchAllLessons, fetchLessonsByID } from '../../redux/features/lessonsSlice';
 import { useEffect } from 'react';
 import FilterBar from '../FilterBar/FilterBar';
 import Lesson from '../Lesson/Lesson';
