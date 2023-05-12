@@ -80,8 +80,8 @@ const lessonsSlice = createSlice({
 })
 
 
-export const selectAllLessons = (state) => state.lessons;
-export const selectStatus = (state) => state.status;
-export const selectError = (state) => state.error;
+export const selectAllLessons = (state) => state.lessons.lessons;
+export const selectStatus = (state) => state.lessons.status;
+export const selectError = (state) => state.lessons.error;
 export default lessonsSlice.reducer;
 export { fetchAllLessons, fetchLesonsByID }
