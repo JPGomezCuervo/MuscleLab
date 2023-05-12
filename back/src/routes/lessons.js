@@ -17,7 +17,7 @@ server.get('/:id', getDetailLessonHandler);
 server.get('/deleted', getDeletedLessons)
 server.post("/create", createNewLesson);
 server.delete("/delete/:id", deleteMyLesson);
-server.put('/restore', restoreDeletedLesson)
+server.put('/restore/:id', restoreDeletedLesson)
 
 module.exports = server;
 

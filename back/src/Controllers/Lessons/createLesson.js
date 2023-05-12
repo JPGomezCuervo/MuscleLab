@@ -2,10 +2,10 @@ const { Lessons, LessonDetail, ExercisesType } = require("../../db");
 let createLesson = async (id, name, effort, goals, shortDescription, description, scheduleDays, scheduleHours, image, types) => {
   const foundedClass = await Lessons.findOne({ where: { name: name } });
   if (foundedClass) {
-    throw new Error("That class already exist");
+    throw new Error("La clase con ese Nombre ya existe");
   } else {
     if(!effort || !goals || !name  || !description || !scheduleDays || !scheduleHours || !types || !shortDescription){
-      throw new Error("Missing data");
+      throw new Error("Falta informacion");
     }
     const newLesson = await Lessons.create({
       id,
