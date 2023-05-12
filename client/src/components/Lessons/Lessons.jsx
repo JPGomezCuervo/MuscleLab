@@ -1,17 +1,23 @@
 import style from './Lessons.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectAllLessons } from '../../redux/features/lessonsSlice';
+import { selectAllLessons, selectStatus, fetchAllLessons, fetchLesonsByID } from '../../redux/features/lessonsSlice';
 import { useEffect } from 'react';
 import FilterBar from '../FilterBar/FilterBar';
 import Lesson from '../Lesson/Lesson';
-import lessons from '../../utils/lessons';
 import tiposClase from '../../utils/tiposClase';
+
 const Lessons = () => {
-    //cuando se funcionen las rutas del server descomenta esto:
-//   const lessons = useSelector(selectAllLessons);
+    const dispatch = useDispatch();
+    const lessons = useSelector(selectAllLessons);
+    const status = useSelector(selectStatus);
+    
+    console.log(lessons);
+    console.log(status);
     useEffect(() => {
         window.scrollTo({top: 0, left:0, behavior: 'auto'})
-    }, []);
+        dispatch(fetchAllLessons());
+        
+    }, [dispatch]);
     
     return (
             <div className={style.Frame}>  
