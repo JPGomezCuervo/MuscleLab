@@ -8,13 +8,13 @@ const ContactUs = () => {
         <div class={styles.container}>
           <h1>Contact the team!</h1>
           <p>
-            Fill out the form below to get in touch with one of our team
-            members. We will try to get back to you within 48 hours. If we do
-            not reply within that time please feel free to use the form again.
+          Rellene el siguiente formulario para ponerse en contacto con un miembro de nuestro equipo.
+          Intentaremos responderle en un plazo de 48 horas. Si no
+          respondemos en ese plazo, no dude en volver a utilizar el formulario.
           </p>
           <form>
             <div class={styles.formGroup}>
-              <label for="firstname">First name*</label>
+              <label for="firstname">Nombres*</label>
               <input
                 type="text"
                 name="firstname"
@@ -25,7 +25,7 @@ const ContactUs = () => {
               />
             </div>
             <div class={styles.formGroup}>
-              <label for="lastname">Last name*</label>
+              <label for="lastname">Apellido*</label>
               <input
                 type="text"
                 name="lastname"
@@ -36,7 +36,7 @@ const ContactUs = () => {
               />
             </div>
             <div class={styles.formGroup}>
-              <label for="email">Email address*</label>
+              <label for="email">Email*</label>
               <input
                 type="email"
                 name="email"
@@ -57,12 +57,12 @@ const ContactUs = () => {
               />
             </div>
             <div class={`${styles.formGroup} ${styles.full}`}>
-              <label for="message">What are you looking for?</label>
+              <label for="message">En que podemos ayudarte?</label>
               <textarea
                 name="message"
                 id="message"
                 class={styles.formElement}
-                placeholder="I want..."
+                placeholder="Escribe aqui tu mensaje...."
               ></textarea>
             </div>
             <div class={styles.submitGroup}>
