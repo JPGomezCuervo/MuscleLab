@@ -12,7 +12,7 @@ const Lessons = () => {
     const status = useSelector(selectStatus);
     const lessonTypes = useSelector(selectAllLessonTypes);
     
-    console.log(lessonTypes);
+    
     useEffect(() => {
         window.scrollTo({top: 0, left:0, behavior: 'auto'})
         dispatch(fetchAllLessons());
