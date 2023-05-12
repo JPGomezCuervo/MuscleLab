@@ -2,7 +2,7 @@
     {
      
         "id": 1,
-        "name": "Zumba",
+        "name": "zumba",
         "effort": "maximum",
         "goals": "body ton",
         "description": "Trabajar el cuerpo completo funciona. sal de tu rutina de siempre y obtén verdaderos resultados.",
@@ -86,7 +86,7 @@
     
     {
         "id": 8,
-        "name": "",
+        "name": "lolis",
         "image": "https://d500.epimg.net/cincodias/imagenes/2019/05/02/lifestyle/1556809482_591063_1556811610_noticia_normal.jpg",   
         "effort": "maximum",
         "goals": "arm ton",
