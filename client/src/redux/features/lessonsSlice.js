@@ -7,7 +7,7 @@ import  axios  from 'axios';
 
 const fetchAllLessons = createAsyncThunk(
     'lessons/fetchAllLessons', async () => {
-        console.log('entre');
+        
         try {
             const response = await axios.get(`${URL}${PORT}/lessons`);
 

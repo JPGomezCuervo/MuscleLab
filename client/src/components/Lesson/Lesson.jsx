@@ -2,7 +2,7 @@ import style from './Lesson.module.css';
 
 const Lesson = ({lesson, index}) => {
     const {name, description, image} = lesson;
-    console.log(index);
+  
     
     const cardType = index % 2 === 0 ? 'Right' : 'Left';
 
