@@ -1,5 +1,5 @@
 import style from './Lesson.module.css';
-
+import { Link } from 'react-router-dom';
 const Lesson = ({lesson, index}) => {
     const {name, description, image} = lesson;
   
@@ -16,7 +16,9 @@ const Lesson = ({lesson, index}) => {
               <div className={style.InfoContainer}>
                 <h2>{name}</h2>
                 <p>{description}</p>
-                <button>Más info</button>
+                <Link to={'/clases/detalles'}>
+                  <button>Más info</button>
+                </Link>
               </div>
             </>
           ) : (
@@ -24,7 +26,9 @@ const Lesson = ({lesson, index}) => {
               <div className={style.InfoContainer}>
                 <h2>{name}</h2>
                 <p>{description}</p>
-                <button>Más info</button>
+                <Link to={'/clases/detalles'}>
+                  <button>Más info</button>
+                </Link>
               </div>
               <div className={style.ImageContainer}>
                 <img src={image} alt={name} />
