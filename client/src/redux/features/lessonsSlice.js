@@ -80,6 +80,7 @@ const lessonsSlice = createSlice({
 
 
 export const selectAllLessons = (state) => state.lessons;
+export const selectLesson = (state) => state.lesson;
 export const selectStatus = (state) => state.status;
 export const selectError = (state) => state.error;
 export default lessonsSlice.reducer;
