@@ -6,11 +6,12 @@ const getDetailLesson= async (id)=>{
     const final={
         name:lesson[0].name,
         image:lesson[0].image,
-        effort:detail[0].effort,
+        effort:lesson[0].effort,
         goals:detail[0].goals,
         description:detail[0].description,
         scheduleDays:detail[0].scheduleDays,
-        scheduleHours:detail[0].scheduleHours
+        scheduleHourStart:detail[0].scheduleHourStart,
+        scheduleHourFinish:detail[0].scheduleHourFinish
     }
     return final;
 }
