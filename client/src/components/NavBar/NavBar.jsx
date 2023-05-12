@@ -3,7 +3,6 @@ import style from './NavBar.module.css';
 import iconMan from './../../assets/icons/man-silhouette.png';
 import iconWeight from '../../assets/icons/dumbbell.png';
 import { Link } from 'react-router-dom';
-import Login from '../Login/Login';
 import SignUp from '../SignUp/SignUp';
 
 const NavBar = ()=>{
@@ -42,7 +41,7 @@ const NavBar = ()=>{
 
             <div className={style.LogOpcions}>
                 <Link to={'/crearclase'}> 
-                    <button className={style.btnInicioSesion}>Crea una clase</button>
+                    <button className={style.btnInicioSesion}>Inicia sesión</button>
                 </Link> 
                 <Link to={SignUp}>
                     <button className={style.btnRegistro}>Regístrate</button>
