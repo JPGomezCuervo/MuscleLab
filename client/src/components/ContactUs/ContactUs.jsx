@@ -12,7 +12,6 @@ const ContactUs = () => {
             members. We will try to get back to you within 48 hours. If we do
             not reply within that time please feel free to use the form again.
           </p>
-
           <form>
             <div class={styles.formGroup}>
               <label for="firstname">First name*</label>

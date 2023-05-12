@@ -82,11 +82,13 @@ textarea {
   justify-self: center;
   
 }
+
 .submitGroup>input{
   background-color: #ffc300;
   font-size: 0.9rem;
   font-weight: 600;
 }
+
 .submitGroup>input:hover{
   background-color: transparent;
   border: 1px solid black;
