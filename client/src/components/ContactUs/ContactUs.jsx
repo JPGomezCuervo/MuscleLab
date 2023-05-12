@@ -21,7 +21,7 @@ const ContactUs = () => {
                 name="firstname"
                 id="firstname"
                 required
-                class="form-element"
+                class={styles.formElement}
                 placeholder="John"
               />
             </div>
@@ -32,7 +32,7 @@ const ContactUs = () => {
                 name="lastname"
                 id="lastname"
                 required
-                class="form-element"
+                class={styles.formElement}
                 placeholder="Doe"
               />
             </div>
@@ -43,7 +43,7 @@ const ContactUs = () => {
                 name="email"
                 id="email"
                 required
-                class="form-element"
+                class={styles.formElement}
                 placeholder="john.doe@example.com"
               />
             </div>
@@ -53,7 +53,7 @@ const ContactUs = () => {
                 type="text"
                 name="company"
                 id="company"
-                class="form-element"
+                class={styles.formElement}
                 placeholder="john.doe@example.com"
               />
             </div>
@@ -62,7 +62,7 @@ const ContactUs = () => {
               <textarea
                 name="message"
                 id="message"
-                class="form-element"
+                class={styles.formElement}
                 placeholder="I want..."
               ></textarea>
             </div>
