@@ -31,8 +31,8 @@
 }
 
 .txt{
-    font-family:'Montserrat-Bold';
-    color:#013565;
+    font-family: 'Montserrat-regular', sans-serif;
+    color:#ffffff;
     font-size: 1.8rem;
     display: flex;
     flex-direction: row;
@@ -40,13 +40,15 @@
     margin-top: 100px;
     margin-left: 70px;
     margin-bottom: 200px;
-    
 }
+
+
 
 .img{
  width: 180px; 
  margin-top: 20px;
 margin-left: 27px;
+border-radius: .4rem;
 }
 
 .fondoBrad{
@@ -55,10 +57,11 @@ margin-left: 27px;
     height: 360px;
     margin-left: 3px;
     margin-right: 430px;
+    border-radius: .4rem;
 }
 
 .instructor{
-    font-family:'Montserrat-Bold';
+    font-family: 'Montserrat-regular', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -68,7 +71,7 @@ margin-left: 27px;
 }
 
 .contentHorarios{
-    background-color: #b30f0f;
+    background-color: white;
     height: 340px;
     width: 600px;
     margin-top: 2rem;    
@@ -82,14 +85,14 @@ margin-left: 27px;
     
 }
 
-.mujerBox{
+.imagenDeporte{
     width: 530px;
     height: 360px;
     display: flex;
     justify-content: center;
     padding-top: 10px;
     padding-left: 10px;
-    
+    border-radius: 1rem;
 }
 
 .fondoMujer{
@@ -97,64 +100,73 @@ margin-left: 27px;
     width: 550px;
     height: 380px;   
     margin-left: 150px;
+    border-radius: .4rem;
 }
 
 .conjuntoMujerycaja{
     background-color: #ffffff;
     width: 700px;
+    
 }
 
 .detalleparrafo{
-    background-color: rgb(58, 248, 131);
-    width: fit-content;
+    background-color:#013565 ;
+    width: 100%;
     height: fit-content;
     display: flex;    
-    margin-left: 80px;
-    margin-right: 40px;
+    margin-top: 30px;
+    
+    /* margin-left: 80px; */
+    /* margin-right: 40px; */
 }
 
-.div1{
-background-color: red;
-width: fit-content;
-height: fit-content;
-display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: space-between;
-padding: 30px;
+.button{
+    margin: auto 0;
+    height: 3rem;
+    color: #ffffff;
+    background-color:#013565;
+    border: 0;
+    border-radius: .4rem;
+    width: 15rem;
+    font-family:'Montserrat-Bold';
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .2s;
+    margin-left: 2rem;
+    margin-top: 3rem;
 }
 
-.div2{
-background-color: aqua;
-width: 100px;
-height: 100px;
-margin-left: 30px;
-margin-left: 30px;
+.button:hover{
+background-color:#002141;
 }
 
-.div3{
-background-color: greenyellow;
-width: 100px;
-height: 100px;
-margin-left: 30px;
-margin-left: 30px;
-}
-
-.div4{
-background-color: blueviolet;
-width: 100px;
-height: 100px;
-margin-left: 30px;
-margin-left: 30px;
-}
-
-.li {
-    background-color: #013565;
-    color: white;
-}
-
-
-
-.ul{
+.button3{
+    margin: auto 0;
+    height: 5rem;
+    color: #ffffff;
     background-color: #ffc300;
+    border: 0;
+    border-radius: .5rem;
+    width: 30rem;
+    font-family:'Montserrat-Bold';
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .2s;
+    margin-right: 3%;
+    
+}
+
+.button3:hover{
+    background-color: #FFAF00;
+}
+
+
+.botones{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3%;
+    margin-left: 3%;
+    padding-right: 3rem;
 }

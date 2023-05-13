@@ -5,7 +5,8 @@ import style from "./DetailLesson.module.css";
 import brad from "../../assets/images/detail/brad.jpeg"
 import NavBar from "../NavBar/NavBar";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams , Link} from "react-router-dom";
+
 
 
 
@@ -39,16 +40,16 @@ const DetailLesson = ()=> {
 
                     <div className={style.conjuntoMujerycaja}>
                             <div className={style.fondoMujer}>
-                            <img src={lesson.image} alt="mujer boxeando" className={style.mujerBox} />
+                            <img src={lesson.image} alt="mujer boxeando" className={style.imagenDeporte} />
                             </div>
                         </div>
 
                         <div className={style.contentHorarios}>
-                            <h2 className={style.text}>{lesson.scheduleDays}</h2>
-                            <h2 className={style.text}>{lesson.scheduleHourStart} - {lesson.scheduleHourFinish}</h2>
+                            <h2 className={style.text}>{lesson.scheduleDays?.join(", ")}</h2>
+                            <h2 className={style.text}>{lesson.scheduleHourStart}hs - {lesson.scheduleHourFinish}</h2>
                             <h2 className={style.text}>{lesson.goals}</h2>
                             <h2 className={style.text}>{lesson.effort}</h2>   
-                            <h2>{lesson.types.join(" , ")}</h2>
+                            <h2 className={style.text}>{lesson.types?.join(", ")}</h2>
                             
                                
                         </div>
@@ -67,20 +68,18 @@ const DetailLesson = ()=> {
                 <p className={style.txt}>{lesson.description}</p>
                 </div>
 
-                <div>
-                    <h2 className={style.text}>Elegi tu clase ideal </h2>
-                </div>
-                <div className={style.div1}>
-                    <div className={style.div2}> 3 </div>
-                    <div className={style.div3}>5</div>
-                    <div className={style.div4}>3 </div>
+                <div className={style.botones}>
+                <button className={style.button3}>Elegí tu sede acá</button>
+                <button className={style.button3}>Elegí tu horario</button>
+                <button className={style.button3}>Elegí tu instructor acá</button>
                 </div>
             </div>
                      :
                      <h1>Cargando datos</h1>
                 }
-
-               
+                <Link to = {'/clases'}>
+               <button className={style.button}>Atras</button>
+                </Link>
 
 
         </div>

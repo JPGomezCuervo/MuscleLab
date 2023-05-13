@@ -89,7 +89,7 @@ const lessonsSlice = createSlice({
                 state.error = action.error;
             })
             .addCase(fetchLessonsByID.fulfilled, (state, {payload}) => {
-                state.lesson = {payload};
+                state.lesson = payload;
                 state.error = '';
                 state.status = fulfilled;
             })
