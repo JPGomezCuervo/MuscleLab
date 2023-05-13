@@ -40,7 +40,7 @@ const NavBar = ()=>{
             <button className={style.btnPlanes}>Planes</button>
 
             <div className={style.LogOpcions}>
-                <Link to={'/crearclase'}> 
+                <Link to={'/login'}> 
                     <button className={style.btnInicioSesion}>Inicia sesión</button>
                 </Link> 
                 <Link to={SignUp}>

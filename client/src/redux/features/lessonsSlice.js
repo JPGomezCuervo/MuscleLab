@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { PORT, URL, pending, rejected, fulfilled } from "../../utils/constants";
 import { sortAtoZ,sortZtoA, sortEasiestToHardest, sortHardestToEasiest } from "../../utils/sorterUtils";
-import lessons from "../../utils/lessons";
+import { cleaner } from "../../utils/cleanerUtils";
 import  axios  from 'axios';
 
 
@@ -56,15 +56,27 @@ const lessonsSlice = createSlice({
         },
         orderFromEasiestToHardest: (state) => {
             state.lessons = sortEasiestToHardest(state.lessons);
-        }
+        },
+        sortByType: (state,action) => {
+            const typesArray = action.payload;
+            const lessons = state.lessons;
+            const filteredLessons = lessons.filter((lesson) => {
+                const lessonTypes = lesson.exercisesTypes;
+                return typesArray.every((type) => lessonTypes.includes(type))});
 
+            state.lessons = filteredLessons;
+            if (filteredLessons.lenght === 0) state.error = 'No se encontraron lecciones con los filtros seleccionados';
+            if (filteredLessons.lenght > 0) state.error = '';
+            
+        }
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchAllLessons.fulfilled, (state, action) => {
+            .addCase(fetchAllLessons.fulfilled, (state, {payload}) => {
+                const cleanedData = cleaner(payload);
                 state.error = '';
                 state.status = fulfilled;
-                state.lessons = action.payload;
+                state.lessons = cleanedData;
             }
             )
             .addCase(fetchAllLessons.pending, (state, action) => {
@@ -76,8 +88,8 @@ const lessonsSlice = createSlice({
                 //revisar sintaxis del error
                 state.error = action.error;
             })
-            .addCase(fetchLessonsByID.fulfilled, (state, action) => {
-                state.lesson = action.payload;
+            .addCase(fetchLessonsByID.fulfilled, (state, {payload}) => {
+                state.lesson = {payload};
                 state.error = '';
                 state.status = fulfilled;
             })
@@ -99,5 +111,5 @@ export const selectLesson = (state) => state.lessons.lesson;
 export const selectStatus = (state) => state.lessons.status;
 export const selectError = (state) => state.lessons.error;
 export default lessonsSlice.reducer;
-export const { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest } = lessonsSlice.actions;
+export const { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest, sortByType } = lessonsSlice.actions;
 export { fetchAllLessons, fetchLessonsByID }

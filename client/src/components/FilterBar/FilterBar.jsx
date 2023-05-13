@@ -1,11 +1,12 @@
 import style from './FilterBar.module.css';
 import { useDispatch } from 'react-redux';
-import { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest } from '../../redux/features/lessonsSlice';
+import { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest, sortByType } from '../../redux/features/lessonsSlice';
 import { useState } from 'react';
 
 const FilterBar = ({lessonsAtributtes}) => {
     const [alphabetOrder, setAlphabetOrder] = useState(false);
     const [effortOrder, setEffortOrder] = useState(false);
+    const [selectedType, setSelectedType] = useState([]);
 
     const dispatch = useDispatch();
 
@@ -27,29 +28,40 @@ const FilterBar = ({lessonsAtributtes}) => {
             setEffortOrder(false);
         }
     };
+    const handleTypeClick = (event) => {
+        const name = event.target.name;
+        console.log(name);
+        if(!selectedType.includes(name)){
+            setSelectedType([...selectedType, name]);
+        } else {
+            setSelectedType(selectedType.filter((type) => type !== name));
+        }
+    };
+    const handleFilterClick = () => {
+        dispatch(sortByType(selectedType));
+    };
     
 return (
     <div className= {style.BarContainer}>
         <div className={style.FilterBar}>
             <p>Ordenar por:</p>
             <div className={style.OptionsContainer}>
-                <button className={style.BtnOption} onClick={handleAlfabetoClick}>Alfabeto</button>
-                <button className={style.BtnOption} onClick={handleIntensidadClick}>Intensidad</button>
-                <button className={style.BtnOption}>Clase</button>
+                <button className={(!alphabetOrder) ? (style.BtnOption) : (`${style.BtnOption} ${style.BtnOptionActive}`)} onClick={handleAlfabetoClick}>Alfabeto</button>
+                <button className={(!effortOrder) ? (style.BtnOption) : (`${style.BtnOption} ${style.BtnOptionActive}`)} onClick={handleIntensidadClick} >Intensidad</button>
                 <ul className={style.BtnOption1}>Tipo de ejercicio
                 <div className={style.DropMenuContainer}>
                     <ul className={style.DropMenu}>
                         {lessonsAtributtes.map((atribute) => {
                             return(
                                 <li key={atribute.id}>
-                                    <button className={`${style.DropMenuBtn} ${style.Active}`}>
+                                    <button className={selectedType.includes(atribute.name) ? `${style.DropMenuBtn} ${style.Active}` : style.DropMenuBtn} onClick={handleTypeClick} name={atribute.name}>
                                         {atribute.name}
                                     </button>
                                 </li>
                             )
                         })}
                     </ul>
-                    <button className={style.FilterButton}>filtrar</button>
+                    <button className={style.FilterButton} onClick={handleFilterClick}>filtrar</button>
                 </div>
                 </ul>
             </div>
