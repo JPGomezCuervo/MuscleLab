@@ -35,7 +35,6 @@ return (
             <div className={style.OptionsContainer}>
                 <button className={style.BtnOption} onClick={handleAlfabetoClick}>Alfabeto</button>
                 <button className={style.BtnOption} onClick={handleIntensidadClick}>Intensidad</button>
-                <button className={style.BtnOption}>Clase</button>
                 <ul className={style.BtnOption1}>Tipo de ejercicio
                 <div className={style.DropMenuContainer}>
                     <ul className={style.DropMenu}>
