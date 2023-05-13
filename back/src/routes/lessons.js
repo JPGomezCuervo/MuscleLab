@@ -18,7 +18,7 @@ server.get('/deleted', getDeletedLessons);
 server.post("/create", createNewLesson);
 server.delete("/delete/:id", deleteMyLesson);
 server.put('/restore/:id', restoreDeletedLesson);
-server.put('/update', updateLessons);
+server.put('/update/:id', updateLessons);
 
 module.exports = server;
 
