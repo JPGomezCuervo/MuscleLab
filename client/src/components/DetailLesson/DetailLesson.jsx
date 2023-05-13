@@ -1,12 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {selectLesson, fetchLessonsByID } from "../../redux/features/lessonsSlice"
+import {selectLesson, fetchLessonsByID, selectAllLessons, fet } from "../../redux/features/lessonsSlice"
 import style from "./DetailLesson.module.css";
 import brad from "../../assets/images/detail/brad.jpeg"
-import mujer from "../../assets/images/lessons/mujer-boxeando.jpg"
 import NavBar from "../NavBar/NavBar";
 import { useEffect } from "react";
-import lessons from "../../utils/lessons"
 import { useParams } from "react-router-dom";
 
 
@@ -15,8 +13,8 @@ import { useParams } from "react-router-dom";
 const DetailLesson = ()=> {
 
    const lesson = useSelector(selectLesson)
-    console.log(lesson)
-   //const lesson = lessons[0]
+   
+   console.log(lesson)
     const dispatch = useDispatch();
     const params = useParams();
 
@@ -29,9 +27,13 @@ const DetailLesson = ()=> {
         <div>
             <NavBar/>
             
-            <div className={style.conteinerTodo}>
 
-                <h1 className={style.h1}>{lesson.name}</h1>
+                {
+                    
+                    lesson 
+                    ?
+                    <div className={style.conteinerTodo}>
+                    <h1 className={style.h1}>{lesson.name}</h1>
 
                     <div className={style.fondoinstrYHor}>
 
@@ -43,10 +45,12 @@ const DetailLesson = ()=> {
 
                         <div className={style.contentHorarios}>
                             <h2 className={style.text}>{lesson.scheduleDays}</h2>
-                            <h2 className={style.text}>{lesson.scheduleHours}</h2>
+                            <h2 className={style.text}>{lesson.scheduleHourStart} - {lesson.scheduleHourFinish}</h2>
                             <h2 className={style.text}>{lesson.goals}</h2>
-                            <h2 className={style.text}>{lesson.effort}</h2>
-                            <h2 className={style.text}>{lesson.category}</h2>
+                            <h2 className={style.text}>{lesson.effort}</h2>   
+                            <h2>{lesson.types.join(" , ")}</h2>
+                            
+                               
                         </div>
 
                         
@@ -71,8 +75,12 @@ const DetailLesson = ()=> {
                     <div className={style.div3}>5</div>
                     <div className={style.div4}>3 </div>
                 </div>
-
             </div>
+                     :
+                     <h1>Cargando datos</h1>
+                }
+
+               
 
 
         </div>

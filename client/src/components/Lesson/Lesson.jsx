@@ -28,7 +28,7 @@ const Lesson = ({lesson, index}) => {
               <div className={style.InfoContainer}>
                 <h2>{name}</h2>
                 <p>{description}</p>
-                <Link to={'/clases/detalles'}>
+                <Link to={`/clases/detalles/${id}`}>
                   <button>Más info</button>
                 </Link>
               </div>

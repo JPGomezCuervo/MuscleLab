@@ -68,7 +68,7 @@ margin-left: 27px;
 }
 
 .contentHorarios{
-    background-color: #ffffff;
+    background-color: #b30f0f;
     height: 340px;
     width: 600px;
     margin-top: 2rem;    
@@ -105,9 +105,9 @@ margin-left: 27px;
 }
 
 .detalleparrafo{
-    background-color: white;
+    background-color: rgb(58, 248, 131);
     width: fit-content;
-    height: 200px;
+    height: fit-content;
     display: flex;    
     margin-left: 80px;
     margin-right: 40px;
@@ -146,4 +146,15 @@ width: 100px;
 height: 100px;
 margin-left: 30px;
 margin-left: 30px;
+}
+
+.li {
+    background-color: #013565;
+    color: white;
+}
+
+
+
+.ul{
+    background-color: #ffc300;
 }
