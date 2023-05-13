@@ -1,11 +1,12 @@
 import style from './FilterBar.module.css';
 import { useDispatch } from 'react-redux';
-import { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest } from '../../redux/features/lessonsSlice';
+import { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest, sortByType } from '../../redux/features/lessonsSlice';
 import { useState } from 'react';
 
 const FilterBar = ({lessonsAtributtes}) => {
     const [alphabetOrder, setAlphabetOrder] = useState(false);
     const [effortOrder, setEffortOrder] = useState(false);
+    const [selectedType, setSelectedType] = useState([]);
 
     const dispatch = useDispatch();
 
@@ -27,6 +28,18 @@ const FilterBar = ({lessonsAtributtes}) => {
             setEffortOrder(false);
         }
     };
+    const handleTypeClick = (event) => {
+        const name = event.target.name;
+        console.log(name);
+        if(!selectedType.includes(name)){
+            setSelectedType([...selectedType, name]);
+        } else {
+            setSelectedType(selectedType.filter((type) => type !== name));
+        }
+    };
+    const handleFilterClick = () => {
+        dispatch(sortByType(selectedType));
+    };
     
 return (
     <div className= {style.BarContainer}>
@@ -41,14 +54,14 @@ return (
                         {lessonsAtributtes.map((atribute) => {
                             return(
                                 <li key={atribute.id}>
-                                    <button className={`${style.DropMenuBtn} ${style.Active}`}>
+                                    <button className={selectedType.includes(atribute.name) ? `${style.DropMenuBtn} ${style.Active}` : style.DropMenuBtn} onClick={handleTypeClick} name={atribute.name}>
                                         {atribute.name}
                                     </button>
                                 </li>
                             )
                         })}
                     </ul>
-                    <button className={style.FilterButton}>filtrar</button>
+                    <button className={style.FilterButton} onClick={handleFilterClick}>filtrar</button>
                 </div>
                 </ul>
             </div>
