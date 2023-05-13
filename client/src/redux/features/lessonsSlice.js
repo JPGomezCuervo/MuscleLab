@@ -56,6 +56,20 @@ const lessonsSlice = createSlice({
         },
         orderFromEasiestToHardest: (state) => {
             state.lessons = sortEasiestToHardest(state.lessons);
+        },
+        sortByType: (state, {payload}) => {
+            const lessons = state.lessons;
+            const typeArray = payload;
+
+            const filteredLessons = lessons.filter(lesson => {
+                const exercisesTypes = lesson.exercisesTypes.split(', ');
+                return Array.isArray(exercisesTypes) && exercisesTypes.every(exerciseType => typeArray.includes(exerciseType));
+            });
+
+            state.lessons = filteredLessons;
+            
+            if (filteredLessons.length === 0) state.error = `No se encontraron clases con estos tipos de ejercicio: ${typeArray.join(', ')}`;
+            if (filteredLessons.length > 0) state.error = '';
         }
 
     },

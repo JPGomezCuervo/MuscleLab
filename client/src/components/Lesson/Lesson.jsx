@@ -1,7 +1,7 @@
 import style from './Lesson.module.css';
 import { Link } from 'react-router-dom';
 const Lesson = ({lesson, index}) => {
-    const {name, description, image} = lesson;
+    const {name, shortDescription, image} = lesson;
   
     
     const cardType = index % 2 === 0 ? 'Right' : 'Left';
@@ -15,7 +15,7 @@ const Lesson = ({lesson, index}) => {
               </div>
               <div className={style.InfoContainer}>
                 <h2>{name}</h2>
-                <p>{description}</p>
+                <p>{shortDescription}</p>
                 <Link to={'/clases/detalles'}>
                   <button>Más info</button>
                 </Link>
@@ -25,7 +25,7 @@ const Lesson = ({lesson, index}) => {
             <>
               <div className={style.InfoContainer}>
                 <h2>{name}</h2>
-                <p>{description}</p>
+                <p>{shortDescription}</p>
                 <Link to={'/clases/detalles'}>
                   <button>Más info</button>
                 </Link>
