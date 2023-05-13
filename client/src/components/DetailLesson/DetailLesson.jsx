@@ -7,19 +7,21 @@ import mujer from "../../assets/images/lessons/mujer-boxeando.jpg"
 import NavBar from "../NavBar/NavBar";
 import { useEffect } from "react";
 import lessons from "../../utils/lessons"
+import { useParams } from "react-router-dom";
 
 
 
 
 const DetailLesson = ()=> {
 
-   // const lesson = useSelector(selectLesson)
-    
-   const lesson = lessons[0]
+   const lesson = useSelector(selectLesson)
+    console.log(lesson)
+   //const lesson = lessons[0]
     const dispatch = useDispatch();
+    const params = useParams();
 
     useEffect(()=>{
-        dispatch(fetchLessonsByID())
+        dispatch(fetchLessonsByID(params.id))
     },[dispatch])
 
     return(
@@ -40,7 +42,7 @@ const DetailLesson = ()=> {
                         </div>
 
                         <div className={style.contentHorarios}>
-                            <h2 className={style.text}>{lesson.scheduleDays.join(" , ")}</h2>
+                            <h2 className={style.text}>{lesson.scheduleDays}</h2>
                             <h2 className={style.text}>{lesson.scheduleHours}</h2>
                             <h2 className={style.text}>{lesson.goals}</h2>
                             <h2 className={style.text}>{lesson.effort}</h2>
