@@ -40,6 +40,9 @@
     font-size: 17px;
     cursor: pointer;
 }
+.BtnOptionActive {
+    background-color: #ffc300;
+}
 
 .BtnOption1{
     padding: .3rem;

@@ -33,8 +33,8 @@ return (
         <div className={style.FilterBar}>
             <p>Ordenar por:</p>
             <div className={style.OptionsContainer}>
-                <button className={style.BtnOption} onClick={handleAlfabetoClick}>Alfabeto</button>
-                <button className={style.BtnOption} onClick={handleIntensidadClick}>Intensidad</button>
+                <button className={(!alphabetOrder) ? (style.BtnOption) : (`${style.BtnOption} ${style.BtnOptionActive}`)} onClick={handleAlfabetoClick}>Alfabeto</button>
+                <button className={(!effortOrder) ? (style.BtnOption) : (`${style.BtnOption} ${style.BtnOptionActive}`)} onClick={handleIntensidadClick} >Intensidad</button>
                 <ul className={style.BtnOption1}>Tipo de ejercicio
                 <div className={style.DropMenuContainer}>
                     <ul className={style.DropMenu}>
