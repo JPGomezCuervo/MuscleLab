@@ -3,14 +3,20 @@ import style from './NavBar.module.css';
 import iconMan from './../../assets/icons/man-silhouette.png';
 import iconWeight from '../../assets/icons/dumbbell.png';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setPlansCLick } from '../../redux/features/utilsSlice';
 import SignUp from '../SignUp/SignUp';
 
 const NavBar = ()=>{
+    const dispatch = useDispatch();
 
     const handleClickLogo = () => {
         window.location.href = '/';
     };
+    const handleClickPlan = () => {
 
+        dispatch(setPlansCLick(true))
+    };
      return (
         <>
         <nav className={style.nav}>
@@ -37,7 +43,9 @@ const NavBar = ()=>{
                 </Link>
 
             </div>
-            <button className={style.btnPlanes}>Planes</button>
+            <Link to = {'/'} className={style.btnPlanes} onClick={handleClickPlan}>
+                <button className={style.btnPlanes}>Planes</button>
+            </Link>
 
             <div className={style.LogOpcions}>
                 <Link to={'/login'}> 
