@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectAllLessonTypes, fetchAllLessonTypes } from "../../redux/features/typesSlice";
 import { useState, useEffect } from "react";
 import { validate } from "./Validation";
+import { weekDays } from "../../utils/constants";
 
 const CreateLesson = () => {
   const dispatch = useDispatch();
@@ -175,11 +176,11 @@ const CreateLesson = () => {
           {errors.goals && <div style={{ color: "red" }}>{errors.goals}</div>}
         </div>
 
-        <div className={style.individualHora}>
+        <div className={style.IndividualHora}>
           <div className={`${style.HourContainer} ${style.HourContainer1}`}>
-          <label className= {style.Options}>Hora inicio*</label>
+          <label className= {style.Options}>Hora inicio</label>
           <select onChange={(e) => setHoraInicio(parseInt(e.target.value))}>
-            <option value="">Seleccione...</option>
+            <option value="">Seleccione</option>
             {[...Array(24)].map((_, index) => (
               <option key={index + 1} value={index + 1}>
                 {index + 1}:00
@@ -189,26 +190,18 @@ const CreateLesson = () => {
           </div>
           
           <div className={`${style.HourContainer} ${style.HourContainer2}`}>
-            <label className= {style.Options}>Hora fin*</label>
+            <label className= {style.Options}>Hora fin</label>
             <select onChange={(e) => setHoraFin(parseInt(e.target.value))}>
-              <option value="">Seleccione...</option>
+              <option value="">Seleccione</option>
               {generateHourOptions()}
             </select>  
           </div>
         </div>
 
-        <div className={style.individual}>
-          <label className= {style.Options}>Días*</label>
+        <div className={`${style.individual} ${style.BottomLine}`}>
+          <label className= {style.Options}>Días</label>
           <div className={style.DaysContainer}>
-            {[
-              "Lunes",
-              "Martes",
-              "Miércoles",
-              "Jueves",
-              "Viernes",
-              "Sábado",
-              "Domingo",
-            ].map((dia) => (
+            {weekDays.map((dia) => (
               <div key={dia}>
                 <label>
                   <input
@@ -226,18 +219,18 @@ const CreateLesson = () => {
           )}
         </div>
         <div className={style.individual}>
-          <label className= {style.Options}>Types*</label>
+          <label className= {style.Options}>Tipo de ejercicio</label>
 
           <div className={style.TypesContainer}>
             {lessonTypes.map((type) => {
-              return (<div key={type}>
+              return (<div key={type.id}>
                 <label>
                   <input
                     type="checkbox"
-                    value={type}
+                    value={type.name}
                     onChange={handleTypeChange}
                   />
-                  <p>{type}</p>
+                  <p>{type.name}</p>
                 </label>
               </div>)
             })}
