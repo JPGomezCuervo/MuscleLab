@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { selectAllLessons } from "../../redux/features/lessonsSlices";
+import { selectAllLessons } from "../../redux/features/lessonsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Dashboard.module.css";
-import { fetchAllLessons } from "../../redux/features/lessonsSlices";
+import { fetchAllLessons } from "../../redux/features/lessonsSlice";
 
 const Dashboard = () => {
   const [serverResponse, setServerResponse] = useState(true);
@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(fetchAllLessons());
-  }, [serverResponse]); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serverResponse]); //eslint-disable-next-line react-hooks/exhaustive-deps
 
   const lessons = useSelector(selectAllLessons);
   //console.log(lessons);

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './Lesson.module.css';
 const Lesson = ({lesson, index}) => {
-    const {name, shortDescription, exercisesTypes, image} = lesson;
+    const {name, shortDescription, exercisesTypes, image, id, effort} = lesson;
   
     
     const cardType = index % 2 === 0 ? 'Right' : 'Left';
@@ -17,8 +17,9 @@ const Lesson = ({lesson, index}) => {
               <div className={style.InfoContainer}>
                 <h2>{name}</h2>
                 <p>{shortDescription}</p>
-                {<p>Tipo de ejercicio: {exercisesTypes.map((type) => `${type} | `)}</p>} 
-                <Link to={'/clases/detalles'}>
+                {<p>Tipo de ejercicio: {exercisesTypes.join(', ')}</p>}
+                {<p>Intensidad: {effort}</p>} 
+                <Link to={`/clases/detalles/${id}`}>
                   <button>Más info</button>
                 </Link>
               </div>
@@ -28,8 +29,9 @@ const Lesson = ({lesson, index}) => {
               <div className={style.InfoContainer}>
                 <h2>{name}</h2>
                 <p>{shortDescription}</p>
-                {<p>{exercisesTypes.map((type) => `${type} | `)}</p>} 
-                <Link to={'/clases/detalles'}>
+                {<p>Tipo de ejercicio: {exercisesTypes.join(', ')}</p>}
+                {<p>Intensidad: {effort}</p>} 
+                <Link to={`/clases/detalles/${id}`}>
                   <button>Más info</button>
                 </Link>
               </div>
