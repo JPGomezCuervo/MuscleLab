@@ -5,8 +5,14 @@
     display: flex;
     background-color:#013565 ;
     min-height: 6rem;
+    z-index: 99999;
+    position: fixed;
     width: 100vw;
 }
+.Link a {
+    text-decoration: none;
+}
+
 
 .IconContainer{
     display: flex;
@@ -55,17 +61,17 @@
     font-family:'Montserrat-Bold';
     font-size: 2rem;
     cursor: pointer;
-    transition: .3s;
+    transition: .2s;
     margin-right: 3%;
 
 }
 
 .btnPlanes:hover{
-    background-color: #ffa600;
+    background-color: #FFAF00;
 }
 
 .btnPlanes:active{
-    background-color: #ffd754;
+    background-color: #ffc300;
 }
 
 .Navbutton{
@@ -80,6 +86,7 @@
 
 }
 
+
 .btnRegistro{
     padding: .3rem;
     background-color: transparent;
@@ -87,7 +94,7 @@
     border: 1px solid white;
     border-radius: 5px;
     font-family: 'Montserrat-regular', sans-serif;
-    font-weight: bolder;
+    font-weight: 100;
     font-size: 17px;
     margin-left: 2rem;
     margin-right: 1.5rem;
@@ -116,12 +123,23 @@
     width: 9rem;
     height: 2rem;
 }
+@media screen and (max-width: 1366px){
 
-.img{
-    background-image: url(../../assets/icons/Muscle.png) ;
-    background-repeat: no-repeat;  
-    max-height: 60px;
-    max-width: 140px;
-    border: none;
-    
+    .nav{
+        height: 5rem;
+    }
+    .OpcionsContainer{
+        gap: 3.5rem;
+    }
+    .btnPlanes{
+        width: 10rem;
+        font-size: 1.7rem;
+    }
+    .Navbutton{
+        font-size: 1.15rem;
+        font-size: 1.06rem;
+    }
+    .btnRegistro{
+        margin-left: 1.5rem;
+    }
 }

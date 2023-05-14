@@ -1,0 +1,97 @@
+.Title {
+    background-color: #013565;
+    color: #ffffff;
+    font-family: 'Montserrat-Bold';
+    text-align: center;
+    font-size: 3rem;
+    padding: 1.2rem;
+}
+.Container{
+    display: flex;
+}
+.BoxLeft {
+    background-color: #303344;
+    color: #ffffff;
+    font-family: 'Montserrat-Bold';
+    font-size: 2rem;
+    padding: 1.2rem;
+    width: 43%;
+    float: left;
+    padding-top: 2rem;
+}
+.BoxLeft button {
+    display: block;
+    padding: .3rem;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-family: 'Montserrat-regular', sans-serif;
+    font-weight: bolder;
+    font-size: 2rem;
+    margin-left: 20%;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    cursor: pointer;
+    width: 22rem;
+}
+.BoxLeft h2 {
+    width: 46rem;
+    font-family:'Montserrat-Bold';
+    font-size: 6rem;
+    font-weight: 100 ;
+    margin: 0 auto;
+    margin-left: 3rem;
+    word-spacing: 1rem;
+}
+.BoxLeft h3 {
+    font-family: 'Montserrat-Light';
+    font-size: 1.5rem;
+    margin-left: 7%;
+    margin-top: 4rem;
+    width: 40rem;
+    word-spacing: .15rem;
+}
+.BoxLeft img {
+    position: absolute;
+    height: 8rem;
+    width: 8rem;
+    left: 18%;
+}
+.BoxRight{
+    width: 100%;
+    height: 46rem;
+    background-image: url(../../assets/images/home/mujer-sentada.jpg);
+    background-size: cover;
+}
+
+@media screen and (max-width: 1366px) {
+
+    .Title{
+        font-size: 2.5rem;
+    }
+    .BoxLeft{
+        width: 80%
+    }
+
+    .BoxLeft h2{
+        width: 36rem;
+        font-size: 4.6rem;
+    }
+
+    .BoxLeft img{
+        left: 20%;
+        height: 6.7rem;
+        width: 6.7rem;
+    }
+
+    .BoxLeft h3{
+        font-size: 1.2rem;
+        width: 31.5rem;
+    }
+
+    .BoxRight{
+        width: 100%;
+        background-position: -15rem 0;
+    }
+}

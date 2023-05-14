@@ -1,0 +1,47 @@
+.Footer{
+    width: 100%;
+    height: 100%;
+    background-color: #013565;
+    margin-top: 10rem;
+    color: white;
+}
+.IconContainer{
+    display: flex;
+    width: auto;
+    padding-left: 15%;
+    padding-top: 2rem;
+    margin-bottom: 1rem;
+}
+.Icon {
+    height: 2rem;
+    margin-right: 2.5rem;
+    cursor: pointer;
+}
+.Twitter {
+    height: 2.3rem;
+}
+.Linkedin {
+    height: 2rem;
+    
+}
+.InfoContainer {
+    display: flex;
+    margin: 0 auto;
+    width: 70%;
+    justify-content: center;
+}
+.Container {
+    border-top: .2rem solid #ffc300;
+    width: 100%;
+    display: flex;
+
+}
+.Info{
+    width: 33%;
+    text-align: center;
+    margin-bottom: 2rem;
+    
+}
+.Info p {
+    cursor: pointer;
+}
