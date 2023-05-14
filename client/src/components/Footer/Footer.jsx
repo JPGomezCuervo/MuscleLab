@@ -3,6 +3,7 @@ import twitter from "../../assets/icons/twitter.png"
 import facebook from "../../assets/icons/facebook.png"
 import instagram from "../../assets/icons/instagram.png"
 import linkedin from "../../assets/icons/linkedin.png"
+import { Link } from "react-router-dom"
 const Footer = () =>{
     return(
         <footer className={style.Footer}>
@@ -38,9 +39,9 @@ const Footer = () =>{
                     </div>
                     <div className={style.Info}>
                         <h3>Navegación</h3>
-                        <p>Aqui va la info</p>
-                        <p>Aqui va la info</p>
-                        <p>Aqui va la info</p>
+                        <Link to={'/clases'}> <p>Clases</p></Link>
+                        <Link to={'/sedes'}> <p>Sedes</p></Link>
+                        <Link to={'/contactanos'}> <p>Contáctanos</p></Link>
                     </div>
                     <div className={style.Info}>
                         <h3>Nosotros</h3>
