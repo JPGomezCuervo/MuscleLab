@@ -4,6 +4,8 @@
 }
 
 .Container{
+    display: flex;
+    flex-direction: column;
     padding-top: 8rem;
 }
 
@@ -13,4 +15,25 @@
     font-family: "Montserrat-Bold";
     text-align: center;
     margin-top: 3rem;
+}
+
+.RetryButton {
+    margin: 4rem auto;
+    height: 3rem;
+    color: #ffffff;
+    background-color: #ffc300;
+    border: 0;
+    border-radius: .4rem;
+    width: 15rem;
+    font-family:'Montserrat-Bold';
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .2s;
+}
+.RetryButton:hover{
+    background-color: #FFAF00;
+}
+
+.RetryButton:active{
+    background-color: #ffc300;
 }

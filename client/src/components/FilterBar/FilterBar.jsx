@@ -1,17 +1,17 @@
 import style from './FilterBar.module.css';
 import { useDispatch } from 'react-redux';
 import { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest, sortByType, sortByIntensityandType, sortByIntensity, fetchAllLessons } from '../../redux/features/lessonsSlice';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import trashIcon from "../../assets/icons/trash-bin.png"
 
-const FilterBar = ({lessonsAtributtes}) => {
+const FilterBar = ({lessonsAtributtes, retryButton, setRetryButton}) => {
     const [alphabetOrder, setAlphabetOrder] = useState(false);
     const [effortOrder, setEffortOrder] = useState(false);
     const [selectedType, setSelectedType] = useState([]);
     const [selectedIntensity, setSelectedIntensity] = useState([]);
-    const intensity = [1,2,3,4,5]
+    const intensity = [1,2,3,4,5];
     const dispatch = useDispatch();
-
+    
     const handleAlfabetoClick = () => {
         if (!alphabetOrder) {
             dispatch(orderFromZtoA());
@@ -78,7 +78,17 @@ const FilterBar = ({lessonsAtributtes}) => {
         dispatch(fetchAllLessons());
     }
 
-    
+ useEffect(() => {
+    if (retryButton){
+        setSelectedIntensity([]);
+        setSelectedType([]);
+        setAlphabetOrder(false);
+        setEffortOrder(false);
+        setRetryButton(false);
+        dispatch(fetchAllLessons());
+    }
+    }, [retryButton, setRetryButton, dispatch])
+
 return (
     <div className= {style.BarContainer}>
         <div className={style.FilterBar}>
@@ -101,7 +111,7 @@ return (
                                 )    
                             })}
                         </ul>
-                        <button className={style.DeleteButton} onClick={handleOnDeleteIntensity}>Delete</button>
+                        <button className={style.DeleteButton} onClick={handleOnDeleteIntensity}>Borrar</button>
                     </div>
 
                 </ul>
@@ -120,7 +130,7 @@ return (
                             )
                         })}
                     </ul>
-                    <button className={style.DeleteButton} onClick={handleOnDeleteType}>Delete</button>
+                    <button className={style.DeleteButton} onClick={handleOnDeleteType}>Borrar</button>
                 </div>
                 </ul>
                 
