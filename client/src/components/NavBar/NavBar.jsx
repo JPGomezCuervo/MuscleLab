@@ -43,8 +43,8 @@ const NavBar = ()=> {
                 </Link>
 
             </div>
-            <Link to = {'/'}>
-                <button className={style.btnPlanes} onClick={handlePlanesClick}>Planes</button>
+            <Link to = {'/'} className={style.btnPlanes} onClick={handlePlanesClick}>
+                Planes
             </Link>
 
             <div className={style.LogOpcions}>
