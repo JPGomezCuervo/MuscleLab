@@ -16,6 +16,7 @@ const getDetailLesson= async (id)=>{
     console.log(types);
     const detail= await LessonDetail.findAll({where:{lessonId:id}});
     const final={
+        
         name:lesson[0].name,
         image:lesson[0].image,
         effort:lesson[0].effort,
