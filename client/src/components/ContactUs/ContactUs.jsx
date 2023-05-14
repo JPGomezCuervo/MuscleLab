@@ -4,16 +4,16 @@ import styles from "./ContactUs.module.css";
 const ContactUs = () => {
   return (
     <main>
-      <section class={styles.sectionContact}>
-        <div class={styles.container}>
-          <h1>Contact the team!</h1>
+      <section className={styles.sectionContact}>
+        <div className={styles.container}>
+          <h1 className={styles.Title}>Contact the team!</h1>
           <p>
           Rellene el siguiente formulario para ponerse en contacto con un miembro de nuestro equipo.
           Intentaremos responderle en un plazo de 48 horas. Si no
           respondemos en ese plazo, no dude en volver a utilizar el formulario.
           </p>
           <form>
-            <div class={styles.formGroup}>
+            <div className={styles.formGroup}>
               <label for="firstname">Nombres*</label>
               <input
                 type="text"
@@ -24,7 +24,7 @@ const ContactUs = () => {
                 placeholder="John"
               />
             </div>
-            <div class={styles.formGroup}>
+            <div className={styles.formGroup}>
               <label for="lastname">Apellido*</label>
               <input
                 type="text"
@@ -35,7 +35,7 @@ const ContactUs = () => {
                 placeholder="Doe"
               />
             </div>
-            <div class={styles.formGroup}>
+            <div className={styles.formGroup}>
               <label for="email">Email*</label>
               <input
                 type="email"
@@ -46,7 +46,7 @@ const ContactUs = () => {
                 placeholder="john.doe@example.com"
               />
             </div>
-            <div class={styles.formGroup}>
+            <div className={styles.formGroup}>
               <label for="company">Company</label>
               <input
                 type="text"
@@ -56,16 +56,16 @@ const ContactUs = () => {
                 placeholder="john.doe@example.com"
               />
             </div>
-            <div class={`${styles.formGroup} ${styles.full}`}>
+            <div className={`${styles.formGroup} ${styles.full}`}>
               <label for="message">En que podemos ayudarte?</label>
               <textarea
                 name="message"
                 id="message"
-                class={styles.formElement}
+                className={styles.formElement}
                 placeholder="Escribe aqui tu mensaje...."
               ></textarea>
             </div>
-            <div class={styles.submitGroup}>
+            <div className={styles.submitGroup}>
               <input type="submit" value="SEND MESSAGE" />
             </div>
           </form>
