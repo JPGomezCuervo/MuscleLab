@@ -43,8 +43,8 @@ const NavBar = ()=>{
                 <Link to={'/login'}> 
                     <button className={style.btnInicioSesion}>Inicia sesión</button>
                 </Link> 
-                <Link to={SignUp}>
-                    <button className={style.btnRegistro}>Regístrate</button>
+                <Link to={'/create'}>
+                    <button className={style.btnRegistro}>Crear clase</button>
                 </Link>
             </div>
             
