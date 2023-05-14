@@ -4,9 +4,11 @@ import styles from "./ContactUs.module.css";
 const ContactUs = () => {
   return (
     <main>
-      <section className={styles.sectionContact}>
-        <div className={styles.container}>
-          <h1 className={styles.Title}>Contact the team!</h1>
+
+      <section class={styles.sectionContact}>
+        <div class={styles.container}>
+          <h1>Contacta a nuestro Equipo!</h1>
+
           <p>
           Rellene el siguiente formulario para ponerse en contacto con un miembro de nuestro equipo.
           Intentaremos responderle en un plazo de 48 horas. Si no
@@ -24,8 +26,10 @@ const ContactUs = () => {
                 placeholder="John"
               />
             </div>
-            <div className={styles.formGroup}>
-              <label for="lastname">Apellido*</label>
+
+            <div class={styles.formGroup}>
+              <label for="lastname">Apellidos*</label>
+
               <input
                 type="text"
                 name="lastname"
@@ -46,8 +50,10 @@ const ContactUs = () => {
                 placeholder="john.doe@example.com"
               />
             </div>
-            <div className={styles.formGroup}>
-              <label for="company">Company</label>
+
+            <div class={styles.formGroup}>
+              <label for="company">Empresa</label>
+
               <input
                 type="text"
                 name="company"
@@ -65,8 +71,10 @@ const ContactUs = () => {
                 placeholder="Escribe aqui tu mensaje...."
               ></textarea>
             </div>
-            <div className={styles.submitGroup}>
-              <input type="submit" value="SEND MESSAGE" />
+
+            <div class={styles.submitGroup}>
+              <input type="submit" value="ENVIAR" />
+
             </div>
           </form>
         </div>
