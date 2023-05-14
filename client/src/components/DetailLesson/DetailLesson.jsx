@@ -45,11 +45,11 @@ const DetailLesson = ()=> {
                         </div>
 
                         <div className={style.contentHorarios}>
-                            <h2 className={style.text}>{lesson.scheduleDays?.join(", ")}</h2>
-                            <h2 className={style.text}>{lesson.scheduleHourStart}hs - {lesson.scheduleHourFinish}</h2>
-                            <h2 className={style.text}>{lesson.goals}</h2>
-                            <h2 className={style.text}>{lesson.effort}</h2>   
-                            <h2 className={style.text}>{lesson.types?.join(", ")}</h2>
+                            <h2 className={style.text}>Dias: {lesson.scheduleDays?.join(", ")}</h2>
+                            <h2 className={style.text}>Horario: {lesson.scheduleHourStart}hs - {lesson.scheduleHourFinish}hs</h2>
+                            <h2 className={style.text}>Objetivos: {lesson.goals}</h2>
+                            <h2 className={style.text}>Intensidad: {lesson.effort}</h2>   
+                            <h2 className={style.text}>Tipo de ejercicio: {lesson.types?.join(", ")}</h2>
                             
                                
                         </div>
