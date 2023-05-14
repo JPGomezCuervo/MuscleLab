@@ -9,6 +9,7 @@ import ContactUs from './components/ContactUs/ContactUs'
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import NewLessons from './components/NewLessons/NewLessons';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path= '/detail' element={<DetailLesson/>}/>
       <Route path= '/contactanos' element={<ContactUs />}/>
       <Route path= '/clases/detalles' element={<DetailLesson/>}/>
+      <Route path= '/dashboard' element={<Dashboard/>}/>
     </Routes>
     <Footer/>
   </> 
