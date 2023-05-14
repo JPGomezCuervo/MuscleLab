@@ -65,8 +65,31 @@ const lessonsSlice = createSlice({
                 return typesArray.every((type) => lessonTypes.includes(type))});
 
             state.lessons = filteredLessons;
-            if (filteredLessons.lenght === 0) state.error = 'No se encontraron lecciones con los filtros seleccionados';
-            if (filteredLessons.lenght > 0) state.error = '';
+            if (filteredLessons.length === 0) state.error = `No se encontraron clases con los tipos: ${typesArray.join(', ')}.`;
+            if (filteredLessons.length > 0) state.error = '';
+            
+        },
+        sortByIntensity: (state,action) => {
+            const intensity = action.payload;
+            const lessons = state.lessons;
+            const filteredLessons = lessons.filter((lesson) => {
+                return intensity.some((int) => int === lesson.effort)
+            });
+            state.lessons = filteredLessons;
+            if (filteredLessons.length === 0) state.error = `No se encontraron clases con los filtros seleccionados: ${intensity.join(', ')}`;
+            if (filteredLessons.length > 0) state.error = '';
+        },
+
+        sortByIntensityandType: (state, action) => {
+            const {selectedType, selectedIntensity} = action.payload;
+            const lessons = state.lessons;
+            const filteredLessons = lessons.filter((lesson) => {
+                const lessonTypes = lesson.exercisesTypes;
+                return selectedType.every((type) => lessonTypes.includes(type)) && selectedIntensity.some((int) => int === lesson.effort)});
+            
+            state.lessons = filteredLessons;
+            if (filteredLessons.length === 0) state.error = `No se encontraron clases con los filtros seleccionados: ${selectedType.join(', ')}, ${selectedIntensity.join(', ')}`;
+            if (filteredLessons.length > 0) state.error = '';
             
         }
     },
@@ -74,9 +97,10 @@ const lessonsSlice = createSlice({
         builder
             .addCase(fetchAllLessons.fulfilled, (state, {payload}) => {
                 const cleanedData = cleaner(payload);
+                const orderedData = sortAtoZ(cleanedData);
                 state.error = '';
                 state.status = fulfilled;
-                state.lessons = cleanedData;
+                state.lessons = orderedData;
             }
             )
             .addCase(fetchAllLessons.pending, (state, action) => {
@@ -111,5 +135,5 @@ export const selectLesson = (state) => state.lessons.lesson;
 export const selectStatus = (state) => state.lessons.status;
 export const selectError = (state) => state.lessons.error;
 export default lessonsSlice.reducer;
-export const { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest, sortByType } = lessonsSlice.actions;
+export const { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest, sortByType, sortByIntensityandType, sortByIntensity } = lessonsSlice.actions;
 export { fetchAllLessons, fetchLessonsByID }

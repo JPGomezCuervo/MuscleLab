@@ -1,6 +1,6 @@
 import style from './Lessons.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectAllLessons, selectStatus, fetchAllLessons } from '../../redux/features/lessonsSlice';
+import { selectAllLessons, selectStatus, fetchAllLessons, selectError } from '../../redux/features/lessonsSlice';
 import { fetchAllLessonTypes, selectAllLessonTypes } from '../../redux/features/typesSlice';
 import { useEffect } from 'react';
 import FilterBar from '../FilterBar/FilterBar';
@@ -10,6 +10,7 @@ const Lessons = () => {
     const dispatch = useDispatch();
     const lessons = useSelector(selectAllLessons);
     const status = useSelector(selectStatus);
+    const error = useSelector(selectError);
     const lessonTypes = useSelector(selectAllLessonTypes);
     
     
@@ -24,6 +25,7 @@ const Lessons = () => {
             <div className={style.Frame}>  
             <FilterBar lessonsAtributtes= {lessonTypes}/>
             <div className={style.Container}>
+                {error && <div className={style.Error}>{error}</div>}
                 {lessons.map((lesson, index)=> {
                     return <Lesson key={lesson.id} lesson={lesson} index={index} />
                 })}

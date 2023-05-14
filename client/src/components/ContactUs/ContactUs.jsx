@@ -6,7 +6,7 @@ const ContactUs = () => {
     <main>
       <section class={styles.sectionContact}>
         <div class={styles.container}>
-          <h1>Contact the team!</h1>
+          <h1>Contacta a nuestro Equipo!</h1>
           <p>
           Rellene el siguiente formulario para ponerse en contacto con un miembro de nuestro equipo.
           Intentaremos responderle en un plazo de 48 horas. Si no
@@ -25,7 +25,7 @@ const ContactUs = () => {
               />
             </div>
             <div class={styles.formGroup}>
-              <label for="lastname">Apellido*</label>
+              <label for="lastname">Apellidos*</label>
               <input
                 type="text"
                 name="lastname"
@@ -47,7 +47,7 @@ const ContactUs = () => {
               />
             </div>
             <div class={styles.formGroup}>
-              <label for="company">Company</label>
+              <label for="company">Empresa</label>
               <input
                 type="text"
                 name="company"
@@ -66,7 +66,7 @@ const ContactUs = () => {
               ></textarea>
             </div>
             <div class={styles.submitGroup}>
-              <input type="submit" value="SEND MESSAGE" />
+              <input type="submit" value="ENVIAR" />
             </div>
           </form>
         </div>
