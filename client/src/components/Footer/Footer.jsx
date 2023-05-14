@@ -8,16 +8,24 @@ const Footer = () =>{
         <footer className={style.Footer}>
             <div className={style.IconContainer}>
                 <div className={style.TwitterContainer}>
-                    <img className={`${style.Icon} ${style.Twitter}`} src={twitter} alt='Icono de twitter' />
+                    <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+                        <img className={`${style.Icon} ${style.Twitter}`} src={twitter} alt='Icono de twitter' />
+                    </a>
                 </div>
                 <div>
-                    <img className={style.Icon} src={facebook} alt='Icono de facebook' />
+                    <a href="https://es-la.facebook.com/" target="_blank" rel="noopener noreferrer">
+                        <img className={style.Icon} src={facebook} alt='Icono de facebook' />
+                    </a>
                 </div>
                 <div>
-                    <img className={style.Icon} src={instagram} alt='Icono de instagram' />
+                    <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">
+                        <img className={style.Icon} src={instagram} alt='Icono de instagram' />
+                    </a>
                 </div>
                 <div className={style.LinkedinContainer}>
-                    <img className={`${style.Icon} ${style.Linkedin}`} src={linkedin} alt='Icono de linkedin' />
+                    <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+                        <img className={`${style.Icon} ${style.Linkedin}`} src={linkedin} alt='Icono de linkedin' />
+                    </a>
                 </div>
             </div>
             <div className={style.InfoContainer}>
