@@ -21,15 +21,21 @@ const FilterBar = ({lessonsAtributtes}) => {
             setAlphabetOrder(false);
         }
     };
+    
     const handleIntensidadClick = () => {
-        if (!effortOrder) {
-            dispatch(orderFomHardestToEasiest());
-            setEffortOrder(true);
-        } else {
-            dispatch(orderFromEasiestToHardest());
-            setEffortOrder(false);
-        }
+        // if (!effortOrder) {
+        //     dispatch(orderFomHardestToEasiest());
+        //     setEffortOrder(true);
+        // } else {
+        //     dispatch(orderFromEasiestToHardest());
+        //     setEffortOrder(false);
+        // }
+        setSelectedIntensity([]);
     };
+    const handleTipoEjercicioClick = () => {
+        setSelectedType([]);
+    };
+
     const handleTypeClick = (event) => {
         const name = event.target.name;
         if(!selectedType.includes(name)){
@@ -38,6 +44,7 @@ const FilterBar = ({lessonsAtributtes}) => {
             setSelectedType(selectedType.filter((type) => type !== name));
         }
     };
+
     const handleIntensityClick = (event) => {
         const name = event.target.name;
         if (!selectedIntensity.includes(name)) {
@@ -77,9 +84,11 @@ return (
         <div className={style.FilterBar}>
             <p>Ordenar por:</p>
             <div className={style.OptionsContainer}>
-                <button className={(!alphabetOrder) ? (style.BtnOption) : (`${style.BtnOption} ${style.BtnOptionActive}`)} onClick={handleAlfabetoClick}>Alfabeto</button>
+                <button className={(!alphabetOrder) ? (style.BtnOption) : (`${style.BtnOption} ${style.BtnOptionActive}`)} onClick={handleAlfabetoClick}><p>Alfabeto</p></button>
 
-                <ul className={selectedIntensity.length !== 0 ? `${style.BtnOptionType} ${style.BtnActive} `: style.BtnOptionType }>Intensidad
+                <ul className={(selectedIntensity.length !== 0) ? `${style.BtnOptionType} ${style.BtnActive} `: (style.BtnOptionType) }>
+                    <p onClick={handleIntensidadClick}>Intensidad</p>
+
                     <div className={style.DropMenuIntensityContainer}>
                         <ul className={style.DropMenuIntensity}>
                             {intensity.map((int,index) => {
@@ -97,7 +106,8 @@ return (
 
                 </ul>
 
-                <ul className={selectedType.length !== 0 ? `${style.BtnOptionType} ${style.BtnActive}` : style.BtnOptionType}>Tipo de ejercicio
+                <ul className={selectedType.length !== 0 ? `${style.BtnOptionType} ${style.BtnActive}` : style.BtnOptionType}>
+                    <p onClick={handleTipoEjercicioClick}>Tipo de ejercicio</p>
                 <div className={style.DropMenuContainer}>
                     <ul className={style.DropMenu}>
                         {lessonsAtributtes.map((atribute) => {

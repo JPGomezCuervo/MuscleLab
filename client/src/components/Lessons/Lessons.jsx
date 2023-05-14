@@ -25,7 +25,7 @@ const Lessons = () => {
             <div className={style.Frame}>  
             <FilterBar lessonsAtributtes= {lessonTypes}/>
             <div className={style.Container}>
-                {error && <div>{error}</div>}
+                {error && <div className={style.Error}>{error}</div>}
                 {lessons.map((lesson, index)=> {
                     return <Lesson key={lesson.id} lesson={lesson} index={index} />
                 })}
