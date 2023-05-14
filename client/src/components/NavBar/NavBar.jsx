@@ -1,3 +1,4 @@
+
 import React from 'react';
 import style from './NavBar.module.css';
 import iconMan from './../../assets/icons/man-silhouette.png';
@@ -48,6 +49,10 @@ const NavBar = ()=> {
             </Link>
 
             <div className={style.LogOpcions}>
+              
+                <Link to={"/create"}>
+                    <button className={style.btnInicioSesion}>Crear Clase</button>
+                </Link>
                 <Link to={'/login'}> 
                     <button className={style.btnInicioSesion}>Inicia sesión</button>
                 </Link> 
@@ -61,6 +66,3 @@ const NavBar = ()=> {
         </>
      )
 }
-
-
-export default NavBar;
