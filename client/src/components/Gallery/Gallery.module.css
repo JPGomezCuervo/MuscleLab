@@ -1,0 +1,164 @@
+.DivContainer {
+    height: fit-content;
+    width: 100vw;
+    padding-top: 7.3rem;
+    background-color: black;
+    cursor: pointer;
+}
+
+.SlideShow {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 350rem ;
+    height: 50.5rem;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.Slide {
+    width: 100%;
+    
+}
+
+.Slide img {
+    width: 140rem;
+
+}
+.TextImg h2{
+    font-size: 7rem;
+    color: #ffc300;
+    position: absolute;
+    font-weight: bolder;
+    z-index: 1;
+    width: 40rem;
+    left: 10rem;
+    top: 4rem;
+
+}
+
+.ImageContainer1 {
+    transform: translateY(-25rem);
+
+    
+}
+.ImageContainer2 {
+    transform: translateY(-26rem);
+}
+.ImageContainer3{
+    transform: translateY(.6rem) scale(1.25);
+}
+.messageContainer{
+ width: 45%;
+ height: 100%;
+ display: flex;
+ flex-direction: column;
+}
+
+.btnPlanes{
+    width: 30rem;
+    padding: 1rem;
+    position: absolute;
+    z-index: 1;
+    color: #ffffff;
+    background-color: #ffc300;
+    border: 0;
+    border-radius: .5rem;
+    font-family:'Montserrat-Bold';
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .2s;
+    top: 37rem;
+    left: 10rem;
+}
+.btnPlanes:hover{
+    background-color: #FFAF00;
+}
+
+.btnPlanes:active{
+    background-color: #ffc300;
+}
+.Arrows{
+    margin-bottom: 1rem;
+    position: absolute;
+    z-index: 1;
+    top: 52.5rem;
+    left: 2rem;
+}
+.ArrowLeft{
+    height: 3rem;
+    width: 3rem;
+    transform: rotate(90deg);
+    padding-left: 1rem;
+    cursor: pointer;
+}
+.ArrowRight{
+    height: 3rem;
+    width: 3rem;
+    transform: rotate(-90deg);
+    padding-right: 1rem;
+    cursor: pointer;
+}
+.Arrows h2{
+    color: #ffffff;
+    height: 100%;
+    margin: 0;
+    width: fit-content;
+    display: inline;
+    font-size: 3rem;
+}
+@media screen and (max-width: 1366px){
+    .DivContainer{
+        padding-top: 7.2rem;
+    }
+    .Slide img {
+        width: 120rem;
+    }
+
+    .SlideShow {
+        height: 40rem;
+    }
+
+    .TextImg h2{
+        font-size: 6.5rem;
+    }
+
+    .btnPlanes{
+        top: 33rem;
+    }
+
+    .Arrows{
+        top: 43rem;
+    }
+
+    .ArrowLeft {
+        height: 2.5rem;
+        width: 2.5rem;
+    }
+
+    .ArrowRight{
+        height: 2.5rem;
+        width: 2.5rem;
+    }
+
+    .Arrows h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 1280px){
+    .SlideShow {
+        height: 37rem;
+    }
+
+    .TextImg h2{
+        font-size: 6rem;
+    }
+
+    .btnPlanes{
+        top: 29rem;
+    }
+
+    .Arrows{
+        top: 40rem;
+    }
+}

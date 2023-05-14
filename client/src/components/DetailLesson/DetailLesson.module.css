@@ -1,0 +1,170 @@
+
+.conteinerTodo{
+    background-color:white;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+.h1{
+    margin-top: 150px;
+    font-family:'Montserrat-Bold';
+    color: #ffc300;
+    font-size: 7rem;
+}
+
+
+.text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family:'Montserrat-Bold';
+    color:#013565;
+    font-size: 2rem;
+    
+}
+
+.txt{
+    font-family: 'Montserrat-regular', sans-serif;
+    color:#ffffff;
+    font-size: 1.9rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 100px;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-bottom: 200px;
+}
+
+
+
+.img{
+ width: 180px; 
+ margin-top: 20px;
+margin-left: 27px;
+border-radius: .4rem;
+}
+
+.fondoBrad{
+    background-color: #ffc300;
+    width: 230px;
+    height: 360px;
+    margin-left: 3px;
+    margin-right: 430px;
+    border-radius: .4rem;
+}
+
+.instructor{
+    font-family: 'Montserrat-regular', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.6rem;
+}
+
+.contentHorarios{
+    background-color: white;
+    height: 340px;
+    width: 600px;
+    margin-top: 2rem;    
+    margin-left: 2rem;
+    margin-right: 1rem;
+}
+
+.fondoinstrYHor{
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.imagenDeporte{
+    width: 530px;
+    height: 360px;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    padding-left: 10px;
+    border-radius: 1rem;
+}
+
+.fondoMujer{
+    background-color: #ffc300;
+    width: 550px;
+    height: 380px;   
+    margin-left: 150px;
+    border-radius: .4rem;
+}
+
+.conjuntoMujerycaja{
+    background-color: #ffffff;
+    width: 700px;    
+}
+
+.detalleparrafo{
+    background-color:#013565 ;
+    width: 100%;
+    height: fit-content;
+    display: flex;    
+    margin-top: 30px;
+}
+
+.button{
+    margin: auto 0;
+    height: 3rem;
+    color: #ffffff;
+    background-color:#013565;
+    border: 0;
+    border-radius: .4rem;
+    width: 15rem;
+    font-family:'Montserrat-Bold';
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .2s;
+    margin-left: 2rem;
+    margin-top: 3rem;
+}
+
+.button:hover{
+background-color:#002141;
+}
+
+.button3{
+    margin: auto 0;
+    height: 5rem;
+    color: #ffffff;
+    background-color: #ffc300;
+    border: 0;
+    border-radius: .5rem;
+    width: 30rem;
+    font-family:'Montserrat-Bold';
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .2s;
+    margin-right: 3%;
+    
+}
+
+.button3:hover{
+    background-color: #FFAF00;
+}
+
+
+.botones{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3%;
+    margin-left: 3%;
+    padding-right: 3rem;
+}
