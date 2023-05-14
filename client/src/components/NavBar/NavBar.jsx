@@ -1,23 +1,16 @@
-
 import React from 'react';
 import style from './NavBar.module.css';
 import iconMan from './../../assets/icons/man-silhouette.png';
 import iconWeight from '../../assets/icons/dumbbell.png';
 import { Link } from 'react-router-dom';
 import SignUp from '../SignUp/SignUp';
-import { useDispatch } from 'react-redux';
-import { setPlansCLick } from '../../redux/features/utilsSlice';
 
-const NavBar = ()=> {
-    const dispatch = useDispatch();
+const NavBar = ()=>{
 
     const handleClickLogo = () => {
         window.location.href = '/';
     };
 
-    const handlePlanesClick = () => {
-        dispatch(setPlansCLick(true));
-    };
      return (
         <>
         <nav className={style.nav}>
@@ -44,15 +37,9 @@ const NavBar = ()=> {
                 </Link>
 
             </div>
-            <Link to = {'/'} className={style.btnPlanes} onClick={handlePlanesClick}>
-                Planes
-            </Link>
+            <button className={style.btnPlanes}>Planes</button>
 
             <div className={style.LogOpcions}>
-              
-                <Link to={"/create"}>
-                    <button className={style.btnInicioSesion}>Crear Clase</button>
-                </Link>
                 <Link to={'/login'}> 
                     <button className={style.btnInicioSesion}>Inicia sesión</button>
                 </Link> 
@@ -66,3 +53,6 @@ const NavBar = ()=> {
         </>
      )
 }
+
+
+export default NavBar;
