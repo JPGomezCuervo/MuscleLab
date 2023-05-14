@@ -88,7 +88,7 @@ const lessonsSlice = createSlice({
                 return selectedType.every((type) => lessonTypes.includes(type)) && selectedIntensity.some((int) => int === lesson.effort)});
             
             state.lessons = filteredLessons;
-            if (filteredLessons.length === 0) state.error = `No se encontraron clases con los filtros seleccionados: ${selectedType.join(', ')}, ${selectedIntensity.join(', ')}`;
+            if (filteredLessons.length === 0) state.error = `No se encontraron clases de tipo de ejercicio ${selectedType.join(', ')} y de intensidad ${selectedIntensity.join(', ')}`;
             if (filteredLessons.length > 0) state.error = '';
             
         }
