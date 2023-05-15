@@ -31,7 +31,12 @@ const fetchLessonsByID = createAsyncThunk(
 
     }
 )
-
+export const cacheMiddleware = store => next => action => {
+    if (action.type === 'lessons/fetchAllLessons/fulfilled' && store.getState().lessons.lessons.length > 0) {
+        return Promise.resolve();
+    }
+    return next(action);
+};
 
 const initialState = {
     lessons: [],
@@ -81,16 +86,20 @@ const lessonsSlice = createSlice({
         },
 
         sortByIntensityandType: (state, action) => {
-            const {selectedType, selectedIntensity} = action.payload;
+            const {selectedTypes, selectedIntensities} = action.payload;
             const lessons = state.lessons;
             const filteredLessons = lessons.filter((lesson) => {
                 const lessonTypes = lesson.exercisesTypes;
-                return selectedType.every((type) => lessonTypes.includes(type)) && selectedIntensity.some((int) => int === lesson.effort)});
+                return selectedTypes.every((type) => lessonTypes.includes(type)) && selectedIntensities.some((int) => int === lesson.effort)});
             
             state.lessons = filteredLessons;
-            if (filteredLessons.length === 0) state.error = `No se encontraron clases de tipo de ejercicio ${selectedType.join(', ')} y de intensidad ${selectedIntensity.join(', ')}`;
+            if (filteredLessons.length === 0) state.error = `No se encontraron clases de tipo de ejercicio ${selectedTypes.join(', ')} y de intensidad ${selectedIntensities.join(', ')}`;
             if (filteredLessons.length > 0) state.error = '';
             
+        },
+        clearLessons: (state) => {
+            state.lessons = [];
+            state.error = '';
         }
     },
     extraReducers: (builder) => {
@@ -135,5 +144,5 @@ export const selectLesson = (state) => state.lessons.lesson;
 export const selectStatus = (state) => state.lessons.status;
 export const selectError = (state) => state.lessons.error;
 export default lessonsSlice.reducer;
-export const { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest, sortByType, sortByIntensityandType, sortByIntensity } = lessonsSlice.actions;
+export const { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest, sortByType, sortByIntensityandType, sortByIntensity, clearLessons } = lessonsSlice.actions;
 export { fetchAllLessons, fetchLessonsByID }
