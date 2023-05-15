@@ -1,7 +1,10 @@
 import style from "./CreateLesson.module.css";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { selectAllLessonTypes, fetchAllLessonTypes } from "../../redux/features/typesSlice";
+import {
+  selectAllLessonTypes,
+  fetchAllLessonTypes,
+} from "../../redux/features/typesSlice";
 import { useState, useEffect } from "react";
 import { validate } from "./Validation";
 import { weekDays } from "../../utils/constants";
@@ -106,14 +109,18 @@ const CreateLesson = () => {
       setTypes((types) => types.filter((t) => t !== type));
     }
   };
+
   useEffect(() => {
     dispatch(fetchAllLessonTypes());
   }, [dispatch]);
-  
+
   return (
     <div className={style.container}>
       <h1>CREA UNA CLASE</h1>
-      <p> Rellena todos los campos del siguiente formulario para crear una clase.</p>
+      <p>
+        {" "}
+        Rellena todos los campos del siguiente formulario para crear una clase.
+      </p>
       <form onSubmit={submitHandler} className={style.FormContainer}>
         <div className={style.individual}>
           <label className={style.Label}>Nombre*</label>
@@ -138,6 +145,9 @@ const CreateLesson = () => {
             onBlur={blurHandler}
             placeholder="Descripción de la clase"
           />
+          {errors.description && (
+            <div style={{ color: "red" }}>{errors.description}</div>
+          )}
         </div>
         <div className={style.individual}>
           <label className={style.Label}>ShortDescripción*</label>
@@ -149,6 +159,9 @@ const CreateLesson = () => {
             onBlur={blurHandler}
             placeholder="Descripción corta de la clase"
           />
+          {errors.shortDescription && (
+            <div style={{ color: "red" }}>{errors.shortDescription}</div>
+          )}
         </div>
 
         <div className={style.individual}>
@@ -178,28 +191,31 @@ const CreateLesson = () => {
 
         <div className={style.IndividualHora}>
           <div className={`${style.HourContainer} ${style.HourContainer1}`}>
-          <label className= {style.Options}>Hora inicio</label>
-          <select onChange={(e) => setHoraInicio(parseInt(e.target.value))}>
-            <option value="">Seleccione</option>
-            {[...Array(24)].map((_, index) => (
-              <option key={index + 1} value={index + 1}>
-                {index + 1}:00
-              </option>
-            ))}
-          </select>
+            <label className={style.Options}>Hora inicio</label>
+            <select onChange={(e) => setHoraInicio(parseInt(e.target.value))}>
+              <option value="">Seleccione</option>
+              {[...Array(24)].map((_, index) => (
+                <option key={index + 1} value={index + 1}>
+                  {index + 1}:00
+                </option>
+              ))}
+            </select>
+            {errors.scheduleHours && (
+              <div style={{ color: "red" }}>{errors.scheduleHours}</div>
+            )}
           </div>
-          
+
           <div className={`${style.HourContainer} ${style.HourContainer2}`}>
-            <label className= {style.Options}>Hora fin</label>
+            <label className={style.Options}>Hora fin</label>
             <select onChange={(e) => setHoraFin(parseInt(e.target.value))}>
               <option value="">Seleccione</option>
               {generateHourOptions()}
-            </select>  
+            </select>
           </div>
         </div>
 
         <div className={`${style.individual} ${style.BottomLine}`}>
-          <label className= {style.Options}>Días</label>
+          <label className={style.Options}>Días</label>
           <div className={style.DaysContainer}>
             {weekDays.map((dia) => (
               <div key={dia}>
@@ -219,24 +235,28 @@ const CreateLesson = () => {
           )}
         </div>
         <div className={style.individual}>
-          <label className= {style.Options}>Tipo de ejercicio</label>
+          <label className={style.Options}>Tipo de ejercicio</label>
 
           <div className={style.TypesContainer}>
             {lessonTypes.map((type) => {
-              return (<div key={type.id}>
-                <label>
-                  <input
-                    type="checkbox"
-                    value={type.name}
-                    onChange={handleTypeChange}
-                  />
-                  <p>{type.name}</p>
-                </label>
-              </div>)
+              return (
+                <div key={type.id}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value={type.name}
+                      onChange={handleTypeChange}
+                    />
+                    <p>{type.name}</p>
+                  </label>
+                </div>
+              );
             })}
           </div>
         </div>
-        <button type="submit" className={style.BtnSubmit}>Crear</button>
+        <button type="submit" className={style.BtnSubmit}>
+          Crear
+        </button>
       </form>
     </div>
   );
