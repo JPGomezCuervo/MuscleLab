@@ -15,32 +15,28 @@ const DetailLesson = ()=> {
 
    const lesson = useSelector(selectLesson)
    
-   console.log(lesson)
     const dispatch = useDispatch();
     const params = useParams();
 
     useEffect(()=>{
         dispatch(fetchLessonsByID(params.id))
-    },[dispatch])
+    },[dispatch, params.id])
 
     return(
 
         <div>
             <NavBar/>
-            
-
-                {
-                    
+                { 
                     lesson 
                     ?
                     <div className={style.conteinerTodo}>
-                    <h1 className={style.h1}>{lesson.name}</h1>
+                        <h1 className={style.h1}>{lesson.name}</h1>
 
-                    <div className={style.fondoinstrYHor}>
+                        <div className={style.fondoinstrYHor}>
 
-                    <div className={style.conjuntoMujerycaja}>
+                        <div className={style.conjuntoMujerycaja}>
                             <div className={style.fondoMujer}>
-                            <img src={lesson.image} alt="mujer boxeando" className={style.imagenDeporte} />
+                                <img src={lesson.image} alt="mujer boxeando" className={style.imagenDeporte} />
                             </div>
                         </div>
 
@@ -65,13 +61,13 @@ const DetailLesson = ()=> {
                     </div>
 
                 <div className={style.detalleparrafo}>
-                <p className={style.txt}>{lesson.description}</p>
+                    <p className={style.txt}>{lesson.description}</p>
                 </div>
 
                 <div className={style.botones}>
-                <button className={style.button3}>Elegí tu sede acá</button>
-                <button className={style.button3}>Elegí tu horario</button>
-                <button className={style.button3}>Elegí tu instructor acá</button>
+                    <button className={style.button3}>Elegí tu sede acá</button>
+                    <button className={style.button3}>Elegí tu horario</button>
+                    <button className={style.button3}>Elegí tu instructor acá</button>
                 </div>
             </div>
                      :

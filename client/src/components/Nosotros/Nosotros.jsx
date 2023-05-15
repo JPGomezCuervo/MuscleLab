@@ -38,7 +38,7 @@ const Nosotros = ()=>{
         </div>
             <div className={style.divbtn}>
             <Link to = {'/clases'}>
-        <button className={style.button}>Mira nuestras clases</button>
+        <button className={style.Button}>Mira nuestras clases</button>
         </Link>
             </div>
                 </div>

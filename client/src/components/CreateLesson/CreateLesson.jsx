@@ -53,13 +53,18 @@ const CreateLesson = () => {
       alert("Debe completar los campos obligatorios y corregir los errores.");
     } else {
       axios
-        .post("http://localhost:3001/lessons/create", form)
-        .then((res) => {
-          alert("Lesson creada correctamente");
-        })
-        .catch((error) => {
+      .post("http://localhost:3001/lessons/create", form)
+      .then((res) => {
+        alert("Lesson creada correctamente");
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response) {
+          alert(`Error:${error.response.data}`);
+        } else {
           alert(`Error: ${error.message}`);
-        });
+        }
+      });
     }
   };
   const changeHandler = (event) => {
