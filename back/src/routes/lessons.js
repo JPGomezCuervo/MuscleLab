@@ -14,6 +14,7 @@ server.put('/', async (req,res)=>{
 });
 
 server.get('/', getAllLessonsHandler);
+
 server.get('/:id', getDetailLessonHandler);
 server.get('/deleted', getDeletedLessons);
 server.post("/create", createNewLesson);
@@ -21,6 +22,7 @@ server.delete("/delete/:id", deleteMyLesson);
 server.put('/restore/:id', restoreDeletedLesson);
 server.put('/update/:id', updateLessons);
 server.put('/updateDetail/:id', updateLessonsDetails);
+
 
 module.exports = server;
 
