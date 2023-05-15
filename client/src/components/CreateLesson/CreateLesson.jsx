@@ -23,7 +23,7 @@ const CreateLesson = () => {
     goals: "",
     shortDescription: "",
     scheduleDays: [],
-    scheduleHours: "",
+    scheduleHours: [],
     types: [],
   });
   const [errors, setErrors] = useState({
@@ -33,35 +33,35 @@ const CreateLesson = () => {
     goals: "",
     shortDescription: "",
     scheduleDays: [],
-    scheduleHours: "",
+    scheduleHours: [],
     types: [],
   });
   //!FUNCIONES
   const submitHandler = (e) => {
     e.preventDefault();
-    form.scheduleDays = dias;
-    form.types = types;
-    form.scheduleHours = horaInicio + "-" + horaFin;
-    axios
-      .post("http://localhost:3001/lessons/create", form)
-      .then((res) => {
-        alert("Lesson creada correctamente");
-      })
-      .catch((error) => {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.errors
-        ) {
-          const errors = error.response.data.errors;
 
-          alert("Debe completar los campos obligatorios");
-        } else {
+    if (
+      errors.name ||
+      errors.description ||
+      errors.goals ||
+      errors.effort ||
+      errors.shortDescription ||
+      !validateHours()||
+      !validatedays() ||
+      !validateTypes() 
+    ) {
+      alert("Debe completar los campos obligatorios y corregir los errores.");
+    } else {
+      axios
+        .post("http://localhost:3001/lessons/create", form)
+        .then((res) => {
+          alert("Lesson creada correctamente");
+        })
+        .catch((error) => {
           alert(`Error: ${error.message}`);
-        }
-      });
+        });
+    }
   };
-
   const changeHandler = (event) => {
     const field = event.target.name;
     const value = event.target.value;
@@ -94,19 +94,53 @@ const CreateLesson = () => {
   const handleDiaChange = (e) => {
     const dia = e.target.value;
     const isChecked = e.target.checked;
-    if (isChecked) {
-      setDias((dias) => [...dias, dia]);
-    } else {
-      setDias((dias) => dias.filter((d) => d !== dia));
-    }
+    const updatedDias = isChecked
+      ? [...dias, dia]
+      : dias.filter((d) => d !== dia);
+    setDias(updatedDias);
   };
+
   const handleTypeChange = (e) => {
     const type = e.target.value;
     const isChecked = e.target.checked;
-    if (isChecked) {
-      setTypes((types) => [...types, type]);
+    const updatedTypes = isChecked
+      ? [...types, type]
+      : types.filter((t) => t !== type);
+    setTypes(updatedTypes);
+  };
+  const validateHours = () => {
+    if (!horaInicio) {
+      errors.scheduleHours = "Debe seleccionar hora de inicio";
+      alert("debe seleccionar hora de inicio");
+      return false;
+    } else if (!horaFin) {
+      errors.scheduleHours = "Debe seleccionar hora de fin";
+      alert("debe seleccionar hora de fin");
+      return false;
     } else {
-      setTypes((types) => types.filter((t) => t !== type));
+      form.scheduleHours = horaInicio + "-" + horaFin;
+      return true;
+    }
+  };
+
+  const validatedays = () => {
+    if (dias.length !== 0) {
+      form.scheduleDays = dias;
+      return true;
+    } else {
+      errors.scheduleDays = "Debe seleccionar al menos un día";
+      alert("Debe seleccionar al menos un día");
+      return false;
+    }
+  };
+  const validateTypes = () => {
+    if (types.length !== 0) {
+      form.types = types;
+      return true;
+    } else {
+      errors.types = "Debe seleccionar al menos un tipo";
+      alert("Debe seleccionar al menos un tipo de ejercicio");
+      return false;
     }
   };
 
@@ -200,9 +234,6 @@ const CreateLesson = () => {
                 </option>
               ))}
             </select>
-            {errors.scheduleHours && (
-              <div style={{ color: "red" }}>{errors.scheduleHours}</div>
-            )}
           </div>
 
           <div className={`${style.HourContainer} ${style.HourContainer2}`}>
@@ -230,9 +261,6 @@ const CreateLesson = () => {
               </div>
             ))}
           </div>
-          {errors.scheduleDays && (
-            <div style={{ color: "red" }}>{errors.scheduleDays}</div>
-          )}
         </div>
         <div className={style.individual}>
           <label className={style.Options}>Tipo de ejercicio</label>
