@@ -1,0 +1,20 @@
+const { Branchoffice } = require("../../db");
+let updateBranchoffice = async (
+  id,
+  name,
+  location,
+  scheduleDays,
+  scheduleHours
+) => {
+  let toUpdate = await Branchoffice.findOne({ where: { id: id } });
+  if (!toUpdate) {
+    throw new Error("No se encontró sucursal");
+  }
+  await toUpdate.update({
+    name: name,
+    location: location,
+    scheduleDays: scheduleDays,
+    scheduleHours: scheduleHours,
+  });
+};
+module.exports = updateBranchoffice;
