@@ -10,17 +10,19 @@ const ContactUs = () => {
     e.preventDefault();
     emailjs
       .sendForm(
-        "service_xf4w6mt",
-        "template_tlt69s4",
+        "service_1nzhkew",
+        "template_9bl5h2h",
         form.current,
-        "1JvIzZUMSo9sa07ae"
+        "ASiDWfbztN_XHNwB9"
       )
       .then(
         (result) => {
           console.log(result.text);
+          alert('Mensaje enviado correctamente')
         },
         (error) => {
           console.log(error.text);
+          alert('Intentelo nuevamente')
         }
       );
     e.target.reset();
