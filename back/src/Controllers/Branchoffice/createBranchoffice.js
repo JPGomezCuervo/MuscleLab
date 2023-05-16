@@ -1,4 +1,4 @@
-const { Branchoffice } = require("../../db");
+const { BranchOffice } = require("../../db");
 
 let createBranchoffice = async (
   id,
@@ -7,7 +7,7 @@ let createBranchoffice = async (
   scheduleDays,
   scheduleHours
 ) => {
-  const foundedBranchoffice = await Branchoffice.findOne({
+  const foundedBranchoffice = await BranchOffice.findOne({
     where: { name: name },
   });
 
@@ -16,7 +16,7 @@ let createBranchoffice = async (
   } else if (!name || !location || !scheduleDays || !scheduleHours) {
     throw new Error("Faltan datos");
   }
-  const newBranchoffice = await Branchoffice.create({
+  const newBranchoffice = await BranchOffice.create({
     id,
     name,
     location,
