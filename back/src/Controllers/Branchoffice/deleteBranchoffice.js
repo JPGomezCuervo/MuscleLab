@@ -1,6 +1,6 @@
-const { Branchoffice } = require("../../db");
+const { BranchOffice } = require("../../db");
 let deleteBranchoffice = async (id) => {
-  let toDelete = await Branchoffice.findOne({ where: { id: id } });
+  let toDelete = await BranchOffice.findOne({ where: { id: id } });
   if (!toDelete) {
     throw new Error("No se encontró sucursal ");
   }
