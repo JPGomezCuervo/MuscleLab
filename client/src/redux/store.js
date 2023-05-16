@@ -4,6 +4,7 @@ import utilsReducer from './features/utilsSlice';
 import usersReducer from './features/usersSlice';
 import typesReducer from './features/typesSlice';
 import filtersReducer from './features/filtersSlice';
+import authReducer from './features/authSlice';
 import { cacheMiddleware } from './features/lessonsSlice';
 
 const store = configureStore({
@@ -12,7 +13,8 @@ const store = configureStore({
         types: typesReducer,
         users: usersReducer,
         utils: utilsReducer,
-        filters: filtersReducer 
+        filters: filtersReducer,
+        auth: authReducer 
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
     devTools: process.env.NODE_ENV !== 'production'
