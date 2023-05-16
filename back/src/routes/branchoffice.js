@@ -3,10 +3,10 @@ const server = Router();
 const createNewBranchoffice = require("../Handlers/Branchoffice/createBranchofficeHandler");
 const getAllBranchoffice = require("../Handlers/Branchoffice/getBranchofficeHandler");
 const getBranchofficeDetail = require("../Handlers/Branchoffice/getBranchofficeDetailHandler");
-const deleteMyBranchoffice = requiere(
+const deleteMyBranchoffice = require(
   "../Handlers/Branchoffice/deleteBranchofficeHandler"
 );
-const updateMyBranchoffice = requiere(
+const updateMyBranchoffice = require(
   "../Handlers/Branchoffice/updateBranchofficeHandler"
 );
 
