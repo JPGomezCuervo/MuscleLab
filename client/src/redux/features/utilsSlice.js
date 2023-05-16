@@ -16,8 +16,8 @@ const utilsSlice = createSlice ({
         lightMode: (state) => {
             state.mode = 'Light'
         },
-        setPlansCLick: (state, action) => {
-            state.plansClicked = action.payload
+        setPlansCLick: (state, {payload}) => {
+            state.plansClicked = payload;
         }
     }
 })
