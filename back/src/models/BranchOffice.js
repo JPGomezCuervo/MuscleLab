@@ -19,11 +19,11 @@ module.exports= (sequelize)=>{
             type:DataTypes.STRING,
             allowNull:false,
         },
-        shceduleDays:{
+        scheduleDays:{
             type:DataTypes.STRING,
             allowNull:false,
         },
-        shceduleHours:{
+        scheduleHours:{
             type:DataTypes.STRING,
             allowNull:false
         }
