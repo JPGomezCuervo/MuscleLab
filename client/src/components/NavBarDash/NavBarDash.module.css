@@ -1,0 +1,8 @@
+.NavBarDash {
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+    height: 100vw;
+    width: 7rem;
+
+}
