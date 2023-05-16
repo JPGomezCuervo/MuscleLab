@@ -3,7 +3,7 @@ const lessons = require("./lessons");
 const users = require("./users");
 const memberships = require("./memberships");
 const types = require("./types");
-const branchoffice = requiere("./branchoffice");
+const branchoffice = require("./branchoffice");
 
 const router = Router();
 
