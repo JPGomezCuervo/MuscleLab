@@ -1,9 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import styles from "./ContactUs.module.css";
 
 
+
 const ContactUs = () => {
+  useEffect(() => {
+    window.scrollTo({top: 0, left:0, behavior: 'auto'})
+    
+}, []);
   const form = useRef();
   
   const sendEmail = (e) => {
