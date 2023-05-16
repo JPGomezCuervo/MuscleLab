@@ -30,7 +30,7 @@ const Lessons = () => {
             <FilterBar lessonsAtributtes= {lessonTypes} retryButton ={retryButton} setRetryButton={setRetryButton}/>
             <div className={style.Container}>
                 {error && <div className={style.Error}>{error}</div>}
-                {error && <button className ={style.RetryButton}onClick={handleRetryClick}>Retry</button>}
+                {error && <button className ={style.RetryButton}onClick={handleRetryClick}>Intenta de nuevo</button>}
                 {lessons.map((lesson, index)=> {
                     return <Lesson key={lesson.id} lesson={lesson} index={index} />
                 })}
