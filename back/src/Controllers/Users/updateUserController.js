@@ -12,7 +12,7 @@ const updateUser = async (id, fullName, password, email, phone) => {
   }
   if (!fullName || !password || !email || !phone) {
     throw new Error("Todos los campos son obligatorios!");
-  }
+  };
 
   await foundedUser.update({
     fullName: fullName,
