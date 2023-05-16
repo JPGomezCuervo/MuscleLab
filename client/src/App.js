@@ -18,7 +18,7 @@ import { useSelector } from 'react-redux';
 import { selectDashAuth } from './redux/features/authSlice';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import NavBardDash from './components/NavBarDash/NavBarDash';
+import NavBarDash from './components/NavBarDash/NavBarDash';
 import LessonsDash from './components/LesssonsDash/LessonsDash';
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
 
   return (
    <>
-    {(location.includes('dashboard') ? <NavBardDash/>: <NavBar/>)}
+    {(location.includes('dashboard') ? <NavBarDash/>: <NavBar/>)}
     <Routes>
       <Route path='/login' element={<Login/>}/>
       <Route path="/" element={<Home/>}/>

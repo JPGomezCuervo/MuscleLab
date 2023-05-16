@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './NavBar.module.css';
-import iconMan from './../../assets/icons/man-silhouette.png';
+import iconMan from '../../assets/icons/man-silhouette.png';
 import iconWeight from '../../assets/icons/dumbbell.png';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
