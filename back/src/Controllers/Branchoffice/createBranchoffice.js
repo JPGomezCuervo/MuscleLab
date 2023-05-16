@@ -1,4 +1,4 @@
-const { Branchoffice } = requiere("../../db");
+const { Branchoffice } = require("../../db");
 
 let createBranchoffice = async (
   id,
