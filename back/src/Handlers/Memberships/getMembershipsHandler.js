@@ -5,7 +5,7 @@ const getMemberships = async (req, res) => {
 };
 
 const getDetailMemberships = async (req, res) => {
-    res.status(200).send('NIY: Estoy en la ruta para obtener las membresias por id');;
+    res.status(200).send('NIY: Estoy en la ruta para obtener las membresias por id');
   }
 
 module.exports = {
