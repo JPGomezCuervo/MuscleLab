@@ -1,3 +1,5 @@
+const createBranchoffice = require("../../Controllers/Branchoffice/createBranchoffice");
+
 const createNewBranchoffice = async (req, res) => {
   const { id, name, location, scheduleDays, scheduleHours } = req.body;
   try {
@@ -8,5 +10,12 @@ const createNewBranchoffice = async (req, res) => {
       scheduleDays,
       scheduleHours
     );
-  } catch (error) {}
+    res.status(201).json({
+      message: "sucursal creada correctamente",
+      branchoffice: newBranchoffice,
+    });
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
 };
+module.exports = createNewBranchoffice;
