@@ -1,18 +1,22 @@
 
 .conteinerTodo{
+    padding-top: 5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    margin: 0 auto;
     background-color:white;
-    height: 100%;
-    width: 100%;
+    height: fit-content;
+    width:115rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
 }
 
 
 .h1{
-    margin-top: 150px;
     font-family:'Montserrat-Bold';
     color: #ffc300;
     font-size: 7rem;
@@ -33,17 +37,10 @@
 .txt{
     font-family: 'Montserrat-regular', sans-serif;
     color:#ffffff;
-    font-size: 1.9rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 100px;
-    margin-left: 5rem;
-    margin-right: 5rem;
-    margin-bottom: 200px;
+    margin: auto auto;
+    font-size: 1.5rem;
+    text-align: center;
 }
-
-
 
 .img{
  width: 180px; 
@@ -53,14 +50,14 @@ border-radius: .4rem;
 }
 
 .fondoBrad{
+    display: block;
     background-color: #ffc300;
     width: 230px;
-    height: 360px;
-    margin-left: 3px;
-    margin-right: 430px;
+    height: 100%;
     border-radius: .4rem;
+    float: right;
+    margin-left: 10%;
 }
-
 .instructor{
     font-family: 'Montserrat-regular', sans-serif;
     display: flex;
@@ -72,47 +69,54 @@ border-radius: .4rem;
 }
 
 .contentHorarios{
+    display: inline-block;
     background-color: white;
     height: 340px;
     width: 600px;
-    margin-top: 2rem;    
-    margin-right: 1rem;
+    margin: 0;
 }
 
 .fondoinstrYHor{
     background-color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    
+    width: 100%;
 }
-
 .imagenDeporte{
-    width: 530px;
-    height: 360px;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
-    padding-top: 10px;
-    padding-left: 10px;
     border-radius: 1rem;
+    padding: .3rem;
+    float: left;
+    background-color: #ffc300;
 }
 
 .fondoMujer{
     background-color: #ffc300;
-    width: 550px;
-    height: 380px;   
-    margin-left: 150px;
-    border-radius: .4rem;
+    width: 25rem;
+    height: 20rem;   
+    padding: 0;
+    float: left;
+    border-radius: 1rem;
+}
+.fondoMujer img{
+    width: 100%;
+    height: 100%;
+    border: solid 1px #ffc300;
+    border-radius: 1rem;
+    padding: .3rem;
 }
 
 .conjuntoMujerycaja{
-    background-color: #ffffff;
-    width: 700px;    
+    display: inline-block;
+    width: fit-content;
+    margin-right: 13.7%;
 }
 
 .detalleparrafo{
     background-color:#013565 ;
     width: 100%;
-    height: fit-content;
+    min-height: 7rem;
     display: flex;    
     margin-top: 30px;
 }

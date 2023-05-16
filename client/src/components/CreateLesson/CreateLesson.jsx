@@ -1,7 +1,10 @@
 import style from "./CreateLesson.module.css";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { selectAllLessonTypes, fetchAllLessonTypes } from "../../redux/features/typesSlice";
+import {
+  selectAllLessonTypes,
+  fetchAllLessonTypes,
+} from "../../redux/features/typesSlice";
 import { useState, useEffect } from "react";
 import { validate } from "./Validation";
 import { weekDays } from "../../utils/constants";
@@ -20,7 +23,7 @@ const CreateLesson = () => {
     goals: "",
     shortDescription: "",
     scheduleDays: [],
-    scheduleHours: "",
+    scheduleHours: [],
     types: [],
   });
   const [errors, setErrors] = useState({
@@ -30,35 +33,40 @@ const CreateLesson = () => {
     goals: "",
     shortDescription: "",
     scheduleDays: [],
-    scheduleHours: "",
+    scheduleHours: [],
     types: [],
   });
   //!FUNCIONES
   const submitHandler = (e) => {
     e.preventDefault();
-    form.scheduleDays = dias;
-    form.types = types;
-    form.scheduleHours = horaInicio + "-" + horaFin;
-    axios
-      .post("http://localhost:3001/lessons/create", form)
+
+    if (
+      errors.name ||
+      errors.description ||
+      errors.goals ||
+      errors.effort ||
+      errors.shortDescription ||
+      !validateHours()||
+      !validatedays() ||
+      !validateTypes() 
+    ) {
+      alert("Debe completar los campos obligatorios y corregir los errores.");
+    } else {
+      axios
+      .post("https://musclelabii.onrender.com/lessons/create", form)
       .then((res) => {
         alert("Lesson creada correctamente");
       })
       .catch((error) => {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.errors
-        ) {
-          const errors = error.response.data.errors;
-
-          alert("Debe completar los campos obligatorios");
+        console.log(error);
+        if (error.response) {
+          alert(`Error:${error.response.data}`);
         } else {
           alert(`Error: ${error.message}`);
         }
       });
+    }
   };
-
   const changeHandler = (event) => {
     const field = event.target.name;
     const value = event.target.value;
@@ -91,29 +99,67 @@ const CreateLesson = () => {
   const handleDiaChange = (e) => {
     const dia = e.target.value;
     const isChecked = e.target.checked;
-    if (isChecked) {
-      setDias((dias) => [...dias, dia]);
-    } else {
-      setDias((dias) => dias.filter((d) => d !== dia));
-    }
+    const updatedDias = isChecked
+      ? [...dias, dia]
+      : dias.filter((d) => d !== dia);
+    setDias(updatedDias);
   };
+
   const handleTypeChange = (e) => {
     const type = e.target.value;
     const isChecked = e.target.checked;
-    if (isChecked) {
-      setTypes((types) => [...types, type]);
+    const updatedTypes = isChecked
+      ? [...types, type]
+      : types.filter((t) => t !== type);
+    setTypes(updatedTypes);
+  };
+  const validateHours = () => {
+    if (!horaInicio) {
+      errors.scheduleHours = "Debe seleccionar hora de inicio";
+      alert("debe seleccionar hora de inicio");
+      return false;
+    } else if (!horaFin) {
+      errors.scheduleHours = "Debe seleccionar hora de fin";
+      alert("debe seleccionar hora de fin");
+      return false;
     } else {
-      setTypes((types) => types.filter((t) => t !== type));
+      form.scheduleHours = horaInicio + "-" + horaFin;
+      return true;
     }
   };
+
+  const validatedays = () => {
+    if (dias.length !== 0) {
+      form.scheduleDays = dias;
+      return true;
+    } else {
+      errors.scheduleDays = "Debe seleccionar al menos un día";
+      alert("Debe seleccionar al menos un día");
+      return false;
+    }
+  };
+  const validateTypes = () => {
+    if (types.length !== 0) {
+      form.types = types;
+      return true;
+    } else {
+      errors.types = "Debe seleccionar al menos un tipo";
+      alert("Debe seleccionar al menos un tipo de ejercicio");
+      return false;
+    }
+  };
+
   useEffect(() => {
     dispatch(fetchAllLessonTypes());
   }, [dispatch]);
-  
+
   return (
     <div className={style.container}>
       <h1>CREA UNA CLASE</h1>
-      <p> Rellena todos los campos del siguiente formulario para crear una clase.</p>
+      <p>
+        {" "}
+        Rellena todos los campos del siguiente formulario para crear una clase.
+      </p>
       <form onSubmit={submitHandler} className={style.FormContainer}>
         <div className={style.individual}>
           <label className={style.Label}>Nombre*</label>
@@ -138,6 +184,9 @@ const CreateLesson = () => {
             onBlur={blurHandler}
             placeholder="Descripción de la clase"
           />
+          {errors.description && (
+            <div style={{ color: "red" }}>{errors.description}</div>
+          )}
         </div>
         <div className={style.individual}>
           <label className={style.Label}>ShortDescripción*</label>
@@ -149,6 +198,9 @@ const CreateLesson = () => {
             onBlur={blurHandler}
             placeholder="Descripción corta de la clase"
           />
+          {errors.shortDescription && (
+            <div style={{ color: "red" }}>{errors.shortDescription}</div>
+          )}
         </div>
 
         <div className={style.individual}>
@@ -178,28 +230,28 @@ const CreateLesson = () => {
 
         <div className={style.IndividualHora}>
           <div className={`${style.HourContainer} ${style.HourContainer1}`}>
-          <label className= {style.Options}>Hora inicio</label>
-          <select onChange={(e) => setHoraInicio(parseInt(e.target.value))}>
-            <option value="">Seleccione</option>
-            {[...Array(24)].map((_, index) => (
-              <option key={index + 1} value={index + 1}>
-                {index + 1}:00
-              </option>
-            ))}
-          </select>
+            <label className={style.Options}>Hora inicio</label>
+            <select onChange={(e) => setHoraInicio(parseInt(e.target.value))}>
+              <option value="">Seleccione</option>
+              {[...Array(24)].map((_, index) => (
+                <option key={index + 1} value={index + 1}>
+                  {index + 1}:00
+                </option>
+              ))}
+            </select>
           </div>
-          
+
           <div className={`${style.HourContainer} ${style.HourContainer2}`}>
-            <label className= {style.Options}>Hora fin</label>
+            <label className={style.Options}>Hora fin</label>
             <select onChange={(e) => setHoraFin(parseInt(e.target.value))}>
               <option value="">Seleccione</option>
               {generateHourOptions()}
-            </select>  
+            </select>
           </div>
         </div>
 
         <div className={`${style.individual} ${style.BottomLine}`}>
-          <label className= {style.Options}>Días</label>
+          <label className={style.Options}>Días</label>
           <div className={style.DaysContainer}>
             {weekDays.map((dia) => (
               <div key={dia}>
@@ -214,29 +266,30 @@ const CreateLesson = () => {
               </div>
             ))}
           </div>
-          {errors.scheduleDays && (
-            <div style={{ color: "red" }}>{errors.scheduleDays}</div>
-          )}
         </div>
         <div className={style.individual}>
-          <label className= {style.Options}>Tipo de ejercicio</label>
+          <label className={style.Options}>Tipo de ejercicio</label>
 
           <div className={style.TypesContainer}>
             {lessonTypes.map((type) => {
-              return (<div key={type.id}>
-                <label>
-                  <input
-                    type="checkbox"
-                    value={type.name}
-                    onChange={handleTypeChange}
-                  />
-                  <p>{type.name}</p>
-                </label>
-              </div>)
+              return (
+                <div key={type.id}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value={type.name}
+                      onChange={handleTypeChange}
+                    />
+                    <p>{type.name}</p>
+                  </label>
+                </div>
+              );
             })}
           </div>
         </div>
-        <button type="submit" className={style.BtnSubmit}>Crear</button>
+        <button type="submit" className={style.BtnSubmit}>
+          Crear
+        </button>
       </form>
     </div>
   );
