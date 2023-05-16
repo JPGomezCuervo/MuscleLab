@@ -15,7 +15,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import CreateLesson from "./components/CreateLesson/CreateLesson";
 import Sedes from './components/Sedes/Sedes';
 
-import LessonsDash from './components/Clases dashboard/LessonsDash';
+import LessonsDash from './components/Lessons dashboard/LessonsDash';
 
 function App() {
   return (

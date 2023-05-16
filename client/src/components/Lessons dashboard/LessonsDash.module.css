@@ -1,5 +1,5 @@
 .contenedor{
-    background-color: aqua;
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
 }
@@ -22,41 +22,169 @@
 
 .divVacio{
     background-color: green;
-    height: 10rem;
+    height: 5rem;
 }
 .contNombre{
-    background-color: pink;
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: row;
+    margin-left: 5rem;
+    font-family:'Montserrat-Bold';
+    color:#013565;
+    font-size: 2rem;
 }
 
-.detalle{
-    background-color: navy;
-    margin-left: 10rem;
-    width: 40rem;
+.deta{
+    background-color: rgb(228, 228, 228);
+    margin-left:3rem;
+    margin-right: 3rem;
+    width: auto;
+    height: 16rem;
+    padding: .4rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    border-radius: 1rem;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
     
+}
+
+.detalle {
+    box-sizing: border-box;
+    width: auto;
+    height: 19rem;
+    background: rgba(255, 255, 255, 0.58);
+    border: 1px solid white;
+    box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(6px);
+    border-radius: 17px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left:3rem;
+    margin-right: 3rem;
+    user-select: none;
+    font-weight: bolder;
+    color: black;
+  }
+  
+  .detalle:hover {
+    border: 1px solid black;
+    transform: scale(1.05);
+  }
+  
+  .detalle:active {
+    transform: scale(0.95) rotateZ(1.7deg);
+  }
+
+.contenido{
+    background-color: rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+    margin-left: 2rem;
+    margin-left: 2rem;
+    font-family: 'Montserrat-regular', sans-serif;
+    color:#013565;
+    margin: auto auto;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.texto{
+    font-family: 'Montserrat-regular', sans-serif;
+    color:#013565;
+    margin: auto auto;
+    font-size: 1rem;
+    text-align: center;
 }
 
 .botones{
     background-color: rgb(248, 96, 9);
+    margin-top: 2rem;
 }
 
 
 .imagenDeporte{
-    width: 530px;
-    height: 360px;
+    width: 18rem;
+    height: 13.5rem;
     display: flex;
     justify-content: center;
-    padding-top: 10px;
-    padding-left: 10px;
-    border-radius: 1rem;
-}
+    margin-top: 2px;
+    margin-left: 6px;
+    margin-right: 6px;
+    border-radius: .8rem;
 
-.card{
+    }
+
+.cartita{
  display: flex;
- flex-direction: grid;
- grid-template-columns: repeat(2, 1fr);
- 
- background-color: blanchedalmond;
+ flex-direction: column; 
+ background-color: rgb(255, 255, 255);
  width: 100%;
 }
+
+.hr{
+    color: #ffc300;
+}
+
+.imgDetalle{
+    width: 20rem;
+    height: 15.5rem;
+    display: flex;
+    align-items: center;
+    margin-top: 1px;
+    margin-left: 5px;
+    border-radius: .8rem;
+    background-color: #ffc300;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .select-trigger {
+    cursor: pointer;
+  }
+  
+  .select-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .select-wrapper:hover .select-options,
+  .select-wrapper:focus-within .select-options {
+    display: block;
+  }
+  
+  .select-options button {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .show {
+    display: block;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+
+  .divNuevo{
+    background-color: #ffc300;
+  }
