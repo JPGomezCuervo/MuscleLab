@@ -16,7 +16,7 @@ let updateBranchoffice = async (
     scheduleDays: scheduleDays,
     scheduleHours: scheduleHours,
   });
-  return `Sucursal ${toUpdate.name} fue eliminada con exito`;
+  return `Sucursal ${toUpdate.name} fue editada con exito`;
 
 };
 module.exports = updateBranchoffice;
