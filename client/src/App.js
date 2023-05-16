@@ -13,6 +13,7 @@ import NewLessons from './components/NewLessons/NewLessons';
 import Nosotros from './components/Nosotros/Nosotros';
 import Dashboard from './components/Dashboard/Dashboard';
 import CreateLesson from "./components/CreateLesson/CreateLesson";
+import LessonsDash from './components/Clases dashboard/LessonsDash';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <Route path= '/nosotros' element={<Nosotros />}/>
       <Route path= '/dashboard' element={<Dashboard/>}/>
       <Route path="/create" element={<CreateLesson />} />
+      <Route path='/clases/dashboard' element={<LessonsDash/>} />
         
     </Routes>
     <Footer/>

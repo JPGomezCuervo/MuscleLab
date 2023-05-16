@@ -1,0 +1,62 @@
+.contenedor{
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.button{
+    margin: auto 0;
+    height: 5rem;
+    color: #ffffff;
+    background-color: #ffc300;
+    border: 0;
+    border-radius: .5rem;
+    width: 30rem;
+    font-family:'Montserrat-Bold';
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .2s;
+    margin-right: 3%;
+}
+
+.divVacio{
+    background-color: green;
+    height: 10rem;
+}
+.contNombre{
+    background-color: pink;
+    display: flex;
+    flex-direction: row;
+}
+
+.detalle{
+    background-color: navy;
+    margin-left: 10rem;
+    width: 40rem;
+    
+}
+
+.botones{
+    background-color: rgb(248, 96, 9);
+}
+
+
+.imagenDeporte{
+    width: 530px;
+    height: 360px;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    padding-left: 10px;
+    border-radius: 1rem;
+}
+
+.card{
+ display: flex;
+ flex-direction: grid;
+ grid-template-columns: repeat(2, 1fr);
+ 
+ background-color: blanchedalmond;
+ width: 100%;
+}

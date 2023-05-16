@@ -15,7 +15,7 @@ const DetailLesson = ()=> {
 
    const lesson = useSelector(selectLesson)
    
-   console.log(lesson)
+   
     const dispatch = useDispatch();
     const params = useParams();
 
