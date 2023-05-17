@@ -30,9 +30,8 @@ const NavBar = ()=>{
                     <p className={style.Navbutton}>Sedes</p>
                 </Link>
 
-                <Link to = {'/clases'}>
-                    <p className={style.Navbutton}>Clases</p>
-                </Link>
+                
+                    <a className={style.Navbutton} href='http://localhost:3000/clases'>Clases</a>
 
                 <Link to = {'/nosotros'}>
                     <p className={style.Navbutton}>Nosotros</p>
@@ -44,7 +43,7 @@ const NavBar = ()=>{
 
             </div>
             <Link to = {'/'} className={style.btnPlanes} onClick={handleClickPlan}>
-                <button className={style.btnPlanes}>Planes</button>
+                <button className={style.btnPlanes} >Planes</button>
             </Link>
 
             <div className={style.LogOpcions}>

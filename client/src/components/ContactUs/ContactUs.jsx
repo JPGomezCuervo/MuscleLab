@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./ContactUs.module.css";
 
+
 const ContactUs = () => {
+  useEffect(() => {
+    window.scrollTo({top: 0, left:0, behavior: 'auto'})
+    
+}, []);
   return (
     <main>
 

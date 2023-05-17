@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
         },
       },
       phone: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           isNumeric: true,
@@ -35,11 +35,17 @@ module.exports = (sequelize) => {
       isMonitor: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
+        allowNull: true,
+      },
+      isAdmin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: true,
       },
       deletedAt: {
         type: DataTypes.DATE,
-        allowNull: true,
         defaultValue: null,
+        allowNull: true,
       },
     },
     { timestamps: false }

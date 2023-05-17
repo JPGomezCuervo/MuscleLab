@@ -15,10 +15,8 @@ module.exports=(sequelize)=>{
         },
         name:{
             type:DataTypes.STRING,
-            allowNull:false,
-            validate:{
-                isAlpha:true
-            }
+            allowNull:false
+
         },
         effort: {
             type: DataTypes.STRING,

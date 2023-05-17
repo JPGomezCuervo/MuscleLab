@@ -3,14 +3,20 @@ import lessonsReducer from './features/lessonsSlice';
 import utilsReducer from './features/utilsSlice';
 import usersReducer from './features/usersSlice';
 import typesReducer from './features/typesSlice';
+import filtersReducer from './features/filtersSlice';
+import authReducer from './features/authSlice';
+import { cacheMiddleware } from './features/lessonsSlice';
 
 const store = configureStore({
     reducer: {
         lessons: lessonsReducer,
         types: typesReducer,
         users: usersReducer,
-        utils: utilsReducer 
+        utils: utilsReducer,
+        filters: filtersReducer,
+        auth: authReducer 
     },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
     devTools: process.env.NODE_ENV !== 'production'
 })
 
