@@ -14,8 +14,7 @@ const updateUsers = async (req, res) =>{
             fullName,
             password,
             email,
-            phone,
-            
+            phone,            
         );
         res.status(200).json(updatedUser);
     } catch (error) {
