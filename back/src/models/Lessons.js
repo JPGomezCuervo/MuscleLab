@@ -35,9 +35,9 @@ module.exports=(sequelize)=>{
             allowNull:false
         },
         isAvailable:{
-            tpye:DataTypes.BOOLEAN,
-            allowNull:true,
-            defaultValue:true
+            type:DataTypes.BOOLEAN,
+            defaultValue:true,
+            allowNull:true
         }
     },{timestamps:false})
 }
