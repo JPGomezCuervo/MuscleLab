@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { PORT, URL, pending, rejected, fulfilled } from "../../utils/constants";
+import { URL, pending, rejected, fulfilled } from "../../utils/constants";
 import axios from 'axios';
 
 const fetchAllLessonTypes = createAsyncThunk(
     'types/fetchAllLessonTypes', async () => {
         try {
-            const response = await axios.get(`${URL}${PORT}/types`);
+            const response = await axios.get(`${URL}/types`);
             return response.data
         } catch (error) {
             throw new Error(error.response)
