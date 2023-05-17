@@ -17,13 +17,18 @@ const getDetailLesson = async (id) => {
       attributes:["name"],
       through:{
         attributes:[]
+      },
+      where:{
+        id: id
       }
     },
     where:{
       isMonitor:true
     }
   });
-  console.log(lesson[0].dataValues.exercisesTypes);
+  //console.log(monitorRaw);
+  const monitors= monitorRaw.map(m=> m.dataValues.fullName);
+  console.log(monitors);
   const types = lesson[0].dataValues.exercisesTypes.map((e) => {
     return e.dataValues.name;
   });
@@ -39,6 +44,7 @@ const getDetailLesson = async (id) => {
     scheduleHourStart: detail[0].scheduleHourStart,
     scheduleHourFinish: detail[0].scheduleHourFinish,
     types: types,
+    monitors: monitors
   };
   return final;
 };
