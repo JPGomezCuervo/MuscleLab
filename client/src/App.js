@@ -41,8 +41,9 @@ function App() {
       <Route path= '/nosotros' element={<Nosotros />}/>
       <Route path="/create" element={<CreateLesson />} />
       <Route path = '/sedes' element= {<Sedes/>}/>
-      <Route path='/dashboard' element={<Dashboard/>}>
+      <Route path='/dashboard' element={<LessonsDash/>}>
          <Route path= '/dashboard/lessons' element={<LessonsDash/>}/> 
+         
       <Route/> 
       </Route> 
 

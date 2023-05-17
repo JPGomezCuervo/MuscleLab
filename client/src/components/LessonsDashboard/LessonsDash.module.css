@@ -1,7 +1,8 @@
 .contenedor{
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    flex-direction: column;
+  
+    flex-wrap: wrap;
+    justify-content: space-between;
+
 }
 
 
@@ -25,7 +26,6 @@
     height: 5rem;
 }
 .contNombre{
-    background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: row;
     margin-left: 5rem;
@@ -35,7 +35,7 @@
 }
 
 .deta{
-    background-color: rgb(228, 228, 228);
+    background-color: rgb(255, 255, 255);
     margin-left:3rem;
     margin-right: 3rem;
     width: auto;
@@ -52,7 +52,7 @@
 
 .detalle {
     box-sizing: border-box;
-    width: auto;
+    width: 50rem;
     height: 19rem;
     background: rgba(255, 255, 255, 0.58);
     border: 1px solid white;
@@ -84,11 +84,11 @@
   }
 
 .contenido{
-    background-color: rgb(255, 255, 255);
+    
     width: auto;
     height: auto;
     margin-left: 2rem;
-    margin-left: 2rem;
+    
     font-family: 'Montserrat-regular', sans-serif;
     color:#013565;
     margin: auto auto;
@@ -104,10 +104,7 @@
     text-align: center;
 }
 
-.botones{
-    background-color: rgb(248, 96, 9);
-    margin-top: 2rem;
-}
+
 
 
 .imagenDeporte{
@@ -141,15 +138,15 @@
 }
 
 .icono{
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 2rem;
+  width: 2rem;
   border: none;
 }
 
 .btnIcono1{
   background-color: #ffffff;
-  width: 6rem;
-  height: 4rem;
+  width: 4.5rem;
+  height: 3.3rem;
   display: inline;
   align-items: center;
   margin-left: 2rem;
@@ -159,8 +156,8 @@
 
 .btnIcono2{
   background-color:#013565;
-  width: 6rem;
-  height: 4rem;
+  width: 4.5rem;
+  height: 3.3rem;
   display: inline;
   align-items: center;
   margin-left: 2rem;
@@ -183,7 +180,15 @@
 }
 
 .divCont{
-  background-color: rgb(255, 255, 255);
-  height: 14rem;
-  margin-right: 2.5rem;
+  
+  height: 5rem;
+  margin-right: .5rem;
+  margin-bottom: 8rem;
+}
+
+.contenedorTodo{
+  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
