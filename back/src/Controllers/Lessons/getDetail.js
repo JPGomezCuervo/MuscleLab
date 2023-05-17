@@ -22,6 +22,7 @@ const getDetailLesson= async (id)=>{
         effort:lesson[0].effort,
         goals:detail[0].goals,
         description:detail[0].description,
+        shortDescription:detail[0].shortDescription,
         scheduleDays:detail[0].scheduleDays,
         scheduleHourStart:detail[0].scheduleHourStart,
         scheduleHourFinish:detail[0].scheduleHourFinish,
