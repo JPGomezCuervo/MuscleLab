@@ -6,7 +6,8 @@ const updateLesson = async(
     effort, 
     shortDescription, 
     image, 
-    types) => {
+    types,
+    isAvailable) => {
     const foundedLesson = await Lessons.findOne({
         where: { 
             id: id,
@@ -15,7 +16,7 @@ const updateLesson = async(
         if (!foundedLesson) {
             throw new Error('La clase que quieres modificar no existe');
         } 
-        if(!name || !effort  || !shortDescription || !image || !types){
+        if(!name || !effort  || !shortDescription || !image || !types || !isAvailable){
                 throw new Error('Todos los campos son obligatorios');
         }
         await foundedLesson.update({
@@ -23,6 +24,7 @@ const updateLesson = async(
             effort: effort,
             shortDescription: shortDescription,
             image: image,
+            isAvailable: isAvailable
         });
 
         return ("Datos actualizados correctamente");

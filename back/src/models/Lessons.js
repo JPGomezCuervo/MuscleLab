@@ -33,6 +33,11 @@ module.exports=(sequelize)=>{
         shortDescription:{
             type:DataTypes.STRING,
             allowNull:false
+        },
+        isAvailable:{
+            tpye:DataTypes.BOOLEAN,
+            allowNull:true,
+            defaultValue:true
         }
     },{timestamps:false})
 }
