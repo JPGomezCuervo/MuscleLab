@@ -63,8 +63,6 @@ let createLesson = async (id, name, effort, goals, shortDescription, description
   }
   if(!Array.isArray(types)){
     throw new Error ("Los tipos debe ser un array de strings");
-  }else{
-    
   }
   const newLesson = await Lessons.create({
     id,
