@@ -35,10 +35,6 @@ module.exports = (sequelize) => {
         allowNull: false,
         foreignKey: true,
       },
-      shortDescription:{
-        type:DataTypes.STRING,
-        allowNull:true
-    }
     },
     { timestamps: false }
   );
