@@ -13,7 +13,6 @@ const getDetailLesson= async (id)=>{
     const types = lesson[0].dataValues.exercisesTypes.map(e =>{
         return e.dataValues.name;
     })
-    console.log(types);
     const detail= await LessonDetail.findAll({where:{lessonId:id}});
     const final={
         
