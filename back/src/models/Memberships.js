@@ -3,9 +3,13 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
     sequelize.define('membership', {
         id: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             primaryKey: true,
-            allowNull: false,
+            autoincrement: true,
+        },
+        name:{
+            type: DataTypes.STRING,
+            allowNull: false
         },
         price: {
             type: DataTypes.STRING,
@@ -23,5 +27,5 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         }
-    });
+    }, { timestamps:false });
 };
