@@ -1,4 +1,4 @@
-const { Lessons, LessonDetail, ExercisesType } = require("../../db");
+const { Lessons, LessonDetail, ExercisesType, User } = require("../../db");
 
 const getDetailLesson = async (id) => {
   const lesson = await Lessons.findAll({
@@ -10,6 +10,18 @@ const getDetailLesson = async (id) => {
       },
     },
     where: { id: id },
+  });
+  const monitorRaw= await User.findAll({
+    include:{
+      model:Lessons,
+      attributes:["name"],
+      through:{
+        attributes:[]
+      }
+    },
+    where:{
+      isMonitor:true
+    }
   });
   console.log(lesson[0].dataValues.exercisesTypes);
   const types = lesson[0].dataValues.exercisesTypes.map((e) => {
