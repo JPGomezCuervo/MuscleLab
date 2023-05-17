@@ -7,14 +7,16 @@ const updateUsers = async (req, res) =>{
         password,
         email,
         phone,
+        lessons
     } = req.body;
     try {
-        const updatedUser = updateUser(
+        const updatedUser =await updateUser(
             id,
             fullName,
             password,
             email,
-            phone,            
+            phone,
+            lessons            
         );
         res.status(200).json(updatedUser);
     } catch (error) {
