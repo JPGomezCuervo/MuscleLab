@@ -1,7 +1,9 @@
 const { Lessons, LessonDetail, ExercisesType } = require("../../db");
+const getTypes = require("../Types/getTypes")
 let createLesson = async (id, name, effort, goals, shortDescription, description, scheduleDays, scheduleHours, image, types) => {
   /** Validations To Create*/
   const foundedClass = await Lessons.findOne({ where: { name: name } });
+  const areTypes = await ExercisesType.findAll();
   const needed = [
     ["name", name],
     ["effort", effort],
@@ -13,6 +15,9 @@ let createLesson = async (id, name, effort, goals, shortDescription, description
     ["types", types]
   ];
   let regexHours=/\d\d\:\d\d-\d\d\:\d\d/i;
+  if(areTypes.length===0){
+    await getTypes();
+  }
   if (!effort || !goals || !name || !description || !scheduleDays || !scheduleHours || !types || !shortDescription) {
     let missing = [];
     for (let i = 0; i < needed.length; i++) {
