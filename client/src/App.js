@@ -19,7 +19,7 @@ import { selectDashAuth } from './redux/features/authSlice';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import NavBardDash from './components/NavBarDash/NavBarDash';
-import LessonsDash from './components/LesssonsDash/LessonsDash';
+import LessonsDash from './components/LessonsDashboard/LessonsDash';
 
 function App() {
   const location = useLocation().pathname;
@@ -41,8 +41,12 @@ function App() {
       <Route path= '/nosotros' element={<Nosotros />}/>
       <Route path="/create" element={<CreateLesson />} />
       <Route path = '/sedes' element= {<Sedes/>}/>
+      <Route path='/dashboard' element={<Dashboard/>}>
+         <Route path= '/dashboard/lessons' element={<LessonsDash/>}/> 
+      <Route/> 
+      </Route> 
 
-        
+
     </Routes>
     <Footer/>
   </> 

@@ -57,7 +57,7 @@
     background: rgba(255, 255, 255, 0.58);
     border: 1px solid white;
     box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
-    backdrop-filter: blur(6px);
+    /* backdrop-filter: blur(6px); */
     border-radius: 17px;
     text-align: center;
     cursor: pointer;
@@ -122,12 +122,7 @@
 
     }
 
-.cartita{
- display: flex;
- flex-direction: column; 
- background-color: rgb(255, 255, 255);
- width: 100%;
-}
+
 
 .hr{
     color: #ffc300;
@@ -145,46 +140,50 @@
     box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
 }
 
+.icono{
+  height: 2.5rem;
+  width: 2.5rem;
+  border: none;
+}
 
+.btnIcono1{
+  background-color: #ffffff;
+  width: 6rem;
+  height: 4rem;
+  display: inline;
+  align-items: center;
+  margin-left: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+}
 
-.select-wrapper {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .select-trigger {
-    cursor: pointer;
-  }
-  
-  .select-options {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #fff;
-    padding: 10px;
-    border: 1px solid #ccc;
-  }
-  
-  .select-wrapper:hover .select-options,
-  .select-wrapper:focus-within .select-options {
-    display: block;
-  }
-  
-  .select-options button {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .show {
-    display: block;
-  }
-  
-  .hide {
-    display: none;
-  }
-  
+.btnIcono2{
+  background-color:#013565;
+  width: 6rem;
+  height: 4rem;
+  display: inline;
+  align-items: center;
+  margin-left: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+}
 
-  .divNuevo{
-    background-color: #ffc300;
-  }
+.btnIcono1:hover {
+  border: 1px solid black;
+  transform: scale(1.09);
+  background-color: #ffc300;
+  
+}
+
+.btnIcono2:hover {
+  border: 1px solid black;
+  transform: scale(1.09);
+  background-color: #ffc300;
+  
+}
+
+.divCont{
+  background-color: rgb(255, 255, 255);
+  height: 14rem;
+  margin-right: 2.5rem;
+}

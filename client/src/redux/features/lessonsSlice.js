@@ -10,7 +10,7 @@ const fetchAllLessons = createAsyncThunk(
     'lessons/fetchAllLessons', async () => {
         
         try {
-            const response = await axios.get(`${URL}${PORT}/lessons`);
+            const response = await axios.get(`${URL}/lessons`);
 
             return response.data
         } catch (error){
