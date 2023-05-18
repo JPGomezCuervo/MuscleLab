@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { PORT, URL, fulfilled, pending, rejected } from "../../utils/constants";
+import {URL, fulfilled, pending, rejected } from "../../utils/constants";
 import axios from "axios";
 
 
@@ -7,7 +7,7 @@ import axios from "axios";
 const fetchAllUsers = createAsyncThunk(
     'users/fetchAllUsers', async () => {
         try {
-            const response = await axios.get(`${URL}+${PORT}/users`);
+            const response = await axios.get(`${URL}/users`);
             return response.data
         } catch (error){
             // revisar como el back envia los errores
@@ -19,7 +19,7 @@ const fetchAllUsers = createAsyncThunk(
 const fetchUserByID = createAsyncThunk(
     'users/fetchUserByID', async () => {
         try {
-            const response = await axios.get(`${URL}${PORT}/users/:id`);
+            const response = await axios.get(`${URL}/users/:id`);
             return response.data
         } catch (error){
             // revisar como el back envia los errores
