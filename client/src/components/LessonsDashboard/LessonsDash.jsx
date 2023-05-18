@@ -153,7 +153,7 @@ return(
               </div>
 
               <div className={style.divCont}>
-                <Link to={`dashboard/clases/detalles/${el.id}`}>
+                <Link to={`editar/${el.id}`}>
               <button className={style.btnIcono1}><img src={edit} alt="edit" className={style.icono} /></button>
               </Link>
               <button className={style.btnIcono2} onClick={removeLessonHandler} name={`${el.id}`}><img src={trash} alt="trash" className={style.icono} /></button>
