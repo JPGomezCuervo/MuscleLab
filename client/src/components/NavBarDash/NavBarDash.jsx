@@ -6,6 +6,7 @@ import usersIcon from '../../assets/icons/users.png'
 import TeachersIcon from '../../assets/icons/teachers.png'
 import lessonsIcon from '../../assets/icons/lessons.png'
 import MemberShipsIcon from '../../assets/icons/memberships.png'
+import { Link } from "react-router-dom";
 
 
 const NavBardDash = () => {
@@ -18,34 +19,36 @@ const NavBardDash = () => {
             </div>
             <h2 className={style.Title}>Dashboard</h2>
 
-            <div className={`${style.OptionContainer} ${style.OptionContainerMember}`}>
+            <Link to={'/dashboard/membresias'} className={`${style.OptionContainer} ${style.OptionContainerMember}`}>
                 <img className={`${style.OptionImg} ${style.MemberIcon}`} src={MemberShipsIcon} alt="Membresias"/>
                 <h3>Membresias</h3>
-            </div>
+            </Link>
                 
-            <div className={style.OptionContainer}>
+            <Link to={'/dashboard/sedes'} className={style.OptionContainer}>
                 <img className={`${style.OptionImg} ${style.LocateIcon}`} src={locationIcon} alt="Sedes"/>
                 <h3>Sedes</h3>
-            </div>
+            </Link>
 
-            <div className={style.OptionContainer}>
+            <Link to={'/dashboard/usuarios'} className={style.OptionContainer}>
                 <img className={style.OptionImg} src={usersIcon} alt="Usuarios"/>
                 <h3>Usuarios</h3>
-            </div>
+            </Link>
 
-            <div className={style.OptionContainer}>
+            <Link to={'/dashboard/profesores'} className={style.OptionContainer}>
                 <img className={style.OptionImg} src={TeachersIcon} alt="Profesores"/>
                 <h3>Profesores</h3>
-            </div>
+            </Link>
 
-            <div className={`${style.OptionContainer} ${style.OptionContainerLessons}`}>
+            <Link to={'/dashboard/clases'}className={`${style.OptionContainer} ${style.OptionContainerLessons}`}>
                 <img className={`${style.OptionImg} ${style.LessonIcon}`} src={lessonsIcon} alt="Clases" />
                 <h3>Clases</h3>
-            </div>
+            </Link>
 
-            <button>
-                Página principal
-            </button>
+            <a href="http://localhost:3000/">
+                <button>
+                    Página principal
+                </button>
+            </a>
             
         </nav>
     )

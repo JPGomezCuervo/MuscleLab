@@ -1,11 +1,14 @@
 import style from './CreateLessonDash.module.css';
 import arrowIcon from '../../assets/icons/arrow-yellow.png';
+import checkIcon from '../../assets/icons/check.png'
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { fetchAllLessonTypes } from '../../redux/features/typesSlice';
 import validations from './validations/mainValidation/index';
 import arrayValidations from './validations/arrayValidations/index';
 import { weekDays } from '../../utils/constants';
+import axios from 'axios';
+import { URL } from '../../utils/constants';
 
 
 class EditLessonDash extends Component {
@@ -39,102 +42,179 @@ class EditLessonDash extends Component {
                 goals: '',
             },
             horaInicio: '',
+            allowSubmit: false,
+            message:'',
+            serverResponse: '',
         };
     };
 
-    generateHourOptions = (type) => {
-        const options = [];
-        for (let i = 1; i <= 24; i++) {
-            options.push(
-              <option key={i} value={i} name = 'scheduleHourStart' selected={this.state.lessonAttributes[type] === i}>
-                {i}:00
-              </option>
-            );
-        }
-        return options;
-      };
 
-       generateFinalHourOptions = (type) => {
-        const options = [];
-        for (let i = 1; i <= 24; i++) {
-            if (i > this.state.horaInicio) {
-                options.push(
-                    <option key={i} value={i} name = 'scheduleHourFinish' selected={this.state.lessonAttributes[type] === i}>
-                        {i}:00
-                    </option>
-                );
+    generateInitialHourOptions = (type) => {
+        const hours = [];
+
+        for (let i = 1; i <= 24 ; i ++){
+          for (let j = 0; j <= 30 ; j+=30){
+            if ( j === 0){
+               hours.push(
+                <option key={`${i}:00`} value={`${i}`} name='scheduleHourStart'
+                >{`${i}:${j}0`}</option>)
+            } else {
+                
+                hours.push(
+                    <option key={`${i}:${j}`} value={`${i}`} name='scheduleHourStart' 
+                    >{`${i}:${j}`}</option>
+                )
             }
+            
+          }
         }
-        return options;
+        return hours;
     };
-        handleChange = (event) => {
-            const name = event.target.name;
-            const value = event.target.value;
+    
+    generateFinalHourOptions = (type) => {
+         
+        const hours = [];
+        for (let i = 1; i <= 24 ; i ++){
+          for (let j = 0; j <= 30 ; j+=30){
+            if ( this.state.horaInicio <= i){
+              if(j === 0) {
+                hours.push(
+                    <option key={`${i}:00`} value={`${i}`} name='scheduleHourStart' selected={this.state.lessonAttributes[type] === `${i}`}
+                    >{`${i}:${j}0`}</option>
+                    )
+              } else {
+                hours.push(
+                    <option key={`${i}:${j}`} value={`${i}`} name='scheduleHourFinish' selected={this.state.lessonAttributes[type] === `${i}:${j}`}
+                    >{`${i}:${j}`}</option>
+                    )
+              }
+            }
+            
+          }
+        }
+        return hours.slice(1);
+    }
+    
+
+    handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+            lessonAttributes: {
+                ...this.state.lessonAttributes,
+                [name]: value,
+            },
+            errors: validations(value, name, this.state.errors),
+        }, () => {
+                this.setState({
+                    allowSubmit: Object.values(this.state.errors).every((item) => item === '') 
+                });   
+        });
+        
+    };
+
+    handleHoursBox = (event) => {
+        const name = event.target.name;
+        const value = Number(event.target.value);
+
+        if (name === 'scheduleHourStart') {
+            this.setState({
+                horaInicio: value,
+                lessonAttributes: {
+                    ...this.state.lessonAttributes,
+                    [name]: value,
+                },
+                errors: validations(value, name, this.state.errors)
+            }, () =>{
+                this.setState({
+                    allowSubmit: Object.values(this.state.errors).every((item) => item === '')
+                });
+            });
+            ;
+        } else {
             this.setState({
                 lessonAttributes: {
                     ...this.state.lessonAttributes,
                     [name]: value,
                 },
-                errors: validations(value, name, this.state.errors),
+                errors: validations(value, name, this.state.errors)
+            }, () =>{
+                this.setState({
+                    allowSubmit: Object.values(this.state.errors).every((item) => item === '')
+                    });
             });
-            
-        };
-
-        handleHoursBox = (event) => {
-            const name = event.target.name;
-            const value = Number(event.target.value);
-
-            if (name === 'scheduleHourStart') {
+        }
+    };
+    handleCheckBox = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        const isChecked = event.target.checked;
+        if (isChecked) {
+            this.setState({
+                lessonAttributes: {
+                    ...this.state.lessonAttributes,
+                    [name]: [...this.state.lessonAttributes[name], value],
+                },
+            }, () => {
                 this.setState({
-                    horaInicio: value,
-                    lessonAttributes: {
-                        ...this.state.lessonAttributes,
-                        [name]: value,
-                    },
-                    errors: validations(value, name, this.state.errors)
-                });
-            } else {
-                this.setState({
-                    lessonAttributes: {
-                        ...this.state.lessonAttributes,
-                        [name]: value,
-                    },
-                    errors: validations(value, name, this.state.errors)
-                });
-            }
-        };
-
-        handleCheckBox = (event) => {
-            const name = event.target.name;
-            const value = event.target.value;
-            const isChecked = event.target.checked;
-            if (isChecked) {
-                this.setState({
-                    lessonAttributes: {
-                        ...this.state.lessonAttributes,
-                        [name]: [...this.state.lessonAttributes[name], value],
-                    },
+                    errors: arrayValidations(this.state.lessonAttributes,this.state.errors, name)
                 }, () => {
                     this.setState({
-                        errors: arrayValidations(this.state.lessonAttributes,this.state.errors, name)
-                    });
+                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')});
                 });
-            } else {
+                
+            });
+        } else {
+            this.setState({
+                lessonAttributes: {
+                    ...this.state.lessonAttributes,
+                    [name]: this.state.lessonAttributes[name].filter((item) => item !== value),
+                },
+            }, () => {
                 this.setState({
-                    lessonAttributes: {
-                        ...this.state.lessonAttributes,
-                        [name]: this.state.lessonAttributes[name].filter((item) => item !== value),
-                    },
+                    errors: arrayValidations(this.state.lessonAttributes, this.state.errors, name)
                 }, () => {
                     this.setState({
-                        errors: arrayValidations(this.state.lessonAttributes, this.state.errors, name)
+                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')});
                     });
-                });
-            }
-        };
 
+            });
+        }
+    };
 
-     componentDidMount() {
+    handleConfirmCreate = (event) => {
+        event.preventDefault();
+        this.setState({
+            message: '¿Estás seguro de que quieres crear esta clase?',
+        });
+    };
+    handleConfirmarClick = (event) => {
+        event.preventDefault();
+        axios.post(`${URL}/lessons/create`, this.state.lessonAttributes)
+        .then((res) => {
+            console.log(res);
+            this.setState({
+                serverResponse: res.data,
+                message: '',
+            });
+        }).catch((err) => {
+            console.log(err);
+            this.setState({
+                serverResponse: err.data,
+                message: '',
+            });
+        })
+    };
+
+    handleVolverClick = (event) => {
+        event.preventDefault();
+        this.setState({
+            message: '',
+            serverResponse: '',
+        });
+    };
+
+    componentDidMount() {
         const { fetchAllLessonTypes } = this.props;
          fetchAllLessonTypes();
          this.inputRef = React.createRef();
@@ -146,7 +226,7 @@ class EditLessonDash extends Component {
 
       return (
               <>
-        <div className={style.MainContainer}>
+        <form className={style.MainContainer}>
             <div className={style.Navigation}>
                 <img className={style.ArrowIcon} src={arrowIcon} alt="" />
                 <h2>{lessonAttributes.name}</h2>
@@ -196,7 +276,7 @@ class EditLessonDash extends Component {
                                 <h2>Hora inicio</h2>
                                 <select name='scheduleHourStart' id='' onChange={this.handleHoursBox} >
                                     <option value='' name = 'scheduleHourStart'>Seleccione</option>
-                                    {this.generateHourOptions('scheduleHourStart').map((option) => option)
+                                    {this.generateInitialHourOptions('scheduleHourStart').map((option) => option)
                                     }
                                 </select>
                             </div>
@@ -281,16 +361,38 @@ class EditLessonDash extends Component {
 
                 </div>
                 <div className={style.ButtonContainer}>
-                    <button className={style.SaveButton}>
-                        Guardar cambios
+                    <button className={this.state.allowSubmit === false ?`${style.SaveButton} ${style.Disable}`: style.SaveButton} disabled={!this.state.allowSubmit} onClick={this.handleConfirmCreate}>
+                        Crear Clase
                     </button>
 
-                    <button className={style.DeleteButton}>
-                        Eliminar clase
-                    </button>
                 </div>
             </div>
-        </div>
+            {this.state.message && 
+            <div>
+                <div className={style.AdvertiseContainer} ></div>
+                <div className={style.Advertise}>
+                    <h1>{this.state.message}</h1> 
+                    <div>
+                        {this.state.message &&<button className={style.AdvertiseButton1} onClick={this.handleConfirmarClick}>Confirmar</button>}
+                        {this.state.message && <button className={style.AdvertiseButton2} onClick={this.handleVolverClick}>Volver</button>}
+                    </div>
+                </div>
+            </div>
+            }
+            {this.state.serverResponse && 
+            <div>
+                <div className={style.AdvertiseContainer} ></div>
+                <div className={style.Advertise}>
+                    <h1>{this.state.serverResponse}</h1>
+                    <img className={style.CheckIcon} src={checkIcon} alt="" />
+                    <div>
+                        {this.state.message && <button className={style.AdvertiseButton1} onClick={this.handleConfirmarClick}>Confirmar</button>}
+                        {this.state.message && <button className={style.AdvertiseButton2} onClick={this.handleVolverClick}>Volver</button>}
+                    </div>
+                </div>
+            </div>
+            }
+        </form>
         </>
       )  
     }

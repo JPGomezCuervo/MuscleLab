@@ -21,6 +21,7 @@ import NavBardDash from './components/NavBarDash/NavBarDash';
 import LessonsDash from './components/LessonsDashboard/LessonsDash';
 import AdminBar from "./components/AdminBar/AdminBar";
 import Wrapper from "./components/Wrapper/Wrapper";
+import TrainerDash from "./components/TrainerDash/TrainerDash";
 
 
 function App() {
@@ -42,13 +43,14 @@ function App() {
       <Route path= '/contactanos' element={<ContactUs />}/>
       <Route path= '/clases/detalles/:id' element={<DetailLesson/>}/>
       <Route path= '/nosotros' element={<Nosotros />}/>
-      <Route path="/create" element={<CreateLesson />} />
+      <Route path="/create" element={<CreateLesson />}/>
       <Route path = '/sedes' element= {<Sedes/>}/>
       {/* <Route path='/dashboard' element={<LessonsDash/>}>
         <Route path= '/dashboard/lessons/detail/:id' element={<LessonsDash/>}/> 
       <Route/>  */}
-      <Route path = 'dashboard/clases/editar/:id' element={<Wrapper/>}/>
-      <Route path = 'dashboard/clases/crear/:id' element={<Wrapper/>}/> 
+      <Route path = '/dashboard/clases/editar/:id' element={<Wrapper/>}/>
+      <Route path = '/dashboard/clases/crear' element={<Wrapper/>}/> 
+      <Route path='/dashboard/profesores' element={<TrainerDash/>} />
       <Route path= "dashboard/clases" element={<LessonsDash/>} />
       
        

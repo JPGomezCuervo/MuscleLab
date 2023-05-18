@@ -9,7 +9,7 @@ const Home = () => {
     const dispatch = useDispatch();
     const plansCLick = useSelector(selectPlansClicked);
     const plansRef = useRef(null);
-
+  
     const handleOnclick = () => {
         plansRef.current.scrollIntoView({ behavior: 'smooth' });
     };
