@@ -11,7 +11,6 @@ const getDeletedUsers = require("../Handlers/Users/getDeletedUsersHandler");
 const restoreDeletedUser = require("../Handlers/Users/restoreDeletedUserHandler");
 const updateUsers = require("../Handlers/Users/udpateUserHandler");
 
-
 server.get("/", ensureAuthenticated, getAllUsers);
 server.get("/monitor", getAllMonitor);
 server.get("/deleted", getDeletedUsers);
@@ -23,9 +22,15 @@ server.put("/restore/:id", restoreDeletedUser);
 server.put("/update/:id", updateUsers);
 
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) return next();
-  else {
-    res.redirect("/users/login");
+    console.log("imprimi esto",req.user);
+  try {
+    if (req.isAuthenticated()) {
+      return next();
+    } else {
+      throw new Error();
+    }
+  } catch (error) {
+    res.status(400).json({ message: "no se pudo verificar" });
   }
 }
 module.exports = server;
