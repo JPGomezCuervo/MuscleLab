@@ -1,4 +1,4 @@
-const updateUser = require('../../Controllers/Users/updateUserController.js')
+const updateUser = require('../../Controllers/Users/updateUserController.js');
 
 const updateUsers = async (req, res) =>{
     const { id } = req.params;
@@ -9,8 +9,8 @@ const updateUsers = async (req, res) =>{
         phone,
     } = req.body;
     try {
-        const updatedUser = updateUser(
-            id,
+        const updatedUser = await updateUser(
+            id, 
             fullName,
             password,
             email,
