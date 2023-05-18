@@ -12,9 +12,9 @@ const userLogin = async (email, password) => {
   } else {
     const match = await bcryptjs.compare(password, toLogin.password);
     if (match) {
-      return "logeado con exito";
+      return { success: true, message: "logeado con exito" };
     } else {
-      return "contraseña incorrecta";
+      return { success: false, message: "contraseña incorrecta" };
     }
   }
 };
