@@ -10,8 +10,10 @@ const getUserDetail = require("../Handlers/Users/getUserDetailHandler");
 const getDeletedUsers = require("../Handlers/Users/getDeletedUsersHandler");
 const restoreDeletedUser = require("../Handlers/Users/restoreDeletedUserHandler");
 const updateUsers = require("../Handlers/Users/udpateUserHandler");
+const {passport} = require("../app")
 
-server.get("/", ensureAuthenticated, getAllUsers);
+
+server.get("/", passport.authenticate("LocalStrategy"), getAllUsers);
 server.get("/monitor", getAllMonitor);
 server.get("/deleted", getDeletedUsers);
 server.get("/:id", getUserDetail);
@@ -21,16 +23,4 @@ server.post("/login", loginUser);
 server.put("/restore/:id", restoreDeletedUser);
 server.put("/update/:id", updateUsers);
 
-function ensureAuthenticated(req, res, next) {
-    console.log("imprimi esto",req.user);
-  try {
-    if (req.isAuthenticated()) {
-      return next();
-    } else {
-      throw new Error();
-    }
-  } catch (error) {
-    res.status(400).json({ message: "no se pudo verificar" });
-  }
-}
 module.exports = server;
