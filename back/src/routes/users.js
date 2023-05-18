@@ -10,7 +10,7 @@ const getUserDetail = require("../Handlers/Users/getUserDetailHandler");
 const getDeletedUsers = require("../Handlers/Users/getDeletedUsersHandler");
 const restoreDeletedUser = require("../Handlers/Users/restoreDeletedUserHandler");
 const updateUsers = require("../Handlers/Users/udpateUserHandler");
-const passport = require("passport");
+
 
 server.get("/", ensureAuthenticated, getAllUsers);
 server.get("/monitor", getAllMonitor);
@@ -25,7 +25,7 @@ server.put("/update/:id", updateUsers);
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) return next();
   else {
-    res.json({ message: "no se pudo verificar" });
+    res.redirect("/users/login");
   }
 }
 module.exports = server;
