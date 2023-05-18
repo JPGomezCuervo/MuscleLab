@@ -25,7 +25,7 @@ server.put("/update/:id", updateUsers);
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) return next();
   else {
-    res.redirect("/users/login");
+    res.json({ message: "no se pudo verificar" });
   }
 }
 module.exports = server;
