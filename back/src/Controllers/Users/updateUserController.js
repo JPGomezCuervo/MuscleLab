@@ -1,3 +1,4 @@
+
 const  { User }  = require("../../db.js");
 const bcryptjs = require("bcryptjs");
 
@@ -8,6 +9,7 @@ const updateUser = async (id, fullName, password, email, phone) =>{
         id:id
       }
     });
+
 
     if(!foundedUser){
       throw new Error('El usuario que deseas modificar no existe');
