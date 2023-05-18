@@ -14,7 +14,6 @@ server.put('/', async (req,res)=>{
 });
 
 server.get('/', getAllLessonsHandler);
-
 server.get('/:id', getDetailLessonHandler);
 server.get('/deleted', getDeletedLessons);
 server.post("/create", createNewLesson);
