@@ -21,6 +21,7 @@ import NavBardDash from './components/NavBarDash/NavBarDash';
 import LessonsDash from './components/LessonsDashboard/LessonsDash';
 import AdminBar from "./components/AdminBar/AdminBar";
 import Wrapper from "./components/Wrapper/Wrapper";
+import TrainerDash from "./components/TrainerDash/TrainerDash";
 
 
 function App() {
