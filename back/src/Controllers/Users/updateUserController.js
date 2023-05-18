@@ -12,7 +12,7 @@ const updateUser = async (id, fullName, password, email, phone) =>{
     if(!foundedUser){
       throw new Error('El usuario que deseas modificar no existe');
     };
-    if(!fullName || !email || !phone){
+    if(!fullName || !email || !phone || !password){
       throw new Error('todos los campos son obligatorios');
     };
     if(password){
