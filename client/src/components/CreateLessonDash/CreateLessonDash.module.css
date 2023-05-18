@@ -1,0 +1,189 @@
+.MainContainer{
+    display: inline-block;
+    position: absolute;
+    width: 76vw;
+    height: 99vh;
+    margin: .5% 0;
+}
+
+.Navigation{
+    display: flex;
+    align-items: center;
+    height: 3.5rem;
+    color: #013565;
+    font-family: 'Montserrat-Bold';
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+}
+
+.Navigation h2{
+    font-size: 3.5rem;
+}
+
+.ArrowIcon{
+    height: 3.5rem;
+    transform: rotate(90deg);
+}
+
+.EditContainer{
+    padding-top: 1rem;
+    height: 77.9vh;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+    border-radius: .4rem;
+    overflow-y: scroll;
+}
+
+.DetailContainer{
+    display: flex;
+    color: black;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.DetailContainer h2{
+    font-family: 'Montserrat-SemiBold';
+    font-size: 1.1rem;
+}
+
+.DetailContainer p{
+    font-family: 'Montserrat-Regular';
+    font-weight: 500;
+    text-align: center;
+    font-size: .9rem;
+}
+
+.Teacher{
+    background-color: #ffc300;
+    color: #013565;
+    font-family: 'Montserrat-Medium';
+    font-size: 1.5rem;
+    padding: .5rem 10%;
+    border-radius: .4rem 1rem 0 0;
+}
+
+.leftContainer{
+    padding-left: 1.5rem;
+}
+
+.ImageContainer{
+    margin: 0 auto;
+    width: 20rem;
+    height: 15rem;
+}
+.leftContainer img{
+    width: 100%;
+    height: 100%;
+}
+
+.leftContainer label{
+    font-family: 'Montserrat-SemiBold';
+    font-size: 1.1rem;
+    text-align: start;
+}
+
+.Description{
+    margin-bottom: 6%;
+    width: 30vw;
+}
+.Description input{
+    background-color: #f3f3f3;
+    padding: 0 1rem;
+    width: 100%;
+    min-height: 3.5rem;
+    margin-top: .4rem;
+}
+
+.RightContainer{
+    padding-right: 3rem;
+    height: fit-content;
+
+}
+
+.RightContainer h2{
+    text-align: center;
+}
+
+.RightContainer select{
+    margin: 0;
+}
+
+.RightContainer input{
+    height: 1rem;
+}
+
+.RightSubContainer{
+    border-bottom: solid .3rem #f3f3f3;
+    padding-bottom: 2rem;
+}
+
+.LastSubContainer{
+    border: 0;
+}
+
+.HourContainer{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.DaysContainer{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-top: 2rem
+}
+
+.TiposDeEjercicio{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    margin-top: 2rem
+}
+
+
+.ButtonContainer{
+    margin: 0 auto;
+    margin-top: 15rem;
+    width: 27.5rem;
+    margin-bottom: 2rem;
+}
+
+.DeleteButton{
+    margin-left: 12%;
+    width: 12rem;
+    height: 3rem;
+    color: #ffffff;
+    background-color: #E11D1D;
+    border: 0;
+    border-radius: 0.4rem;
+    font-family: "Montserrat-Bold";
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.DeleteButton:hover{
+    background-color: rgb(182, 22, 22);
+}
+
+.DeleteButton:active{
+    background-color: #E11D1D;
+}
+
+.SaveButton{
+    height: 3rem;
+    color: #ffffff;
+    width: 12rem;
+    background-color: #ffc300;
+    border: 0;
+    border-radius: 0.4rem;
+    font-family: "Montserrat-Bold";
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.SaveButton:hover{
+    background-color: #FFAF00;
+}
+.SaveButton:active{
+    background-color: #ffc300;
+}

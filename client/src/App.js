@@ -1,4 +1,3 @@
-
 import './App.css';
 import { Route, Routes, Outlet } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
@@ -19,7 +18,8 @@ import { selectDashAuth } from './redux/features/authSlice';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import NavBardDash from './components/NavBarDash/NavBarDash';
-import LessonsDash from './components/LessonsDashboard/LessonsDash';
+import LessonsDash from './components/LesssonsDash/LessonsDash';
+
 
 function App() {
   const location = useLocation().pathname;
@@ -31,6 +31,7 @@ function App() {
   return (
    <>
     {(location.includes('dashboard') ? <NavBardDash/>: <NavBar/>)}
+    {(location.includes('dashboard') ? <AdminBar/>: null)}
     <Routes>
       <Route path='/login' element={<Login/>}/>
       <Route path="/" element={<Home/>}/>
@@ -41,15 +42,15 @@ function App() {
       <Route path= '/nosotros' element={<Nosotros />}/>
       <Route path="/create" element={<CreateLesson />} />
       <Route path = '/sedes' element= {<Sedes/>}/>
-      <Route path='/dashboard' element={<LessonsDash/>}>
-         <Route path= '/dashboard/lessons' element={<LessonsDash/>}/> 
-         
-      <Route/> 
-      </Route> 
-
-
+      {/* <Route path='/dashboard' element={<LessonsDash/>}>
+        <Route path= '/dashboard/lessons/detail/:id' element={<LessonsDash/>}/> 
+      <Route/>  */}
+      <Route path = 'dashboard/clases/editar/:id' element={<Wrapper/>}/>
+      <Route path = 'dashboard/clases/crear/:id' element={<Wrapper/>}/> 
+      
+       
     </Routes>
-    <Footer/>
+    {(location.includes('dashboard') ? null: <Footer/>)}
   </> 
 
   );

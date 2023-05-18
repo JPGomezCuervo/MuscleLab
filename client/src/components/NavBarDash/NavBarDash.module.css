@@ -1,8 +1,122 @@
 .NavBarDash {
-    display: flex;
-    flex-direction: row;
-    background-color: aqua;
-    height: 100px;
-    width: 7rem;
+    display: inline-block;
+    background-color: #013565;
+    margin-right: 2.5%;
+    height: 100vh;
+    width: 20rem;
+}
 
+.NavBarDash button {
+    display: block;
+    height: 3rem;
+    color: #ffffff;
+    background-color: #ffc300;
+    margin: 0 auto;
+    border: 0;
+    border-radius: 0.4rem;
+    width: 12rem;
+    font-family: "Montserrat-Bold";
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: 27%;
+
+}
+
+.NavBarDash button:hover{
+    background-color: #FFAF00;
+}
+
+.NavBarDash button:active{
+    background-color: #ffc300;
+}
+
+.IconContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-left: 12%;
+    cursor: pointer;
+}
+
+.IconContainer h2{
+    font-family: 'Montserrat-Bold';
+    color: #ffffff;
+    width: 4rem;
+    font-size: 2.2rem;
+    text-align: start;
+}
+
+.IconContainer .IconMan{
+    position: absolute;
+    margin-top: 1rem;
+    margin-right: 12rem;
+    height: 6rem;
+    width: 6rem;
+
+}
+
+.IconContainer .IconWeight{
+    height: 3rem;
+    margin-top: 2rem;
+    margin-left: .8rem;
+}
+
+.Title{
+    background-color: transparent;
+    color: white;
+    text-align: center;
+    font-family: 'Montserrat-Regular';
+    font-size: 1.8rem;
+    padding-bottom: .3rem;
+    font-weight: 100;
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 3.5rem;
+    width: 15rem;
+    border-bottom: #ffc300 solid .15rem;
+}
+
+.OptionContainer{
+    display: flex;
+    gap: 16%;
+    align-items: center;
+    padding-left: 3rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.OptionContainer h3{
+    text-align: center;
+    width: 8rem;
+    color: white;
+    line-height: 2.5rem;
+    font-family: 'Montserrat-Regular';
+    font-weight: 500;
+}
+
+.OptionImg{
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.MemberIcon{
+    height: 3.5rem;
+    width: 3.5rem;
+}
+
+.LessonIcon{
+    height: 4rem;
+    width: 4rem;
+}
+
+.OptionContainerMember{
+    padding-left: 2.5rem;
+    gap: 13%;
+}
+
+.OptionContainerLessons{
+    padding-left: 2rem;
+    gap: 12%;
 }

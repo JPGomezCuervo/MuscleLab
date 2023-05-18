@@ -14,4 +14,9 @@ const individualLessonCleaner = (data) => {
     }
     return cleanedData;
 };
-export { cleaner, individualLessonCleaner}
+
+const typesCleaner = (data) => {
+    return data.map((type) =>type.name);
+};
+export { cleaner, individualLessonCleaner, typesCleaner}
+
