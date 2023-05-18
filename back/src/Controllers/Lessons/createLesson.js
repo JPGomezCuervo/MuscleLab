@@ -1,6 +1,8 @@
 const loginUser = require("../../Handlers/Users/loginUserHandler");
 const { Lessons, LessonDetail, ExercisesType } = require("../../db");
-const getTypes = require("../Types/getTypes")
+const getTypes = require("../Types/getTypes");
+const getGoals =require("../Goals/getGoals");
+const db = require("../../db");
 let createLesson = async (id, name, effort, goals, shortDescription, description, scheduleDays, scheduleHourStart,scheduleHourFinish, image, types) => {
   /** Validations To Create*/
   let existingName = name.split("-");
@@ -19,6 +21,8 @@ let createLesson = async (id, name, effort, goals, shortDescription, description
     ["scheduleHourFinish", scheduleHourFinish],
     ["types", types]
   ];
+  const dbGoals=await getGoals();
+  let checkGoals=true;
   if(areTypes.length===0){
     await getTypes();
   }
@@ -46,6 +50,17 @@ let createLesson = async (id, name, effort, goals, shortDescription, description
   }
   if(!Array.isArray(types)){
     throw new Error ("Los tipos debe ser un array de strings");
+  }
+  for(let i=0;i<goals.length;i++){
+    for(let j=0;j<dbGoals.length;j++){
+      if(dbGoals[j].name===goals[i]){
+        checkGoals=false
+      }
+
+    }
+  }
+  if(checkGoals){
+    throw new Error("No existe ese objetivo");
   }
   /**Finish validations */
   console.log(existingClass);

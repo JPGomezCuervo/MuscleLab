@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
             }
         },
         goals: {
-            type: DataTypes.STRING,
+            type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: false,
         },
         shortDescription:{
