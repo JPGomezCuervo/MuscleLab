@@ -1,12 +1,12 @@
 const { LessonDetail } = require('../../db');
 
 const updateLessonDetail = async( 
-    id, 
-    goals, 
+    id,  
     description, 
     scheduleDays , 
     scheduleHourStart, 
-    scheduleHourFinish) => {
+    scheduleHourFinish,
+    isAvailable) => {
     const foundedDetail = await LessonDetail.findOne({
         where:{
             id:id
@@ -20,7 +20,7 @@ const updateLessonDetail = async(
             !description  || 
             !scheduleDays || 
             !scheduleHourStart || 
-            !scheduleHourFinish){
+            !scheduleHourFinish || !isAvailable){
                 throw new Error('Todos los campos son obligatorios');
         }
         await foundedDetail.update({
@@ -29,6 +29,7 @@ const updateLessonDetail = async(
             scheduleDays: scheduleDays,
             scheduleHourStart: scheduleHourStart,
             scheduleHourFinish: scheduleHourFinish,
+            isAvailable: isAvailable
         });
         
         return ("Datos actualizados correctamente");
