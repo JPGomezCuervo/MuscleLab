@@ -1,0 +1,214 @@
+.contenedor{
+  
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+}
+
+
+.button{
+    margin: auto 0;
+    height: 5rem;
+    color: #ffffff;
+    background-color: #ffc300;
+    border: 0;
+    border-radius: .5rem;
+    width: 30rem;
+    font-family:'Montserrat-Bold';
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .2s;
+    margin-right: 3%;
+}
+
+.divVacio{
+    background-color: green;
+    height: 5rem;
+}
+.contNombre{
+    display: flex;
+    flex-direction: row;
+    margin-left: 5rem;
+    font-family:'Montserrat-Bold';
+    color:#013565;
+    font-size: 2rem;
+}
+
+.deta{
+    background-color: rgb(255, 255, 255);
+    margin-left:3rem;
+    margin-right: 3rem;
+    width: auto;
+    height: 16rem;
+    padding: .4rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    border-radius: 1rem;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+    
+}
+
+.detalle {
+    box-sizing: border-box;
+    width: 57rem;
+    height: auto;
+    background: rgba(255, 255, 255, 0.58);
+    border: 1px solid white;
+    box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+    /* backdrop-filter: blur(6px); */
+    border-radius: 17px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left:3rem;
+    margin-right: 3rem;
+    user-select: none;
+    font-weight: bolder;
+    color: black;
+  }
+  
+  .detalle:hover {
+    border: 1px solid black;
+    transform: scale(1.05);
+  }
+  
+  .detalle:active {
+    transform: scale(0.95) rotateZ(1.7deg);
+  }
+
+.contenido{
+    
+    width: auto;
+    height: auto;
+    padding-left: 1.3rem;    
+    font-family: 'Montserrat-regular', sans-serif;
+    color:#013565;
+    margin: auto auto;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.texto{
+    font-family: 'Montserrat-regular', sans-serif;
+    color:#013565;
+    margin: auto auto;
+    font-size: 1rem;
+    text-align: center;
+}
+
+
+
+
+.imagenDeporte{
+    width: 18rem;
+    height: 13.5rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 2px;
+    margin-left: 6px;
+    margin-right: 6px;
+    border-radius: .8rem;
+
+    }
+
+
+
+.hr{
+    color: #ffc300;
+}
+
+.imgDetalle{
+    width: 20rem;
+    height: 14.5rem;
+    display: flex;
+    align-items: center;
+    margin-top: 1px;
+    margin-left: 2rem;
+    border-radius: .8rem;
+    background-color: #ffc300;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+}
+
+.icono{
+  height: 2rem;
+  width: 2rem;
+  border: none;
+}
+
+.btnIcono1{
+  background-color: #ffffff;
+  width: 4.5rem;
+  height: 3.3rem;
+  display: inline;
+  align-items: center;
+  margin-left: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btnIcono2{
+  background-color:#013565;
+  width: 4.5rem;
+  height: 3.3rem;
+  display: inline;
+  align-items: center;
+  margin-left: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btnIcono1:hover {
+  border: 1px solid black;
+  transform: scale(1.09);
+  background-color: #ffc300;
+  
+}
+
+.btnIcono2:hover {
+  border: 1px solid black;
+  transform: scale(1.09);
+  background-color: #ffc300;
+  
+}
+
+.divCont{
+  
+  height: 5rem;
+  margin-right: 2rem;
+  margin-bottom: 8rem;
+}
+
+.contenedorTodo{
+  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
+.seleccion{
+  
+  height: 2.5rem;
+  width: 17rem;
+  display: inline;
+  margin-top: .5rem; 
+  
+  font-family: 'Montserrat-regular', sans-serif;
+    color:#013565;
+    margin: auto auto;
+    font-size: 1.5rem;
+    text-align:left;
+
+}
+
+.divSelect{
+ 
+  margin-left: 20rem;
+}
