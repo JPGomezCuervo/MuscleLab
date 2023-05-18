@@ -1,0 +1,26 @@
+.MainContainer{
+    display: inline-block;
+    position: absolute;
+    width: 76vw;
+    height: 99vh;
+    margin: .5% 0;
+}
+.Navigation{
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    height: 3.5rem;
+    color: #013565;
+    font-family: 'Montserrat-Bold';
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+}
+
+.Navigation h2{
+    font-size: 3.5rem;
+}
+
+.ArrowIcon{
+    height: 3.5rem;
+    transform: rotate(90deg);
+}

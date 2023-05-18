@@ -1,23 +1,80 @@
 .MainContainer{
     display: inline-block;
     position: absolute;
-    width: 76vw;
+    width: 78vw;
     height: 99vh;
-    margin: .5% 0;
+    margin-right: 5%;
+}
+
+
+.Navigator{
+    font-size: 3rem;
+    font-family: 'Montserrat-Bold';
+    height: 3.5rem;
+    color: #013565;
+    margin-bottom: 6rem;
+    margin-top: 2rem;
+}
+
+.BGContainer{
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+    overflow-y: scroll;
+    padding-top: 1rem;
 }
 
 .Container{
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+    
 }
 
 .Info{
     font-family: 'Montserrat-Regular';
+    font-weight: 300;
+    text-align: center;
+    color: #013565;
+    margin-bottom: 3.4rem;
 }
-
 .Title{
     background-color: #ffc300;
     margin-top: 0;
-    text-align: center;
+    margin-bottom: 0;
+}
+
+.InfoName{
+    font-family: 'Montserrat-Regular';
+    font-weight: 300;
+    text-align: start;
+    color: #013565;
+    margin-left: 2rem;
+    margin-bottom: 3.4rem;
+}
+
+.BGContainer button{
+    display: block;
+    margin-left: auto;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+.PlusIcon{
+    height: 6rem;
+}
+
+.Info img{
+    display: inline-block;
+    margin-left: 20%;
+    height: 1.8rem;
+    width: 1.8rem;
+    cursor: pointer;
+}
+
+.Status{
+    text-align: end;
+    padding-right: 16%;
+}
+
+.TitleContainer{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
 }

@@ -22,6 +22,7 @@ import LessonsDash from './components/LessonsDashboard/LessonsDash';
 import AdminBar from "./components/AdminBar/AdminBar";
 import Wrapper from "./components/Wrapper/Wrapper";
 import TrainerDash from "./components/TrainerDash/TrainerDash";
+import EditTrainerDash from './components/EditTrainerDash/EditTrainerDash';
 
 
 function App() {
@@ -51,7 +52,8 @@ function App() {
       <Route path = '/dashboard/clases/editar/:id' element={<Wrapper/>}/>
       <Route path = '/dashboard/clases/crear' element={<Wrapper/>}/> 
       <Route path='/dashboard/profesores' element={<TrainerDash/>} />
-      <Route path= "dashboard/clases" element={<LessonsDash/>} />
+      <Route path= 'dashboard/clases' element={<LessonsDash/>} />
+      <Route path= '/dashboard/profesores/editar/:id' element={<EditTrainerDash/>}/>
       
        
     </Routes>
