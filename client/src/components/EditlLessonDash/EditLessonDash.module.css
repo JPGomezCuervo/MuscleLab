@@ -16,8 +16,18 @@
     margin-top: 2rem;
 }
 
+.Navigation button{
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+}
+
 .Navigation h2{
     font-size: 3.5rem;
+}
+
+.Navigation a{
+    height: 3.5rem;
 }
 
 .ArrowIcon{
@@ -201,7 +211,7 @@
 
 .AdvertiseContainer{
     background-color: #ffffff;
-    opacity: 0.25;
+    opacity: 0.5;
     position: fixed;
     z-index: 9998;
     height: 100vh;
@@ -286,4 +296,24 @@
 
 .AdvertiseButton1:active, .AdvertiseButton2:active{
     background-color: #ffc300;
+}
+
+.AdvertiseButton3{
+    display: block;
+    background-color: #ffc300;
+    color: white;
+    font-family: 'Montserrat-Regular';
+    font-weight: 900;
+    border-radius: .4rem;
+    text-decoration: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: .3s;
+    width: 15rem;
+    height: 3.5rem;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    line-height: 3.5rem;
+    text-align: center;
+    
 }
