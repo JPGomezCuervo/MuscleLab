@@ -10,10 +10,8 @@ const getUserDetail = require("../Handlers/Users/getUserDetailHandler");
 const getDeletedUsers = require("../Handlers/Users/getDeletedUsersHandler");
 const restoreDeletedUser = require("../Handlers/Users/restoreDeletedUserHandler");
 const updateUsers = require("../Handlers/Users/udpateUserHandler");
-const {passport} = require("../app.js")
 
-
-server.get("/", passport.authenticate('local'), getAllUsers);
+server.get("/", getAllUsers);
 server.get("/monitor", getAllMonitor);
 server.get("/deleted", getDeletedUsers);
 server.get("/:id", getUserDetail);
