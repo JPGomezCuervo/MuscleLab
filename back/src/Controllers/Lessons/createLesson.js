@@ -1,9 +1,9 @@
 const loginUser = require("../../Handlers/Users/loginUserHandler");
-const { Lessons, LessonDetail, ExercisesType, User } = require("../../db");
+const { Lessons, LessonDetail, ExercisesType, User, BranchOffice } = require("../../db");
 const getTypes = require("../Types/getTypes");
 const getGoals =require("../Goals/getGoals");
 const db = require("../../db");
-let createLesson = async (id, name, effort, goals, shortDescription, description, scheduleDays, scheduleHourStart,scheduleHourFinish, image, types, monitor) => {
+let createLesson = async (id, name, effort, goals, shortDescription, description, scheduleDays, scheduleHourStart,scheduleHourFinish, image, types, monitor, branchOffice) => {
   /** Validations To Create*/
   let existingName = name.split("-");
   existingName=existingName[0];
@@ -64,7 +64,6 @@ let createLesson = async (id, name, effort, goals, shortDescription, description
   }
   /**Finish validations */
   const mon= await User.findOne({where:{fullName:monitor}});
-  console.log(mon);
   let newLesson=0;
   if(!existingClass){
     newLesson = await Lessons.create({
@@ -94,6 +93,12 @@ let createLesson = async (id, name, effort, goals, shortDescription, description
     scheduleHourFinish,
     lessonId: lessonid
   });
+  branchOffice.map(async (o)=>{
+    const office= await BranchOffice.findOne({
+      where:{name:o}
+    });
+    details.addBranchOffice(office?.id);
+  })
   details.addUser(mon?.id);
   return `id: ${details.id} name: ${details.name}`;
 

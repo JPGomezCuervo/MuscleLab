@@ -1,4 +1,4 @@
-const { Lessons, LessonDetail, ExercisesType, User } = require("../../db");
+const { Lessons, LessonDetail, ExercisesType, User, BranchOffice } = require("../../db");
 const { Op } = require("sequelize");
 
 const getDetailLesson = async (name) => {
@@ -27,6 +27,20 @@ const getDetailLesson = async (name) => {
       isMonitor: true
     }
   });
+  const officeRaw = await BranchOffice.findAll({
+    include:{
+      model: LessonDetail,
+      attributes: ["name"],
+      through: {
+        attributes: []
+      },
+      where: {
+        lessonId:lesson[0].id
+      }
+    }
+  });
+  const offices = officeRaw.map(o=>{return{name:o.dataValues.name, lessons:o.dataValues.lessonDetails}});
+  console.log(offices[0].lessons);
   const monitors = monitorRaw.map(m =>{return{name:m.dataValues.fullName, lesson:m.dataValues.lessonDetails}});
   const types = lesson[0].dataValues.exercisesTypes.map((e) => {
     return e.dataValues.name;
@@ -35,10 +49,18 @@ const getDetailLesson = async (name) => {
   const final = [];
   for (let i = 0; i < detail.length; i++) {
     let monitor;
+    let office;
     for(let j=0;j<monitors.length;j++){
       for(let k=0;k<monitors[j].lesson.length;k++){
         if(detail[i].name===monitors[j].lesson[k].name){
           monitor=monitors[j].name;
+        }  
+      }
+    }
+    for(let j=0;j<offices.length;j++){
+      for(let k=0;k<offices[j].lessons.length;k++){
+        if(detail[i].name===offices[j].lessons[k].name){
+          office=offices[j].name;
         }  
       }
     }
@@ -54,7 +76,8 @@ const getDetailLesson = async (name) => {
       scheduleHourFinish: detail[i].scheduleHourFinish,
       isAvailable:detail[i].isAvailable,
       types: types,
-      monitors: monitor
+      monitors: monitor,
+      office: office
     }
     final.push(objDetail);
   }
