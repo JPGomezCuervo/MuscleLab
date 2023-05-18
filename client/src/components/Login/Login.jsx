@@ -16,15 +16,15 @@ const Login = () => {
         }
       );
       console.log("el response es:", response.data);
-      if (response.data === "logeado con exito") {
+      if (response.data.login.success) {
         window.location.href = "/";
-      } else if (response.data === "contraseña incorrecta") {
-        alert("contraseña incorrecta");
       } else {
-        alert("hubo un error");
+        alert("contraseña incorrecta");
       }
     } catch (error) {
-      alert(error.message);
+      alert(
+        "No se encontro un usuario con ese email"
+      );
     }
   };
   return (
