@@ -16,6 +16,18 @@ const fetchAllUsers = createAsyncThunk(
     }
 )
 
+const fetchAllMonitors = createAsyncThunk(
+    'users/fetchAllMonitors', async () => {
+        try {
+            const response = await axios.get(`${URL}/users/monitor`);
+            return response.data
+        } catch (error){
+            // revisar como el back envia los errores
+            throw new Error (error.response)
+        }
+    }
+)
+
 const fetchUserByID = createAsyncThunk(
     'users/fetchUserByID', async () => {
         try {
@@ -31,6 +43,8 @@ const fetchUserByID = createAsyncThunk(
 const initialState = {
     users: [],
     user: {},
+    monitors: [],
+    monitor: {},
     status: 'idle',
     error: ''
 }
@@ -74,12 +88,31 @@ const usersSlice = createSlice ({
                 state.error = action.error;
                 
             }) 
+            .addCase(fetchAllMonitors.fulfilled, ( state, action) => {
+                state.status = fulfilled;
+                state.error = '';
+                state.monitors = action.payload
+ 
+            })
+            .addCase(fetchAllMonitors.pending, (state, action) => {
+                state.status = pending;
+                state.error = '';
+            })
+            .addCase(fetchAllMonitors.rejected, (state, action) => {
+                state.status = rejected;
+                //revisar sintaxis del error
+                state.error = action.error;
+                
+            })
             
     }
 })
 
 export const selectAllUsers = (state) => state.users.users;
 export const selectUserByID = (state) => state.users.user;
+export const selectAllMonitors = (state) => state.users.monitors;
+export const selectMonitorByID = (state) => state.users.monitor;
 export const selectStatus = (state) => state.users.status;
 export const selectError = (state) => state.users.error;
 export default usersSlice.reducer;
+export { fetchAllUsers, fetchAllMonitors, fetchUserByID };

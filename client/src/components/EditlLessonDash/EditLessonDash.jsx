@@ -1,12 +1,15 @@
 import style from './EditLessonDash.module.css';
 import arrowIcon from '../../assets/icons/arrow-yellow.png';
 import React, {Component} from 'react';
+import checkIcon from '../../assets/icons/check.png'
 import { connect } from 'react-redux';
 import { fetchLessonsByID } from '../../redux/features/lessonsSlice';
 import { fetchAllLessonTypes } from '../../redux/features/typesSlice';
 import validations from './validations/mainValidation/index';
 import arrayValidations from './validations/arrayValidations/index';
 import { weekDays } from '../../utils/constants';
+import axios from 'axios';
+import { URL } from '../../utils/constants';
 
 
 class DetailLessonDash extends Component {
@@ -40,34 +43,58 @@ class DetailLessonDash extends Component {
                 goals: '',
             },
             horaInicio: '',
+            allowSubmit: true,
+            message:'',
+            serverResponse: '',
         };
     };
 
-    generateHourOptions = (type) => {
-        const options = [];
-        for (let i = 1; i <= 24; i++) {
-            options.push(
-              <option key={i} value={i} name = 'scheduleHourStart' selected={this.state.lessonAttributes[type] === i}>
-                {i}:00
-              </option>
-            );
-        }
-        return options;
-      };
+    generateInitialHourOptions = (type) => {
+        const hours = [];
 
-       generateFinalHourOptions = (type) => {
-        const options = [];
-        for (let i = 1; i <= 24; i++) {
-            if (i > this.state.horaInicio) {
-                options.push(
-                    <option key={i} value={i} name = 'scheduleHourFinish' selected={this.state.lessonAttributes[type] === i}>
-                        {i}:00
-                    </option>
-                );
+        for (let i = 1; i <= 24 ; i ++){
+          for (let j = 0; j <= 30 ; j+=30){
+            if ( j === 0){
+             
+               hours.push(
+                <option key={`${i}:00`} value={`${i}`} name='scheduleHourStart' selected={this.state.lessonAttributes[type] === `${i}:${j}0`}
+                >{`${i}:${j}0`}</option>)
+            } else {
+                
+                hours.push(
+                    <option key={`${i}:${j}`} value={`${i}`} name='scheduleHourStart' selected={this.state.lessonAttributes[type] === `${i}:${j}`} 
+                    >{`${i}:${j}`}</option>
+                )
             }
+            
+          }
         }
-        return options;
+        return hours;
     };
+    
+    generateFinalHourOptions = (type) => {
+         
+        const hours = [];
+        for (let i = 1; i <= 24 ; i ++){
+          for (let j = 0; j <= 30 ; j+=30){
+            if ( this.state.horaInicio <= i){
+              if(j === 0) {
+                hours.push(
+                    <option key={`${i}:00`} value={`${i}`} name='scheduleHourStart' selected={this.state.lessonAttributes[type] === `${i}:${j}0`}
+                    >{`${i}:${j}0`}</option>
+                    )
+              } else {
+                hours.push(
+                    <option key={`${i}:${j}`} value={`${i}`} name='scheduleHourFinish' selected={this.state.lessonAttributes[type] === `${i}:${j}`}
+                    >{`${i}:${j}`}</option>
+                    )
+              }
+            }
+            
+          }
+        }
+        return hours.slice(1);
+    }
         handleChange = (event) => {
             const name = event.target.name;
             const value = event.target.value;
@@ -77,6 +104,10 @@ class DetailLessonDash extends Component {
                     [name]: value,
                 },
                 errors: validations(value, name, this.state.errors),
+            }, () => {
+                    this.setState({
+                        allowSubmit: Object.values(this.state.errors).every((item) => item === '') 
+                    });   
             });
             
         };
@@ -93,7 +124,12 @@ class DetailLessonDash extends Component {
                         [name]: value,
                     },
                     errors: validations(value, name, this.state.errors)
+                }, () =>{
+                    this.setState({
+                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')
+                    });
                 });
+                ;
             } else {
                 this.setState({
                     lessonAttributes: {
@@ -101,6 +137,10 @@ class DetailLessonDash extends Component {
                         [name]: value,
                     },
                     errors: validations(value, name, this.state.errors)
+                }, () =>{
+                    this.setState({
+                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')
+                        });
                 });
             }
         };
@@ -118,7 +158,11 @@ class DetailLessonDash extends Component {
                 }, () => {
                     this.setState({
                         errors: arrayValidations(this.state.lessonAttributes,this.state.errors, name)
+                    }, () => {
+                        this.setState({
+                            allowSubmit: Object.values(this.state.errors).every((item) => item === '')});
                     });
+                    
                 });
             } else {
                 this.setState({
@@ -129,16 +173,67 @@ class DetailLessonDash extends Component {
                 }, () => {
                     this.setState({
                         errors: arrayValidations(this.state.lessonAttributes, this.state.errors, name)
-                    });
+                    }, () => {
+                        this.setState({
+                            allowSubmit: Object.values(this.state.errors).every((item) => item === '')});
+                        });
+
                 });
             }
         };
         
-        handleGuardarCambiosClick = () => {
-            
+        handleConfirmarClick = (event) => {
+            if (this.state.message.includes('modificar')){
+                event.preventDefault();
+                axios.put(`${URL}/lessons/update/${this.props.id}`, this.state.lessonAttributes)
+                .then((res) => {
+                    this.setState({
+                        serverResponse: res.data,
+                        message: ''});
+                }).catch((err) => {
+                    this.setState({
+                        serverResponse: err.data,
+                        message: ''});
+                });
+            } else {
+                event.preventDefault();
+                axios.delete(`${URL}/lessons/delete/${this.props.id}`)
+                .then((res) => {
+                    this.setState({
+                        serverResponse: res.data,
+                        message: ''});
+                }).catch((err) => {
+                    this.setState({
+                        serverResponse: err.response.data,
+                        message: ''});
+                }
+                );
+            }
+        };
+        
+        handleVolverClick = (event) => {
+            event.preventDefault();
+            this.setState({
+                message: '',
+                serverResponse: '',
+            });
         };
 
-     componentDidMount() {
+        handleConfirmModify = (event) => {          
+            event.preventDefault();
+            this.setState({
+                message: '¿Estás seguro de que quieres modificar la clase?',
+            });
+        };
+        handleConfirmRemove = (event) => {
+            event.preventDefault();
+            this.setState({
+                message: '¿Estás seguro de que quieres eliminar la clase?',
+            });
+        };
+
+        
+     componentDidMount(prevProps, prevState) {
         const {fetchLessonsByID, fetchAllLessonTypes} = this.props;
          fetchLessonsByID(this.props.id)
          .then((res) =>{ 
@@ -149,8 +244,8 @@ class DetailLessonDash extends Component {
                         shortDescription: res.payload.shortDescription,
                         effort: res.payload.effort,
                         image: res.payload.image,
-                        scheduleHourStart: Number(res.payload.scheduleHourStart),
-                        scheduleHourFinish: Number(res.payload.scheduleHourFinish),
+                        scheduleHourStart: res.payload.scheduleHourStart,
+                        scheduleHourFinish: res.payload.scheduleHourFinish,
                         scheduleDays: res.payload.scheduleDays,
                         types: res.payload.types,
                         goals: res.payload.goals,
@@ -167,14 +262,14 @@ class DetailLessonDash extends Component {
         const {lessonAttributes, errors} = this.state;
 
       return (
-              <>
-        <div className={style.MainContainer}>
+        <form className={style.MainContainer}>
             <div className={style.Navigation}>
                 <img className={style.ArrowIcon} src={arrowIcon} alt="" />
                 <h2>{lesson.name}</h2>
             </div>
 
-            <div className={style.Teacher}> Profesor: Brad Pitt</div>
+            <div className={style.Teacher}> Profesor: Brad Pitt
+            </div>
             <div className={style.EditContainer}>
                 <div className={style.DetailContainer}>
                     <div className={style.leftContainer}>
@@ -218,7 +313,7 @@ class DetailLessonDash extends Component {
                                 <h2>Hora inicio</h2>
                                 <select name='scheduleHourStart' id='' onChange={this.handleHoursBox} >
                                     <option value='' name = 'scheduleHourStart'>Seleccione</option>
-                                    {this.generateHourOptions('scheduleHourStart').map((option) => option)
+                                    {this.generateInitialHourOptions('scheduleHourStart').map((option) => option)
                                     }
                                 </select>
                             </div>
@@ -303,17 +398,44 @@ class DetailLessonDash extends Component {
 
                 </div>
                 <div className={style.ButtonContainer}>
-                    <button className={style.SaveButton} onClick={this.handleGuardarCambiosClick}>
+                    <button className={this.state.allowSubmit === true ? style.SaveButton:`${style.SaveButton} ${style.Disable}`} onClick={this.handleConfirmModify} disabled={!this.state.allowSubmit}>
                         Guardar cambios
                     </button>
 
-                    <button className={style.DeleteButton} onClick={this.handleEliminarClaseClick}>
+                    <button className={style.DeleteButton} onClick={this.handleConfirmRemove} disabled={!this.state.allowSubmit}>
                         Eliminar clase
                     </button>
                 </div>
+
+
             </div>
-        </div>
-        </>
+            {this.state.message && 
+                <div>
+                    <div className={style.AdvertiseContainer} ></div>
+                    <div className={style.Advertise}>
+                        <h1>{this.state.message}</h1> 
+                        <div>
+                            {this.state.message &&<button className={style.AdvertiseButton1} onClick={this.handleConfirmarClick}>Confirmar</button>}
+                            {this.state.message && <button className={style.AdvertiseButton2} onClick={this.handleVolverClick}>Volver</button>}
+                        </div>
+                    </div>
+                </div>
+                }
+
+            {this.state.serverResponse && 
+                <div>
+                    <div className={style.AdvertiseContainer} ></div>
+                    <div className={style.Advertise}>
+                        <h1>{this.state.serverResponse}</h1>
+                        <img className={style.CheckIcon} src={checkIcon} alt="" />
+                        <div>
+                            {this.state.message && <button className={style.AdvertiseButton1} onClick={this.handleConfirmarClick}>Confirmar</button>}
+                            {this.state.message && <button className={style.AdvertiseButton2} onClick={this.handleVolverClick}>Volver</button>}
+                        </div>
+                    </div>
+                </div>
+                }
+        </form>
       )  
     }
 }

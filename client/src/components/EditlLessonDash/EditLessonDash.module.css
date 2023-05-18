@@ -187,3 +187,103 @@
 .SaveButton:active{
     background-color: #ffc300;
 }
+
+.Disable{
+    background-color: #f3f3f3;
+    color: #013565;;
+    cursor: not-allowed;
+}
+
+.Disable:hover, .Disable:active{
+    background-color: #f3f3f3;
+    
+}
+
+.AdvertiseContainer{
+    background-color: #ffffff;
+    opacity: 0.25;
+    position: fixed;
+    z-index: 9998;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+}
+.Advertise{
+    flex-direction: column;
+    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9998;
+    background-color: white;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+    border-radius: .4rem;
+    min-height: 16rem;
+    min-width: 30rem;
+}
+
+.Advertise h1{
+    font-family: 'Montserrat-Medium';
+    font-weight: 500;
+    color: #013565;
+    text-align: center;
+    width: 27rem;
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+.CheckIcon{
+    display: block;
+    margin: 0 auto;
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 3rem;
+}
+
+.AdvertiseButton1{
+    background-color: #ffc300;
+    color: white;
+    font-family: 'Montserrat-Regular';
+    font-weight: 900;
+    border: 0;
+    border-radius: .4rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: .3s;
+    float: left;
+    margin-left: 15%;
+    width: 9rem;
+    height: 4rem;
+    line-height: 4rem;
+}
+
+.AdvertiseButton2{
+    background-color: #ffc300;
+    color: white;
+    font-family: 'Montserrat-Regular';
+    font-weight: 900;
+    border: 0;
+    border-radius: .4rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: .3s;
+    float: right;
+    margin-right: 15%;
+    width: 9rem;
+    height: 4rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    margin-bottom: 2rem;
+    
+}
+
+.AdvertiseButton1:hover, .AdvertiseButton2:hover{
+    background-color: #FFAF00;
+}
+
+.AdvertiseButton1:active, .AdvertiseButton2:active{
+    background-color: #ffc300;
+}

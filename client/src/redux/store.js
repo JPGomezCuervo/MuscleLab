@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { cacheMiddleware } from './features/lessonsSlice';
 import lessonsReducer from './features/lessonsSlice';
 import utilsReducer from './features/utilsSlice';
 import usersReducer from './features/usersSlice';
 import typesReducer from './features/typesSlice';
 import filtersReducer from './features/filtersSlice';
 import authReducer from './features/authSlice';
-import { cacheMiddleware } from './features/lessonsSlice';
+import officesReducer from './features/officesSlice';
 
 const store = configureStore({
     reducer: {
@@ -14,7 +15,8 @@ const store = configureStore({
         users: usersReducer,
         utils: utilsReducer,
         filters: filtersReducer,
-        auth: authReducer 
+        auth: authReducer,
+        offices: officesReducer 
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
     devTools: process.env.NODE_ENV !== 'production'
