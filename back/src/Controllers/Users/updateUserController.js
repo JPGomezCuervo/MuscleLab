@@ -1,4 +1,4 @@
-const  { User, Lessons }  = require("../../db.js");
+const  { User, LessonDetail }  = require("../../db.js");
 
 const updateUser = async (id, fullName, password, email, phone, lessons) => {
   const foundedUser = await User.findOne({
@@ -21,11 +21,11 @@ const updateUser = async (id, fullName, password, email, phone, lessons) => {
     phone: phone
   });
   lessons.map(async (lesson) => {
-    const l = await Lessons.findOne({
+    const l = await LessonDetail.findOne({
       attributes: ["id"],
       where: { name: lesson }
     });
-    foundedUser.addLesson(l?.id);
+    foundedUser.addLessonDetail(l?.id);
   });
   return("Usuario actualizado correctamente");
 };
