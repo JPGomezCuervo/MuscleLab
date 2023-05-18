@@ -52,7 +52,7 @@
 
 .detalle {
     box-sizing: border-box;
-    width: 55rem;
+    width: 57rem;
     height: auto;
     background: rgba(255, 255, 255, 0.58);
     border: 1px solid white;
@@ -87,8 +87,7 @@
     
     width: auto;
     height: auto;
-    margin-left: 2rem;
-    
+    padding-left: 1.3rem;    
     font-family: 'Montserrat-regular', sans-serif;
     color:#013565;
     margin: auto auto;
@@ -127,11 +126,11 @@
 
 .imgDetalle{
     width: 20rem;
-    height: 15.5rem;
+    height: 14.5rem;
     display: flex;
     align-items: center;
     margin-top: 1px;
-    margin-left: 5px;
+    margin-left: 2rem;
     border-radius: .8rem;
     background-color: #ffc300;
     box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
@@ -182,7 +181,7 @@
 .divCont{
   
   height: 5rem;
-  margin-right: .5rem;
+  margin-right: 2rem;
   margin-bottom: 8rem;
 }
 

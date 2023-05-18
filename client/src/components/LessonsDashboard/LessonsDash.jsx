@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./LessonsDash.module.css"
-import { selectAllLessons, fetchAllLessons } from "../../redux/features/lessonsSlice";
+import { selectAllLessons, fetchAllLessons, clearLesson } from "../../redux/features/lessonsSlice";
 import { selectSelectedTypes, setSelectedTypes } from "../../redux/features/filtersSlice";
 import { useSelector , useDispatch} from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -33,26 +33,64 @@ const LessonsDash = ()=> {
         dispatch(fetchAllLessons())
     },[serverResponse])
 
+    // const removeLessonHandler = (event) => {
+    //   const id = event.target.name;    
+    //   let text = "Esta acción no se podrá revertir!\nPulse OK o Cancelar.";
+    //   if (window.confirm(text) === true) {
+    //     console.log(id)
+    //     fetch("https://musclelabii.onrender.com/lessons/delete/" + id, { method: "DELETE" })
+    //       .then((response) => {
+    //         setServerResponse(true, response);
+    //         alert("Borrado con éxito!");
+    //       })
+    //       .catch((error) => {
+    //         setServerResponse(false, error);
+    //         alert("Error al borrar la lección.");
+    //       });
+    //   } else {
+    //     alert("Cancelado por el usuario");
+    //   }
+       
+    // };
+
     const removeLessonHandler = (event) => {
       const id = event.target.name;
     
       let text = "Esta acción no se podrá revertir!\nPulse OK o Cancelar.";
       if (window.confirm(text) === true) {
-        console.log(id)
+        console.log(id);
+        // Eliminar directamente del servidor
         fetch("https://musclelabii.onrender.com/lessons/delete/" + id, { method: "DELETE" })
           .then((response) => {
-            setServerResponse(true, response);
-            alert("Borrado con éxito!");
+            if (response.status === 200) {
+              // Eliminación exitosa
+              setServerResponse(true);
+              alert("Borrado con éxito!");
+              // Llamar a la acción clearLesson para actualizar el estado local
+              dispatch(clearLesson(id));
+            } else if (response.status === 400) {
+              // Error en el servidor
+              setServerResponse(false);
+              return response.json();
+            } else {
+              // Otro código de estado
+              throw new Error("Error de red");
+            }
+          })
+          .then((data) => {
+            // Manejar el mensaje de error del servidor
+            if (data && data.error) {
+              alert(data.error);
+            }
           })
           .catch((error) => {
-            setServerResponse(false, error);
-            alert("Error al borrar la lección.");
+            alert(error.message);
           });
       } else {
         alert("Cancelado por el usuario");
       }
-        navigate("/dashboard")
     };
+    
 
 
     const handleFilterTypes = (event) => {
@@ -110,7 +148,7 @@ return(
               <div className={style.contenido}>
               <h2>Nombre: {el.name}</h2>
               <h2>status: {el.status}</h2>
-              <h2>Descripcion corta: {el.shortDescription}</h2>
+              <h2>Descripcion: {el.shortDescription}</h2>
               <h2>Tipo de ejercicio: {el.exercisesTypes?.join(", ")}</h2>
               </div>
 
