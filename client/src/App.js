@@ -18,7 +18,9 @@ import { selectDashAuth } from './redux/features/authSlice';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import NavBardDash from './components/NavBarDash/NavBarDash';
-import LessonsDash from './components/LesssonsDash/LessonsDash';
+import LessonsDash from './components/LessonsDashboard/LessonsDash';
+import AdminBar from "./components/AdminBar/AdminBar";
+import Wrapper from "./components/Wrapper/Wrapper";
 
 
 function App() {
@@ -47,6 +49,7 @@ function App() {
       <Route/>  */}
       <Route path = 'dashboard/clases/editar/:id' element={<Wrapper/>}/>
       <Route path = 'dashboard/clases/crear/:id' element={<Wrapper/>}/> 
+      <Route path= "dashboard/clases" element={<LessonsDash/>} />
       
        
     </Routes>
