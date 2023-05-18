@@ -10,9 +10,9 @@ module.exports = (sequelize) => {
         primaryKey: true,
         allowNull: false,
       },
-      goals: {
+      name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
       },
       description: {
         type: DataTypes.TEXT,
@@ -30,11 +30,21 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      deletedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: null
+      },
+      isAvailable: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+        allowNull: true
+      },
       lessonId: {
         type: DataTypes.UUID,
         allowNull: false,
         foreignKey: true,
-      },
+      }
     },
     { timestamps: false }
   );

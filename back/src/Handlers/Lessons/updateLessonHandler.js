@@ -7,7 +7,7 @@ const updateLessons = async(req, res,) => {
         effort, 
         shortDescription, 
         image, 
-        types,
+        goals,
     } = req.body;
     try {
         const updatedLesson = await updateLesson( 
@@ -16,7 +16,7 @@ const updateLessons = async(req, res,) => {
             effort, 
             shortDescription,  
             image, 
-            types,);
+            goals,);
         res.status(200).json(updatedLesson);
     } catch (error) {
         res.status(400).json({error: error.message});

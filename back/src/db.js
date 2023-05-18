@@ -4,16 +4,10 @@ const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DATABASE_URL } = process.env;
 
-const sequelize = new Sequelize(`${DATABASE_URL}`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-  dialect: 'postgres',
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false // En entornos de producción, debes configurar esto en `true` y proporcionar el certificado adecuado
-    }
-  }
+  dialect: 'postgres'
 });
 const basename = path.basename(__filename);
 
@@ -63,8 +57,8 @@ StatusMemberships.hasOne(User);
 Lessons.belongsToMany(ExercisesType, { through: "Lessons_Type" });
 ExercisesType.belongsToMany(Lessons, { through: "Lessons_Type" });
 
-User.belongsToMany(Lessons, { through: "User_Lesson" });
-Lessons.belongsToMany(User, { through: "User_Lesson" });
+User.belongsToMany(LessonDetail, { through: "User_Lesson" });
+LessonDetail.belongsToMany(User, { through: "User_Lesson" });
 
 Lessons.hasOne(LessonDetail);
 LessonDetail.belongsTo(Lessons);
