@@ -147,7 +147,7 @@ return(
               </div>
               <div className={style.contenido}>
               <h2>Nombre: {el.name}</h2>
-              <h2>status: {el.status}</h2>
+              <h2>status: {el.isAvailable}</h2>
               <h2>Descripcion: {el.shortDescription}</h2>
               <h2>Tipo de ejercicio: {el.exercisesTypes?.join(", ")}</h2>
               </div>

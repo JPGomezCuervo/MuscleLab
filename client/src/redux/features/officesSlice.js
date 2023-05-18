@@ -37,6 +37,13 @@ const officesSlice = createSlice({
     initialState,
     reducers: {
         // aquí van las otras acciones
+        clearOffice: (state, {payload}) =>{
+            state.offices = state.offices.filter((office)=>{
+                
+                return office.id !== payload
+            })
+            state.error = "";
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -74,6 +81,7 @@ const officesSlice = createSlice({
 export const selectAllOffices = (state) => state.offices.offices;
 export const selectOffice = (state) => state.offices.office;
 export default officesSlice.reducer;
+export const {clearOffice} = officesSlice.actions;
 export { fetchAllOffices, fetchOfficeByID };
 
 

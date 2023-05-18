@@ -22,6 +22,7 @@ import LessonsDash from './components/LessonsDashboard/LessonsDash';
 import AdminBar from "./components/AdminBar/AdminBar";
 import Wrapper from "./components/Wrapper/Wrapper";
 import TrainerDash from "./components/TrainerDash/TrainerDash";
+import SedesDash from "./components/SedesDashboard/SedesDash";
 
 
 function App() {
@@ -52,7 +53,7 @@ function App() {
       <Route path = '/dashboard/clases/crear' element={<Wrapper/>}/> 
       <Route path='/dashboard/profesores' element={<TrainerDash/>} />
       <Route path= "dashboard/clases" element={<LessonsDash/>} />
-      
+      <Route path= '/dashboard/sedes' element={<SedesDash/>} />
        
     </Routes>
     {(location.includes('dashboard') ? null: <Footer/>)}

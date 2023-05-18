@@ -1,0 +1,126 @@
+
+.contenedor{
+    
+    margin-top: 2rem;    
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+/* .card{
+    background-color: violet;
+    margin-top: 3rem;
+    margin-left: 2rem;
+    height: 20rem;
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+
+} */
+
+.detalle {
+    box-sizing: border-box;
+    width: 35rem;
+    height: 25rem;
+    background: rgba(255, 255, 255, 0.58);
+    border: 1px solid white;
+    box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+    /* backdrop-filter: blur(6px); */
+    border-radius: 17px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left:3rem;
+    margin-right: 3rem;
+    user-select: none;
+    font-weight: bolder;
+    color: black;
+  }
+  
+  .detalle:hover {
+    border: 1px solid black;
+    transform: scale(1.05);
+  }
+  
+  .detalle:active {
+    transform: scale(0.95) rotateZ(1.7deg);
+  }
+
+.divVacio{
+    background-color: red;
+    height: 5rem;
+    
+}
+
+.todo{
+    
+    width: 40rem;
+    margin-left: 2rem;
+    
+}
+
+.texto{
+    font-family:'Montserrat-Bold';
+    color:#013565;
+    font-size: 1.6rem;
+    margin-left: 1rem;
+}
+
+.icono{
+    height: 2rem;
+    width: 2rem;
+    border: none;
+  }
+  
+  .btnIcono1{
+    background-color: #ffffff;
+    width: 4.5rem;
+    height: 3.3rem;
+    display: inline;
+    align-items: center;
+    margin-left: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btnIcono2{
+    background-color:#013565;
+    width: 4.5rem;
+    height: 3.3rem;
+    display: inline;
+    align-items: center;
+    margin-left: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btnIcono1:hover {
+    border: 1px solid black;
+    transform: scale(1.09);
+    background-color: #ffc300;
+    
+  }
+  
+  .btnIcono2:hover {
+    border: 1px solid black;
+    transform: scale(1.09);
+    background-color: #ffc300;
+    
+  }
+
+  .contNombre{
+    display: flex;
+    flex-direction: row;
+    margin-left: 5rem;
+    font-family:'Montserrat-Bold';
+    color:#013565;
+    font-size: 2rem;
+}
+
+.hr{
+  color: #ffc300;
+}
