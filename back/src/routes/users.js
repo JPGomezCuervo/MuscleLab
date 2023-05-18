@@ -12,7 +12,7 @@ const restoreDeletedUser = require("../Handlers/Users/restoreDeletedUserHandler"
 const updateUsers = require("../Handlers/Users/udpateUserHandler");
 const passport = require("passport");
 
-server.get("/", passport.authenticate("local"), getAllUsers);
+server.get("/", ensureAuthenticated, getAllUsers);
 server.get("/monitor", getAllMonitor);
 server.get("/deleted", getDeletedUsers);
 server.get("/:id", getUserDetail);
@@ -21,4 +21,11 @@ server.delete("/delete/:id", deleteMyUser);
 server.post("/login", loginUser);
 server.put("/restore/:id", restoreDeletedUser);
 server.put("/update/:id", updateUsers);
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  else {
+    res.redirect("/users/login");
+  }
+}
 module.exports = server;
