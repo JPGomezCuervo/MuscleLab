@@ -82,15 +82,4 @@ const Login = () => {
   );
 };
 
-
-        <button className={style.ButtonLogIn} onClick={handleLogin}>
-          Iniciar sesión
-        </button>
-
-        <button className={style.ButtonCreate}>Crea una cuenta</button>
-      </div>
-    </div>
-  );
-};
-
 export default Login;
