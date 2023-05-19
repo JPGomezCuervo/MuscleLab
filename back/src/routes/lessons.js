@@ -8,15 +8,16 @@ const getDeletedLessons=require('../Handlers/Lessons/getDeletedLessonsHandler');
 const restoreDeletedLesson = require("../Handlers/Lessons/restoreDeletedLessonsHandler");
 const updateLessons = require('../Handlers/Lessons/updateLessonHandler');
 const updateLessonsDetails = require('../Handlers/Lessons/updateDetailLessonsHandler');
+const getLessonById = require('../Handlers/Lessons/getLessonById');
 
 server.put('/', async (req,res)=>{
     res.status(200).json({msg:'Hola'})
 });
 
 server.get('/', getAllLessonsHandler);
-
 server.get('/deleted', getDeletedLessons);
 server.post("/create", createNewLesson);
+server.get('/detail/:id', getLessonById);
 server.delete("/delete/:id", deleteMyLesson);
 server.put('/restore/:id', restoreDeletedLesson);
 server.put('/update/:id', updateLessons);
