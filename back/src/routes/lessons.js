@@ -9,10 +9,6 @@ const restoreDeletedLesson = require("../Handlers/Lessons/restoreDeletedLessonsH
 const updateLessons = require('../Handlers/Lessons/updateLessonHandler');
 const updateLessonsDetails = require('../Handlers/Lessons/updateDetailLessonsHandler');
 
-server.put('/', async (req,res)=>{
-    res.status(200).json({msg:'Hola'})
-});
-
 server.get('/', getAllLessonsHandler);
 
 server.get('/deleted', getDeletedLessons);

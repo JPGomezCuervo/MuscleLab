@@ -5,7 +5,6 @@ const memberships = require("./memberships");
 const types = require("./types");
 const branchoffice = require("./branchoffice");
 const goals = require('./goals');
-
 const router = Router();
 
 router.use("/lessons", lessons);
