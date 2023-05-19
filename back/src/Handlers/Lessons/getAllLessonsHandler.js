@@ -5,7 +5,7 @@ const getAllLessonsHandler= async (req,res)=>{
         let lessons= await getLessons();
         res.status(200).json(lessons); 
     } catch (error) {
-        res.status(400).json({err:error.msg});
+        res.status(400).json({error:error.message});
     }
 }
 

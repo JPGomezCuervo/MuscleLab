@@ -7,7 +7,8 @@ const updateLessonsDetails = async(req, res) => {
         description, 
         scheduleDays , 
         scheduleHourStart, 
-        scheduleHourFinish
+        scheduleHourFinish,
+        isAvailable
     } = req.body;    
     try {
         const updatedDetails = await updateLessonDetail(
@@ -16,7 +17,8 @@ const updateLessonsDetails = async(req, res) => {
             description, 
             scheduleDays , 
             scheduleHourStart, 
-            scheduleHourFinish  
+            scheduleHourFinish,
+            isAvailable  
         );
         res.status(200).json(updatedDetails);
     } catch (error) {

@@ -7,7 +7,7 @@ const getLessons= async ()=>{
         through:{
             attributes:[]
         }
-    }, where:{deletedAt:null}});
+    }});
     return lessons;
 }
 

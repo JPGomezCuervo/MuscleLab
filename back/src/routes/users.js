@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const server = Router();
+
 //? HANDLERS
 const createNewUser = require("../Handlers/Users/createUserHandler");
 const deleteMyUser = require("../Handlers/Users/deleteUserHandler");
