@@ -100,7 +100,15 @@ const lessonsSlice = createSlice({
         clearLessons: (state) => {
             state.lessons = [];
             state.error = '';
+        },
+
+        clearLesson: (state, {payload}) =>{
+            state.lessons = state.lessons.filter((lesson)=>{
+                return lesson.id !== payload
+            })
+            state.error = "";
         }
+
     },
     extraReducers: (builder) => {
         builder
@@ -143,6 +151,7 @@ export const selectAllLessons = (state) => state.lessons.lessons;
 export const selectLesson = (state) => state.lessons.lesson;
 export const selectStatus = (state) => state.lessons.status;
 export const selectError = (state) => state.lessons.error;
+
 export default lessonsSlice.reducer;
-export const { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest, sortByType, sortByIntensityandType, sortByIntensity, clearLessons } = lessonsSlice.actions;
+export const { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest, sortByType, sortByIntensityandType, sortByIntensity, clearLessons, clearLesson } = lessonsSlice.actions;
 export { fetchAllLessons, fetchLessonsByID }

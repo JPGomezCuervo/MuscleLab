@@ -14,7 +14,7 @@ import { useParams , Link} from "react-router-dom";
 const DetailLesson = ()=> {
 
    const lesson = useSelector(selectLesson)
-   
+   console.log(lesson)
     const dispatch = useDispatch();
     const params = useParams();
 
