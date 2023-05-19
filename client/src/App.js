@@ -14,12 +14,17 @@ import Nosotros from './components/Nosotros/Nosotros';
 import Dashboard from './components/Dashboard/Dashboard';
 import CreateLesson from "./components/CreateLesson/CreateLesson";
 import Sedes from './components/Sedes/Sedes';
+import Users from './components/Users/Users';
+import  CreateUser  from './components/CreateUser/CreateUser';
+
+
 import { useSelector } from 'react-redux';
 import { selectDashAuth } from './redux/features/authSlice';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import NavBardDash from './components/NavBarDash/NavBarDash';
 import LessonsDash from './components/LesssonsDash/LessonsDash';
+
 
 function App() {
   const location = useLocation().pathname;
@@ -41,12 +46,15 @@ function App() {
       <Route path= '/nosotros' element={<Nosotros />}/>
       <Route path="/create" element={<CreateLesson />} />
       <Route path = '/sedes' element= {<Sedes/>}/>
+      <Route path = '/users' element= {<Users/>}/>
+      <Route path = '/users/createuser' element= {<CreateUser/>}/>  
       <Route path='/dashboard' element={<LessonsDash/>}>
-        <Route path= '/dashboard/lessons' element={<LessonsDash/>}/> 
+      <Route path= '/dashboard/lessons' element={<LessonsDash/>}/> 
       <Route/> 
       </Route> 
       
        
+
     </Routes>
     <Footer/>
   </> 
