@@ -11,6 +11,18 @@ const fetchAllUsers = createAsyncThunk(
             return response.data
         } catch (error){
             // revisar como el back envia los errores
+            throw new Error (error.response) 
+        }
+    }
+)
+
+const fetchAllMonitors = createAsyncThunk(
+    'users/fetchAllMonitors', async () => {
+        try {
+            const response = await axios.get(`${URL}/users/monitor`);
+            return response.data
+        } catch (error){
+            // revisar como el back envia los errores
             throw new Error (error.response)
         }
     }
@@ -104,4 +116,3 @@ export const selectStatus = (state) => state.users.status;
 export const selectError = (state) => state.users.error;
 export default usersSlice.reducer;
 export { fetchAllUsers, fetchAllMonitors, fetchUserByID };
-export { fetchAllUsers, fetchUserByID }
