@@ -12,7 +12,6 @@ const getDeletedUsers = require("../Handlers/Users/getDeletedUsersHandler");
 const restoreDeletedUser = require("../Handlers/Users/restoreDeletedUserHandler");
 const updateUsers = require("../Handlers/Users/udpateUserHandler");
 
-
 server.get("/", getAllUsers);
 server.get("/monitor", getAllMonitor);
 server.get("/deleted", getDeletedUsers);
@@ -22,4 +21,5 @@ server.delete("/delete/:id", deleteMyUser);
 server.post("/login", loginUser);
 server.put("/restore/:id", restoreDeletedUser);
 server.put("/update/:id", updateUsers);
+
 module.exports = server;

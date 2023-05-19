@@ -10,7 +10,7 @@ const updateLessons = require('../Handlers/Lessons/updateLessonHandler');
 const updateLessonsDetails = require('../Handlers/Lessons/updateDetailLessonsHandler');
 
 server.get('/', getAllLessonsHandler);
-
+server.get('/:id', getDetailLessonHandler);
 server.get('/deleted', getDeletedLessons);
 server.post("/create", createNewLesson);
 server.delete("/delete/:id", deleteMyLesson);
