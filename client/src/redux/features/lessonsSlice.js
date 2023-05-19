@@ -20,9 +20,9 @@ const fetchAllLessons = createAsyncThunk(
     }
 )
 const fetchLessonsByID = createAsyncThunk(
-    'lessons/fetchAllLessonsByID', async (id) => {
+    'lessons/fetchAllLessonsByID', async (name) => {
         try {
-            const response = await axios.get(`${URL}/lessons/${id}`);
+            const response = await axios.get(`${URL}/lessons/${name}`);
             return response.data
         } catch (error){
             // revisar como el back envia los errores

@@ -42,7 +42,7 @@ function App() {
       <Route path='/clases' element={<Lessons/>}/>
       <Route path= '/detail' element={<DetailLesson/>}/>
       <Route path= '/contactanos' element={<ContactUs />}/>
-      <Route path= '/clases/detalles/:id' element={<DetailLesson/>}/>
+      <Route path= '/clases/detalles/:name' element={<DetailLesson/>}/>
       <Route path= '/nosotros' element={<Nosotros />}/>
       <Route path="/create" element={<CreateLesson />}/>
       <Route path = '/sedes' element= {<Sedes/>}/>

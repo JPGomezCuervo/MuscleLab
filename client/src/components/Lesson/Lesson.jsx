@@ -25,7 +25,7 @@ const Lesson = ({lesson, index}) => {
                 {<p>Tipo de ejercicio: {exercisesTypes.join(', ')}</p>}
                 {<p>Intensidad: {effort}</p>} 
 
-                <Link to={`/clases/detalles/${id}`}>
+                <Link to={`/clases/detalles/${name}`}>
                   <button>Más info</button>
                 </Link>
               </div>

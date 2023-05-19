@@ -19,8 +19,8 @@ const DetailLesson = ()=> {
     const params = useParams();
 
     useEffect(()=>{
-        dispatch(fetchLessonsByID(params.id))
-    },[dispatch, params.id])
+        dispatch(fetchLessonsByID(params.name))
+    },[dispatch, params.name])
 
     return(
 
@@ -30,7 +30,7 @@ const DetailLesson = ()=> {
                     lesson 
                     ?
                     <div className={style.conteinerTodo}>
-                        <h1 className={style.h1}>{lesson.name}</h1>
+                        <h1 className={style.h1}>{lesson[0].name}</h1>
 
                         <div className={style.fondoinstrYHor}>
 
