@@ -63,14 +63,14 @@ StatusMemberships.hasOne(User);
 Lessons.belongsToMany(ExercisesType, { through: "Lessons_Type" });
 ExercisesType.belongsToMany(Lessons, { through: "Lessons_Type" });
 
-User.belongsToMany(Lessons, { through: "User_Lesson" });
-Lessons.belongsToMany(User, { through: "User_Lesson" });
+User.belongsToMany(LessonDetail, { through: "User_Lesson" });
+LessonDetail.belongsToMany(User, { through: "User_Lesson" });
 
 Lessons.hasOne(LessonDetail);
 LessonDetail.belongsTo(Lessons);
 
-Lessons.belongsToMany(BranchOffice, { through: "Lesson_BranchOffice" });
-BranchOffice.belongsToMany(Lessons, { through: "Lesson_BranchOffice" });
+LessonDetail.belongsToMany(BranchOffice, { through: "Lesson_BranchOffice" });
+BranchOffice.belongsToMany(LessonDetail, { through: "Lesson_BranchOffice" });
 
 StatusMemberships.belongsToMany(BranchOffice, {
   through: "Status_BranchOffice",

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { PORT, URL, fulfilled, pending, rejected } from "../../utils/constants";
+import {URL, fulfilled, pending, rejected } from "../../utils/constants";
 import axios from "axios";
 
 

@@ -14,7 +14,7 @@ const createNewUser = async (req, res) => {
       isMonitor
     );
     res.status(201).json({
-      message: "User created succesfully",
+      message: "Usuario creado correctamente",
       user: newUser,
     });
   } catch (error) {

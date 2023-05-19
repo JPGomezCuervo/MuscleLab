@@ -1,7 +1,7 @@
-const { Lessons } = require("../../db");
+const { LessonDetail } = require("../../db");
 
 let restoreLesson = async (id) => {
-  let toRestore = await Lessons.findOne({ where: { id: id } });
+  let toRestore = await LessonDetail.findOne({ where: { id: id } });
   if (!toRestore) {
     throw new Error("Clase no encontrada");
   }

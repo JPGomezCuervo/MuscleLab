@@ -15,7 +15,7 @@ const Dashboard = () => {
   }, [serverResponse]); //eslint-disable-next-line react-hooks/exhaustive-deps
 
   const lessons = useSelector(selectAllLessons);
-  //console.log(lessons);
+  
 
   const removeLessonHandler = (event) => {
     const id = event.target.name;
