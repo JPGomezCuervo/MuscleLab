@@ -23,7 +23,6 @@ const sequelize = new Sequelize(`${DATABASE_URL}`, {
 //     logging: false,
 //     native: false,
 //   }
-
 // );
 
 const basename = path.basename(__filename);

@@ -1,14 +1,12 @@
 const { getDetailLesson } = require("../../Controllers/Lessons/getDetail");
 const jwt = require("jsonwebtoken");
 
-
 const getDetailLessonHandler = async (req, res) => {
-
   const { name } = req.params;
   let lessonDetail = await getDetailLesson(name);
   try {
-      const token = req.headers.authorization.split(" ")[1];
-      
+    const token = req.headers.authorization.split(" ")[1];
+
     if (!token) {
       return res
         .status(403)
