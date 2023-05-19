@@ -2,8 +2,8 @@ const { LessonDetail } = require('../../db');
 
 const updateLessonDetail = async (
     id,
-    description,
     name,
+    description,
     scheduleDays,
     scheduleHourStart,
     scheduleHourFinish,
