@@ -1,18 +1,19 @@
 const { Router } = require('express');
-const {getMemberships, getStatusMemberships} = require('../Handlers/Memberships/getMembershipsHandler');
+const { getMemberships } = require('../Handlers/Memberships/getMembershipsHandler');
 const postNewMembership = require('../Handlers/Memberships/postMembershipsHandler');
 const updateMembership = require('../Handlers/Memberships/putMembershipsHandler');
 const deleteMembership = require('../Handlers/Memberships/deleteMembershipsHandler');
+const restoreMembership = require('../Handlers/Memberships/restoreDeletedMembershipHandler')
 const server = Router();
 
 server.get('/', getMemberships);
 
-server.get("/:id", getStatusMemberships);
-
 server.post('/create', postNewMembership);
 
-server.put('/update', updateMembership);
+server.put('/update/:id', updateMembership);
 
-server.delete('/delete', deleteMembership);
+server.delete('/delete/:id', deleteMembership);
+
+server.put('/restore/:id', restoreMembership);
 
 module.exports = server;
