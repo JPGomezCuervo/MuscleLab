@@ -42,7 +42,8 @@ import validation from './validation';
    // eslint-disable-next-line react-hooks/exhaustive-deps
    
   //Mapping server response by Select All Users
-  const mappedUsers = users.user && users?.user.map(user => {
+  const mappedUsers = 
+    users.users && users?.user.map(user => {
     return {
       email: user.email,
     };
