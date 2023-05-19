@@ -2,7 +2,8 @@
     display: inline-block;
     position: absolute;
     margin: .5% 0;
-    width: 74vw;
+    width: fit-content;
+    margin-left: 63vw;
     z-index: 9997;
 }
 

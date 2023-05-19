@@ -7,6 +7,7 @@ import typesReducer from './features/typesSlice';
 import filtersReducer from './features/filtersSlice';
 import authReducer from './features/authSlice';
 import officesReducer from './features/officesSlice';
+import membershipsReducer from './features/membershipsSlice'
 
 const store = configureStore({
     reducer: {
@@ -16,7 +17,8 @@ const store = configureStore({
         utils: utilsReducer,
         filters: filtersReducer,
         auth: authReducer,
-        offices: officesReducer 
+        offices: officesReducer,
+        memberships: membershipsReducer 
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
     devTools: process.env.NODE_ENV !== 'production'

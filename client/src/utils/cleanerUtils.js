@@ -18,5 +18,15 @@ const individualLessonCleaner = (data) => {
 const typesCleaner = (data) => {
     return data.map((type) =>type.name);
 };
-export { cleaner, individualLessonCleaner, typesCleaner}
+
+const userCleaner = (data) => {
+    return data.user;
+};
+
+const monitorsCleaner = (data) => {
+    return data.monitor;
+};
+
+export { cleaner, individualLessonCleaner, typesCleaner, userCleaner, monitorsCleaner}
+
 

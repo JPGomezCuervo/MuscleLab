@@ -56,12 +56,12 @@ class EditLessonDash extends Component {
           for (let j = 0; j <= 30 ; j+=30){
             if ( j === 0){
                hours.push(
-                <option key={`${i}:00`} value={`${i}`} name='scheduleHourStart'
+                <option key={`${i}:00`} value={`${i}:${j}0`} name='scheduleHourStart'
                 >{`${i}:${j}0`}</option>)
             } else {
                 
                 hours.push(
-                    <option key={`${i}:${j}`} value={`${i}`} name='scheduleHourStart' 
+                    <option key={`${i}:${j}`} value={`${i}:${j}`} name='scheduleHourStart' 
                     >{`${i}:${j}`}</option>
                 )
             }
@@ -79,12 +79,12 @@ class EditLessonDash extends Component {
             if ( this.state.horaInicio <= i){
               if(j === 0) {
                 hours.push(
-                    <option key={`${i}:00`} value={`${i}`} name='scheduleHourStart' selected={this.state.lessonAttributes[type] === `${i}`}
+                    <option key={`${i}:${j}0`} value={`${i}:00`} name='scheduleHourStart'
                     >{`${i}:${j}0`}</option>
                     )
               } else {
                 hours.push(
-                    <option key={`${i}:${j}`} value={`${i}`} name='scheduleHourFinish' selected={this.state.lessonAttributes[type] === `${i}:${j}`}
+                    <option key={`${i}:${j}`} value={`${i}:${j}`} name='scheduleHourFinish'
                     >{`${i}:${j}`}</option>
                     )
               }
@@ -104,7 +104,7 @@ class EditLessonDash extends Component {
                 ...this.state.lessonAttributes,
                 [name]: value,
             },
-            errors: validations(value, name, this.state.errors),
+            errors: validations(value, name, this.state.errors, this.state.lessonAttributes),
         }, () => {
                 this.setState({
                     allowSubmit: Object.values(this.state.errors).every((item) => item === '') 
@@ -115,36 +115,46 @@ class EditLessonDash extends Component {
 
     handleHoursBox = (event) => {
         const name = event.target.name;
-        const value = Number(event.target.value);
+        const value = event.target.value;
+        console.log(value);
 
         if (name === 'scheduleHourStart') {
             this.setState({
-                horaInicio: value,
+                horaInicio: value.split(':')[0],
                 lessonAttributes: {
                     ...this.state.lessonAttributes,
                     [name]: value,
                 },
-                errors: validations(value, name, this.state.errors)
             }, () =>{
                 this.setState({
-                    allowSubmit: Object.values(this.state.errors).every((item) => item === '')
+                    errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
+                },() =>{
+                    this.setState({
+                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')
+                    });
                 });
             });
-            ;
+            
         } else {
             this.setState({
                 lessonAttributes: {
                     ...this.state.lessonAttributes,
                     [name]: value,
                 },
-                errors: validations(value, name, this.state.errors)
+                errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
             }, () =>{
                 this.setState({
-                    allowSubmit: Object.values(this.state.errors).every((item) => item === '')
-                    });
+
+                }, () => {
+                    this.setState({
+                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')
+                        });
+
+                })
             });
         }
     };
+
     handleCheckBox = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -213,6 +223,11 @@ class EditLessonDash extends Component {
             serverResponse: '',
         });
     };
+    handlePrevArrow = (event) => {
+        event.preventDefault();
+        window.location.href = 'http://localhost:3000/dashboard/clases/';
+    };
+
 
     componentDidMount() {
         const { fetchAllLessonTypes } = this.props;
@@ -228,7 +243,9 @@ class EditLessonDash extends Component {
               <>
         <form className={style.MainContainer}>
             <div className={style.Navigation}>
-                <img className={style.ArrowIcon} src={arrowIcon} alt="" />
+                <button onClick={this.handlePrevArrow}>
+                    <img className={style.ArrowIcon} src={arrowIcon} alt="" />
+                </button>
                 <h2>{lessonAttributes.name}</h2>
             </div>
 
@@ -263,6 +280,7 @@ class EditLessonDash extends Component {
                             <label>Imagen</label>
                             <input ref={this.inputRef} placeholder='Imagen' value={lessonAttributes.image} id='image' type='text' name='image' onChange={this.handleChange}/>
                         </div>
+                        {errors.image && <p className={style.Error}>{errors.image}</p>}
                         
                         <div className={style.ImageContainer}>
                             <img src={this.inputRef?.current?.value} alt="Tu imagen" />

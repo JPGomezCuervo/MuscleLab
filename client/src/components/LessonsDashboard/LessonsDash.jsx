@@ -6,7 +6,8 @@ import { useSelector , useDispatch} from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect , useState} from "react";
 import edit from "../../assets/icons/edit.png"
-import trash from "../../assets/icons/trash-bin.png"
+import trash from "../../assets/icons/trash-bin-blue.png"
+import plusIcon from '../../assets/icons/plus.png'
 
 
 
@@ -105,74 +106,77 @@ const LessonsDash = ()=> {
 
 
 return(
-    <div className={style.contenedor}>
+  <>
 
-            <div className={style.contNombre}>
-              <h1>Clases</h1>
-            </div>
-             <hr className={style.hr}/>   
+  <div className={style.contenedor}>
+
+    <a href="">
+    <img src={plusIcon} alt="crear" className={style.PlusIcon} />
+    </a>
+
+    <div className={style.contNombre}><h1>Clases</h1></div>
+
+    <hr className={style.hr}/>  
+
     <div className={style.divSelect}>
-             <select onChange={handleFilterTypes} value={selectedTypes} className={style.seleccion}>
-  <option value="">All</option>
-  <option value="Fuerza">Fuerza</option>
-  <option value="Cardio">Cardio</option>
-  <option value="Flexibilidad">Flexibilidad</option>
-  <option value="Equilibrio">Equilibrio</option>
-  <option value="Coordinación">Coordinación</option>
-  <option value="Velocidad">Velocidad</option>
-  <option value="Resistencia">Resistencia</option>
-  <option value="Agilidad">Agilidad</option>
-  <option value="Potencia">Potencia</option>
-  <option value="Movilidad">Movilidad</option>
-  <option value="Estiramiento">Estiramiento</option>
-  <option value="Relajación">Relajación</option>
+      <select onChange={handleFilterTypes} value={selectedTypes} className={style.seleccion}>
+        <option value="">All</option>
+        <option value="Fuerza">Fuerza</option>
+        <option value="Cardio">Cardio</option>
+        <option value="Flexibilidad">Flexibilidad</option>
+        <option value="Equilibrio">Equilibrio</option>
+        <option value="Coordinación">Coordinación</option>
+        <option value="Velocidad">Velocidad</option>
+        <option value="Resistencia">Resistencia</option>
+        <option value="Agilidad">Agilidad</option>
+        <option value="Potencia">Potencia</option>
+        <option value="Movilidad">Movilidad</option>
+        <option value="Estiramiento">Estiramiento</option>
+        <option value="Relajación">Relajación</option>
 
-</select>
+      </select>
     </div>
 
     <div className={style.contenedorTodo}>
-
-      
-
-    {allLessons ? (
-  allLessons
-    .filter(el => selectedTypes.length === 0 || el.exercisesTypes.some(type => selectedTypes.includes(type)))
-    .map(el => (
-              <div key={el.id}>           
+      {allLessons ? (
+        allLessons
+        .filter(el => selectedTypes.length === 0 || el.exercisesTypes.some(type => selectedTypes.includes(type)))
+        .map(el => (
+          <div key={el.id}>           
 
             <div className={style.detalle}>
              
               <div className={style.imgDetalle}>
-              <img src={el.image} alt="" className={style.imagenDeporte} />
+                <img src={el.image} alt="" className={style.imagenDeporte} />
               </div>
+
               <div className={style.contenido}>
-              <h2>Nombre: {el.name}</h2>
-              <h2>status: {el.isAvailable}</h2>
-              <h2>Descripcion: {el.shortDescription}</h2>
-              <h2>Tipo de ejercicio: {el.exercisesTypes?.join(", ")}</h2>
+                <h2>Nombre: <span>{el.name}</span></h2>
+                <h2>status: <span>{el.status}</span> </h2>
+                <h2>Descripcion: <span>{el.shortDescription}</span> </h2>
+                <h2>Tipo de ejercicio: <span>{el.exercisesTypes?.join(", ")}</span> </h2>
               </div>
 
               <div className={style.divCont}>
                 <Link to={`editar/${el.id}`}>
-              <button className={style.btnIcono1}><img src={edit} alt="edit" className={style.icono} /></button>
-              </Link>
-              <button className={style.btnIcono2} onClick={removeLessonHandler} name={`${el.id}`}><img src={trash} alt="trash" className={style.icono} /></button>
+                    <img src={edit} alt="edit" className={style.icono}/>
+                </Link>
+                <button className={style.btnIcono2} onClick={removeLessonHandler} name={`${el.id}`}>
+                  <img src={trash} alt="trash" className={style.icono}/>
+                </button>
               
               </div>
             
+            </div>
 
-</div>
-
-            
           </div>
         ))
         ) : (
             <p>Loading</p>
             )}
-            </div>
-
-          
-    </div>
+        </div>       
+  </div>
+  </>
   );
 };
 

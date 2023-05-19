@@ -7,6 +7,7 @@
 }
 
 .Navigation{
+    z-index: 9999;
     display: flex;
     align-items: center;
     height: 3.5rem;
@@ -14,6 +15,12 @@
     font-family: 'Montserrat-Bold';
     margin-bottom: 1.5rem;
     margin-top: 2rem;
+}
+
+.Navigation button{
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
 }
 
 .Navigation h2{

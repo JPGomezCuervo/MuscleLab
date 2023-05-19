@@ -28,6 +28,7 @@ import Wrapper from "./components/Wrapper/Wrapper";
 import TrainerDash from "./components/TrainerDash/TrainerDash";
 import SedesDash from "./components/SedesDashboard/SedesDash";
 
+import EditTrainerDash from './components/EditTrainerDash/EditTrainerDash';
 
 
 function App() {
@@ -65,6 +66,8 @@ function App() {
       <Route path= '/dashboard/lessons' element={<LessonsDash/>}/> 
       <Route/> 
       </Route> 
+      <Route path= 'dashboard/clases' element={<LessonsDash/>} />
+      <Route path= '/dashboard/profesores/editar/:id' element={<EditTrainerDash/>}/>
       
        
 

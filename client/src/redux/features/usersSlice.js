@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {URL, fulfilled, pending, rejected } from "../../utils/constants";
+import { URL, fulfilled, pending, rejected } from "../../utils/constants";
 import axios from "axios";
+import { userCleaner,monitorsCleaner } from "../../utils/cleanerUtils";
 
 
 
@@ -29,9 +30,9 @@ const fetchAllMonitors = createAsyncThunk(
 )
 
 const fetchUserByID = createAsyncThunk(
-    'users/fetchUserByID', async () => {
+    'users/fetchUserByID', async (id) => {
         try {
-            const response = await axios.get(`${URL}/users/:id`);
+            const response = await axios.get(`${URL}/users/${id}`);
             return response.data
         } catch (error){
             // revisar como el back envia los errores
@@ -44,7 +45,6 @@ const initialState = {
     users: [],
     user: {},
     monitors: [],
-    monitor: {},
     status: 'idle',
     error: ''
 }
@@ -73,9 +73,11 @@ const usersSlice = createSlice ({
                 
             }) 
             .addCase(fetchUserByID.fulfilled, ( state, action) => {
+                const cleanedUser = userCleaner(action.payload);
                 state.status = fulfilled;
                 state.error = '';
-                state.user = action.payload
+                state.user = cleanedUser;
+
  
             })
             .addCase(fetchUserByID.pending, (state, action) => {
@@ -89,9 +91,10 @@ const usersSlice = createSlice ({
                 
             }) 
             .addCase(fetchAllMonitors.fulfilled, ( state, action) => {
+                const cleanedMonitors = monitorsCleaner(action.payload);
                 state.status = fulfilled;
                 state.error = '';
-                state.monitors = action.payload
+                state.monitors = cleanedMonitors;
  
             })
             .addCase(fetchAllMonitors.pending, (state, action) => {
@@ -111,7 +114,6 @@ const usersSlice = createSlice ({
 export const selectAllUsers = (state) => state.users.users;
 export const selectUserByID = (state) => state.users.user;
 export const selectAllMonitors = (state) => state.users.monitors;
-export const selectMonitorByID = (state) => state.users.monitor;
 export const selectStatus = (state) => state.users.status;
 export const selectError = (state) => state.users.error;
 export default usersSlice.reducer;

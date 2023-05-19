@@ -80,12 +80,12 @@ class DetailLessonDash extends Component {
             if ( this.state.horaInicio <= i){
               if(j === 0) {
                 hours.push(
-                    <option key={`${i}:00`} value={`${i}`} name='scheduleHourStart' selected={this.state.lessonAttributes[type] === `${i}:${j}0`}
+                    <option key={`${i}:00`} value={`${i}:00`} name='scheduleHourStart' selected={this.state.lessonAttributes[type] === `${i}:${j}0`}
                     >{`${i}:${j}0`}</option>
                     )
               } else {
                 hours.push(
-                    <option key={`${i}:${j}`} value={`${i}`} name='scheduleHourFinish' selected={this.state.lessonAttributes[type] === `${i}:${j}`}
+                    <option key={`${i}:${j}`} value={`${i}:${j}`} name='scheduleHourFinish' selected={this.state.lessonAttributes[type] === `${i}:${j}`}
                     >{`${i}:${j}`}</option>
                     )
               }
@@ -103,7 +103,7 @@ class DetailLessonDash extends Component {
                     ...this.state.lessonAttributes,
                     [name]: value,
                 },
-                errors: validations(value, name, this.state.errors),
+                errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
             }, () => {
                     this.setState({
                         allowSubmit: Object.values(this.state.errors).every((item) => item === '') 
@@ -114,33 +114,42 @@ class DetailLessonDash extends Component {
 
         handleHoursBox = (event) => {
             const name = event.target.name;
-            const value = Number(event.target.value);
-
+            const value = event.target.value;
+            console.log(value);
+    
             if (name === 'scheduleHourStart') {
                 this.setState({
-                    horaInicio: value,
+                    horaInicio: value.split(':')[0],
                     lessonAttributes: {
                         ...this.state.lessonAttributes,
                         [name]: value,
                     },
-                    errors: validations(value, name, this.state.errors)
                 }, () =>{
                     this.setState({
-                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')
+                        errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
+                    },() =>{
+                        this.setState({
+                            allowSubmit: Object.values(this.state.errors).every((item) => item === '')
+                        });
                     });
                 });
-                ;
+                
             } else {
                 this.setState({
                     lessonAttributes: {
                         ...this.state.lessonAttributes,
                         [name]: value,
                     },
-                    errors: validations(value, name, this.state.errors)
+                    errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
                 }, () =>{
                     this.setState({
-                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')
-                        });
+    
+                    }, () => {
+                        this.setState({
+                            allowSubmit: Object.values(this.state.errors).every((item) => item === '')
+                            });
+    
+                    })
                 });
             }
         };
@@ -264,12 +273,13 @@ class DetailLessonDash extends Component {
       return (
         <form className={style.MainContainer}>
             <div className={style.Navigation}>
-                <img className={style.ArrowIcon} src={arrowIcon} alt="" />
+                <button>
+                    <img className={style.ArrowIcon} src={arrowIcon} alt="" />
+                </button>
                 <h2>{lesson.name}</h2>
             </div>
 
-            <div className={style.Teacher}> Profesor: Brad Pitt
-            </div>
+            <div className={style.Teacher}> Profesor: Brad Pitt</div>
             <div className={style.EditContainer}>
                 <div className={style.DetailContainer}>
                     <div className={style.leftContainer}>
@@ -429,8 +439,9 @@ class DetailLessonDash extends Component {
                         <h1>{this.state.serverResponse}</h1>
                         <img className={style.CheckIcon} src={checkIcon} alt="" />
                         <div>
-                            {this.state.message && <button className={style.AdvertiseButton1} onClick={this.handleConfirmarClick}>Confirmar</button>}
-                            {this.state.message && <button className={style.AdvertiseButton2} onClick={this.handleVolverClick}>Volver</button>}
+                            <a className={style.AdvertiseButton3} href='http://localhost:3000/dashboard/clases'>
+                                Volver a Clases
+                                </a>
                         </div>
                     </div>
                 </div>
