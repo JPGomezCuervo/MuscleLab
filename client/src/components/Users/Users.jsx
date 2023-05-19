@@ -13,20 +13,19 @@ const Users = () => {
   const users = useSelector(selectAllUsers);
 
   const [serverResponse, setServerResponse] = useState(true);
-  const [userSelectToEdit, setUserSelectToEdit] = useState(null)
+  const [userSelectToEdit, setUserSelectToEdit] = useState(null);
 
   useEffect(() => {
     dispatch(fetchAllUsers());
   }, [serverResponse]); // eslint-disable-next-line react-hooks/exhaustive-deps
   //
   const [editUser, setEditUser] = useState({
-    
-    fullName: '',
-    email: '',
-    phone: '',
-    isMonitor: '',
+    fullName: "",
+    email: "",
+    phone: "",
+    isMonitor: "",
     //isAdmin: '',
-    statusMembershipIdStatus:''   
+    statusMembershipIdStatus: "",
   });
 
   const [errors, setErrors] = useState({
@@ -35,7 +34,7 @@ const Users = () => {
     email: "",
     phone: "",
     disabled: false,
-    edit: ''
+    edit: "",
   });
 
   //Emergent window state
@@ -44,8 +43,8 @@ const Users = () => {
   const openWindowVisible = (event) => {
     const id = event.target.name;
     setWindowVisible(true);
-    
-    setUserSelectToEdit(id)
+
+    setUserSelectToEdit(id);
   };
 
   const closeWindowVisible = () => {
@@ -67,15 +66,14 @@ const Users = () => {
       };
     });
 
-  
-
   //console.log(users);
 
   //Delete user
   const removeUserHandler = async (event) => {
     const id = event.target.name;
 
-    let text = "Esta accion no se podra revertir!\nPulse OK para Aceptar o Cancelar.";
+    let text =
+      "Esta accion no se podra revertir!\nPulse OK para Aceptar o Cancelar.";
     if (window.confirm(text) === true) {
       await fetch("https://musclelabii.onrender.com/users/delete/" + id, {
         method: "DELETE",
@@ -91,40 +89,38 @@ const Users = () => {
 
   const handleChange = (event) => {
     const { id, value } = event.target;
-    
-      setEditUser({ ...editUser, [id]: value });
 
-      setErrors( validation({...editUser,
-                            [id]: value,     
-                            })
-      );   
+    setEditUser({ ...editUser, [id]: value });
+
+    setErrors(validation({ ...editUser, [id]: value }));
   };
 
-  const editUserHandler =  (event) => {
-    
+  const editUserHandler = (event) => {
     let text = "Confirmar cambios!! \nPulse OK o Cancelar.";
-    
+
     if (window.confirm(text) === true) {
-          
-      fetch(`https://musclelabii.onrender.com/users/update/${userSelectToEdit}`, {
-        method: "PUT",
-        body: JSON.stringify(editUser),
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-      })
-        .then((response) => setServerResponse(response)) 
-        .catch((error) => setServerResponse(error))
-      
-              
-     } else {
+      fetch(
+        `https://musclelabii.onrender.com/users/update/${userSelectToEdit}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(editUser),
+          headers: { "Content-type": "application/json; charset=UTF-8" },
+        }
+      )
+        .then((response) => setServerResponse(response))
+        .catch((error) => setServerResponse(error));
+    } else {
       alert("Cancelado por el usuario");
     }
-    if(serverResponse.response) alert('Accion completada con exito!') 
-    if(serverResponse.error) alert('Algo salio mal, intente nuevamente') 
-    
+    if (serverResponse.response) alert("Accion completada con exito!");
+    if (serverResponse.error) alert("Algo salio mal, intente nuevamente");
   };
 
-console.log('userselect',userSelectToEdit)
-console.log('respuesta fetch editar',serverResponse.error)
+  const userFiltered = mappedUsers.filter(
+    (user) => user.id === userSelectToEdit
+  );
+  console.log("userselect", userSelectToEdit);
+  console.log("respuesta fetch editar", serverResponse.error);
 
   return (
     <div className={styles.container}>
@@ -141,7 +137,10 @@ console.log('respuesta fetch editar',serverResponse.error)
             <th className={styles.th}>Teléfono:</th>
             <th className={styles.th}>Rol:</th>
             <th className={styles.th}>status Membresia:</th>
-            <th className={styles.th}>Acciones: <span className={styles.crud1}>CR</span><span className={styles.crud2}>U</span><span className={styles.crud3}>D</span>
+            <th className={styles.th}>
+              Acciones: <span className={styles.crud1}>CR</span>
+              <span className={styles.crud2}>U</span>
+              <span className={styles.crud3}>D</span>
             </th>
           </tr>
         </thead>
@@ -157,7 +156,9 @@ console.log('respuesta fetch editar',serverResponse.error)
                 <td className={styles.td}>{user.fullName}</td>
                 <td className={styles.td}>{user.email}</td>
                 <td className={styles.td}>{user.phone}</td>
-                <td className={styles.td}>{user.isMonitor ? 'Entrenador' : 'Deportista'}</td>
+                <td className={styles.td}>
+                  {user.isMonitor ? "Entrenador" : "Deportista"}
+                </td>
                 <td className={styles.td}>
                   {user.statusMemberShipIdStatus ? "Activo" : "Inactivo"}
                 </td>
@@ -192,65 +193,65 @@ console.log('respuesta fetch editar',serverResponse.error)
 
       {windowVisible && (
         <div className={styles.ventanaEmergente}>
-          <div className={styles.contenido}>
-            <h2 className={styles.title1}>Actualizar datos de Usuario</h2>
+          {userFiltered.map((user, index) => (
+            <div className={styles.contenido} key={index}>
+              {/*Filtrar Nombre de usuario con filter*/}
+              <h2 className={styles.title1}>
+                Actualizar datos para Usuario: <p className={styles.title1a}>{user.fullName}</p>
+              </h2>
 
-            <form onSubmit={ (e)=>editUserHandler(e)}>
-              <label htmlFor="fullName">Nombre: </label>
-              <p className={styles.error}>{errors.edit && errors.fullName}</p>
-              <input
-                type="text"
-                id="fullName"
-                autoComplete="off"
-                placeholder="*Nombre completo"
-                value={editUser.fullName}
-                onChange={(e)=>handleChange(e)}
-                className={styles.input}
-              />
-              <label className={styles.label} htmlFor="password">
-                Password:{" "}
-              </label>
-               <p className={styles.error}>{errors.edit && errors.password}</p>
-              
-              <input
-                type="password"
-                id="password"
-                autoComplete="off"
-                placeholder="Password"
-                value={editUser.password}
-                onChange={(e) => handleChange(e)}
-                className={styles.input}
-              /> 
-              <label htmlFor="email">Email:</label>
-              <p className={styles.error}>
-                {errors.edit && errors.email}
-              </p>
-              <input
-                type="email"
-                id="email"
-                autoComplete="off"
-                name="email"
-                placeholder="*Correo electronico"
-                value={editUser.email}
-                onChange={(e)=>handleChange(e)}
-                className={styles.input}
-              />
+              <form onSubmit={(e) => editUserHandler(e)}>
+                <label htmlFor="fullName">Nombre: </label>
+                <p className={styles.error}>{errors.edit && errors.fullName}</p>
+                <input
+                  type="text"
+                  id="fullName"
+                  autoComplete="off"
+                  placeholder="*Nombre completo"
+                  value={editUser.fullName}
+                  onChange={(e) => handleChange(e)}
+                  className={styles.input}
+                />
+                <label className={styles.label} htmlFor="password">
+                  Password:{" "}
+                </label>
+                <p className={styles.error}>{errors.edit && errors.password}</p>
 
-              <label htmlFor="phone">Telefono:</label>
-              <p className={styles.error}>
-                {errors.edit && errors.phone}
-              </p>
-              <input
-                type="text"
-                id="phone"
-                name="phone"
-                placeholder="*Telefono: XXXXXXXXXX "
-                value={editUser.phone}
-                onChange={(e)=>handleChange(e)}
-                className={styles.input}
-              />
+                <input
+                  type="password"
+                  id="password"
+                  autoComplete="off"
+                  placeholder="Password"
+                  value={editUser.password}
+                  onChange={(e) => handleChange(e)}
+                  className={styles.input}
+                />
+                <label htmlFor="email">Email:</label>
+                <p className={styles.error}>{errors.edit && errors.email}</p>
+                <input
+                  type="email"
+                  id="email"
+                  autoComplete="off"
+                  name="email"
+                  placeholder="*Correo electronico"
+                  value={editUser.email}
+                  onChange={(e) => handleChange(e)}
+                  className={styles.input}
+                />
 
-              {/* <label htmlFor="status">Status:</label>
+                <label htmlFor="phone">Telefono:</label>
+                <p className={styles.error}>{errors.edit && errors.phone}</p>
+                <input
+                  type="text"
+                  id="phone"
+                  name="phone"
+                  placeholder="*Telefono: XXXXXXXXXX "
+                  value={editUser.phone}
+                  onChange={(e) => handleChange(e)}
+                  className={styles.input}
+                />
+
+                {/* <label htmlFor="status">Status:</label>
               <input
                 type="text"
                 id="status"
@@ -260,26 +261,32 @@ console.log('respuesta fetch editar',serverResponse.error)
                 onChange={(e)=>handleChange(e)}
                 className={styles.input}
               /> */}
-            {errors.edit ? <p className={styles.errorForm}>⚠️ Revisar el formato de los inputs antes de enviar! ⚠️</p> 
-                       : <p className={styles.validForm}>Actualizar datos de usuario! ✔️</p> }
-              <button 
-                className={styles.save}
-                type="submit"
-                onClick={editUserHandler}
-                
-              >
-                Guardar
+                {errors.edit ? (
+                  <p className={styles.errorForm}>
+                    ⚠️ Revisar el formato de los inputs antes de enviar! ⚠️
+                  </p>
+                ) : (
+                  <p className={styles.validForm}>
+                    Actualizar datos de usuario! ✔️
+                  </p>
+                )}
+                <button
+                  className={styles.save}
+                  type="submit"
+                  onClick={editUserHandler}
+                >
+                  Guardar
+                </button>
+              </form>
+              <button className={styles.close} onClick={closeWindowVisible}>
+                Cerrar
               </button>
-            </form>
-            <button className={styles.close} onClick={closeWindowVisible}>
-              Cerrar
-            </button>
-          </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
   );
 };
-
 
 export default Users;

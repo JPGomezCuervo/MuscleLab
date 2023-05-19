@@ -39,11 +39,13 @@
   background-color: #ffc300;
   border: 0;
   border-radius: .4rem;
-  width: fit-content;
-  padding: 2px;
-  margin-bottom: 2px;
+  width: 90%;
+  margin-bottom: 1px;
   font-size: 1.3em;
-  line-height: 40px;
+  line-height: 20px;
+}
+.title1a{
+  color: #1a1a1a;
 }
 
 .table {
