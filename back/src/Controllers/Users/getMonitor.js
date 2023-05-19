@@ -1,8 +1,9 @@
 const { User } = require("../../db");
 
 const getMonitor = async () => {
-  console.log("entramos al controller");
-  let monitor = await User.findAll({ where: { isMonitor: true } });
+  let monitor = await User.findAll({
+    where: { isMonitor: true, deletedAt: null },
+  });
   if (!monitor) {
     throw new Error("Monitor not found");
   }

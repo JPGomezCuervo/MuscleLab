@@ -13,6 +13,10 @@ import Nosotros from './components/Nosotros/Nosotros';
 import Dashboard from './components/Dashboard/Dashboard';
 import CreateLesson from "./components/CreateLesson/CreateLesson";
 import Sedes from './components/Sedes/Sedes';
+import Users from './components/Users/Users';
+import  CreateUser  from './components/CreateUser/CreateUser';
+
+
 import { useSelector } from 'react-redux';
 import { selectDashAuth } from './redux/features/authSlice';
 import { useLocation } from 'react-router-dom';
@@ -23,6 +27,7 @@ import AdminBar from "./components/AdminBar/AdminBar";
 import Wrapper from "./components/Wrapper/Wrapper";
 import TrainerDash from "./components/TrainerDash/TrainerDash";
 import SedesDash from "./components/SedesDashboard/SedesDash";
+
 
 
 function App() {
@@ -54,7 +59,15 @@ function App() {
       <Route path = '/dashboard/clases/crear' element={<Wrapper/>}/> 
       <Route path='/dashboard/profesores' element={<TrainerDash/>} />
       <Route path= '/dashboard/sedes' element={<SedesDash/>} />
+      <Route path = '/users' element= {<Users/>}/>
+      <Route path = '/users/createuser' element= {<CreateUser/>}/>  
+      <Route path='/dashboard' element={<LessonsDash/>}>
+      <Route path= '/dashboard/lessons' element={<LessonsDash/>}/> 
+      <Route/> 
+      </Route> 
+      
        
+
     </Routes>
     {(location.includes('dashboard') ? null: <Footer/>)}
   </> 

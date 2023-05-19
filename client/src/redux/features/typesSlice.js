@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { PORT, URL, pending, rejected, fulfilled } from "../../utils/constants";
-import { typesCleaner } from "../../utils/cleanerUtils";
+import { URL, pending, rejected, fulfilled } from "../../utils/constants";
 import axios from 'axios';
 
 const fetchAllLessonTypes = createAsyncThunk(

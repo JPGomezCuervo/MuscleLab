@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { PORT, URL, fulfilled, pending, rejected } from "../../utils/constants";
+import {URL, fulfilled, pending, rejected } from "../../utils/constants";
 import axios from "axios";
 
 
@@ -8,18 +8,6 @@ const fetchAllUsers = createAsyncThunk(
     'users/fetchAllUsers', async () => {
         try {
             const response = await axios.get(`${URL}/users`);
-            return response.data
-        } catch (error){
-            // revisar como el back envia los errores
-            throw new Error (error.response) 
-        }
-    }
-)
-
-const fetchAllMonitors = createAsyncThunk(
-    'users/fetchAllMonitors', async () => {
-        try {
-            const response = await axios.get(`${URL}/users/monitor`);
             return response.data
         } catch (error){
             // revisar como el back envia los errores
@@ -116,3 +104,4 @@ export const selectStatus = (state) => state.users.status;
 export const selectError = (state) => state.users.error;
 export default usersSlice.reducer;
 export { fetchAllUsers, fetchAllMonitors, fetchUserByID };
+export { fetchAllUsers, fetchUserByID }

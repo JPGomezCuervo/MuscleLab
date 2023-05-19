@@ -1,6 +1,6 @@
-const { Lessons} = require("../../db");
+const { LessonDetail} = require("../../db");
 let deleteLesson = async (id) => {
-  let toDelete = await Lessons.findOne({ where: { id: id } });
+  let toDelete = await LessonDetail.findOne({ where: { id: id } });
   if (!toDelete) {
     throw new Error("Lesson not found");
   }
