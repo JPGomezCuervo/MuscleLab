@@ -1,9 +1,15 @@
-const { User } = require("../../db");
+const { User, LessonDetail} = require("../../db");
 
 const getMonitor = async () => {
-  let monitor = await User.findAll({
-    where: { isMonitor: true, deletedAt: null },
-  });
+
+  let monitor = await User.findAll({ include:{
+    model: LessonDetail,
+    attributes: ["name"],
+    through:{
+      attributes:[]
+    }
+  } ,where: { isMonitor: true , deletedAt: null} });
+
   if (!monitor) {
     throw new Error("Monitor not found");
   }
