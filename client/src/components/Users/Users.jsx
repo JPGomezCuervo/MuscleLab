@@ -52,8 +52,9 @@ const Users = () => {
   };
 
   //Mapping server response by Select All Users
+  
   const mappedUsers =
-    users &&
+    users &&  
     users.user?.map((user) => {
       return {
         id: user.id,
@@ -64,9 +65,10 @@ const Users = () => {
         isAdmin: user.isAdmin,
         statusMembershipIdStatus: user.statusMemberShipIdStatus,
       };
-    });
+    })  
 
-  //console.log(users);
+  console.log('usuarios desde FetchInit:',users);
+  console.log('usuariosMapeados:',mappedUsers);
 
   //Delete user
   const removeUserHandler = async (event) => {
@@ -116,7 +118,7 @@ const Users = () => {
     if (serverResponse.error) alert("Algo salio mal, intente nuevamente");
   };
 
-  const userFiltered = mappedUsers.filter(
+  const userFiltered = mappedUsers?.filter(
     (user) => user.id === userSelectToEdit
   );
   console.log("userselect", userSelectToEdit);
@@ -148,6 +150,7 @@ const Users = () => {
           {!mappedUsers?.length ? (
             <div className={styles.empty}>
               <p>Upss! No hay usuarios para mostrar!</p>
+              <p className={styles.loading}>Loading...</p>
             </div>
           ) : (
             mappedUsers.map((user, index) => (
