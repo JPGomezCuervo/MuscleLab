@@ -1,8 +1,7 @@
 const { Lessons } = require('../../db');
 
 const updateLesson = async( 
-    id, 
-    name, 
+    id,  
     effort, 
     shortDescription, 
     image,
@@ -15,11 +14,10 @@ const updateLesson = async(
         if (!foundedLesson) {
             throw new Error('La clase que quieres modificar no existe');
         } 
-        if(!name || !effort  || !shortDescription || !image || !goals){
+        if(!effort  || !shortDescription || !image || !goals){
                 throw new Error('Todos los campos son obligatorios');
         }
         await foundedLesson.update({
-            name: name,
             effort: effort,
             shortDescription: shortDescription,
             image: image,

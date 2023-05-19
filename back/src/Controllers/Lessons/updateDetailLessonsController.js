@@ -2,7 +2,8 @@ const { LessonDetail } = require('../../db');
 
 const updateLessonDetail = async( 
     id,  
-    description, 
+    description,
+    name, 
     scheduleDays , 
     scheduleHourStart, 
     scheduleHourFinish,
@@ -16,7 +17,7 @@ const updateLessonDetail = async(
         throw new Error('El detalle de la clase que quieres modificar no existe!');
     } 
         if(
-            !goals || 
+            !name ||
             !description  || 
             !scheduleDays || 
             !scheduleHourStart || 
@@ -24,7 +25,7 @@ const updateLessonDetail = async(
                 throw new Error('Todos los campos son obligatorios');
         }
         await foundedDetail.update({
-            goals: goals,
+            name: name,
             description: description,
             scheduleDays: scheduleDays,
             scheduleHourStart: scheduleHourStart,
