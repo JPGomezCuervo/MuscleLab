@@ -4,6 +4,8 @@ import Plans from "../Plans/Plans";
 import { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPlansCLick, selectPlansClicked } from "../../redux/features/utilsSlice";
+import { fetchAllMemberships, selectAllMemberships } from "../../redux/features/membershipsSlice";
+
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -13,6 +15,11 @@ const Home = () => {
     const handleOnclick = () => {
         plansRef.current.scrollIntoView({ behavior: 'smooth' });
     };
+    useEffect(() => {
+        dispatch(fetchAllMemberships());
+    }, [dispatch]);
+    console.log(useSelector(selectAllMemberships));
+
     useEffect (() => {
         if (plansCLick) {
             plansRef.current.scrollIntoView({ behavior: 'smooth' });

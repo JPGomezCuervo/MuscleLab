@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { URL, fulfilled, pending, rejected } from "../../utils/constants";
 import axios from "axios";
-import { userCleaner } from "../../utils/cleanerUtils";
+import { userCleaner,monitorsCleaner } from "../../utils/cleanerUtils";
 
 
 
@@ -76,7 +76,7 @@ const usersSlice = createSlice ({
                 const cleanedUser = userCleaner(action.payload);
                 state.status = fulfilled;
                 state.error = '';
-                state.user = cleanedUser
+                state.user = cleanedUser;
 
  
             })
@@ -91,9 +91,10 @@ const usersSlice = createSlice ({
                 
             }) 
             .addCase(fetchAllMonitors.fulfilled, ( state, action) => {
+                const cleanedMonitors = monitorsCleaner(action.payload);
                 state.status = fulfilled;
                 state.error = '';
-                state.monitors = action.payload
+                state.monitors = cleanedMonitors;
  
             })
             .addCase(fetchAllMonitors.pending, (state, action) => {

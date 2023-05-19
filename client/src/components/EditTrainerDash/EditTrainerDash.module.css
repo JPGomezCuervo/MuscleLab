@@ -15,6 +15,23 @@
     margin-bottom: 1.5rem;
     margin-top: 2rem;
 }
+.Teacher{
+    background-color: #ffc300;
+    color: #013565;
+    font-family: 'Montserrat-Medium';
+    font-size: 1.5rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-right: 0%;
+    border-radius: .4rem .4rem 0 0;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.Navigation button{
+    border: 0;
+    background-color: transparent;
+}
 
 .Navigation h2{
     font-size: 3.5rem;
@@ -23,4 +40,44 @@
 .ArrowIcon{
     height: 3.5rem;
     transform: rotate(90deg);
+}
+
+.Description{
+    width: fit-content;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+
+.Description h3{
+    background-color: #f3f3f3;
+    padding: 1rem;
+    border-radius: .4rem;
+    font-family: 'Montserrat-Regular';
+    font-weight: 200;
+}
+
+.Description label{
+    display: block;
+    font-family: 'Montserrat-SemiBold';
+    font-size: 1.1rem;
+    text-align: start;
+}
+
+.Description input{
+    font-family: 'Montserrat-Regular';
+    display: block;
+    background-color: #f3f3f3;
+    padding: 0 1rem;
+    width: 25rem;
+    min-height: 3.5rem;
+    margin-top: .4rem;
+}
+
+.EditContainer{
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+    width: 40%;
+    margin: 0 auto;
+    border-radius: .4rem .4rem 0 0;
+    padding-bottom: 2rem;
+    
 }

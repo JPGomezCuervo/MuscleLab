@@ -16,12 +16,11 @@ const TrainerDash = () => {
     return(
         <div className={style.MainContainer}>
             <div className={style.Navigator}>
-                <h2>Clases</h2>
+                <h2>Profesores</h2>
             </div>
 
             <div className={style.TitleContainer}>
                 <h2 className={`${style.Title} ${style.Info}`}> Nombre</h2>
-                <h2 className={`${style.Title} ${style.Info}`}> Status</h2>
                 <h2 className={`${style.Title} ${style.Info}`}> Clase</h2>
             </div>
 
@@ -29,50 +28,50 @@ const TrainerDash = () => {
 
                 <div className={style.Container}>
                     <div className={style.NameContainer}>
-                        <h2 className={style.InfoName}> Lorem ipsum dolor</h2>
-                        <h2 className={style.InfoName}> Lorem ipsum dolor</h2>
-                        <h2 className={style.InfoName}> Lorem ipsum dolor</h2>
-                        <h2 className={style.InfoName}> Lorem ipsum dolor</h2>
-                        <h2 className={style.InfoName}> Lorem ipsum dolor</h2>
-                        <h2 className={style.InfoName}> Lorem ipsum dolor</h2>
-                    </div>
+                        {monitors.map((monitor) => (
+                            <h2 className={style.InfoName}>{monitor.fullName}</h2>
+                        ))}
 
-                    <div className={style.TrainerContainer}>
-                        <h2 className={style.Info}> Brad Pitt</h2>
-                        <h2 className={style.Info}> Antonio Gomez</h2>
-                        <h2 className={style.Info}> Brad Pitt</h2>
-                        <h2 className={style.Info}> Brad Pitt</h2>
-                        <h2 className={style.Info}> Antonio Gomez</h2>
-                        <h2 className={style.Info}> Antonio Gomez</h2>
                     </div>
 
                     <div className={style.StatusContainer}>
+                        <div className={style.ContainerS}>
+                            <h2 className={`${style.Info} ${style.Status}`}>
+                                Taijutsu, ninjutsu, Boxeo
+                            </h2>
+                            <img src={editIcon} alt="" />
+                        </div>
 
-                        <h2 className={`${style.Info} ${style.Status}`}>
-                            Activo
+                        <div className={style.ContainerS}>
+                            <h2 className={`${style.Info} ${style.Status}`}>
+                                Taijutsu, ninjutsu, Boxeo
+                            </h2>
                             <img src={editIcon} alt="" />
-                        </h2>
-
-                        <h2 className={`${style.Info} ${style.Status}`}>
-                            Inactivo
+                        </div>
+                        <div className={style.ContainerS}>
+                            <h2 className={`${style.Info} ${style.Status}`}>
+                                Taijutsu, ninjutsu, Boxeo
+                            </h2>
                             <img src={editIcon} alt="" />
-                        </h2>
-                        <h2 className={`${style.Info} ${style.Status}`}>
-                            Inactivo
+                        </div>
+                        <div className={style.ContainerS}>
+                            <h2 className={`${style.Info} ${style.Status}`}>
+                                Taijutsu, ninjutsu, Boxeo
+                            </h2>
                             <img src={editIcon} alt="" />
-                        </h2>
-                        <h2 className={`${style.Info} ${style.Status}`}>
-                            Activo
+                        </div>
+                        <div className={style.ContainerS}>
+                            <h2 className={`${style.Info} ${style.Status}`}>
+                                Boxeo
+                            </h2>
                             <img src={editIcon} alt="" />
-                        </h2>
-                        <h2 className={`${style.Info} ${style.Status}`}>
-                            Activo
+                        </div>
+                        <div className={style.ContainerS}>
+                            <h2 className={`${style.Info} ${style.Status}`}>
+                                Taijutsu, ninjutsu, Boxeo
+                            </h2>
                             <img src={editIcon} alt="" />
-                        </h2>
-                        <h2 className={`${style.Info} ${style.Status}`}>
-                            Inactivo
-                            <img src={editIcon} alt="" />
-                        </h2>
+                        </div>
                     </div>
                 </div>
 

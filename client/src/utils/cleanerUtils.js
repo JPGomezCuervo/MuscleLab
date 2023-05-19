@@ -22,6 +22,11 @@ const typesCleaner = (data) => {
 const userCleaner = (data) => {
     return data.user;
 };
-export { cleaner, individualLessonCleaner, typesCleaner, userCleaner}
+
+const monitorsCleaner = (data) => {
+    return data.monitor;
+};
+
+export { cleaner, individualLessonCleaner, typesCleaner, userCleaner, monitorsCleaner}
 
 
