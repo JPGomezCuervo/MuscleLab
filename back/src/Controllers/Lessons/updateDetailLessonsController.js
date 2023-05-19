@@ -16,6 +16,7 @@ const updateLessonDetail = async (
     if (!foundedDetail) {
         throw new Error('El detalle de la clase que quieres modificar no existe!');
     }
+    console.log(description, name, scheduleDays, scheduleHourStart, scheduleHourFinish);
     if (
         !name ||
         !description ||
