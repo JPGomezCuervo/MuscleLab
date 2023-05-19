@@ -21,7 +21,7 @@ const updateLessonDetail = async (
         !description ||
         !scheduleDays ||
         !scheduleHourStart ||
-        !scheduleHourFinish || typeof(isAvailable)==="boolean") {
+        !scheduleHourFinish) {
         throw new Error('Todos los campos son obligatorios');
     }
     await foundedDetail.update({
