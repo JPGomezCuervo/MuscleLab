@@ -16,13 +16,12 @@ const updateLessonDetail = async (
     if (!foundedDetail) {
         throw new Error('El detalle de la clase que quieres modificar no existe!');
     }
-    console.log("descripcion",description,"name", name, scheduleDays, scheduleHourStart, scheduleHourFinish);
     if (
         !name ||
         !description ||
         !scheduleDays ||
         !scheduleHourStart ||
-        !scheduleHourFinish) {
+        !scheduleHourFinish || typeof(isAvailable)==="boolean") {
         throw new Error('Todos los campos son obligatorios');
     }
     await foundedDetail.update({
