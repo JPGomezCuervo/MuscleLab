@@ -49,10 +49,10 @@ function App() {
       {/* <Route path='/dashboard' element={<LessonsDash/>}>
         <Route path= '/dashboard/lessons/detail/:id' element={<LessonsDash/>}/> 
       <Route/>  */}
+      <Route path= "dashboard/clases" element={<LessonsDash/>} />
       <Route path = '/dashboard/clases/editar/:id' element={<Wrapper/>}/>
       <Route path = '/dashboard/clases/crear' element={<Wrapper/>}/> 
       <Route path='/dashboard/profesores' element={<TrainerDash/>} />
-      <Route path= "dashboard/clases" element={<LessonsDash/>} />
       <Route path= '/dashboard/sedes' element={<SedesDash/>} />
        
     </Routes>
