@@ -2,8 +2,12 @@ import style from "./EditTrainerDash.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchUserByID, selectUserByID } from "../../redux/features/usersSlice";
+import { URL } from '../../utils/constants';
 import arrowIcon from "../../assets/icons/arrow-yellow.png";
 import { useParams } from "react-router-dom";
+import validations from './Validations/index';
+import checkIcon from '../../assets/icons/check.png';
+import axios from 'axios'
 
 const EditTrainerDash = () => {
     const dispatch = useDispatch();
@@ -14,6 +18,9 @@ const EditTrainerDash = () => {
         fullName: "",
         email: "",
         phone: "",
+        isAdmin:"",
+        isMonitor: "",
+        password:""
     });
 
     const [errors, setErrors] = useState({
@@ -22,6 +29,12 @@ const EditTrainerDash = () => {
         phone: "",
     });
 
+    const [allowSubmit, setAllowSubmit] = useState(true);
+
+    const [message, setMessage] = useState("")
+    const [serverResponse, setServerResponse] = useState("")
+
+
     const handleInputChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -29,8 +42,53 @@ const EditTrainerDash = () => {
             ...input,
             [name]: value,
         });
+        setErrors(validations(value,errors,name))
 
     };
+
+    const handleSelectChange = (event) => {
+        const value = event.target.value;
+        const name = event.target.name;
+        setInput({...input, [name]: value})
+        
+    }
+
+    const handleConfirmModify = (event) => {
+        event.preventDefault();
+        setMessage("¿Estás seguro de que quieres modificar tu perfil?")
+    }
+
+    const handleConfirmRemove = (event) => {
+        event.preventDefault();
+        setMessage("¿Estás seguro de que quieres eliminar tu perfil?")
+    }
+
+    const handleVolverClick = (event) => {
+        event.preventDefault();
+        setMessage("");
+        setServerResponse("");
+
+    }
+
+    const handleConfirmarClick = (event) =>{
+        //Pide lessons para editar, mi pregunta es si en la tabla lecciones, ya debe existir la relacion con profesores
+        event.preventDefault();
+        if(message.includes("modificar")) {
+            console.log(JSON.stringify(input))
+        } else{
+            console.log(`entre al delete y est es el ${id}`)
+            axios.delete(`${URL}/users/delete/${id}`)
+            .then((res) => {
+                setServerResponse(res.data)
+                setMessage("")
+            }).catch((error) =>{
+                setServerResponse(error.response.data)
+                setMessage("")
+            })
+        }
+
+
+    }
 
     useEffect(() => {
         dispatch(fetchUserByID(id))
@@ -41,9 +99,16 @@ const EditTrainerDash = () => {
             fullName: user.fullName,
             email: user.email,
             phone: user.phone,
+            password: user.password
+
         }
         );
     }, [user]);
+
+    useEffect(() =>{
+        console.log("useEffect");
+        setAllowSubmit(Object.values(errors).every((item) => item === ""))
+    }, [errors])
     
     return (
         <>
@@ -64,21 +129,92 @@ const EditTrainerDash = () => {
 
                 <div className={style.Description}>
                     <label htmlFor='name'>Nombre*</label>
-                    <input placeholder='Nombre' value={input.fullName} type='text' id='name' name='fullName' onChange={handleInputChange}/>      
+                    <input placeholder='Nombre' value={input.fullName} type='text' id='name' name='fullName' onChange={handleInputChange}/>
+
+                    {errors.fullName && <p>{errors.fullName}</p>}  
                 </div>
 
                 <div className={style.Description}>
-                    <label htmlFor='email'>Email*</label>
+                    <label htmlFor='email'>Correo electrónico*</label>
                     <input placeholder='Nombre' value={input.email} type='text' id='email' name='email' onChange={handleInputChange} />      
+
+                    {errors.email && <p>{errors.email}</p>}
                 </div>
 
                 <div className={style.Description}>
                     <label htmlFor='telefono'>Teléfono*</label>
-                    <input placeholder='Nombre' value={input.phone} type='text' id='telefono' name='phone' onChange={handleInputChange}/>      
+                    <input placeholder='Nombre' value={input.phone} type='text' id='telefono' name='phone' onChange={handleInputChange}/>
+
+                    {errors.phone && <p>{errors.phone}</p>}   
+                </div>
+
+                <div className={style.LastDescription}>
+                    <div className={style.Selector}>
+                        <h2>Es profesor?</h2>
+                        <select name= "isMonitor" id= "" onChange={handleSelectChange}>
+                            <option value= {user.isMonitor}>
+                                {user.isMonitor === true ? "Si": "No" }
+                            </option>
+
+                            <option value= {!user.isMonitor}>
+                                {!user.isMonitor === false ? "No": "Si" }
+                            </option>
+                        </select>
+                    </div>
+
+                    <div className={style.Selector}>
+                        <h2>Es administrador?</h2>
+                        <select name="isAdmin" id="" onChange={handleSelectChange} >
+                            <option value = {user.isAdmin}>
+                                {user.isAdmin === true ? "Si": "No" }
+                            </option>
+
+                            <option value = {!user.isAdmin}>
+                                {!user.isAdmin === false ? "No": "Si" }
+                            </option>
+                        </select>
+                    </div>
                 </div>
 
 
+                <div className={style.Description}>
+                    <button className={allowSubmit === true ? style.SaveButton:`${style.SaveButton} ${style.Disable}`} disabled = {!allowSubmit} onClick={handleConfirmModify} >
+                        Guardar
+                    </button>
+
+                    <button className={style.DeleteButton} onClick = {handleConfirmRemove}>
+                        Borrar
+                    </button>
+                </div>
             </div>
+
+            {message && 
+                <div>
+                    <div className={style.AdvertiseContainer} ></div>
+                    <div className={style.Advertise}>
+                        <h1>{message}</h1> 
+                        <div>
+                            {message &&<button className={style.AdvertiseButton1} onClick={handleConfirmarClick}>Confirmar</button>}
+                            {message && <button className={style.AdvertiseButton2} onClick={handleVolverClick}>Volver</button>}
+                        </div>
+                    </div>
+                </div>
+                }
+
+            {serverResponse && 
+                <div>
+                    <div className={style.AdvertiseContainer} ></div>
+                    <div className={style.Advertise}>
+                        <h1>{serverResponse}</h1>
+                        <img className={style.CheckIcon} src={checkIcon} alt="" />
+                        <div>
+                            <a className={style.AdvertiseButton3} href='http://localhost:3000/dashboard/profesores'>
+                                Volver a Profesores
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                }
         </form>
         </>
     );

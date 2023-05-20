@@ -4,6 +4,7 @@ import checkIcon from '../../assets/icons/check.png'
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { fetchAllLessonTypes } from '../../redux/features/typesSlice';
+import { fetchAllLessonGoals } from '../../redux/features/goalsSlice';
 import validations from './validations/mainValidation/index';
 import arrayValidations from './validations/arrayValidations/index';
 import { weekDays } from '../../utils/constants';
@@ -28,6 +29,7 @@ class EditLessonDash extends Component {
                 scheduleDays: [],
                 types: [],
                 goals: [],
+                isAvailable: null,
              },
             errors: {
                 name: '',
@@ -95,6 +97,14 @@ class EditLessonDash extends Component {
         return hours.slice(1);
     }
     
+    generateAvailableOptions = () => {
+        return (
+            <>
+                <option value={true}>Activa</option>
+                <option value={false}> Inactiva </option>
+            </>
+        );
+    };
 
     handleChange = (event) => {
         const name = event.target.name;
@@ -107,7 +117,7 @@ class EditLessonDash extends Component {
             errors: validations(value, name, this.state.errors, this.state.lessonAttributes),
         }, () => {
                 this.setState({
-                    allowSubmit: Object.values(this.state.errors).every((item) => item === '') 
+                    allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
                 });   
         });
         
@@ -130,7 +140,7 @@ class EditLessonDash extends Component {
                     errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
                 },() =>{
                     this.setState({
-                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')
+                        allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
                     });
                 });
             });
@@ -147,7 +157,7 @@ class EditLessonDash extends Component {
 
                 }, () => {
                     this.setState({
-                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')
+                        allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
                         });
 
                 })
@@ -159,18 +169,20 @@ class EditLessonDash extends Component {
         const name = event.target.name;
         const value = event.target.value;
         const isChecked = event.target.checked;
+
         if (isChecked) {
+            console.log(`entre a checked y este es el valor de value ${value}`);
             this.setState({
                 lessonAttributes: {
                     ...this.state.lessonAttributes,
                     [name]: [...this.state.lessonAttributes[name], value],
-                },
+                }
             }, () => {
                 this.setState({
                     errors: arrayValidations(this.state.lessonAttributes,this.state.errors, name)
                 }, () => {
                     this.setState({
-                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')});
+                        allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')}) 
                 });
                 
             });
@@ -185,7 +197,7 @@ class EditLessonDash extends Component {
                     errors: arrayValidations(this.state.lessonAttributes, this.state.errors, name)
                 }, () => {
                     this.setState({
-                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')});
+                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')}) && Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true);
                     });
 
             });
@@ -216,6 +228,24 @@ class EditLessonDash extends Component {
         })
     };
 
+    handleIsAvailable = (event) => {
+        console.log(event.target.value);
+        const name = event.target.name;
+        const value = event.target.value;
+
+        this.setState({
+            lessonAttributes: {
+                ...this.state.lessonAttributes,
+                [name]: value,
+            },
+        });
+
+        this.setState({
+            errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
+        })
+
+    };
+
     handleVolverClick = (event) => {
         event.preventDefault();
         this.setState({
@@ -230,13 +260,14 @@ class EditLessonDash extends Component {
 
 
     componentDidMount() {
-        const { fetchAllLessonTypes } = this.props;
+        const { fetchAllLessonTypes, fetchAllLessonGoals} = this.props;
          fetchAllLessonTypes();
+         fetchAllLessonGoals();
          this.inputRef = React.createRef();
     };
 
     render() {
-        const {lessonsTypes} = this.props;
+        const {lessonsTypes, lessonsGoals} = this.props;
         const {lessonAttributes, errors} = this.state;
 
       return (
@@ -357,7 +388,7 @@ class EditLessonDash extends Component {
                         <div className={`${style.RightSubContainer} ${style.LastSubContainer}`}>
                             <h2>Objetivos</h2>
                             <div className={style.TiposDeEjercicio}>
-                                {lessonsTypes.map((lesson) => (
+                                {lessonsGoals.map((lesson) => (
                                     <div key={lesson}>
                                         <label>
                                             <input
@@ -372,8 +403,17 @@ class EditLessonDash extends Component {
                                     </div>
                                 ))}
                             </div>
+                            {errors.goals && <p className={style.Error}>{errors.goals}</p>}
 
                         </div>
+                        <div className={`${style.RightSubContainer} ${style.LastSubContainer}`}>
+                            <h2>Estatus de la clase</h2>
+                            <select name='isAvailable' onChange={this.handleIsAvailable}>
+                                <option>Seleccione</option>
+                                {this.generateAvailableOptions()}
+                            </select>
+                        </div>
+                        {errors.isAvailable && <p className={style.Error}>{errors.isAvailable}</p>}
 
                     </div>
 
@@ -419,16 +459,18 @@ class EditLessonDash extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        lessonsTypes: state.types.types
+        lessonsTypes: state.types.types,
+        lessonsGoals: state.goals.goals,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
-        fetchAllLessonTypes: () => dispatch(fetchAllLessonTypes())
+        fetchAllLessonTypes: () => dispatch(fetchAllLessonTypes()),
+        fetchAllLessonGoals: () => dispatch(fetchAllLessonGoals()),
     }
 }
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditLessonDash);

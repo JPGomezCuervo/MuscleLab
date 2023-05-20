@@ -7,12 +7,14 @@ import typesReducer from './features/typesSlice';
 import filtersReducer from './features/filtersSlice';
 import authReducer from './features/authSlice';
 import officesReducer from './features/officesSlice';
-import membershipsReducer from './features/membershipsSlice'
+import membershipsReducer from './features/membershipsSlice';
+import goalsReducer from './features/goalsSlice';
 
 const store = configureStore({
     reducer: {
         lessons: lessonsReducer,
         types: typesReducer,
+        goals: goalsReducer,
         users: usersReducer,
         utils: utilsReducer,
         filters: filtersReducer,

@@ -22,7 +22,7 @@ const fetchAllLessons = createAsyncThunk(
 const fetchLessonsByID = createAsyncThunk(
     'lessons/fetchAllLessonsByID', async (id) => {
         try {
-            const response = await axios.get(`${URL}/lessons/${id}`);
+            const response = await axios.get(`${URL}/lessons/detail/${id}`);
             return response.data
         } catch (error){
             // revisar como el back envia los errores
@@ -31,6 +31,8 @@ const fetchLessonsByID = createAsyncThunk(
 
     }
 )
+
+
 export const cacheMiddleware = store => next => action => {
     if (action.type === 'lessons/fetchAllLessons/fulfilled' && store.getState().lessons.lessons.length > 0) {
         return Promise.resolve();

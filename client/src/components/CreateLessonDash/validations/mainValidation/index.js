@@ -5,9 +5,7 @@ import effortValidation from './effortValidation';
 import imageValidation from './imageValidation';
 import scheduleHourStartValidation from './scheduleHourStartValidation';
 import scheduleHourFinishValidation from './scheduleHourFinishValidation'
-import scheduleDayValidation from '../arrayValidations/scheduleDayValidation';
-import typesValidation from '../arrayValidations/typesValidation';
-import goalsValidation from '../arrayValidations/goalsValidation';
+import isAvailableValidation from './isAvailableValidation';
 
 const validations = (value, name, errors, lessonAttributes) => {
     switch (name) {
@@ -31,6 +29,9 @@ const validations = (value, name, errors, lessonAttributes) => {
 
         case 'scheduleHourFinish':
             return scheduleHourFinishValidation(value, errors, name, lessonAttributes);
+        
+        case 'isAvailable':
+            return isAvailableValidation(value, errors, name);
 
         default:
             return errors;          

@@ -49,7 +49,7 @@
 }
 
 .Description h3{
-    background-color: #f3f3f3;
+    background-color: #fafafa;
     padding: 1rem;
     border-radius: .4rem;
     font-family: 'Montserrat-Regular';
@@ -78,6 +78,180 @@
     width: 40%;
     margin: 0 auto;
     border-radius: .4rem .4rem 0 0;
-    padding-bottom: 2rem;
+    padding-bottom: .5rem;
+}
+
+.LastDescription{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 3.5rem;
+}
+
+.LastDescription h2{
+    display: block;
+    font-family: 'Montserrat-SemiBold';
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.DeleteButton{
+    width: 9rem;
+    height: 2.6rem;
+    color: #ffffff;
+    background-color: #E11D1D;
+    border: 0;
+    border-radius: 0.4rem;
+    font-family: "Montserrat-Bold";
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-left: 1rem;
+}
+
+.DeleteButton:hover{
+    background-color: rgb(182, 22, 22);
+}
+
+.DeleteButton:active{
+    background-color: #E11D1D;
+}
+
+.SaveButton{
+    width: 9rem;
+    height: 2.6rem;
+    color: #ffffff;
+    background-color: #ffc300;
+    border: 0;
+    border-radius: 0.4rem;
+    font-family: "Montserrat-Bold";
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.SaveButton:hover{
+    background-color: #FFAF00;
+}
+.SaveButton:active{
+    background-color: #ffc300;
+}
+
+.Disable{
+    background-color: #f3f3f3;
+    color: #013565;;
+    cursor: not-allowed;
+}
+
+.Disable:hover, .Disable:active{
+    background-color: #f3f3f3;
+    
+}
+
+.AdvertiseContainer{
+    background-color: #ffffff;
+    opacity: 0.5;
+    position: fixed;
+    z-index: 9998;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+}
+.Advertise{
+    flex-direction: column;
+    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9998;
+    background-color: white;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+    border-radius: .4rem;
+    min-height: 16rem;
+    min-width: 30rem;
+}
+
+.Advertise h1{
+    font-family: 'Montserrat-Medium';
+    font-weight: 500;
+    color: #013565;
+    text-align: center;
+    width: 27rem;
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+.CheckIcon{
+    display: block;
+    margin: 0 auto;
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 3rem;
+}
+
+.AdvertiseButton1{
+    background-color: #ffc300;
+    color: white;
+    font-family: 'Montserrat-Regular';
+    font-weight: 900;
+    border: 0;
+    border-radius: .4rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: .3s;
+    float: left;
+    margin-left: 15%;
+    width: 9rem;
+    height: 4rem;
+    line-height: 4rem;
+}
+
+.AdvertiseButton2{
+    background-color: #ffc300;
+    color: white;
+    font-family: 'Montserrat-Regular';
+    font-weight: 900;
+    border: 0;
+    border-radius: .4rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: .3s;
+    float: right;
+    margin-right: 15%;
+    width: 9rem;
+    height: 4rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    margin-bottom: 2rem;
+    
+}
+
+.AdvertiseButton1:hover, .AdvertiseButton2:hover{
+    background-color: #FFAF00;
+}
+
+.AdvertiseButton1:active, .AdvertiseButton2:active{
+    background-color: #ffc300;
+}
+
+.AdvertiseButton3{
+    display: block;
+    background-color: #ffc300;
+    color: white;
+    font-family: 'Montserrat-Regular';
+    font-weight: 900;
+    border-radius: .4rem;
+    text-decoration: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: .3s;
+    width: 15rem;
+    height: 3.5rem;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    line-height: 3.5rem;
+    text-align: center;
     
 }

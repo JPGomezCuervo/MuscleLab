@@ -1,3 +1,4 @@
+import goalsValidation from "./goalsValidation";
 import scheduleDayValidation from "./scheduleDayValidation";
 import typesValidation from "./typesValidation";
 
@@ -8,6 +9,9 @@ const arrayValidations = (values, errors, name, id) => {
             return scheduleDayValidation(values, errors, name, id);
         case 'types':
             return typesValidation(values, errors, name, id);
+
+        case 'goals':
+            return goalsValidation(values, errors, name, id);
         
         default:
             return errors;
