@@ -61,10 +61,10 @@ const officesSlice = createSlice({
                 state.status = rejected;
                 state.error = action.error.message;
             })
-            .addCase(fetchOfficeByID.fulfilled, (state, action) => {
+            .addCase(fetchOfficeByID.fulfilled, (state, {payload}) => {
                 state.error = '';
                 state.status = fulfilled;
-                state.office = action.payload;
+                state.office = payload;
             })
             .addCase(fetchOfficeByID.pending, (state) => {
                 state.status = pending;

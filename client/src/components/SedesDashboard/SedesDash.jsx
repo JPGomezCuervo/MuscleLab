@@ -23,7 +23,7 @@ const SedesDash = () => {
     dispatch(fetchAllOffices())
   }, [dispatch, serverResponse]);
 
-
+  
   // const removeSedeHandler = async (id) => {
   //   //const id = event.target.name;
   //  // console.log(event)
@@ -63,17 +63,20 @@ const SedesDash = () => {
   //   }
   // }
 
-
   const removeSedeHandler = async (id) => {
-  
     const confirmation = window.confirm("Esta acción no se podrá revertir!\nPulse OK o Cancelar.");
   
     if (confirmation) {
       try {
         await fetch(`https://musclelabii.onrender.com/branchoffice/delete/${id}`, { method: "DELETE" });
+
+        
         setServerResponse(true);
         alert("Borrado con éxito!");
+        
         dispatch(clearOffice(id));
+        // Eliminar la sede eliminada del estado
+       
       } catch (error) {
         console.log(error);
         // Manejar el error de red aquí
@@ -82,6 +85,9 @@ const SedesDash = () => {
       alert("Cancelado por el usuario");
     }
   };
+
+  
+  
   
 
   return (
@@ -91,6 +97,10 @@ const SedesDash = () => {
         <h1>Sedes</h1>
       </div>
       <hr className={style.hr} />
+
+          <Link to="/dashboard/sedes/crear">
+      <button>Crear Sede</button>
+          </Link>
 
       <div className={style.contenedor}>
         {

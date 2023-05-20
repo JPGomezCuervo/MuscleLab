@@ -29,6 +29,9 @@ import TrainerDash from "./components/TrainerDash/TrainerDash";
 import SedesDash from "./components/SedesDashboard/SedesDash";
 
 import EditTrainerDash from './components/EditTrainerDash/EditTrainerDash';
+import SedeHomeDetalle from './components/SedeHomeDetalle/SedeHomeDetalle';
+import SedesDashEditar from './components/SedesDashEditar/SedesDashEditar';
+import SedesDashCrear from './components/SedesDashCrear/SedesDashCrear';
 
 
 function App() {
@@ -52,6 +55,7 @@ function App() {
       <Route path= '/nosotros' element={<Nosotros />}/>
       <Route path="/create" element={<CreateLesson />}/>
       <Route path = '/sedes' element= {<Sedes/>}/>
+      <Route path='/sedes/detalles/:id' element={<SedeHomeDetalle/>}/>
       {/* <Route path='/dashboard' element={<LessonsDash/>}>
         <Route path= '/dashboard/lessons/detail/:id' element={<LessonsDash/>}/> 
       <Route/>  */}
@@ -60,6 +64,8 @@ function App() {
       <Route path = '/dashboard/clases/crear' element={<Wrapper/>}/> 
       <Route path='/dashboard/profesores' element={<TrainerDash/>} />
       <Route path= '/dashboard/sedes' element={<SedesDash/>} />
+      <Route path= '/dashboard/sedes/editar/:id' element={<SedesDashEditar/>}/>
+      <Route path='/dashboard/sedes/crear' element={<SedesDashCrear/>}/>
       <Route path = '/users' element= {<Users/>}/>
       <Route path = '/users/createuser' element= {<CreateUser/>}/>  
       <Route path='/dashboard' element={<LessonsDash/>}>

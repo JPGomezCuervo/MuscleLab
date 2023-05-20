@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {selectLesson, fetchLessonsByID, selectAllLessons, fet } from "../../redux/features/lessonsSlice"
+import {selectLesson, fetchLessonsByID, selectAllLessons } from "../../redux/features/lessonsSlice"
 import style from "./DetailLesson.module.css";
 import brad from "../../assets/images/detail/brad.jpeg"
 import NavBar from "../NavBar/NavBar";
