@@ -3,10 +3,12 @@ import style from "./Sedes.module.css"
 import { fetchAllOffices, selectAllOffices } from '../../redux/features/officesSlice';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
+import Sede from "../Sede/Sede";
+
 const Sedes = () => {
 
     const sedes = useSelector(selectAllOffices)
-
+     
     const dispatch = useDispatch();
 
 
@@ -17,8 +19,15 @@ useEffect(()=>{
 
 
     return (
-        <div>
-            <h1>Sedes</h1>
+        <div >
+            
+            <div className={style.Container}>
+
+            {sedes.branchoffice?.map((sede, index)=> {
+                return <Sede key={sede.id} sede={sede} index={index} />
+            })}
+            </div>
+
         </div>
     )
 }
