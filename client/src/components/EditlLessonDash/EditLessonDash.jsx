@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { fetchLessonsByID } from '../../redux/features/lessonsSlice';
 import { fetchAllLessonTypes } from '../../redux/features/typesSlice';
 import { fetchAllLessonGoals } from '../../redux/features/goalsSlice';
+import { fetchAllMonitors } from '../../redux/features/usersSlice';
+import { fetchAllOffices } from '../../redux/features/officesSlice';
 import validations from './validations/mainValidation/index';
 import arrayValidations from './validations/arrayValidations/index';
 import { weekDays } from '../../utils/constants';
@@ -31,7 +33,9 @@ class DetailLessonDash extends Component {
                 scheduleDays: [],
                 types: [],
                 goals: [],
-                isAvailable:null
+                isAvailable:null,
+                monitor: '',
+                branchoffice: [],
              },
             errors: {
                 name: '',
@@ -44,6 +48,8 @@ class DetailLessonDash extends Component {
                 scheduleDays: '',
                 types: '',
                 goals: '',
+                monitor: '',
+                branchoffice: '',
             },
             horaInicio: '',
             allowSubmit: true,
@@ -108,6 +114,23 @@ class DetailLessonDash extends Component {
             );
         };
 
+        generateTrainersOptions = () => {
+
+            return this.props.monitors.map((monitor) => {
+                return (
+                    <option key={monitor.id} value={monitor.fullName}>{monitor.fullName}</option>
+                )
+            })
+        };
+    
+        generateBranchOfficeOptions = () => {
+            return this.props.offices.map((office) => {
+                return (
+                    <option key={office.id} value={office.name}>{office.name}</option>
+                )
+            })
+        };
+
         availabilityMiddleware = (value) => {
             if (value === 'Activa') return true;
             if (value === 'Inactiva') return false;
@@ -131,6 +154,48 @@ class DetailLessonDash extends Component {
             });
             
         };
+        handleTrainerOptions = (event) => {
+            const name = event.target.name;
+            const value = event.target.value;
+            this.setState({
+                lessonAttributes: {
+                    ...this.state.lessonAttributes,
+                    [name]: value,
+                },
+            }, () =>{
+                this.setState({
+                    errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
+                })
+            }, () => {
+                this.setState({
+                    allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
+                    });
+    
+        });
+    
+    };
+    
+        handleBranchOfficeOptions = (event) => {
+            const name = event.target.name;
+            const value = event.target.value;
+            this.setState({
+                lessonAttributes: {
+                    ...this.state.lessonAttributes,
+                    [name]: [value],
+                },
+            }, () =>{
+                this.setState({
+                    errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
+                })
+            }
+            , () => {
+                this.setState({
+                    allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
+                    });
+            }
+            );
+        };
+
 
         handleHoursBox = (event) => {
             const name = event.target.name;
@@ -308,7 +373,7 @@ class DetailLessonDash extends Component {
 
         
      componentDidMount(prevProps, prevState) {
-        const {fetchLessonsByID, fetchAllLessonTypes, fetchAllLessonGoals} = this.props;
+        const {fetchLessonsByID, fetchAllLessonTypes, fetchAllLessonGoals, fetchAllMonitors, fetchAllOffices} = this.props;
          fetchLessonsByID(this.props.id)
          .then((res) =>{ 
              this.setState({
@@ -328,18 +393,20 @@ class DetailLessonDash extends Component {
                  }
              },
              () => {
-                console.log(this.state.lessonAttributes.isAvailable);
+                
                 this.availabilityOption = this.state.lessonAttributes.isAvailable;
              });
          }) 
          fetchAllLessonTypes();
          fetchAllLessonGoals();
+         fetchAllMonitors();
+         fetchAllOffices();
          this.inputRef = React.createRef();
          
     };
 
     render() {
-        const {lesson, lessonsTypes, lessonsGoals} = this.props;
+        const {lessonsTypes, lessonsGoals} = this.props;
         const {lessonAttributes, errors} = this.state;
 
       return (
@@ -350,8 +417,9 @@ class DetailLessonDash extends Component {
                 </button>
                 <h2>{lessonAttributes.name}</h2>
             </div>
+            <h1>EDITA UNA CLASE</h1>
 
-            <div className={style.Teacher}> Profesor: Brad Pitt</div>
+            <div className={style.Teacher}>{`Profesor: Brad Pitt`}</div>
             <div className={style.EditContainer}>
                 <div className={style.DetailContainer}>
                     <div className={style.leftContainer}>
@@ -377,6 +445,25 @@ class DetailLessonDash extends Component {
                             <input placeholder='Intensidad' value={lessonAttributes.effort} type='text' id='effort' name='effort' onChange={this.handleChange}/>
                         </div>
                         {errors.effort && <p className={style.Error}>{errors.effort}</p>}
+
+                        <div className={style.SelectorContainer}>
+                            <div>
+                                <label className={style.Profesor}>Profesor*</label>
+                                <select onChange={this.handleTrainerOptions} name='monitor'>
+                                    <option value='Seleccione'>Seleccione</option>
+                                    {this.generateTrainersOptions().map((option) => option)}
+                                </select>    
+                            </div>
+                            {errors.monitor && <p className={style.Error}>{errors.monitor}</p>}
+                            <div>
+                                <label className={style.Profesor}>Sede*</label>
+                                <select onChange={this.handleBranchOfficeOptions} name='branchoffice'>
+                                    <option value='Seleccione'>Seleccione</option>
+                                    {this.generateBranchOfficeOptions().map((option) => option)}
+                                </select>
+                            </div>
+                            {errors.branchoffice && <p className={style.Error}>{errors.branchoffice}</p>}
+                        </div>
 
                         <div className={style.Description}>
                             <label>Imagen</label>
@@ -537,6 +624,8 @@ const mapStateToProps = (state) => {
         lesson: state.lessons.lesson,
         lessonsTypes: state.types.types,
         lessonsGoals: state.goals.goals,
+        monitors: state.users.monitors,
+        offices: state.offices.offices,
     }
 }
 
@@ -545,6 +634,8 @@ const mapDispatchToProps = (dispatch) => {
         fetchLessonsByID: (id) => dispatch(fetchLessonsByID(id)),
         fetchAllLessonTypes: () => dispatch(fetchAllLessonTypes()),
         fetchAllLessonGoals: () => dispatch(fetchAllLessonGoals()),
+        fetchAllMonitors: () => dispatch(fetchAllMonitors()),
+        fetchAllOffices: () => dispatch(fetchAllOffices()),
     }
 }
 

@@ -30,6 +30,10 @@ const monitorsCleaner = (data) => {
     return data.monitor;
 };
 
-export { cleaner, individualLessonCleaner, typesCleaner, userCleaner, monitorsCleaner, goalsCleaner}
+const branchOfficeCleaner = (data) => {
+    return data.branchoffice;
+};
+
+export { cleaner, individualLessonCleaner, typesCleaner, userCleaner, monitorsCleaner, goalsCleaner, branchOfficeCleaner}
 
 

@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./LessonsDash.module.css"
-import { selectAllLessons, fetchAllLessons, clearLesson } from "../../redux/features/lessonsSlice";
+import { selectAllLessonsDashboard, fetchAllLessonsDashboard, clearLesson } from "../../redux/features/lessonsSlice";
 import { selectSelectedTypes, setSelectedTypes } from "../../redux/features/filtersSlice";
 import { useSelector , useDispatch} from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,9 +16,9 @@ import plusIcon from '../../assets/icons/plus.png'
 
 const LessonsDash = ()=> {
 
-    const allLessons = useSelector(selectAllLessons);
+    const allLessons = useSelector(selectAllLessonsDashboard);
 
-    console.log(allLessons)
+    
 
     const selectedTypes = useSelector(selectSelectedTypes);
 
@@ -31,8 +31,8 @@ const LessonsDash = ()=> {
     const [serverResponse, setServerResponse] = useState(true);
 
     useEffect(()=>{
-        dispatch(fetchAllLessons())
-    },[serverResponse])
+        dispatch(fetchAllLessonsDashboard())
+    },[dispatch])
 
     // const removeLessonHandler = (event) => {
     //   const id = event.target.name;    
@@ -110,9 +110,9 @@ return(
 
   <div className={style.contenedor}>
 
-    <a href="">
+    <Link to= 'crear'>
     <img src={plusIcon} alt="crear" className={style.PlusIcon} />
-    </a>
+    </Link>
 
     <div className={style.contNombre}><h1>Clases</h1></div>
 
@@ -140,7 +140,7 @@ return(
     <div className={style.contenedorTodo}>
       {allLessons ? (
         allLessons
-        .filter(el => selectedTypes.length === 0 || el.exercisesTypes.some(type => selectedTypes.includes(type)))
+        .filter(el => selectedTypes.length === 0 || el.types.some(type => selectedTypes.includes(type)))
         .map(el => (
           <div key={el.id}>           
 
@@ -152,9 +152,9 @@ return(
 
               <div className={style.contenido}>
                 <h2>Nombre: <span>{el.name}</span></h2>
-                <h2>status: <span>{el.status}</span> </h2>
+                <h2>status: <span>{(el.isAvailable)? 'Activa' : 'Inactiva'}</span> </h2>
                 <h2>Descripcion: <span>{el.shortDescription}</span> </h2>
-                <h2>Tipo de ejercicio: <span>{el.exercisesTypes?.join(", ")}</span> </h2>
+                <h2>Tipo de ejercicio: <span>{el.types?.join(", ")}</span> </h2>
               </div>
 
               <div className={style.divCont}>

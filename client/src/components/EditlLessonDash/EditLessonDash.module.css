@@ -6,6 +6,11 @@
     margin: .5% 0;
 }
 
+.container h1 {
+    color: #666;
+    font-size: 36px;
+  }
+
 .Navigation{
     display: flex;
     align-items: center;
@@ -37,10 +42,11 @@
 
 .EditContainer{
     padding-top: 1rem;
-    height: 77.9vh;
+    height: 73vh;
     box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
     border-radius: .4rem;
     overflow-y: scroll;
+    
 }
 
 .DetailContainer{
@@ -323,4 +329,17 @@
     line-height: 3.5rem;
     text-align: center;
     
+}
+
+.SelectorContainer{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem; 
+    flex-direction: row;
+}
+
+.Profesor{
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
 }

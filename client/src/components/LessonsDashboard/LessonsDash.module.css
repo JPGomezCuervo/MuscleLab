@@ -177,6 +177,7 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  height: 7rem;
+  height: 10rem;
   cursor: pointer;
+  margin-right: 2rem;
 }

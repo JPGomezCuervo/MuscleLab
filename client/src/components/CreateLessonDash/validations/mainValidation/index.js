@@ -6,6 +6,8 @@ import imageValidation from './imageValidation';
 import scheduleHourStartValidation from './scheduleHourStartValidation';
 import scheduleHourFinishValidation from './scheduleHourFinishValidation'
 import isAvailableValidation from './isAvailableValidation';
+import monitorValidation from './monitorValidation';
+import branchOfficeValidation from './branchOfficeValidation';
 
 const validations = (value, name, errors, lessonAttributes) => {
     switch (name) {
@@ -32,6 +34,12 @@ const validations = (value, name, errors, lessonAttributes) => {
         
         case 'isAvailable':
             return isAvailableValidation(value, errors, name);
+
+        case 'monitor':
+            return monitorValidation(value, errors, name);
+
+        case 'branchoffice':
+            return branchOfficeValidation(value, errors, name);
 
         default:
             return errors;          

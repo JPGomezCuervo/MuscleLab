@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {URL, pending, rejected, fulfilled } from "../../utils/constants";
 import axios from "axios";
+import { branchOfficeCleaner } from "../../utils/cleanerUtils";
 
 const fetchAllOffices = createAsyncThunk(
     'offices/fetchAllOffices', async () => {
@@ -42,9 +43,10 @@ const officesSlice = createSlice({
         builder
 
             .addCase(fetchAllOffices.fulfilled, (state, action) => {
+                const cleanedData = branchOfficeCleaner(action.payload);
                 state.error = '';
                 state.status = fulfilled;
-                state.offices = action.payload;
+                state.offices = cleanedData;
             })
             .addCase(fetchAllOffices.pending, (state) => {
                 state.status = pending;
