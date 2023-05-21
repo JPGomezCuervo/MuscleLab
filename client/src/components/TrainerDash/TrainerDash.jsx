@@ -2,6 +2,7 @@ import style from './TrainerDash.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllMonitors, selectAllMonitors } from '../../redux/features/usersSlice';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import plusIcon from '../../assets/icons/plus.png'
 import editIcon from '../../assets/icons/edit.png'
 
@@ -25,61 +26,38 @@ const TrainerDash = () => {
             </div>
 
             <div className={style.BGContainer}>
-
                 <div className={style.Container}>
-                    <div className={style.NameContainer}>
-                        {monitors.map((monitor) => (
-                            <h2 className={style.InfoName}>{monitor.fullName}</h2>
-                        ))}
+                    {monitors.map((monitor) =>(
+                        <div className={style.SectionContainer}>
+                            <div className={style.InfoNameContainer}>
+                                <h2 className={style.InfoName}>
+                                    {monitor.fullName}
+                                </h2>
+                            </div>
 
-                    </div>
+                            <div className={style.SubContainer}>
+                                <div className={style.ClaseContainer}>
+                                    <h2 className={`${style.Info} ${style.Status}`}>
+                                        {monitor.lessonDetails.map((lesson) => (
+                                            <p>{lesson.name}</p>
+                                        ))}    
+                                    </h2>
+                                </div>
+                                <Link to={`editar/${monitor.id}`}>
+                                    <img src={editIcon} alt="" />
+                                </Link>
 
-                    <div className={style.StatusContainer}>
-                        <div className={style.ContainerS}>
-                            <h2 className={`${style.Info} ${style.Status}`}>
-                                Taijutsu, ninjutsu, Boxeo
-                            </h2>
-                            <img src={editIcon} alt="" />
+                            </div>
                         </div>
+                    ))}
 
-                        <div className={style.ContainerS}>
-                            <h2 className={`${style.Info} ${style.Status}`}>
-                                Taijutsu, ninjutsu, Boxeo
-                            </h2>
-                            <img src={editIcon} alt="" />
-                        </div>
-                        <div className={style.ContainerS}>
-                            <h2 className={`${style.Info} ${style.Status}`}>
-                                Taijutsu, ninjutsu, Boxeo
-                            </h2>
-                            <img src={editIcon} alt="" />
-                        </div>
-                        <div className={style.ContainerS}>
-                            <h2 className={`${style.Info} ${style.Status}`}>
-                                Taijutsu, ninjutsu, Boxeo
-                            </h2>
-                            <img src={editIcon} alt="" />
-                        </div>
-                        <div className={style.ContainerS}>
-                            <h2 className={`${style.Info} ${style.Status}`}>
-                                Boxeo
-                            </h2>
-                            <img src={editIcon} alt="" />
-                        </div>
-                        <div className={style.ContainerS}>
-                            <h2 className={`${style.Info} ${style.Status}`}>
-                                Taijutsu, ninjutsu, Boxeo
-                            </h2>
-                            <img src={editIcon} alt="" />
-                        </div>
-                    </div>
                 </div>
 
-                <button>
-                    <img className={style.PlusIcon} src={plusIcon} alt="" /> 
-                </button>
             </div>
 
+                <Link to='crear/'>
+                    <img className={style.PlusIcon} src={plusIcon} alt="" /> 
+                </Link>
         </div>
     )
 }

@@ -36,6 +36,7 @@ class DetailLessonDash extends Component {
                 isAvailable:null,
                 monitor: '',
                 branchoffice: [],
+                monitors: '',
              },
             errors: {
                 name: '',
@@ -118,7 +119,7 @@ class DetailLessonDash extends Component {
 
             return this.props.monitors.map((monitor) => {
                 return (
-                    <option key={monitor.id} value={monitor.fullName}>{monitor.fullName}</option>
+                    <option key={monitor.id} value={monitor.fullName} selected ={(monitor.fullName === this.state.lessonAttributes.monitors)}>{monitor.fullName}</option>
                 )
             })
         };
@@ -126,7 +127,7 @@ class DetailLessonDash extends Component {
         generateBranchOfficeOptions = () => {
             return this.props.offices.map((office) => {
                 return (
-                    <option key={office.id} value={office.name}>{office.name}</option>
+                    <option key={office.id} value={office.name} selected={(office === this.state.lessonAttributes.office)}>{office.name}</option>
                 )
             })
         };
@@ -278,24 +279,8 @@ class DetailLessonDash extends Component {
         handleConfirmarClick = (event) => {
             if (this.state.message.includes('modificar')){
                 event.preventDefault();
-                console.log(JSON.stringify(
-                    {
-                        name: this.state.lessonAttributes.name,
-                        description: this.state.lessonAttributes.description,
-                        scheduleHourStart: this.state.lessonAttributes.scheduleHourStart,
-                        scheduleHourFinish: this.state.lessonAttributes.scheduleHourFinish,
-                        scheduleDays: this.state.lessonAttributes.scheduleDays,
-                        isAvailable: this.state.lessonAttributes.isAvailable,
-                    }
-                ))
-                axios.put(`${URL}/lessons/updateDetail/${this.props.id}`, {
-                    name: this.state.lessonAttributes.name,
-                    description: this.state.lessonAttributes.description,
-                    scheduleHourStart: this.state.lessonAttributes.scheduleHourStart,
-                    scheduleHourFinish: this.state.lessonAttributes.scheduleHourFinish,
-                    scheduleDays: this.state.lessonAttributes.scheduleDays,
-                    isAvailable: this.state.lessonAttributes.isAvailable,
-                })
+                console.log(JSON.stringify(this.state.lessonAttributes))
+                axios.put(`${URL}/lessons/update/${this.props.id}`, this.state.lessonAttributes)
                 .then((res) => {
                     this.setState({
                         serverResponse: res.data,
@@ -308,13 +293,6 @@ class DetailLessonDash extends Component {
                         message: ''});
                         console.log(err.data);
                 });
-
-                // axios.put(`${URL}/lessons/update/${this.props.id}`, {
-                //     effort: this.state.lessonAttributes.effort,
-                //     shortDescription: this.state.lessonAttributes.shortDescription,
-                //     image: this.state.lessonAttributes.image,
-                //     goals: this.state.lessonAttributes.goals,
-                // });
 
             } else {
                 event.preventDefault();
@@ -389,6 +367,7 @@ class DetailLessonDash extends Component {
                         types: res.payload.types,
                         goals: res.payload.goals,
                         isAvailable: res.payload.isAvailable,
+                        monitors: res.payload.monitors,
 
                  }
              },
@@ -419,7 +398,7 @@ class DetailLessonDash extends Component {
             </div>
             <h1>EDITA UNA CLASE</h1>
 
-            <div className={style.Teacher}>{`Profesor: Brad Pitt`}</div>
+            <div className={style.Teacher}>{`Profesor: ${lessonAttributes.monitors}`}</div>
             <div className={style.EditContainer}>
                 <div className={style.DetailContainer}>
                     <div className={style.leftContainer}>

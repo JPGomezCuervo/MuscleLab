@@ -142,6 +142,7 @@ return(
         allLessons
         .filter(el => selectedTypes.length === 0 || el.types.some(type => selectedTypes.includes(type)))
         .map(el => (
+          <Link to={`editar/${el.id}`} key={el.id}>
           <div key={el.id}>           
 
             <div className={style.detalle}>
@@ -170,6 +171,7 @@ return(
             </div>
 
           </div>
+          </Link>
         ))
         ) : (
             <p>Loading</p>

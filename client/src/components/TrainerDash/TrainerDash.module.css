@@ -18,17 +18,19 @@
 
 .BGContainer{
     box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
-    overflow-y: scroll;
     padding-top: 1rem;
-    width: 80%;
+    width: 70%;
     margin: 0 auto;
+    height: fit-content;
 }
 
 .Container{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    width: 100%;
     margin: 0 auto;
+    overflow-y: scroll;
+    height: 60vh;
+    overflow-x: hidden;
+    padding-right: 5rem;
+    padding-left: 1rem;
     
 }
 
@@ -39,59 +41,71 @@
     color: #013565;
     margin: 0 ;
 
-}
-.Title{
+}.Title{
     background-color: #ffc300;
     margin-top: 0;
     margin-bottom: 0;
 }
 
 .InfoName{
+    display: block;
     font-family: 'Montserrat-Regular';
     font-weight: 300;
-    text-align: start;
     color: #013565;
-    margin-bottom: 3.2rem;
-    margin-top: 1.2rem;
-    padding-left: 10%;
+    margin: 0;
+    margin-left: 46%;
+
+    
 }
 
-.BGContainer button{
-    display: block;
-    margin-left: auto;
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
-}
 .PlusIcon{
-    height: 6rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 8rem;
 }
 
 
 .Status{
-    text-align: end;
+    text-align: start;
     width: 100%;
 }
 
 .TitleContainer{
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    width: 80%;
+    width: 70%;
     margin: 0 auto;
 }
 
-.ContainerS{
+.SectionContainer{
+    width: 100%;
     display: flex;
     align-items: center;
-    margin-bottom: 3.2rem;
-    margin-top: 1.2rem;
-    padding-right: 10%;
+    border-bottom: solid .3rem #f3f3f3;
 }
 
-.ContainerS img{
+.SectionContainer img{
     display: inline-block;
-    margin-left: 20%;
     height: 1.8rem;
     width: 1.8rem;
     cursor: pointer;
+    margin-right: 2%;
+}
+
+.SubContainer{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    
+}
+
+.ClaseContainer{
+    margin-left: 10%;
+}
+
+.InfoNameContainer{
+    width: 50%;
 }

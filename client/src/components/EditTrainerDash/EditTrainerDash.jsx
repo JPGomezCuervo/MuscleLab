@@ -75,19 +75,28 @@ const EditTrainerDash = () => {
         event.preventDefault();
         if(message.includes("modificar")) {
             console.log(JSON.stringify(input))
-        } else{
-            console.log(`entre al delete y est es el ${id}`)
+            axios.put(`${URL}/users/update/${id}`, input)
+            .then((res) => {
+                console.log(res);
+                setServerResponse(res.data)
+            })
+            .catch((error) => {
+                console.log(error);
+                setServerResponse(error.data)
+            }
+            )
+        } else {
             axios.delete(`${URL}/users/delete/${id}`)
             .then((res) => {
+                console.log(res);
                 setServerResponse(res.data)
-                setMessage("")
-            }).catch((error) =>{
-                setServerResponse(error.response.data)
-                setMessage("")
             })
+            .catch((error) => {
+                console.log(error);
+                setServerResponse(error.data)
+            }
+            )
         }
-
-
     }
 
     useEffect(() => {
@@ -100,13 +109,11 @@ const EditTrainerDash = () => {
             email: user.email,
             phone: user.phone,
             password: user.password
-
         }
         );
     }, [user]);
 
     useEffect(() =>{
-        console.log("useEffect");
         setAllowSubmit(Object.values(errors).every((item) => item === ""))
     }, [errors])
     
@@ -183,7 +190,7 @@ const EditTrainerDash = () => {
                     </button>
 
                     <button className={style.DeleteButton} onClick = {handleConfirmRemove}>
-                        Borrar
+                        Eliminar
                     </button>
                 </div>
             </div>
