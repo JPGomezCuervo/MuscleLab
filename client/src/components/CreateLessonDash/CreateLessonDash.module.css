@@ -1,0 +1,354 @@
+.MainContainer{
+    display: inline-block;
+    position: absolute;
+    width: 76vw;
+    height: 99vh;
+    margin: .5% 0;
+}
+.MainContainer h1{
+    font-family: 'Montserrat-Bold';
+    font-size: 2.5rem;
+    color: #013565;
+    margin-bottom: 1rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+
+.Navigation{
+    display: flex;
+    align-items: center;
+    height: 3.5rem;
+    color: #013565;
+    font-family: 'Montserrat-Bold';
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+}
+
+.Navigation button{
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+}
+
+.Navigation h2{
+    font-size: 3.5rem;
+}
+
+.Navigation a{
+    height: 3.5rem;
+}
+
+.ArrowIcon{
+    height: 3.5rem;
+    transform: rotate(90deg);
+}
+
+.EditContainer{
+    padding-top: 1rem;
+    height: 69vh;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+    border-radius: .4rem;
+    overflow-y: scroll;
+}
+
+.DetailContainer{
+    display: flex;
+    color: black;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.DetailContainer h2{
+    font-family: 'Montserrat-SemiBold';
+    font-size: 1.1rem;
+}
+
+.DetailContainer p{
+    font-family: 'Montserrat-Regular';
+    font-weight: 500;
+    text-align: center;
+    font-size: .9rem;
+}
+
+.Teacher{
+    background-color: #ffc300;
+    color: #013565;
+    font-family: 'Montserrat-Medium';
+    font-size: 1.5rem;
+    padding: .5rem 10%;
+    border-radius: .4rem 1rem 0 0;
+}
+
+.leftContainer{
+    padding-left: 1.5rem;
+}
+
+
+.ImageContainer{
+    margin: 0 auto;
+    width: 20rem;
+    height: 15rem;
+}
+.leftContainer img{
+    width: 100%;
+    height: 100%;
+}
+
+.leftContainer select{
+    width: 10rem;
+    margin: 0 auto;
+    margin-bottom: 6%;
+    margin-top: .3rem;
+    display: block;
+}
+.Profesor{
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.leftContainer label{
+    font-family: 'Montserrat-SemiBold';
+    font-size: 1.1rem;
+    text-align: start;
+}
+
+.Description{
+    margin-bottom: 6%;
+    width: 30vw;
+}
+.Description input{
+    background-color: #f3f3f3;
+    padding: 0 1rem;
+    width: 100%;
+    min-height: 3.5rem;
+    margin-top: .4rem;
+}
+
+.RightContainer{
+    padding-right: 3rem;
+    height: fit-content;
+    margin-left: 6%;
+
+}
+
+.RightContainer h2{
+    text-align: center;
+}
+
+.RightContainer select{
+    margin: 0;
+}
+
+.RightContainer input{
+    height: 1rem;
+}
+
+.RightSubContainer{
+    border-bottom: solid .3rem #f3f3f3;
+    padding-bottom: 2rem;
+}
+
+.LastSubContainer{
+    border: 0;
+}
+
+.LastSubContainer select{
+    width: 10rem;
+    margin: 0 auto;
+    display: block;
+}
+
+.HourContainer{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.DaysContainer{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-top: 2rem
+}
+
+.TiposDeEjercicio{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    margin-top: 2rem
+}
+
+
+.ButtonContainer{
+    margin: 0 auto;
+    margin-top: 30rem;
+    width: 27.5rem;
+    margin-bottom: 2rem;
+}
+
+.DeleteButton{
+    margin-left: 12%;
+    width: 12rem;
+    height: 3rem;
+    color: #ffffff;
+    background-color: #E11D1D;
+    border: 0;
+    border-radius: 0.4rem;
+    font-family: "Montserrat-Bold";
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.DeleteButton:hover{
+    background-color: rgb(182, 22, 22);
+}
+
+.DeleteButton:active{
+    background-color: #E11D1D;
+}
+
+.SaveButton{
+    height: 3rem;
+    color: #ffffff;
+    width: 12rem;
+    background-color: #ffc300;
+    border: 0;
+    border-radius: 0.4rem;
+    font-family: "Montserrat-Bold";
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.SaveButton:hover{
+    background-color: #FFAF00;
+}
+.SaveButton:active{
+    background-color: #ffc300;
+}
+
+.Disable{
+    background-color: #f3f3f3;
+    color: #013565;;
+    cursor: not-allowed;
+}
+
+.Disable:hover, .Disable:active{
+    background-color: #f3f3f3;
+    
+}
+
+.AdvertiseContainer{
+    background-color: #ffffff;
+    opacity: 0.5;
+    position: fixed;
+    z-index: 9998;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+}
+.Advertise{
+    flex-direction: column;
+    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9998;
+    background-color: white;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+    border-radius: .4rem;
+    min-height: 16rem;
+    min-width: 30rem;
+}
+
+.Advertise h1{
+    font-family: 'Montserrat-Medium';
+    font-weight: 500;
+    color: #013565;
+    text-align: center;
+    width: 27rem;
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+.CheckIcon{
+    display: block;
+    margin: 0 auto;
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 3rem;
+}
+.AdvertiseButton1{
+    background-color: #ffc300;
+    color: white;
+    font-family: 'Montserrat-Regular';
+    font-weight: 900;
+    border: 0;
+    border-radius: .4rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: .3s;
+    float: left;
+    margin-left: 15%;
+    width: 9rem;
+    height: 4rem;
+    line-height: 4rem;
+}
+
+.AdvertiseButton2{
+    background-color: #ffc300;
+    color: white;
+    font-family: 'Montserrat-Regular';
+    font-weight: 900;
+    border: 0;
+    border-radius: .4rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: .3s;
+    float: right;
+    margin-right: 15%;
+    width: 9rem;
+    height: 4rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    margin-bottom: 2rem;
+    
+}
+
+.AdvertiseButton1:hover, .AdvertiseButton2:hover{
+    background-color: #FFAF00;
+}
+
+.AdvertiseButton1:active, .AdvertiseButton2:active{
+    background-color: #ffc300;
+}
+
+.AdvertiseButton3{
+    display: block;
+    background-color: #ffc300;
+    color: white;
+    font-family: 'Montserrat-Regular';
+    font-weight: 900;
+    border-radius: .4rem;
+    text-decoration: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: .3s;
+    width: 15rem;
+    height: 3.5rem;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    line-height: 3.5rem;
+    text-align: center;
+}
+
+.SelectorContainer{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem; 
+    flex-direction: row;
+}

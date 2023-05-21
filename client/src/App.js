@@ -1,4 +1,3 @@
-
 import './App.css';
 import { Route, Routes, Outlet } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
@@ -16,15 +15,19 @@ import CreateLesson from "./components/CreateLesson/CreateLesson";
 import Sedes from './components/Sedes/Sedes';
 import Users from './components/Users/Users';
 import  CreateUser  from './components/CreateUser/CreateUser';
-
-
 import { useSelector } from 'react-redux';
 import { selectDashAuth } from './redux/features/authSlice';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import NavBardDash from './components/NavBarDash/NavBarDash';
-import LessonsDash from './components/LesssonsDash/LessonsDash';
+import LessonsDash from './components/LessonsDashboard/LessonsDash';
+import AdminBar from "./components/AdminBar/AdminBar";
+import Wrapper from "./components/Wrapper/Wrapper";
+import TrainerDash from "./components/TrainerDash/TrainerDash";
+import EditTrainerDash from './components/EditTrainerDash/EditTrainerDash';
+import CreateTrainerDash from './components/CreateTrainerDash/CreateTrainerDash';
 import UserDetails from './components/UserDetails/UserDetails';
+
 
 
 function App() {
@@ -37,6 +40,7 @@ function App() {
   return (
    <>
     {(location.includes('dashboard') ? <NavBardDash/>: <NavBar/>)}
+    {(location.includes('dashboard') ? <AdminBar/>: null)}
     <Routes>
       <Route path='/login' element={<Login/>}/>
       <Route path="/" element={<Home/>}/>
@@ -45,8 +49,17 @@ function App() {
       <Route path= '/contactanos' element={<ContactUs />}/>
       <Route path= '/clases/detalles/:id' element={<DetailLesson/>}/>
       <Route path= '/nosotros' element={<Nosotros />}/>
-      <Route path="/create" element={<CreateLesson />} />
+      <Route path="/create" element={<CreateLesson />}/>
       <Route path = '/sedes' element= {<Sedes/>}/>
+      {/* <Route path='/dashboard' element={<LessonsDash/>}>
+        <Route path= '/dashboard/lessons/detail/:id' element={<LessonsDash/>}/> 
+      <Route/>  */}
+      <Route path = '/dashboard/clases/editar/:id' element={<Wrapper/>}/>
+      <Route path = '/dashboard/clases/crear' element={<Wrapper/>}/> 
+      <Route path='/dashboard/profesores' element={<TrainerDash/>} />
+      <Route path= 'dashboard/clases' element={<LessonsDash/>} />
+      <Route path= 'dashboard/profesores/crear' element={<CreateTrainerDash/>} />
+      <Route path = 'dashboard/profesores/editar/:id' element={<EditTrainerDash/>} />
       <Route path = '/users' element= {<Users/>}/>
       <Route path = '/users/createuser' element= {<CreateUser/>}/>  
       <Route path= '/user-face' element={<UserDetails/>}/>
@@ -54,11 +67,12 @@ function App() {
       <Route path= '/dashboard/lessons' element={<LessonsDash/>}/>
       <Route/> 
       </Route> 
+
       
        
 
     </Routes>
-    <Footer/>
+    {(location.includes('dashboard') ? null: <Footer/>)}
   </> 
 
   );

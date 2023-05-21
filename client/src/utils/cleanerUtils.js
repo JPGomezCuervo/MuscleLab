@@ -14,4 +14,26 @@ const individualLessonCleaner = (data) => {
     }
     return cleanedData;
 };
-export { cleaner, individualLessonCleaner}
+
+const typesCleaner = (data) => {
+    return data.map((type) => type.name);
+};
+const goalsCleaner = (data) => {
+    return data.map((goal) => goal.name);
+};
+
+const userCleaner = (data) => {
+    return data.user;
+};
+
+const monitorsCleaner = (data) => {
+    return data.monitor;
+};
+
+const branchOfficeCleaner = (data) => {
+    return data.branchoffice;
+};
+
+export { cleaner, individualLessonCleaner, typesCleaner, userCleaner, monitorsCleaner, goalsCleaner, branchOfficeCleaner}
+
+

@@ -1,14 +1,15 @@
-import React from "react";
+import React from 'react';
+import style from './NavBar.module.css';
+import iconMan from '../../assets/icons/man-silhouette.png';
+import iconWeight from '../../assets/icons/dumbbell.png';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setPlansCLick } from '../../redux/features/utilsSlice';
+import SignUp from '../SignUp/SignUp';
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from 'axios'
-import style from "./NavBar.module.css";
-import iconMan from "./../../assets/icons/man-silhouette.png";
-import iconWeight from "../../assets/icons/dumbbell.png";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setPlansCLick } from "../../redux/features/utilsSlice";
-//import SignUp from "../SignUp/SignUp";
 import adminIcon from '../../assets/icons/admin.png'
+
 
 const NavBar = () => {
   const dispatch = useDispatch();

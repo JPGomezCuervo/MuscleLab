@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { URL, pending, rejected, fulfilled } from "../../utils/constants";
+import { PORT, URL, pending, rejected, fulfilled } from "../../utils/constants";
+import { typesCleaner } from "../../utils/cleanerUtils";
 import axios from 'axios';
 
 const fetchAllLessonTypes = createAsyncThunk(
@@ -27,13 +28,14 @@ const typesSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchAllLessonTypes.fulfilled, (state, action) => {
+            .addCase(fetchAllLessonTypes.fulfilled, (state, {payload}) => {
+                const cleanedData = typesCleaner(payload);
                 state.error = '';
                 state.status = fulfilled;
-                state.types = action.payload;
+                state.types = cleanedData;
             }
             )
-            .addCase(fetchAllLessonTypes.pending, (state, action) => {
+            .addCase(fetchAllLessonTypes.pending, (state, {payload}) => {
                 state.status = pending;
                 state.error = '';
             })
