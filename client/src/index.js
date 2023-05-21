@@ -1,17 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import store from './redux/store';
-import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import { Auth0Provider } from '@auth0/auth0-react'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import store from "./redux/store";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { Auth0Provider } from "@auth0/auth0-react";
+const domain = "dev-6vdarqnmyh1ejaoz.us.auth0.com";
+const clientId = "WsPbppwSiybx7h6ZLLXG0lLaBZydNP4Y";
 
-const domain = 'dev-6vdarqnmyh1ejaoz.us.auth0.com'
-const clientId = 'WsPbppwSiybx7h6ZLLXG0lLaBZydNP4Y'
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Auth0Provider
@@ -21,11 +20,11 @@ root.render(
       audience="musclelabgyms"
       scope="openid profile email"
     >
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
     </Auth0Provider>
   </React.StrictMode>
 );

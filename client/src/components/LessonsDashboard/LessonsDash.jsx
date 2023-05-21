@@ -11,7 +11,7 @@ import plusIcon from '../../assets/icons/plus.png'
 
 
 
-
+console.log("estas aca?");
 
 
 const LessonsDash = ()=> {
