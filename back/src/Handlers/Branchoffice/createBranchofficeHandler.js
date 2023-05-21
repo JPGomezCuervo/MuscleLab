@@ -12,7 +12,7 @@ const createNewBranchoffice = async (req, res) => {
     );
     res.status(201).json({
       message: "sucursal creada correctamente",
-      branchoffice: newBranchoffice,
+      branchOffice: newBranchoffice,
     });
   } catch (error) {
     res.status(400).json(error.message);
