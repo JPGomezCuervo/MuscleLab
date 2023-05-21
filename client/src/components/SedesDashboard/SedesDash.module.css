@@ -124,3 +124,24 @@
 .hr{
   color: #ffc300;
 }
+
+
+.button{
+  margin: auto 0;
+  height: 3rem;
+  color: #ffffff;
+  background-color:#013565;
+  border: 0;
+  border-radius: .4rem;
+  width: 15rem;
+  font-family:'Montserrat-Bold';
+  font-size: 2rem;
+  cursor: pointer;
+  transition: .2s;
+  margin-left: 2rem;
+  margin-top: 3rem;
+}
+
+.button:hover{
+background-color:#002141;
+}

@@ -99,7 +99,7 @@ const SedesDash = () => {
       <hr className={style.hr} />
 
           <Link to="/dashboard/sedes/crear">
-      <button>Crear Sede</button>
+      <button className={style.button}>Crear Sede</button>
           </Link>
 
       <div className={style.contenedor}>
