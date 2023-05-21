@@ -191,7 +191,6 @@ class EditLessonDash extends Component {
     handleHoursBox = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        console.log(value);
 
         if (name === 'scheduleHourStart') {
             this.setState({
@@ -236,7 +235,6 @@ class EditLessonDash extends Component {
         const isChecked = event.target.checked;
 
         if (isChecked) {
-            console.log(`entre a checked y este es el valor de value ${value}`);
             this.setState({
                 lessonAttributes: {
                     ...this.state.lessonAttributes,
@@ -262,7 +260,7 @@ class EditLessonDash extends Component {
                     errors: arrayValidations(this.state.lessonAttributes, this.state.errors, name)
                 }, () => {
                     this.setState({
-                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')}) && Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true);
+                        allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')});
                     });
 
             });
@@ -276,6 +274,7 @@ class EditLessonDash extends Component {
         });
     };
     handleConfirmarClick = (event) => {
+        JSON.stringify(this.state.lessonAttributes)
         event.preventDefault();
         axios.post(`${URL}/lessons/create`, this.state.lessonAttributes)
         .then((res) => {
@@ -285,7 +284,6 @@ class EditLessonDash extends Component {
                 message: '',
             });
         }).catch((err) => {
-            console.log(err);
             this.setState({
                 serverResponse: err.data,
                 message: '',
@@ -294,7 +292,6 @@ class EditLessonDash extends Component {
     };
 
     handleIsAvailable = (event) => {
-        console.log(event.target.value);
         const name = event.target.name;
         const value = event.target.value;
 
@@ -303,11 +300,17 @@ class EditLessonDash extends Component {
                 ...this.state.lessonAttributes,
                 [name]: value,
             },
+        }, () => {
+            this.setState({
+                errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
+            }, () => {
+                this.setState({
+                    allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
+                })
+            })
+
         });
 
-        this.setState({
-            errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
-        })
 
     };
 
