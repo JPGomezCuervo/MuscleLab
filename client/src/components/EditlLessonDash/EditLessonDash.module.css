@@ -5,6 +5,14 @@
     height: 99vh;
     margin: .5% 0;
 }
+.MainContainer h1{
+    font-family: 'Montserrat-Bold';
+    font-size: 2.5rem;
+    color: #013565;
+    margin-bottom: 1rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
 
 .Navigation{
     display: flex;
@@ -37,10 +45,11 @@
 
 .EditContainer{
     padding-top: 1rem;
-    height: 77.9vh;
+    height: 73vh;
     box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
     border-radius: .4rem;
     overflow-y: scroll;
+    
 }
 
 .DetailContainer{
@@ -106,6 +115,7 @@
 .RightContainer{
     padding-right: 3rem;
     height: fit-content;
+    margin-left: 6%;
 
 }
 
@@ -130,6 +140,12 @@
     border: 0;
 }
 
+.LastSubContainer select{
+    width: 10rem;
+    margin: 0 auto;
+    display: block;
+}
+
 .HourContainer{
     display: flex;
     justify-content: space-around;
@@ -144,14 +160,14 @@
 
 .TiposDeEjercicio{
     display: grid;
-    grid-template-columns: repeat(7,1fr);
+    grid-template-columns: repeat(5,1fr);
     margin-top: 2rem
 }
 
 
 .ButtonContainer{
     margin: 0 auto;
-    margin-top: 15rem;
+    margin-top: 30rem;
     width: 27.5rem;
     margin-bottom: 2rem;
 }
@@ -316,4 +332,17 @@
     line-height: 3.5rem;
     text-align: center;
     
+}
+
+.SelectorContainer{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem; 
+    flex-direction: row;
+}
+
+.Profesor{
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
 }

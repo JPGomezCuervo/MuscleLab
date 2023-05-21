@@ -40,7 +40,6 @@ const getDetailLesson = async (name) => {
     }
   });
   const offices = officeRaw.map(o=>{return{name:o.dataValues.name, lessons:o.dataValues.lessonDetails}});
-  console.log(offices[0].lessons);
   const monitors = monitorRaw.map(m =>{return{name:m.dataValues.fullName, lesson:m.dataValues.lessonDetails}});
   const types = lesson[0].dataValues.exercisesTypes.map((e) => {
     return e.dataValues.name;

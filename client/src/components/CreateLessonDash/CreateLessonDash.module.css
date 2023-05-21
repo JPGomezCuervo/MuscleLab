@@ -5,9 +5,17 @@
     height: 99vh;
     margin: .5% 0;
 }
+.MainContainer h1{
+    font-family: 'Montserrat-Bold';
+    font-size: 2.5rem;
+    color: #013565;
+    margin-bottom: 1rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
 
 .Navigation{
-    z-index: 9999;
     display: flex;
     align-items: center;
     height: 3.5rem;
@@ -27,6 +35,10 @@
     font-size: 3.5rem;
 }
 
+.Navigation a{
+    height: 3.5rem;
+}
+
 .ArrowIcon{
     height: 3.5rem;
     transform: rotate(90deg);
@@ -34,7 +46,7 @@
 
 .EditContainer{
     padding-top: 1rem;
-    height: 77.9vh;
+    height: 69vh;
     box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
     border-radius: .4rem;
     overflow-y: scroll;
@@ -72,6 +84,7 @@
     padding-left: 1.5rem;
 }
 
+
 .ImageContainer{
     margin: 0 auto;
     width: 20rem;
@@ -80,6 +93,19 @@
 .leftContainer img{
     width: 100%;
     height: 100%;
+}
+
+.leftContainer select{
+    width: 10rem;
+    margin: 0 auto;
+    margin-bottom: 6%;
+    margin-top: .3rem;
+    display: block;
+}
+.Profesor{
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
 }
 
 .leftContainer label{
@@ -103,6 +129,7 @@
 .RightContainer{
     padding-right: 3rem;
     height: fit-content;
+    margin-left: 6%;
 
 }
 
@@ -127,6 +154,12 @@
     border: 0;
 }
 
+.LastSubContainer select{
+    width: 10rem;
+    margin: 0 auto;
+    display: block;
+}
+
 .HourContainer{
     display: flex;
     justify-content: space-around;
@@ -141,14 +174,14 @@
 
 .TiposDeEjercicio{
     display: grid;
-    grid-template-columns: repeat(7,1fr);
+    grid-template-columns: repeat(5,1fr);
     margin-top: 2rem
 }
 
 
 .ButtonContainer{
     margin: 0 auto;
-    margin-top: 15rem;
+    margin-top: 30rem;
     width: 27.5rem;
     margin-bottom: 2rem;
 }
@@ -188,17 +221,17 @@
     transition: 0.2s;
 }
 
-.Disable{
-    background-color: #f3f3f3;
-    color: #013565;;
-    cursor: not-allowed;
-}
-
 .SaveButton:hover{
     background-color: #FFAF00;
 }
 .SaveButton:active{
     background-color: #ffc300;
+}
+
+.Disable{
+    background-color: #f3f3f3;
+    color: #013565;;
+    cursor: not-allowed;
 }
 
 .Disable:hover, .Disable:active{
@@ -208,7 +241,7 @@
 
 .AdvertiseContainer{
     background-color: #ffffff;
-    opacity: 0.25;
+    opacity: 0.5;
     position: fixed;
     z-index: 9998;
     height: 100vh;
@@ -249,7 +282,6 @@
     height: 5rem;
     margin-bottom: 3rem;
 }
-
 .AdvertiseButton1{
     background-color: #ffc300;
     color: white;
@@ -293,4 +325,30 @@
 
 .AdvertiseButton1:active, .AdvertiseButton2:active{
     background-color: #ffc300;
+}
+
+.AdvertiseButton3{
+    display: block;
+    background-color: #ffc300;
+    color: white;
+    font-family: 'Montserrat-Regular';
+    font-weight: 900;
+    border-radius: .4rem;
+    text-decoration: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: .3s;
+    width: 15rem;
+    height: 3.5rem;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    line-height: 3.5rem;
+    text-align: center;
+}
+
+.SelectorContainer{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem; 
+    flex-direction: row;
 }

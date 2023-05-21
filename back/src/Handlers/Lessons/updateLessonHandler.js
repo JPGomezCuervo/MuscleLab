@@ -3,7 +3,6 @@ const updateLesson = require('../../Controllers/Lessons/updateLessonsController'
 const updateLessons = async(req, res,) => {
     const { id } = req.params;
     const { 
-        name,
         effort, 
         shortDescription, 
         image, 
@@ -12,7 +11,6 @@ const updateLessons = async(req, res,) => {
     try {
         const updatedLesson = await updateLesson( 
             id,
-            name, 
             effort, 
             shortDescription,  
             image, 

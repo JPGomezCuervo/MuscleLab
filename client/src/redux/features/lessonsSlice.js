@@ -19,10 +19,22 @@ const fetchAllLessons = createAsyncThunk(
 
     }
 )
+
+const fetchAllLessonsDashboard = createAsyncThunk(
+    'lessons/fetchAllLessonsDashboard', async () => {
+        try {
+            const response = await axios.get(`${URL}/lessons/all`);
+            return response.data
+        } catch (error){
+            throw new Error (error.response) 
+        }
+    }
+)
+
 const fetchLessonsByID = createAsyncThunk(
     'lessons/fetchAllLessonsByID', async (name) => {
         try {
-            const response = await axios.get(`${URL}/lessons/${name}`);
+            const response = await axios.get(`${URL}/lessons/detail/${id}`);
             return response.data
         } catch (error){
             // revisar como el back envia los errores
@@ -31,6 +43,8 @@ const fetchLessonsByID = createAsyncThunk(
 
     }
 )
+
+
 export const cacheMiddleware = store => next => action => {
     if (action.type === 'lessons/fetchAllLessons/fulfilled' && store.getState().lessons.lessons.length > 0) {
         return Promise.resolve();
@@ -41,6 +55,7 @@ export const cacheMiddleware = store => next => action => {
 const initialState = {
     lessons: [],
     lesson: {},
+    lessonsDashboard: [],
     status: 'idle',
     error: ''
 }
@@ -143,15 +158,31 @@ const lessonsSlice = createSlice({
                 //revisar sintaxis del error
                 state.error = action.error
             })
+            .addCase(fetchAllLessonsDashboard.fulfilled, (state, {payload}) => {
+                state.lessonsDashboard = payload;
+                state.error = '';
+                state.status = fulfilled;
+            }
+            )
+            .addCase(fetchAllLessonsDashboard.pending, (state, action) => {
+                state.status = pending;
+                state.error = '';
+            })
+            .addCase(fetchAllLessonsDashboard.rejected, (state, action) => {
+                state.status = rejected;
+                //revisar sintaxis del error
+                state.error = action.error;
+            })
     }
 })
 
 
 export const selectAllLessons = (state) => state.lessons.lessons;
+export const selectAllLessonsDashboard = (state) => state.lessons.lessonsDashboard;
 export const selectLesson = (state) => state.lessons.lesson;
 export const selectStatus = (state) => state.lessons.status;
 export const selectError = (state) => state.lessons.error;
 
 export default lessonsSlice.reducer;
 export const { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest, sortByType, sortByIntensityandType, sortByIntensity, clearLessons, clearLesson } = lessonsSlice.actions;
-export { fetchAllLessons, fetchLessonsByID }
+export { fetchAllLessons, fetchLessonsByID, fetchAllLessonsDashboard }

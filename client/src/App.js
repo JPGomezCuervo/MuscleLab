@@ -15,8 +15,6 @@ import CreateLesson from "./components/CreateLesson/CreateLesson";
 import Sedes from './components/Sedes/Sedes';
 import Users from './components/Users/Users';
 import  CreateUser  from './components/CreateUser/CreateUser';
-
-
 import { useSelector } from 'react-redux';
 import { selectDashAuth } from './redux/features/authSlice';
 import { useLocation } from 'react-router-dom';
@@ -27,6 +25,9 @@ import AdminBar from "./components/AdminBar/AdminBar";
 import Wrapper from "./components/Wrapper/Wrapper";
 import TrainerDash from "./components/TrainerDash/TrainerDash";
 import SedesDash from "./components/SedesDashboard/SedesDash";
+import EditTrainerDash from './components/EditTrainerDash/EditTrainerDash';
+import CreateTrainerDash from './components/CreateTrainerDash/CreateTrainerDash';
+import UserDetails from './components/UserDetails/UserDetails';
 
 import EditTrainerDash from './components/EditTrainerDash/EditTrainerDash';
 import SedeHomeDetalle from './components/SedeHomeDetalle/SedeHomeDetalle';
@@ -74,6 +75,23 @@ function App() {
       </Route> 
       <Route path= 'dashboard/clases' element={<LessonsDash/>} />
       <Route path= '/dashboard/profesores/editar/:id' element={<EditTrainerDash/>}/>
+      {/* <Route path='/dashboard' element={<LessonsDash/>}>
+        <Route path= '/dashboard/lessons/detail/:id' element={<LessonsDash/>}/> 
+      <Route/>  */}
+      <Route path = '/dashboard/clases/editar/:id' element={<Wrapper/>}/>
+      <Route path = '/dashboard/clases/crear' element={<Wrapper/>}/> 
+      <Route path='/dashboard/profesores' element={<TrainerDash/>} />
+      <Route path= 'dashboard/clases' element={<LessonsDash/>} />
+      <Route path= 'dashboard/profesores/crear' element={<CreateTrainerDash/>} />
+      <Route path = 'dashboard/profesores/editar/:id' element={<EditTrainerDash/>} />
+      <Route path = '/dashboard/usuarios' element= {<Users/>}/>
+      <Route path = '/dashboard/usuarios/crear' element= {<CreateUser/>}/>  
+      <Route path= '/user-face' element={<UserDetails/>}/>
+      <Route path='/dashboard' element={<LessonsDash/>}>
+      <Route path= '/dashboard/lessons' element={<LessonsDash/>}/>
+      <Route/> 
+      </Route> 
+
       
        
 

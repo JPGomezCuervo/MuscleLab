@@ -52,8 +52,9 @@ const Users = () => {
   };
 
   //Mapping server response by Select All Users
+  
   const mappedUsers =
-    users &&
+    users &&  
     users.user?.map((user) => {
       return {
         id: user.id,
@@ -64,9 +65,10 @@ const Users = () => {
         isAdmin: user.isAdmin,
         statusMembershipIdStatus: user.statusMemberShipIdStatus,
       };
-    });
+    })  
 
-  //console.log(users);
+  console.log('usuarios desde FetchInit:',users);
+  console.log('usuariosMapeados:',mappedUsers);
 
   //Delete user
   const removeUserHandler = async (event) => {
@@ -116,7 +118,7 @@ const Users = () => {
     if (serverResponse.error) alert("Algo salio mal, intente nuevamente");
   };
 
-  const userFiltered = mappedUsers.filter(
+  const userFiltered = mappedUsers?.filter(
     (user) => user.id === userSelectToEdit
   );
   console.log("userselect", userSelectToEdit);
@@ -124,9 +126,9 @@ const Users = () => {
 
   return (
     <div className={styles.container}>
-      <div class={styles.buttonContainer}>
+
         <h2 class={styles.title}>Formulario de Usuarios</h2>
-      </div>
+
 
       <table className={styles.table}>
         <thead>
@@ -148,6 +150,7 @@ const Users = () => {
           {!mappedUsers?.length ? (
             <div className={styles.empty}>
               <p>Upss! No hay usuarios para mostrar!</p>
+              <p className={styles.loading}>Loading...</p>
             </div>
           ) : (
             mappedUsers.map((user, index) => (
@@ -184,7 +187,7 @@ const Users = () => {
         </tbody>
       </table>
       <div>
-        <Link to={"/users/createuser"}>
+        <Link to={"crear"}>
           <button className={styles.btnCrearUsuario}>Crear nuevo</button>
         </Link>
       </div>
@@ -192,12 +195,14 @@ const Users = () => {
       {/* Emergent window for user edition */}
 
       {windowVisible && (
+        <div>
+          <div className={styles.BigBigContainer}></div>
         <div className={styles.ventanaEmergente}>
           {userFiltered.map((user, index) => (
             <div className={styles.contenido} key={index}>
               {/*Filtrar Nombre de usuario con filter*/}
               <h2 className={styles.title1}>
-                Actualizar datos para Usuario: <p className={styles.title1a}>{user.fullName}</p>
+                 {user.fullName}
               </h2>
 
               <form onSubmit={(e) => editUserHandler(e)}>
@@ -283,6 +288,7 @@ const Users = () => {
               </button>
             </div>
           ))}
+        </div>  
         </div>
       )}
     </div>
