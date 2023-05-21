@@ -1,56 +1,9 @@
-// import React from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { useEffect } from "react";
-// import { useParams } from "react-router-dom";
-// import { selectOffice, fetchAllOffices, fetchOfficeByID } from "../../redux/features/officesSlice";
-
-
-
-// const SedeHomeDetalle = () => {
-
-//     const office = useSelector(selectOffice)
-
-  
-
-//     const dispatch= useDispatch();
-//     const params = useParams();
-
-
-//     useEffect(()=>{        
-//         dispatch(fetchOfficeByID(params.name))
-//     }, [dispatch, params.name])
-
-// console.log(office)
-
-//     return(
-//         <div>
-//             {
-//               Object.keys(office[0]).length !== 0
-//                 ?
-//                 office.map((off)=>{
-//                     return (
-//                 <div>
-//                     <h1>{off?.name}</h1>
-                    
-//                 </div>
-//                     )
-//                 })
-//                     :
-//                     <p>Loading</p>
-//             }
-//         </div>
-//     )
-
-// }
-
-
-// export default SedeHomeDetalle;
-
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { fetchOfficeByID, selectOffice } from "../../redux/features/officesSlice";
+import style from "./SedeHomeDetalle.module.css";
 
 const SedeHomeDetalle = () => {
   const dispatch = useDispatch();
@@ -71,15 +24,19 @@ const SedeHomeDetalle = () => {
                     ?
                    (
       
-        <div>
-          <h1>{office.branchoffice.name}</h1>
-          <p>Dirección: {office.branchoffice.location}</p>
-          <p>Días de atención: {office.branchoffice.scheduleDays}</p>
-          <p>Horario: {office.branchoffice.scheduleHours}</p>
+        <div className={style.card}>
+          <h1 className={style.h1}>{office.branchoffice.name}</h1>
+          <p className={style.text}>Dirección: {office.branchoffice.location}</p>
+          <p className={style.text}>Días de atención: {office.branchoffice.scheduleDays}</p>
+          <p className={style.text}>Horario: {office.branchoffice.scheduleHours}</p>
         </div>)
        : 
         <p>Loading</p>
 }
+
+<Link to = {'/sedes'}>
+               <button className={style.button}>Atras</button>
+                </Link>
     </div>
   );
 };

@@ -14,62 +14,70 @@ const SedesDashEditar = () => {
     scheduleHours: "",
   });
 
-  const handleChange = (e) => {
-    setSedes({
-      ...sedes,
-      [e.target.name]: e.target.value,
-    });
-  };
+
+  const [errors, setErrors] = useState({
+    name: "",
+    location: "",
+    scheduleDays: "",
+    scheduleHours: "",
+  });
+
+ 
   const params = useParams();
 
   const navigate = useNavigate();
 
-  
-  const guardarCambiosSede = () => {
-    const id = params.id;
-    const url = `https://musclelabii.onrender.com/branchoffice/update/${id}`;
-  
+ 
+
+  const validarFormulario = () => {
     const regexNombre = /^[A-Za-z\s,]+$/;
     const regexDireccion = /^[A-Za-z0-9\s]+$/;
     const regexDias = /^[A-Za-z\s,]+$/;
     const regexHorario = /^\d{2}-\d{2}$/;
-  
-    const errors = {};
-  
+
+    let newErrors = {};
+
     if (sedes.name.trim() === "") {
-      errors.name = "El campo de nombre es requerido.";
+      newErrors.name = "El campo de nombre es requerido.";
     } else if (!regexNombre.test(sedes.name)) {
-      errors.name = "El nombre debe contener solo letras, espacios y comas.";
+      newErrors.name = "El nombre debe contener solo letras, espacios y comas.";
     }
-  
+
     if (sedes.location.trim() === "") {
-      errors.location = "El campo de dirección es requerido.";
+      newErrors.location = "El campo de dirección es requerido.";
     } else if (!regexDireccion.test(sedes.location)) {
-      errors.location = "La dirección debe contener letras y números sin caracteres especiales.";
+      newErrors.location =
+        "La dirección debe contener letras y números sin caracteres especiales.";
     }
-  
+
     if (sedes.scheduleDays.trim() === "") {
-      errors.scheduleDays = "El campo de días de atención es requerido.";
+      newErrors.scheduleDays = "El campo de días de atención es requerido.";
     } else if (!regexDias.test(sedes.scheduleDays)) {
-      errors.scheduleDays = "Los días de atención deben contener solo palabras, espacios y comas.";
+      newErrors.scheduleDays =
+        "Los días de atención deben contener solo palabras, espacios y comas.";
     }
-  
+
     if (sedes.scheduleHours.trim() === "") {
-      errors.scheduleHours = "El campo de horario es requerido.";
+      newErrors.scheduleHours = "El campo de horario es requerido.";
     } else if (!regexHorario.test(sedes.scheduleHours)) {
-      errors.scheduleHours = "El horario debe tener el formato HH-HH (por ejemplo, 09-22).";
+      newErrors.scheduleHours =
+        "El horario debe tener el formato HH-HH (por ejemplo, 09-22).";
     }
-  
-    // Verificar si hay errores de validación
-    if (Object.keys(errors).length > 0) {
-      console.error("Errores de validación:", errors);
-      // Manejar los errores de validación si es necesario
-      return;
+
+     setErrors(newErrors)
+  };
+
+  const guardarCambiosSede = () => {
+    const id = params.id;
+    const url = `https://musclelabii.onrender.com/branchoffice/update/${id}`;
+   
+
+    if (Object.values(errors).some((error) => error !== "")) {
+      return alert("Faltan datos");
     }
-  
-    // Ventana emergente de confirmación
+
     const confirmacion = window.confirm("¿Estás seguro de guardar los cambios?");
-  
+
     if (confirmacion) {
       axios
         .put(url, sedes)
@@ -86,7 +94,7 @@ const SedesDashEditar = () => {
       alert("Acción cancelada");
     }
   };
-  
+
   
 
   const eliminarSede = () => {
@@ -113,7 +121,17 @@ const SedesDashEditar = () => {
     }
   };
   
+  const handleChange = (e) => {
+    validarFormulario({
+      ...sedes,
+      [e.target.name]: e.target.value
+     })
 
+    setSedes({
+      ...sedes,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <div>
@@ -141,6 +159,9 @@ const SedesDashEditar = () => {
           />
         </div>
 
+        {errors.name && <p>{errors.name}</p>}
+
+
         <div className={style.Description}>
           <label htmlFor="location" className={style.texto}>Dirección: *</label>
           <input
@@ -151,6 +172,8 @@ const SedesDashEditar = () => {
             name="location"
           />
         </div>
+
+        {errors.description && <p>{errors.description}</p>}
 
         <div className={style.Description}>
 
@@ -164,6 +187,8 @@ const SedesDashEditar = () => {
           />
         </div>
 
+        {errors.scheduleDays && <p>{errors.scheduleDays}</p>}
+
         <div className={style.Description}>
           <label htmlFor="scheduleHours" className={style.texto}>Horario: *</label>
           <input
@@ -175,6 +200,7 @@ const SedesDashEditar = () => {
           />
         </div>
 
+        {errors.scheduleHours && <p>{errors.scheduleHours}</p>}
 
         <div className={style.ButtonConteiner}>
           <button onClick={guardarCambiosSede} className={style.SaveButton}>Guardar Cambios</button>

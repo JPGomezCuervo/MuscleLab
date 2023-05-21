@@ -83,9 +83,9 @@ const DetailLesson = ()=> {
                 }
 
 <div className={style.botones}>
-                    <button className={style.button3}>Elegí tu sede acá</button>
+                    {/* <button className={style.button3}>Elegí tu sede acá</button>
                     <button className={style.button3}>Elegí tu horario</button>
-                    <button className={style.button3}>Elegí tu instructor acá</button>
+                    <button className={style.button3}>Elegí tu instructor acá</button> */}
                 </div>
                 <Link to = {'/clases'}>
                <button className={style.button}>Atras</button>
