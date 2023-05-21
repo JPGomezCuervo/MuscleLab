@@ -32,3 +32,14 @@ conn
   .catch((error) => {
     console.error("Error syncing models:", error);
   });
+//   //!para el local host
+// conn
+// .sync({ alter: true })
+// .then(() => {
+//   server.listen(3001, () => {
+//     console.log("Server listening on port 3001"); // eslint-disable-line no-console
+//   });
+// })
+// .catch((error) => {
+//   console.error("Error syncing models:", error);
+// });
