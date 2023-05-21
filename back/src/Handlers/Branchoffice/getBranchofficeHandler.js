@@ -2,8 +2,8 @@ const getBranchoffice = require("../../Controllers/Branchoffice/getBranchoffice"
 
 const getAllBranchoffice = async (req, res) => {
   try {
-    let branchoffice = await getBranchoffice();
-    res.status(200).json({ branchoffice: branchoffice });
+    let branchOffice = await getBranchoffice();
+    res.status(200).json({ branchOffice: branchOffice });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
