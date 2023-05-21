@@ -24,6 +24,7 @@ import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import NavBardDash from './components/NavBarDash/NavBarDash';
 import LessonsDash from './components/LesssonsDash/LessonsDash';
+import UserDetails from './components/UserDetails/UserDetails';
 
 
 function App() {
@@ -48,8 +49,9 @@ function App() {
       <Route path = '/sedes' element= {<Sedes/>}/>
       <Route path = '/users' element= {<Users/>}/>
       <Route path = '/users/createuser' element= {<CreateUser/>}/>  
+      <Route path= '/user-face' element={<UserDetails/>}/>
       <Route path='/dashboard' element={<LessonsDash/>}>
-      <Route path= '/dashboard/lessons' element={<LessonsDash/>}/> 
+      <Route path= '/dashboard/lessons' element={<LessonsDash/>}/>
       <Route/> 
       </Route> 
       
