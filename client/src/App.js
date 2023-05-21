@@ -60,8 +60,8 @@ function App() {
       <Route path= 'dashboard/clases' element={<LessonsDash/>} />
       <Route path= 'dashboard/profesores/crear' element={<CreateTrainerDash/>} />
       <Route path = 'dashboard/profesores/editar/:id' element={<EditTrainerDash/>} />
-      <Route path = '/users' element= {<Users/>}/>
-      <Route path = '/users/createuser' element= {<CreateUser/>}/>  
+      <Route path = '/dashboard/usuarios' element= {<Users/>}/>
+      <Route path = '/dashboard/usuarios/crear' element= {<CreateUser/>}/>  
       <Route path= '/user-face' element={<UserDetails/>}/>
       <Route path='/dashboard' element={<LessonsDash/>}>
       <Route path= '/dashboard/lessons' element={<LessonsDash/>}/>

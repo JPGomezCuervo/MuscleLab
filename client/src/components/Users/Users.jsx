@@ -126,9 +126,9 @@ const Users = () => {
 
   return (
     <div className={styles.container}>
-      <div class={styles.buttonContainer}>
+
         <h2 class={styles.title}>Formulario de Usuarios</h2>
-      </div>
+
 
       <table className={styles.table}>
         <thead>
@@ -187,7 +187,7 @@ const Users = () => {
         </tbody>
       </table>
       <div>
-        <Link to={"/users/createuser"}>
+        <Link to={"crear"}>
           <button className={styles.btnCrearUsuario}>Crear nuevo</button>
         </Link>
       </div>
@@ -195,12 +195,14 @@ const Users = () => {
       {/* Emergent window for user edition */}
 
       {windowVisible && (
+        <div>
+          <div className={styles.BigBigContainer}></div>
         <div className={styles.ventanaEmergente}>
           {userFiltered.map((user, index) => (
             <div className={styles.contenido} key={index}>
               {/*Filtrar Nombre de usuario con filter*/}
               <h2 className={styles.title1}>
-                Actualizar datos para Usuario: <p className={styles.title1a}>{user.fullName}</p>
+                 {user.fullName}
               </h2>
 
               <form onSubmit={(e) => editUserHandler(e)}>
@@ -286,6 +288,7 @@ const Users = () => {
               </button>
             </div>
           ))}
+        </div>  
         </div>
       )}
     </div>
