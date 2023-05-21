@@ -7,7 +7,8 @@ import iconWeight from "../../assets/icons/dumbbell.png";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setPlansCLick } from "../../redux/features/utilsSlice";
-import SignUp from "../SignUp/SignUp";
+//import SignUp from "../SignUp/SignUp";
+import adminIcon from '../../assets/icons/admin.png'
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -21,32 +22,33 @@ const NavBar = () => {
 
   const { 
     loginWithPopup, 
-    loginWithRedirect, 
+    //loginWithRedirect, 
     logout, 
     user,
     isLoading,
     error,
     isAuthenticated,
     getAccessTokenSilent } = useAuth0();
+         
 
-    async function callApi() {
-      await axios.get('http://localhost:3001/')
-      .then(response => console.log(response.data))
-      .catch(error => console.log(error.message))
-    }
+    // async function callApi() {
+    //   await axios.get('http://localhost:3001/')
+    //   .then(response => console.log(response.data))
+    //   .catch(error => console.log(error.message))
+    // }
 
-    async function callProtectedApi(){
-      try {
-        const token = await getAccessTokenSilent();
-        const response = await axios.get('http://localhost:3001/protected', {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        })  
-      } catch (error) {
-        console.log(error.message)
-      }
-    }
+    // async function callProtectedApi(){
+    //   try {
+    //     const token = await getAccessTokenSilent();
+    //     const response = await axios.get('http://localhost:3001/protected', {
+    //       headers: {
+    //         authorization: `Bearer ${token}`,
+    //       },
+    //     })  
+    //   } catch (error) {
+    //     console.log(error.message)
+    //   }
+    // }
   
   //***Config in backend ***/ 
 
@@ -93,6 +95,7 @@ const NavBar = () => {
   // }
   
   //******************** */
+
   
   return (
     <>
@@ -134,7 +137,7 @@ const NavBar = () => {
         <div className={style.LogOpcions}>
           {/* <Link to={"/login"}> */}
           
-        { !isAuthenticated && (<button className={style.btnRegistro} onClick={loginWithPopup}>Sign Up / Login</button>)}
+        { !isAuthenticated && (<button className={style.btnRegistro1} onClick={loginWithPopup}>Sign Up / Login</button>)}
 
         {error && <p>Authentication Error</p>}
         {!error && isLoading && <p>Loading...</p>}
@@ -145,11 +148,17 @@ const NavBar = () => {
         { isAuthenticated &&  
           (
             <div className={style.userLogin}>
-              <span className={style.userName}>Hola, {user.name}</span>
-          <Link to={"/create"}>
-            <button className={style.btnRegistro}>Crear clase</button>
-          </Link>
-          </div> )}
+              <span className={style.userName}>Hola, {user.name.split(' ')[0]}</span>
+            </div> 
+          )
+        }
+        {
+          isAuthenticated &&(
+          <Link to={"/user-face"}>
+          <img className={style.adminIcon} src={adminIcon} alt={user.name}/>
+          {/* {<button className={style.btnRegistro}></button>} */}
+        </Link>)
+        }
           
         </div>
       </nav>
