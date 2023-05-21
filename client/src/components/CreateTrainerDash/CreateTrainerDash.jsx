@@ -52,7 +52,7 @@ const CreateTrainerDash = () => {
         })
         .catch((error) => {
             console.log(error);
-            setServerResponse(error.data.message)
+            setServerResponse(error.data)
         })
     }
 
