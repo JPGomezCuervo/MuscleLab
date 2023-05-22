@@ -25,10 +25,10 @@ const SedeHomeDetalle = () => {
                    (
       
         <div className={style.card}>
-          <h1 className={style.h1}>{office.branchoffice.name}</h1>
-          <p className={style.text}>Dirección: {office.branchoffice.location}</p>
-          <p className={style.text}>Días de atención: {office.branchoffice.scheduleDays}</p>
-          <p className={style.text}>Horario: {office.branchoffice.scheduleHours}</p>
+          <h1 className={style.h1}>{office.branchOffice.name}</h1>
+          <p className={style.text}>Dirección: {office.branchOffice.location}</p>
+          <p className={style.text}>Días de atención: {office.branchOffice.scheduleDays}</p>
+          <p className={style.text}>Horario: {office.branchOffice.scheduleHours}</p>
         </div>)
        : 
         <p>Loading</p>
