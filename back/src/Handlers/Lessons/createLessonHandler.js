@@ -14,7 +14,7 @@ const createNewLesson = async (req, res) => {
     image,
     types,
     monitor,
-    branchOffice,
+    branchoffice,
   } = req.body;
   console.log("esto es el req.body", req.body);
   try {
@@ -31,7 +31,7 @@ const createNewLesson = async (req, res) => {
       image,
       types,
       monitor,
-      branchOffice
+      branchoffice
     );
     res
       .status(201)
