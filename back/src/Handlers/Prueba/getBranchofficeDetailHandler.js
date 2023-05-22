@@ -1,4 +1,4 @@
-const getDetail = require("../../Controllers/BranchOffice/getBranchofficeDetail");
+const getDetail = require("../../Controllers/Prueba/getBranchofficeDetail");
 
 const getBranchOfficeDetail = async (req, res) => {
   const { id } = req.params;
