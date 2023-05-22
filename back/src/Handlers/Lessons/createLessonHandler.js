@@ -36,7 +36,7 @@ const createNewLesson = async (req, res) => {
       .status(201)
       .json({ message: "Lesson created succesfully", lesson: newLesson });
   } catch (error) {
-    res.status(400).json(error.message);
+    res.status(400).json({error:error.message});
   }
 };
 module.exports = createNewLesson;
