@@ -99,6 +99,7 @@ const FilterBar = ({lessonsAtributtes, retryButton, setRetryButton}) => {
     }
     }, [retryButton, setRetryButton, dispatch])
 
+
 return (
     <div className= {style.BarContainer}>
         <div className={style.FilterBar}>
@@ -130,11 +131,11 @@ return (
                     <p onClick={handleTipoEjercicioClick}>Tipo de ejercicio</p>
                 <div className={style.DropMenuContainer}>
                     <ul className={style.DropMenu}>
-                        {lessonsAtributtes.map((atribute) => {
+                        {lessonsAtributtes?.map((atribute) => {
                             return(
                                 <li key={atribute.id}>
-                                    <button className={selectedTypes.includes(atribute.name) ? `${style.DropMenuBtn} ${style.Active}` : style.DropMenuBtn} onClick={handleTypeClick} name={atribute.name}>
-                                        {atribute.name}
+                                    <button className={selectedTypes.includes(atribute) ? `${style.DropMenuBtn} ${style.Active}` : style.DropMenuBtn} onClick={handleTypeClick} name={atribute}>
+                                        {atribute}
                                     </button>
                                 </li>
                             )
