@@ -280,7 +280,11 @@ class DetailLessonDash extends Component {
             console.log(JSON.stringify(this.state.lessonAttributes))
             if (this.state.message.includes('modificar')){
                 event.preventDefault();
-                axios.put(`${URL}/lessons/update/${this.props.id}`, this.state.lessonAttributes)
+                axios.put(`${URL}/lessons/update/${this.props.id}`, {
+                    effort: this.state.lessonAttributes.effort,
+                    shortDescription: this.state.lessonAttributes.shortDescription,
+                    image: this.state.lessonAttributes.image,
+                    goals: this.state.lessonAttributes.goals})
                 .then((res) => {
                     this.setState({
                         serverResponse: res.data,
@@ -293,6 +297,14 @@ class DetailLessonDash extends Component {
                         message: ''});
                         console.log(err.data);
                 });
+                axios.put(`${URL}/lessons/updateDetail/${this.props.id}`, {
+                    name: this.state.lessonAttributes.name,
+                    description: this.state.lessonAttributes.description,
+                    scheduleDays: this.state.lessonAttributes.scheduleDays,
+                    scheduleHourStart: this.state.lessonAttributes.scheduleHourStart,
+                    scheduleHourFinish: this.state.lessonAttributes.scheduleHourFinish,
+                    isAvailable: this.state.lessonAttributes.isAvailable
+                })
 
             } else {
                 event.preventDefault();
@@ -391,9 +403,9 @@ class DetailLessonDash extends Component {
       return (
         <form className={style.MainContainer}>
             <div className={style.Navigation}>
-                <button>
+                <a href='http://localhost:3000/dashboard/clases'>
                     <img className={style.ArrowIcon} src={arrowIcon} alt="" />
-                </button>
+                </a>
                 <h2>{lessonAttributes.name}</h2>
             </div>
             <h1>EDITA UNA CLASE</h1>
@@ -425,7 +437,7 @@ class DetailLessonDash extends Component {
                         </div>
                         {errors.effort && <p className={style.Error}>{errors.effort}</p>}
 
-                        <div className={style.SelectorContainer}>
+                        {/* <div className={style.SelectorContainer}>
                             <div>
                                 <label className={style.Profesor}>Profesor*</label>
                                 <select onChange={this.handleTrainerOptions} name='monitor'>
@@ -442,7 +454,7 @@ class DetailLessonDash extends Component {
                                 </select>
                             </div>
                             {errors.branchoffice && <p className={style.Error}>{errors.branchoffice}</p>}
-                        </div>
+                        </div> */}
 
                         <div className={style.Description}>
                             <label>Imagen</label>

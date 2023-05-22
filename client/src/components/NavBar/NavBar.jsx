@@ -76,7 +76,7 @@ const NavBar = () => {
           {/* <Link to={"/login"}> */}
           {token && (
             <Link to="dashboard">
-              <button>dashboard</button>
+              <button className={style.btnRegistro1} >dashboard</button>
             </Link>
           )}
 

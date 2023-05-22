@@ -105,7 +105,7 @@ const SedesDash = () => {
       <div className={style.contenedor}>
         {
           sedes ?
-            sedes.branchoffice?.map((sede) => {
+            sedes?.map((sede) => {
               return (
                 <div className={style.todo} key={sede.id}>
                   <div className={style.detalle}>

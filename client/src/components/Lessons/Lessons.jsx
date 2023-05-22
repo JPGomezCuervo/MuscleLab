@@ -12,6 +12,7 @@ const Lessons = () => {
     const status = useSelector(selectStatus);
     const error = useSelector(selectError);
     const lessonTypes = useSelector(selectAllLessonTypes);
+
     const [retryButton, setRetryButton] = useState(false);
 
     const handleRetryClick = () => {
@@ -22,9 +23,10 @@ const Lessons = () => {
         window.scrollTo({top: 0, left:0, behavior: 'auto'})
         dispatch(fetchAllLessons());
         dispatch(fetchAllLessonTypes());
-        
     }, [dispatch]);
+
     
+
     return (
             <div className={style.Frame}>  
             <FilterBar lessonsAtributtes= {lessonTypes} retryButton ={retryButton} setRetryButton={setRetryButton}/>

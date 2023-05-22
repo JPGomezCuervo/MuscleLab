@@ -10,6 +10,7 @@ const updateLessonsDetails = async(req, res) => {
         scheduleHourFinish,
         isAvailable
     } = req.body;    
+    console.log("este es el detail",req.body);
     try {
         const updatedDetails = await updateLessonDetail(
             id,
