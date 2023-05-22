@@ -26,8 +26,8 @@ const DetailLesson = ()=> {
     const params = useParams();
 
     useEffect(()=>{
-        dispatch(fetchLessonsByID(params.name))
-    },[dispatch, params.name])
+        dispatch(fetchLessonsByID(params.id))
+    },[dispatch, params.id])
 
     return(
 

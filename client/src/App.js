@@ -29,7 +29,6 @@ import EditTrainerDash from './components/EditTrainerDash/EditTrainerDash';
 import CreateTrainerDash from './components/CreateTrainerDash/CreateTrainerDash';
 import UserDetails from './components/UserDetails/UserDetails';
 
-import EditTrainerDash from './components/EditTrainerDash/EditTrainerDash';
 import SedeHomeDetalle from './components/SedeHomeDetalle/SedeHomeDetalle';
 import SedesDashEditar from './components/SedesDashEditar/SedesDashEditar';
 import SedesDashCrear from './components/SedesDashCrear/SedesDashCrear';

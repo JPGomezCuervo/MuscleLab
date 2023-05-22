@@ -32,7 +32,7 @@ const fetchAllLessonsDashboard = createAsyncThunk(
 )
 
 const fetchLessonsByID = createAsyncThunk(
-    'lessons/fetchAllLessonsByID', async (name) => {
+    'lessons/fetchAllLessonsByID', async (id) => {
         try {
             const response = await axios.get(`${URL}/lessons/detail/${id}`);
             return response.data
