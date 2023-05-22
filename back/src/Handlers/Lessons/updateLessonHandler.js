@@ -1,26 +1,26 @@
-const updateLesson = require('../../Controllers/Lessons/updateLessonsController');
-
-const updateLessons = async(req, res,) => {
-    const { id } = req.params;
-    const { 
-        name,
-        effort, 
-        shortDescription, 
-        image, 
-        goals,
-    } = req.body;
-    try {
-        const updatedLesson = await updateLesson( 
-            id,
-            name, 
-            effort, 
-            shortDescription,  
-            image, 
-            goals,);
-        res.status(200).json(updatedLesson);
-    } catch (error) {
-        res.status(400).json({error: error.message});
-    }
+const updateLesson = require("../../Controllers/Lessons/updateLessonsController");
+const { LessonDetail } = require("../../db");
+const updateLessons = async (req, res) => {
+  const { id } = req.params;
+  const { effort, shortDescription, image, goals, name, description, scheduleDays , scheduleHourStart, scheduleHourFinish, isAvailable } = req.body;
+  try {
+    const updatedLesson = await updateLesson(
+      id,
+      effort,
+      shortDescription,
+      image,
+      goals,
+      name, 
+      description, 
+      scheduleDays , 
+      scheduleHourStart, 
+      scheduleHourFinish,
+      isAvailable
+    );
+    res.status(200).json(updatedLesson);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 module.exports = updateLessons;

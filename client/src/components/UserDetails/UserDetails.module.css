@@ -1,0 +1,148 @@
+
+/* General styles */
+.userDetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f2f2f2;
+  min-height: 100vh;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-image: linear-gradient(175deg, #ffff 80%, #ffc300 45%, #ffc300);
+  }
+  .userAccessCard{
+    font-size: 2rem;
+    background: #ffc30050;
+    height: 10%;
+    border-radius: 50%;
+  }
+  
+  .userDetailsCard {
+    width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Header styles */
+  .user-details-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .userDetailsAvatar {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .userDetailsName {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .userDetailsEmail {
+    margin: 0;
+    font-size: 16px;
+    color: #888;
+  }
+  
+  /* sections */
+  .userDetailsSection {
+    margin-top: 20px;
+  }
+  
+  .userDetailsSection > h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+  }
+  
+  .user-details-section > p {
+    margin: 0;
+  }
+  
+  .userDetailsSkills {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .userDetailsSkills > li {
+    margin-bottom: 5px;
+    color: red;
+    font-weight: 900;
+  }
+  .plans{
+    display: flex;
+    position: relative;
+    margin-bottom: 60%;
+    height: 3%;
+    width: 20%;
+    margin-left: 2.5%;
+    padding: 15%;
+    margin-top: 3px;
+    
+  }
+  
+  .userBtn1{
+    background: #ffc300;
+    color: #f2f2f2;
+    font-weight: bold;
+    border-radius: 3px;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 2px;
+  }
+  .userBtn2{
+    background: #ffc300;
+    color: #f2f2f2;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    padding: 2px;
+    cursor: pointer;
+  }
+  .userBtn3{
+    background: rgba(0,0,255, 0.7);
+    color: #f2f2f2;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 3px
+  }
+  .hq{
+    width: fit-content;
+    padding: 2px;
+    background: #ffc300;
+    color: #f2f2f2;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  /* responsive */
+  @media (max-width: 600px) {
+    .userDetailsCard {
+      width: 100%;
+    }
+    
+    .userDetailsAvatar {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .userDetailsName {
+      font-size: 20px;
+    }
+    
+    .userDetailsEmail {
+      font-size: 14px;
+    }
+  }
+  

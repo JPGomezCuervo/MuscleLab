@@ -1,27 +1,40 @@
 import { useState } from "react";
 import style from "./Login.module.css";
 import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Login = () => {
+  const {
+    loginWithPopup,
+    //loginWithRedirect,
+    logout,
+    user,
+    isLoading,
+    error,
+    isAuthenticated,
+    getAccessTokenSilent,
+  } = useAuth0();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
   const handleLogin = async () => {
+    console.log(email, password);
     if (!email || !password) {
       alert("complete los campos");
     } else {
       try {
         const response = await axios.post(
-          "https://musclelabii.onrender.com/users/login",
+          "https:musclelabii.onrender.com/users/login",
           {
             email,
             password,
           }
         );
-
         if (response.data.login.success) {
+          localStorage.setItem("token", response.data.login.token);
           window.location.href = "/";
         } else if (
           response.data.login.message ===
@@ -32,7 +45,8 @@ const Login = () => {
           setPasswordError(response.data.login.message);
         }
       } catch (error) {
-        alert("error del servidor");
+        console.log("entramos al catch");
+        alert(error.message);
       }
     }
   };
@@ -75,6 +89,10 @@ const Login = () => {
         <button className={style.ButtonLogIn} onClick={handleLogin}>
           Iniciar sesión
         </button>
+        <button className={style.ButtonLogIn} onClick={loginWithPopup}>
+          Iniciar sesion con google
+        </button>
+
 
         <button className={style.ButtonCreate}>Crea una cuenta</button>
       </div>
