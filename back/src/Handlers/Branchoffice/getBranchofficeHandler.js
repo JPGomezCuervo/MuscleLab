@@ -1,11 +1,11 @@
-const getBranchoffice = require("../../Controllers/Branchoffice/getBranchoffice");
+const getBranchOffice = require("../../Controllers/BranchOffice/getBranchOffice");
 
-const getAllBranchoffice = async (req, res) => {
+const getAllBranchOffice = async (req, res) => {
   try {
-    let branchOffice = await getBranchoffice();
+    let branchOffice = await getBranchOffice();
     res.status(200).json({ branchOffice: branchOffice });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
-module.exports = getAllBranchoffice;
+module.exports = getAllBranchOffice;

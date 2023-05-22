@@ -1,10 +1,10 @@
-const updateBranchoffice = require("../../Controllers/Branchoffice/updateBranchoffice");
-const updateMyBranchoffice = async (req, res) => {
+const updateBranchOffice = require("../../Controllers/BranchOffice/updateBranchOffice");
+const updateMyBranchOffice = async (req, res) => {
   const { id } = req.params;
   const { name, location, scheduleDays, scheduleHours } = req.body;
 
   try {
-    const toUpdate = await updateBranchoffice(
+    const toUpdate = await updateBranchOffice(
       id,
       name,
       location,
@@ -16,4 +16,4 @@ const updateMyBranchoffice = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-module.exports = updateMyBranchoffice;
+module.exports = updateMyBranchOffice;
