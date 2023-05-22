@@ -86,14 +86,15 @@ const SedesDashCrear = ()=>{
 
 
       return (
+        <div className={style.BigBigContainer}>
         <div>
 
 
 <div>
         <Link to="/dashboard/sedes">
-        <button>
+        <a href="http://localhost:3000/dashboard/sedes">
           <img className={style.ArrowIcon} src={arrowIcon} alt="" />
-        </button>
+        </a>
         </Link>
         <h1 className={style.tex}>Crear Sede Sede</h1>
         <hr className={style.hr} />
@@ -150,6 +151,7 @@ const SedesDashCrear = ()=>{
     
         </div>
             </div>
+        </div>
       );
 
 }

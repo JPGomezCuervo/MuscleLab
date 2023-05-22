@@ -134,13 +134,14 @@ const SedesDashEditar = () => {
   };
 
   return (
-    <div>
+  <>
+    <div className={style.BigBigContainer}>
 
       <div>
         <Link to="/dashboard/sedes">
-        <button>
+        <a href="http://localhost:3000/dashboard/sedes">
           <img className={style.ArrowIcon} src={arrowIcon} alt="" />
-        </button>
+        </a>
         </Link>
         <h1 className={style.tex}>Editar Sede</h1>
         <hr className={style.hr} />
@@ -170,7 +171,7 @@ const SedesDashEditar = () => {
             value={sedes.location}
             onChange={handleChange}
             name="location"
-          />
+            />
         </div>
 
         {errors.description && <p>{errors.description}</p>}
@@ -184,7 +185,7 @@ const SedesDashEditar = () => {
             value={sedes.scheduleDays}
             onChange={handleChange}
             name="scheduleDays"
-          />
+            />
         </div>
 
         {errors.scheduleDays && <p>{errors.scheduleDays}</p>}
@@ -197,7 +198,7 @@ const SedesDashEditar = () => {
             value={sedes.scheduleHours}
             onChange={handleChange}
             name="scheduleHours"
-          />
+            />
         </div>
 
         {errors.scheduleHours && <p>{errors.scheduleHours}</p>}
@@ -209,6 +210,7 @@ const SedesDashEditar = () => {
 
       </div>
     </div>
+</>
   );
 };
 
