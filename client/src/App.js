@@ -35,15 +35,15 @@ function App() {
     console.log(location);
   }, [location]);
 
-  let isAdmin = false; // Declaración inicial con valor predeterminado
-  const token = localStorage.getItem("token");
+  // let isAdmin = false; // Declaración inicial con valor predeterminado
+  // const token = localStorage.getItem("token");
 
-  if (token) {
-    const decodedToken = jwt_decode(token);
-    isAdmin = decodedToken.isAdmin;
-  } else {
-    isAdmin = false; // Establecer isAdmin en false si no hay token
-  }
+  // if (token) {
+  //   const decodedToken = jwt_decode(token);
+  //   isAdmin = decodedToken.isAdmin;
+  // } else {
+  //   isAdmin = false; // Establecer isAdmin en false si no hay token
+  // }
 
   return (
     <>
@@ -63,10 +63,10 @@ function App() {
         {/* <Route path='/dashboard' element={<LessonsDash/>}>
         <Route path= '/dashboard/lessons/detail/:id' element={<LessonsDash/>}/> 
       <Route/>  */}
-        {isAdmin ? (
-          <>
+        {/* {isAdmin ? (
+          <> */}
             <Route path="/dashboard" element={<LessonsDash />} />
-            <Route path="dashboard/clases" element={<LessonsDash />} />
+            <Route path="/dashboard/clases" element={<LessonsDash />} />
             <Route path="/dashboard/clases/editar/:id" element={<Wrapper />} />
             <Route path="/dashboard/clases/crear" element={<Wrapper />} />
             <Route path="/dashboard/profesores" element={<TrainerDash />} />
@@ -80,10 +80,10 @@ function App() {
             />
             <Route path="/dashboard/usuarios" element={<Users />} />
             <Route path="/dashboard/usuarios/crear" element={<CreateUser />} />
-          </>
-        ) : (
-          <Route path="/denegado" element={<login />}></Route>
-        )}
+          {/* </>
+        ) : ( */}
+          {/* <Route path="/denegado" element={<login />}></Route>
+        )} */}
       </Routes>
       {location.includes("dashboard") ? null : <Footer />}
     </>
