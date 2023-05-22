@@ -33,7 +33,7 @@ class EditLessonDash extends Component {
                 goals: [],
                 isAvailable: null,
                 monitor: '',
-                branchoffice: [],
+                branchOffice: [],
              },
             errors: {
                 name: '',
