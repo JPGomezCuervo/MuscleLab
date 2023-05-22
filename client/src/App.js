@@ -24,10 +24,12 @@ import LessonsDash from "./components/LessonsDashboard/LessonsDash";
 import AdminBar from "./components/AdminBar/AdminBar";
 import Wrapper from "./components/Wrapper/Wrapper";
 import TrainerDash from "./components/TrainerDash/TrainerDash";
-import EditTrainerDash from "./components/EditTrainerDash/EditTrainerDash";
-import CreateTrainerDash from "./components/CreateTrainerDash/CreateTrainerDash";
-import UserDetails from "./components/UserDetails/UserDetails";
-import jwt_decode from "jwt-decode";
+import EditTrainerDash from './components/EditTrainerDash/EditTrainerDash';
+import CreateTrainerDash from './components/CreateTrainerDash/CreateTrainerDash';
+import UserDetails from './components/UserDetails/UserDetails';
+
+
+
 function App() {
   const location = useLocation().pathname;
   const dashAuth = useSelector(selectDashAuth);
@@ -46,21 +48,20 @@ function App() {
   // }
 
   return (
-    <>
-      {location.includes("dashboard") ? <NavBardDash /> : <NavBar />}
-      {location.includes("dashboard") ? <AdminBar /> : null}
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/clases" element={<Lessons />} />
-        <Route path="/detail" element={<DetailLesson />} />
-        <Route path="/contactanos" element={<ContactUs />} />
-        <Route path="/clases/detalles/:id" element={<DetailLesson />} />
-        <Route path="/nosotros" element={<Nosotros />} />
-        <Route path="/create" element={<CreateLesson />} />
-        <Route path="/sedes" element={<Sedes />} />
-        <Route path="/user-face" element={<UserDetails />} />
-        {/* <Route path='/dashboard' element={<LessonsDash/>}>
+   <>
+    {(location.includes('dashboard') ? <NavBardDash/>: <NavBar/>)}
+    {(location.includes('dashboard') ? <AdminBar/>: null)}
+    <Routes>
+      <Route path='/login' element={<Login/>}/>
+      <Route path="/" element={<Home/>}/>
+      <Route path='/clases' element={<Lessons/>}/>
+      <Route path= '/detail' element={<DetailLesson/>}/>
+      <Route path= '/contactanos' element={<ContactUs />}/>
+      <Route path= '/clases/detalles/:id' element={<DetailLesson/>}/>
+      <Route path= '/nosotros' element={<Nosotros />}/>
+      <Route path="/create" element={<CreateLesson />}/>
+      <Route path = '/sedes' element= {<Sedes/>}/>
+      {/* <Route path='/dashboard' element={<LessonsDash/>}>
         <Route path= '/dashboard/lessons/detail/:id' element={<LessonsDash/>}/> 
       <Route/>  */}
         {/* {isAdmin ? (

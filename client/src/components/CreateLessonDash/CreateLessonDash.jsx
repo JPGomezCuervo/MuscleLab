@@ -362,6 +362,7 @@ class EditLessonDash extends Component {
                             <input placeholder='Nombre' value={lessonAttributes.name} type='text' id='name' name='name' onChange={this.handleChange}/>
                         </div>
                         {errors.name && <p className={style.Error}>{errors.name}</p>}
+                        
                         <div className={style.Description}>
                             <label>Descripción*</label>
                             <input placeholder='Descripción' value={lessonAttributes.description} id='description' type='text' name='description' onChange={this.handleChange}/>
