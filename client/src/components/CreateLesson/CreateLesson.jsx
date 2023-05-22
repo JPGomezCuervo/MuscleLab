@@ -23,7 +23,8 @@ const CreateLesson = () => {
     goals: "",
     shortDescription: "",
     scheduleDays: [],
-    scheduleHours: [],
+    scheduleHourStart: "",
+    scheduleHourFinish: "",
     types: [],
   });
   const [errors, setErrors] = useState({
@@ -33,11 +34,13 @@ const CreateLesson = () => {
     goals: "",
     shortDescription: "",
     scheduleDays: [],
-    scheduleHours: [],
+    scheduleHourStart: "",
+    scheduleHourFinish: "",
     types: [],
   });
   //!FUNCIONES
   const submitHandler = (e) => {
+    console.log("imprimi esto ",form.goals);
     e.preventDefault();
 
     if (
@@ -46,25 +49,25 @@ const CreateLesson = () => {
       errors.goals ||
       errors.effort ||
       errors.shortDescription ||
-      !validateHours()||
+      !validateHours() ||
       !validatedays() ||
-      !validateTypes() 
+      !validateTypes()
     ) {
       alert("Debe completar los campos obligatorios y corregir los errores.");
     } else {
       axios
-      .post("https://musclelabii.onrender.com/lessons/create", form)
-      .then((res) => {
-        alert("Lesson creada correctamente");
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error.response) {
-          alert(`Error:${error.response.data}`);
-        } else {
-          alert(`Error: ${error.message}`);
-        }
-      });
+        .post("http://localhost:3001/lessons/create", form)
+        .then((res) => {
+          alert("Lesson creada correctamente");
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error.response) {
+            alert(`Error:${error.response.data}`);
+          } else {
+            alert(`Error: ${error.message}`);
+          }
+        });
     }
   };
   const changeHandler = (event) => {
@@ -115,15 +118,16 @@ const CreateLesson = () => {
   };
   const validateHours = () => {
     if (!horaInicio) {
-      errors.scheduleHours = "Debe seleccionar hora de inicio";
+      errors.scheduleHourStart = "Debe seleccionar hora de inicio";
       alert("debe seleccionar hora de inicio");
       return false;
     } else if (!horaFin) {
-      errors.scheduleHours = "Debe seleccionar hora de fin";
+      errors.scheduleHourFinish = "Debe seleccionar hora de fin";
       alert("debe seleccionar hora de fin");
       return false;
     } else {
-      form.scheduleHours = horaInicio + "-" + horaFin;
+      form.scheduleHourStart = horaInicio;
+      form.scheduleHourFinish = horaFin;
       return true;
     }
   };
