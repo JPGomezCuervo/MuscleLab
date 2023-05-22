@@ -36,7 +36,6 @@ function App() {
   }, [location]);
 
   let isAdmin = false; // Declaración inicial con valor predeterminado
-
   const token = localStorage.getItem("token");
 
   if (token) {
