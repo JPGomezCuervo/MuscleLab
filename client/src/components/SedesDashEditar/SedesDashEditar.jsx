@@ -137,14 +137,13 @@ const SedesDashEditar = () => {
   <>
     <div className={style.BigBigContainer}>
 
-      <div>
+      <div className={style.Navigation}>
         <Link to="/dashboard/sedes">
         <a href="http://localhost:3000/dashboard/sedes">
           <img className={style.ArrowIcon} src={arrowIcon} alt="" />
         </a>
         </Link>
         <h1 className={style.tex}>Editar Sede</h1>
-        <hr className={style.hr} />
       </div>
 
 

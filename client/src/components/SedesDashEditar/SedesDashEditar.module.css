@@ -1,18 +1,19 @@
 .MainConteiner{
-    
+    margin: 0 auto;
         padding-top: 1rem;
+        width: 40rem;
         height: 40rem;
-        width: 50rem;
         box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
         border-radius: .4rem;
         background-color: rgb(255, 255, 255);
+        margin-top: 2rem;
 }
 
 .BigBigContainer {
+    margin: 0 auto;
     position: absolute;
     display: inline-block;
-    overflow-y: scroll;
-    height: 60wh;
+    width: 80vw;
   }
 
 .ArrowIcon{
@@ -44,7 +45,8 @@
     font-size: 1.25rem;
     cursor: pointer;
     transition: 0.2s;
-    margin-left: 1rem;
+    margin-left: 10%;
+    float: left;
 }
 
 .SaveButton:hover{
@@ -55,7 +57,6 @@
 }
 
 .DeleteButton{
-    margin-left: 12%;
     width: 12rem;
     height: 3rem;
     color: #ffffff;
@@ -66,6 +67,8 @@
     font-size: 1.25rem;
     cursor: pointer;
     transition: 0.2s;
+    float:right;
+    margin-right: 10%;
 }
 
 .DeleteButton:hover{
@@ -98,4 +101,8 @@
 
 .hr{
     color:#FFAF00
+}
+.Navigation{
+    display: flex;
+    margin-top: 6rem;
 }

@@ -1,8 +1,9 @@
 .MainConteiner{
     margin: 0 auto;
-    padding-top: 1rem;
+    padding: 0 1rem;
+    padding-top: 2rem;
     height: 40rem;
-    width: 50rem;
+    width: 40rem;
     box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
     border-radius: .4rem;
     background-color: rgb(255, 255, 255);
@@ -11,13 +12,14 @@
 .BigBigContainer {
     position: absolute;
     display: inline-block;
-    overflow-y: scroll;
+    width: 80vw;
   }
 
 .ArrowIcon{
-height: 3.5rem;
-transform: rotate(90deg);
-}
+  margin-top: .6rem;
+  height: 3.5rem;
+  transform: rotate(90deg);
+  }
 
 .Description{
 margin-bottom: 1rem;
@@ -43,7 +45,8 @@ font-family: "Montserrat-Bold";
 font-size: 1.25rem;
 cursor: pointer;
 transition: 0.2s;
-margin-left: 1rem;
+display: block;
+margin: 0 auto;
 }
 
 .SaveButton:hover{
@@ -93,6 +96,11 @@ color: #013565;
 font-family:'Montserrat-Bold';
 font-size: 2rem;
 margin-left: 1.3rem;
+}
+
+.Navigation{
+  display: flex;
+  margin-top: 6rem;
 }
 
 .hr{

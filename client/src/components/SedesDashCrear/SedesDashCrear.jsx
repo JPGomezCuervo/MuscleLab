@@ -90,14 +90,11 @@ const SedesDashCrear = ()=>{
         <div>
 
 
-<div>
-        <Link to="/dashboard/sedes">
+      <div className={style.Navigation}>
         <a href="http://localhost:3000/dashboard/sedes">
           <img className={style.ArrowIcon} src={arrowIcon} alt="" />
         </a>
-        </Link>
         <h1 className={style.tex}>Crear Sede Sede</h1>
-        <hr className={style.hr} />
       </div>
             <div className={style.MainConteiner}>
 
