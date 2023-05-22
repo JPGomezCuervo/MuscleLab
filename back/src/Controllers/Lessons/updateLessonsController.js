@@ -1,4 +1,5 @@
 const { Lessons, LessonDetail } = require("../../db");
+const {Op}= require("sequelize");
 
 const updateLesson = async (id, effort, shortDescription, image, goals, name, description, scheduleDays, scheduleHourStart, scheduleHourFinish, isAvailable) => {
   const foundedDetail = await LessonDetail.findOne({
@@ -8,7 +9,8 @@ const updateLesson = async (id, effort, shortDescription, image, goals, name, de
   });
   const checkName = await LessonDetail.findOne({
     where:{
-      name:name
+      name:name,
+      id:{[Op.not]:id}
     }
   });
   const foundedLesson = await Lessons.findOne({
