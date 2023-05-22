@@ -23,7 +23,7 @@ useEffect(()=>{
             
             <div className={style.Container}>
 
-            {sedes.branchOffice?.map((sede, index)=> {
+            {sedes?.map((sede, index)=> {
                 return <Sede key={sede.id} sede={sede} index={index} />
             })}
             </div>
