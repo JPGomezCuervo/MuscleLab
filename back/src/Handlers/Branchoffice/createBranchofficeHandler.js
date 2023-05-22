@@ -1,4 +1,4 @@
-const createBranchOffice = require("../../Controllers/BranchOffice/createBranchOffice")
+const createBranchOffice = require("../../Controllers/BranchOffice/createBranchoffice")
 
 const createNewBranchOffice = async (req, res) => {
   const { id, name, location, scheduleDays, scheduleHours } = req.body;
@@ -12,15 +12,7 @@ const createNewBranchOffice = async (req, res) => {
     );
     res.status(201).json({
       message: "sucursal creada correctamente",
-<<<<<<< HEAD
-<<<<<<< HEAD
       branchOffice: newBranchOffice,
-=======
-      branchoffice: newBranchoffice,
->>>>>>> parent of 8837a9b (log create lesson)
-=======
-      branchoffice: newBranchoffice,
->>>>>>> parent of 8837a9b (log create lesson)
     });
   } catch (error) {
     res.status(400).json(error.message);

@@ -1,10 +1,10 @@
 const { Router } = require("express");
 const server = Router();
-const createNewBranchOffice = require("../Handlers/BranchOffice/createBranchOfficeHandler");
-const getAllBranchOffice = require("../Handlers/BranchOffice/getBranchOfficeHandler");
-const getBranchOfficeDetail = require("../Handlers/BranchOffice/getBranchOfficeDetailHandler");
-const deleteMyBranchOffice = require("../Handlers/BranchOffice/deleteBranchOfficeHandler");
-const updateMyBranchOffice = require("../Handlers/BranchOffice/updateBranchOfficeHandler");
+const createNewBranchOffice = require("../Handlers/BranchOffice/createBranchofficeHandler");
+const getAllBranchOffice = require("../Handlers/BranchOffice/getBranchofficeHandler");
+const getBranchOfficeDetail = require("../Handlers/BranchOffice/getBranchofficeDetailHandler");
+const deleteMyBranchOffice = require("../Handlers/BranchOffice/deleteBranchofficeHandler");
+const updateMyBranchOffice = require("../Handlers/BranchOffice/updateBranchofficeHandler");
 
 server.post("/create", createNewBranchOffice);
 server.get("/", getAllBranchOffice);
