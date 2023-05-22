@@ -1,4 +1,3 @@
-const loginUser = require("../../Handlers/Users/loginUserHandler");
 const {
   Lessons,
   LessonDetail,
@@ -8,7 +7,6 @@ const {
 } = require("../../db");
 const getTypes = require("../Types/getTypes");
 const getGoals = require("../Goals/getGoals");
-const db = require("../../db");
 let createLesson = async (
   id,
   name,
@@ -25,6 +23,10 @@ let createLesson = async (
   branchoffice
 ) => {
   /** Validations To Create*/
+  const mon = await User.findOne({ where: { fullName: monitor } });
+  const office = await BranchOffice.findOne({
+    where: { name: branchoffice },
+  });
   let existingName = name.split("-");
   existingName = existingName[0];
   const existingClass = await Lessons.findOne({
@@ -42,10 +44,13 @@ let createLesson = async (
     ["scheduleHourStart", scheduleHourStart],
     ["scheduleHourFinish", scheduleHourFinish],
     ["types", types],
+    ["monitor", monitor],
+    ["branchoffice", branchoffice]
   ];
-  console.log("esto es el branchoffice:", branchoffice);
   const dbGoals = await getGoals();
   let checkGoals = true;
+  let newLesson = 0;
+  let lessonid;
   if (areTypes.length === 0) {
     await getTypes();
   }
@@ -58,9 +63,11 @@ let createLesson = async (
     !scheduleHourStart ||
     !scheduleHourFinish ||
     !types ||
-    !shortDescription
-  ) {
-    let missing = [];
+    !shortDescription ||
+    !monitor ||
+    !branchoffice
+    ) {
+      let missing = [];
     for (let i = 0; i < needed.length; i++) {
       if (!needed[i][1]) {
         missing.push(needed[i][0]);
@@ -94,9 +101,13 @@ let createLesson = async (
   if (checkGoals) {
     throw new Error("No existe ese objetivo");
   }
+  if (!mon) {
+    throw new Error("Ese monitor no existe");
+  }
+  if(!office){
+    throw new Error("La sucursal no existe");
+  }
   /**Finish validations */
-  const mon = await User.findOne({ where: { fullName: monitor } });
-  let newLesson = 0;
   if (!existingClass) {
     newLesson = await Lessons.create({
       id,
@@ -114,7 +125,6 @@ let createLesson = async (
       newLesson.addExercisesType(t?.id);
     });
   }
-  let lessonid;
   newLesson ? (lessonid = newLesson.id) : (lessonid = existingClass.id);
   const details = await LessonDetail.create({
     id,
@@ -125,12 +135,7 @@ let createLesson = async (
     scheduleHourFinish,
     lessonId: lessonid,
   });
-  branchoffice.map(async (o) => {
-    const office = await BranchOffice.findOne({
-      where: { name: o },
-    });
-    details.addBranchOffice(office?.id);
-  });
+  details.addBranchOffice(office?.id);
   details.addUser(mon?.id);
   return `id: ${details.id} name: ${details.name}`;
 };
