@@ -35,12 +35,12 @@ module.exports = (sequelize) => {
       isMonitor: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
-        allowNull: true,
+        allowNull: false,
       },
       isAdmin: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
-        allowNull: true,
+        allowNull: false,
       },
       deletedAt: {
         type: DataTypes.DATE,

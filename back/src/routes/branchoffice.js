@@ -1,15 +1,15 @@
 const { Router } = require("express");
 const server = Router();
-const createNewBranchoffice = require("../Handlers/Branchoffice/createBranchofficeHandler");
-const getAllBranchoffice = require("../Handlers/Branchoffice/getBranchofficeHandler");
-const getBranchofficeDetail = require("../Handlers/Branchoffice/getBranchofficeDetailHandler");
-const deleteMyBranchoffice = require("../Handlers/Branchoffice/deleteBranchofficeHandler");
-const updateMyBranchoffice = require("../Handlers/Branchoffice/updateBranchofficeHandler");
-
-server.post("/create", createNewBranchoffice);
-server.get("/", getAllBranchoffice);
-server.get("/:id", getBranchofficeDetail);
-server.delete("/delete/:id", deleteMyBranchoffice);
-server.put("/update/:id", updateMyBranchoffice);
+const Lalo = require("../Handlers/Branchoffice/prueba")
+const createNewBranchOffice = require("../Handlers/Prueba/createBranchofficeHandler");
+const getAllBranchOffice = require("../Handlers/Prueba/getBranchofficeHandler.js");
+const getBranchOfficeDetail = require("../Handlers/Prueba/getBranchofficeDetailHandler.js");
+const deleteMyBranchOffice = require("../Handlers/Prueba/deleteBranchofficeHandler.js");
+const updateMyBranchOffice = require("../Handlers/Prueba/updateBranchofficeHandler.js");
+server.post("/create", createNewBranchOffice);
+server.get("/", getAllBranchOffice);
+server.get("/:id", getBranchOfficeDetail);
+server.delete("/delete/:id", deleteMyBranchOffice);
+server.put("/update/:id", updateMyBranchOffice);
 
 module.exports = server;

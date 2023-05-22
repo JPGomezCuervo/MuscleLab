@@ -96,7 +96,21 @@
     border-radius: 5px;
     font-family: 'Montserrat-regular', sans-serif;
     font-weight: 100;
-    font-size: 17px;
+    /* font-size: 17px; */
+    font-size: 12px;
+    margin-left: 2rem;
+    margin-right: 1.5rem;
+    cursor: pointer;
+}
+.btnRegistro1{
+    padding: .3rem;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-family: 'Montserrat-regular', sans-serif;
+    font-weight: 100;
+    font-size: 1rem;
     margin-left: 2rem;
     margin-right: 1.5rem;
     cursor: pointer;
@@ -124,6 +138,23 @@
     width: 9rem;
     height: 2rem;
 }
+.adminIcon{
+    background: #ffc300;
+    width: 25px;
+    padding: .3rem;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.userName{
+    padding: .3rem;
+    background-color: transparent;
+    color: white;
+    border-radius: 5px;
+    font-family: 'Montserrat-regular', sans-serif;
+    font-weight: 100;
+    font-size: 17px;;
+}
+
 @media screen and (max-width: 1366px){
 
     .nav{
