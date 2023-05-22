@@ -1,29 +1,29 @@
-import React from 'react';
-import style from './SedesDash.module.css'
-import { useEffect, useState } from 'react';
+import React from "react";
+import style from "./SedesDash.module.css";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from 'react-router-dom';
-import { fetchAllOffices, selectAllOffices, clearOffice } from '../../redux/features/officesSlice';
-import edit from "../../assets/icons/edit.png"
-import trash from "../../assets/icons/trash-bin.png"
-
-
+import { Link } from "react-router-dom";
+import {
+  fetchAllOffices,
+  selectAllOffices,
+  clearOffice,
+} from "../../redux/features/officesSlice";
+import edit from "../../assets/icons/edit.png";
+import trash from "../../assets/icons/trash-bin.png";
 
 const SedesDash = () => {
-
-  const sedes = useSelector(selectAllOffices)
-
-  console.log(sedes)
+  const sedes = useSelector(selectAllOffices);
 
   const dispatch = useDispatch();
 
   const [serverResponse, setServerResponse] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchAllOffices())
+    dispatch(fetchAllOffices());
   }, [dispatch, serverResponse]);
 
-  
+  console.log(sedes);
+
   // const removeSedeHandler = async (id) => {
   //   //const id = event.target.name;
   //  // console.log(event)
@@ -64,19 +64,22 @@ const SedesDash = () => {
   // }
 
   const removeSedeHandler = async (id) => {
-    const confirmation = window.confirm("Esta acción no se podrá revertir!\nPulse OK o Cancelar.");
-  
+    const confirmation = window.confirm(
+      "Esta acción no se podrá revertir!\nPulse OK o Cancelar."
+    );
+
     if (confirmation) {
       try {
-        await fetch(`https://musclelabii.onrender.com/branchoffice/delete/${id}`, { method: "DELETE" });
+        await fetch(
+          `https://musclelabii.onrender.com/branchoffice/delete/${id}`,
+          { method: "DELETE" }
+        );
 
-        
         setServerResponse(true);
         alert("Borrado con éxito!");
-        
+
         dispatch(clearOffice(id));
         // Eliminar la sede eliminada del estado
-       
       } catch (error) {
         console.log(error);
         // Manejar el error de red aquí
@@ -86,60 +89,56 @@ const SedesDash = () => {
     }
   };
 
-  
-  
-  
-
   return (
     <div className={style.BigBigContainer}>
-    <div className={style.ImageContainer}>
+      <div className={style.ImageContainer}>
+        <div className={style.contNombre}>
+          <h1>Sedes</h1>
+        </div>
+        <hr className={style.hr} />
 
-      <div className={style.contNombre}>
-        <h1>Sedes</h1>
-      </div>
-      <hr className={style.hr} />
+        <Link to="/dashboard/sedes/crear">
+          <button className={style.button}>Crear Sede</button>
+        </Link>
 
-          <Link to="/dashboard/sedes/crear">
-      <button className={style.button}>Crear Sede</button>
-          </Link>
-
-      <div className={style.contenedor}>
-        {
-          sedes ?
+        <div className={style.contenedor}>
+          {sedes ? (
             sedes?.map((sede) => {
               return (
                 <div className={style.todo} key={sede.id}>
                   <div className={style.detalle}>
                     <h2 className={style.texto}>Nombre: {sede.name}</h2>
                     <h2 className={style.texto}>Dirección: {sede.location}</h2>
-                    <h2 className={style.texto}>Días: {sede.scheduleDays}</h2>
-                    <h2 className={style.texto}>Horario de atanción: {sede.scheduleHours} hs</h2>
-                  
+                    <h2 className={style.texto}>Días: {sede.scheduleDays?.join(", ")}</h2>
+                    <h2 className={style.texto}>
+                      Horario de atanción: {sede.scheduleHourStart}hs - {sede.scheduleHourFinish}hs
+                    </h2>
 
                     <div className={style.divCont}>
                       <Link to={`editar/${sede.id}`}>
-                        <button className={style.btnIcono1}><img src={edit} alt="edit" className={style.icono} /></button>
+                        <button className={style.btnIcono1}>
+                          <img src={edit} alt="edit" className={style.icono} />
+                        </button>
                       </Link>
-                      <button className={style.btnIcono2} onClick={()=> removeSedeHandler(sede.id)} name={sede.id} ><img src={trash} alt="trash" className={style.icono} /></button>
-
+                      <button
+                        className={style.btnIcono2}
+                        onClick={() => removeSedeHandler(sede.id)}
+                        name={sede.id}
+                      >
+                        <img src={trash} alt="trash" className={style.icono} />
+                      </button>
                     </div>
-
                   </div>
-
                 </div>
-              )
+              );
             })
-            :
+          ) : (
             <p>Loading...</p>
-
-        }
+          )}
+        </div>
       </div>
-
-
-
     </div>
-    </div>
-  )
-}
+  );
+};
 
 export default SedesDash;

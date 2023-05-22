@@ -40,9 +40,7 @@ const CreateLesson = () => {
   });
   //!FUNCIONES
   const submitHandler = (e) => {
-    console.log("imprimi esto ",form.goals);
     e.preventDefault();
-
     if (
       errors.name ||
       errors.description ||
@@ -61,7 +59,6 @@ const CreateLesson = () => {
           alert("Lesson creada correctamente");
         })
         .catch((error) => {
-          console.log(error);
           if (error.response) {
             alert(`Error:${error.response.data}`);
           } else {

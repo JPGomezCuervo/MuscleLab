@@ -4,7 +4,8 @@ let updateBranchOffice = async (
   name,
   location,
   scheduleDays,
-  scheduleHours
+  scheduleHourStart,
+  scheduleHourFinish
 ) => {
   let toUpdate = await BranchOffice.findOne({ where: { id: id } });
   if (!toUpdate) {
@@ -14,7 +15,8 @@ let updateBranchOffice = async (
     name: name,
     location: location,
     scheduleDays: scheduleDays,
-    scheduleHours: scheduleHours,
+    scheduleHourStart: scheduleHourStart,
+    scheduleHourFinish:scheduleHourFinish
   });
   return `Sucursal ${toUpdate.name} fue editada con exito`;
 

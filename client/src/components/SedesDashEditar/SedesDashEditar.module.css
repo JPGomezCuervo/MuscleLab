@@ -1,108 +1,122 @@
-.MainConteiner{
-    margin: 0 auto;
-        padding-top: 1rem;
-        width: 40rem;
-        height: 40rem;
-        box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
-        border-radius: .4rem;
-        background-color: rgb(255, 255, 255);
-        margin-top: 2rem;
+.MainConteiner {
+  margin: 0 auto;
+  padding-top: 1rem;
+  width: 40rem;
+  height: 40rem;
+  box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 0.4rem;
+  background-color: rgb(255, 255, 255);
+  margin-top: 2rem;
 }
-
+.DaysContainer {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.DaysContainer p {
+  text-align: center;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  margin-top: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+.DaysContainer input {
+  margin-top: 1rem;
+  margin-bottom: 0.2rem;
+}
 .BigBigContainer {
-    margin: 0 auto;
-    position: absolute;
-    display: inline-block;
-    width: 80vw;
-  }
-
-.ArrowIcon{
-    height: 3.5rem;
-    transform: rotate(90deg);
+  margin: 0 auto;
+  position: absolute;
+  display: inline-block;
+  width: 80vw;
 }
 
-.Description{
-    margin-bottom: 1rem;
-    width: 30vw;
-}
-.Description input{
-    background-color: #f3f3f3;
-    padding: 0 1rem;
-    width: 100%;
-    min-height: 3.5rem;
-    margin-top: .4rem;
-    margin-left: 2rem;
+.ArrowIcon {
+  height: 3.5rem;
+  transform: rotate(90deg);
 }
 
-.SaveButton{
-    height: 3rem;
-    color: #ffffff;
-    width: 13rem;
-    background-color: #ffc300;
-    border: 0;
-    border-radius: 0.4rem;
-    font-family: "Montserrat-Bold";
-    font-size: 1.25rem;
-    cursor: pointer;
-    transition: 0.2s;
-    margin-left: 10%;
-    float: left;
+.Description {
+  margin-bottom: 1rem;
+  width: 30vw;
+}
+.Description input {
+  background-color: #f3f3f3;
+  padding: 0 1rem;
+  width: 100%;
+  min-height: 3.5rem;
+  margin-top: 0.4rem;
+  margin-left: 2rem;
 }
 
-.SaveButton:hover{
-    background-color: #FFAF00;
-}
-.SaveButton:active{
-    background-color: #ffc300;
-}
-
-.DeleteButton{
-    width: 12rem;
-    height: 3rem;
-    color: #ffffff;
-    background-color: #E11D1D;
-    border: 0;
-    border-radius: 0.4rem;
-    font-family: "Montserrat-Bold";
-    font-size: 1.25rem;
-    cursor: pointer;
-    transition: 0.2s;
-    float:right;
-    margin-right: 10%;
+.SaveButton {
+  height: 3rem;
+  color: #ffffff;
+  width: 13rem;
+  background-color: #ffc300;
+  border: 0;
+  border-radius: 0.4rem;
+  font-family: "Montserrat-Bold";
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-left: 10%;
+  float: left;
 }
 
-.DeleteButton:hover{
-    background-color: rgb(182, 22, 22);
+.SaveButton:hover {
+  background-color: #ffaf00;
+}
+.SaveButton:active {
+  background-color: #ffc300;
 }
 
-.DeleteButton:active{
-    background-color: #E11D1D;
+.DeleteButton {
+  width: 12rem;
+  height: 3rem;
+  color: #ffffff;
+  background-color: #e11d1d;
+  border: 0;
+  border-radius: 0.4rem;
+  font-family: "Montserrat-Bold";
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: 0.2s;
+  float: right;
+  margin-right: 10%;
 }
 
-.ButtonContainer{
-    margin: 0 auto;
-    margin-top: 15rem;
-    width: 27.5rem;
-    margin-bottom: 2rem;
+.DeleteButton:hover {
+  background-color: rgb(182, 22, 22);
 }
 
-.texto{
-    font-family: "Montserrat-Bold";
-    font-size: 1.25rem;
-    margin-left:1rem;
+.DeleteButton:active {
+  background-color: #e11d1d;
 }
 
-.tex{
-    color: #013565;
-    font-family:'Montserrat-Bold';
+.ButtonContainer {
+  margin: 0 auto;
+  margin-top: 15rem;
+  width: 27.5rem;
+  margin-bottom: 2rem;
+}
+
+.texto {
+  font-family: "Montserrat-Bold";
+  font-size: 1.25rem;
+  margin-left: 1rem;
+}
+
+.tex {
+  color: #013565;
+  font-family: "Montserrat-Bold";
   font-size: 2rem;
   margin-left: 1.3rem;
 }
 
-.hr{
-    color:#FFAF00
+.hr {
+  color: #ffaf00;
 }
-.Navigation{
-    display: flex;
-    margin-top: 6rem;
+.Navigation {
+  display: flex;
+  margin-top: 6rem;
 }
