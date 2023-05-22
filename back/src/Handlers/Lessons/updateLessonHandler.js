@@ -2,7 +2,21 @@ const updateLesson = require("../../Controllers/Lessons/updateLessonsController"
 const { LessonDetail } = require("../../db");
 const updateLessons = async (req, res) => {
   const { id } = req.params;
-  const { effort, shortDescription, image, goals, name, description, scheduleDays , scheduleHourStart, scheduleHourFinish, isAvailable } = req.body;
+  const { 
+    effort, 
+    shortDescription, 
+    image, 
+    goals, 
+    name, 
+    description, 
+    scheduleDays , 
+    scheduleHourStart, 
+    scheduleHourFinish, 
+    isAvailable, 
+    monitor,
+    branchOffice,
+    types
+  } = req.body;
   try {
     const updatedLesson = await updateLesson(
       id,
@@ -15,7 +29,10 @@ const updateLessons = async (req, res) => {
       scheduleDays , 
       scheduleHourStart, 
       scheduleHourFinish,
-      isAvailable
+      isAvailable,
+      monitor,
+      branchOffice,
+      types
     );
     res.status(200).json(updatedLesson);
   } catch (error) {
