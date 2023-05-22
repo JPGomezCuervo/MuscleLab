@@ -7,7 +7,6 @@ const {getDetailLessonHandler}=require('../Handlers/Lessons/getDetailLessonHandl
 const getDeletedLessons=require('../Handlers/Lessons/getDeletedLessonsHandler');
 const restoreDeletedLesson = require("../Handlers/Lessons/restoreDeletedLessonsHandler");
 const updateLessons = require('../Handlers/Lessons/updateLessonHandler');
-const updateLessonsDetails = require('../Handlers/Lessons/updateDetailLessonsHandler');
 const getLessonById = require('../Handlers/Lessons/getLessonById');
 const getEveryLesson = require('../Handlers/Lessons/getEveryLessonHandler');
 
@@ -20,7 +19,6 @@ server.get('/detail/:id', getLessonById);
 server.delete("/delete/:id", deleteMyLesson);
 server.put('/restore/:id', restoreDeletedLesson);
 server.put('/update/:id', updateLessons);
-server.put('/updateDetail/:id', updateLessonsDetails);
 server.get('/:name', getDetailLessonHandler);
 
 

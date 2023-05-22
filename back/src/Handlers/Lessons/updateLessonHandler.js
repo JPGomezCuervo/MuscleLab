@@ -2,20 +2,20 @@ const updateLesson = require("../../Controllers/Lessons/updateLessonsController"
 const { LessonDetail } = require("../../db");
 const updateLessons = async (req, res) => {
   const { id } = req.params;
-  const lesson = await LessonDetail.findOne({ where: { id: id } });
-  const idLesson = lesson.lessonId;
-  console.log(idLesson);
-  const { effort, shortDescription, image, goals } = req.body;
-
-  console.log("este NO es el detail", req.body);
-
+  const { effort, shortDescription, image, goals, name, description, scheduleDays , scheduleHourStart, scheduleHourFinish, isAvailable } = req.body;
   try {
     const updatedLesson = await updateLesson(
-      idLesson,
+      id,
       effort,
       shortDescription,
       image,
-      goals
+      goals,
+      name, 
+      description, 
+      scheduleDays , 
+      scheduleHourStart, 
+      scheduleHourFinish,
+      isAvailable
     );
     res.status(200).json(updatedLesson);
   } catch (error) {
