@@ -1,5 +1,4 @@
-const { Lessons, LessonDetail, ExercisesType, User, BranchOffice } = require("../../db");
-const { Op } = require("sequelize");
+const {Lessons} = require("../../db");
 const {getDetailLesson}= require('./getDetail');
 
 const getEveryLesson =async ()=>{
@@ -19,6 +18,7 @@ const getEveryLesson =async ()=>{
                         effort: el.effort,
                         goals: el.goals,
                         shortDescription: shortDescription[i].shortDescription,
+                        description:el.description,
                         scheduleDays: el.scheduleDays,
                         scheduleHourStart: el.scheduleHourStart,
                         scheduleHourFinish: el.scheduleHourFinish,

@@ -9,6 +9,7 @@ let createUser = async (
   isMonitor,
   isAdmin
 ) => {
+
   const foundedUser = await User.findOne({ where: { email: email } });
   if (foundedUser) {
     throw new Error("That email has already been registered ");
