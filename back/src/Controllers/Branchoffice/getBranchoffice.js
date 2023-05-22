@@ -1,9 +1,9 @@
 const { BranchOffice } = require("../../db");
 
-const getBranchoffice = async () => {
+const getBranchOffice = async () => {
   const branchOffice = await BranchOffice.findAll({
     where: { deletedAt: null },
   });
   return branchOffice;
 };
-module.exports = getBranchoffice;
+module.exports = getBranchOffice;
