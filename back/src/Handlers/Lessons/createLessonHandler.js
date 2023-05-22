@@ -16,7 +16,6 @@ const createNewLesson = async (req, res) => {
     monitor,
     branchoffice,
   } = req.body;
-  console.log("esto es el req.body", req.body);
   try {
     const newLesson = await createLesson(
       id,
