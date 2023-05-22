@@ -6,7 +6,7 @@ import { branchOfficeCleaner } from "../../utils/cleanerUtils";
 const fetchAllOffices = createAsyncThunk(
     'offices/fetchAllOffices', async () => {
         try {
-            const response = await axios.get(`${URL}/branchOffice`);
+            const response = await axios.get(`${URL}/branchoffice`);
             return response.data
         } catch (error){
             console.log(error.response.data);
@@ -18,7 +18,7 @@ const fetchAllOffices = createAsyncThunk(
 const fetchOfficeByID = createAsyncThunk(
     'offices/fetchOfficeByID', async (id) => {
         try {
-            const response = await axios.get(`${URL}/branchOffice/${id}`);
+            const response = await axios.get(`${URL}/branchoffice/${id}`);
             return response.data
         } catch (error){
             throw new Error (error.response)

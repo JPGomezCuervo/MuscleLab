@@ -31,7 +31,7 @@ const monitorsCleaner = (data) => {
 };
 
 const branchOfficeCleaner = (data) => {
-    return data.branchOffice;
+    return data.branchoffice;
 };
 
 export { cleaner, individualLessonCleaner, typesCleaner, userCleaner, monitorsCleaner, goalsCleaner, branchOfficeCleaner}

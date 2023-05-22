@@ -3,7 +3,7 @@ const lessons = require("./lessons");
 const users = require("./users");
 const memberships = require("./memberships");
 const types = require("./types");
-const branchOffice = require("./branchOffice");
+const branchoffice = require("./branchoffice");
 const goals = require('./goals');
 
 const router = Router();
@@ -13,6 +13,6 @@ router.use("/types", types);
 router.use("/users", users);
 router.use("/goals", goals);
 router.use("/memberships", memberships);
-router.use("/branchOffice", branchOffice);
+router.use("/branchoffice", branchoffice);
 
 module.exports = router;

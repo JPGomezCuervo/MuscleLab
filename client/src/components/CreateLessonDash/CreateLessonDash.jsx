@@ -33,7 +33,7 @@ class EditLessonDash extends Component {
                 goals: [],
                 isAvailable: null,
                 monitor: '',
-                branchOffice: [],
+                branchoffice: [],
              },
             errors: {
                 name: '',
@@ -47,7 +47,7 @@ class EditLessonDash extends Component {
                 types: '',
                 goals: '',
                 monitor: '',
-                branchOffice: '',
+                branchoffice: '',
             },
             horaInicio: '',
             allowSubmit: false,
@@ -390,12 +390,12 @@ class EditLessonDash extends Component {
                             {errors.monitor && <p className={style.Error}>{errors.monitor}</p>}
                             <div>
                                 <label className={style.Profesor}>Sede*</label>
-                                <select onChange={this.handleBranchOfficeOptions} name='branchOffice'>
+                                <select onChange={this.handleBranchOfficeOptions} name='branchoffice'>
                                     <option value='Seleccione'>Seleccione</option>
                                     {this.generateBranchOfficeOptions().map((option) => option)}
                                 </select>
                             </div>
-                            {errors.branchOffice && <p className={style.Error}>{errors.branchOffice}</p>}
+                            {errors.branchoffice && <p className={style.Error}>{errors.branchoffice}</p>}
                         </div>
                         
                         
