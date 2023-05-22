@@ -21,6 +21,7 @@ let createLesson = async (id, name, effort, goals, shortDescription, description
     ["scheduleHourFinish", scheduleHourFinish],
     ["types", types]
   ];
+  console.log(branchOffice);
   const dbGoals=await getGoals();
   let checkGoals=true;
   if(areTypes.length===0){
