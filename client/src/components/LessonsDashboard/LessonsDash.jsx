@@ -75,7 +75,7 @@ const LessonsDash = ()=> {
               return response.json();
             } else {
               // Otro código de estado
-              throw new Error("Error de red");
+              throw new Error("Error");
             }
           })
           .then((data) => {

@@ -118,4 +118,3 @@ export const selectStatus = (state) => state.users.status;
 export const selectError = (state) => state.users.error;
 export default usersSlice.reducer;
 export { fetchAllUsers, fetchAllMonitors, fetchUserByID };
-
