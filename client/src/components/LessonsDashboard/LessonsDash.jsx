@@ -162,9 +162,9 @@ return(
                 <Link to={`editar/${el.id}`}>
                     <img src={edit} alt="edit" className={style.icono}/>
                 </Link>
-                <button className={style.btnIcono2} onClick={removeLessonHandler} name={`${el.id}`}>
+                {/* <button className={style.btnIcono2} onClick={removeLessonHandler} name={`${el.id}`}>
                   <img src={trash} alt="trash" className={style.icono}/>
-                </button>
+                </button> */}
               
               </div>
             

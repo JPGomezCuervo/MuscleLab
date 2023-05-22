@@ -8,6 +8,9 @@ const updateLessons = async(req, res,) => {
         image, 
         goals,
     } = req.body;
+    
+    console.log("este NO es el detail",req.body);
+
     try {
         const updatedLesson = await updateLesson( 
             id,

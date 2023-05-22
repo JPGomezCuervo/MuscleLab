@@ -33,7 +33,7 @@ class EditLessonDash extends Component {
                 goals: [],
                 isAvailable: null,
                 monitor: '',
-                branchoffice: [],
+                branchOffice: [],
              },
             errors: {
                 name: '',
@@ -280,12 +280,13 @@ class EditLessonDash extends Component {
         .then((res) => {
             console.log(res);
             this.setState({
-                serverResponse: res.data,
+                serverResponse: res.data.message,
                 message: '',
-            });
+             });
         }).catch((err) => {
+            console.log(err)
             this.setState({
-                serverResponse: err.data,
+                serverResponse: err.message,
                 message: '',
             });
         })
@@ -321,6 +322,7 @@ class EditLessonDash extends Component {
             serverResponse: '',
         });
     };
+
     handlePrevArrow = (event) => {
         event.preventDefault();
         window.location.href = 'http://localhost:3000/dashboard/clases/';
@@ -541,6 +543,7 @@ class EditLessonDash extends Component {
                     <div>
                         {this.state.message && <button className={style.AdvertiseButton1} onClick={this.handleConfirmarClick}>Confirmar</button>}
                         {this.state.message && <button className={style.AdvertiseButton2} onClick={this.handleVolverClick}>Volver</button>}
+                    {this.state.serverResponse && <button className={style.AdvertiseButton2} onClick={this.handleVolverClick}>Volver</button>}
                     </div>
                 </div>
             </div>

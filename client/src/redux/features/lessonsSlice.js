@@ -43,7 +43,18 @@ const fetchLessonsByID = createAsyncThunk(
 
     }
 )
+const fetchLessonByName = createAsyncThunk(
+    "lessons/fetchLessonByName", async (name)=>{
+        try {
+            const response = await axios.get(`${URL}/lessons/${name}`);
+            return response.data
+        } catch (error){
+            // revisar como el back envia los errores
+            throw new Error (error.response) 
+        }
 
+    }
+)
 
 export const cacheMiddleware = store => next => action => {
     if (action.type === 'lessons/fetchAllLessons/fulfilled' && store.getState().lessons.lessons.length > 0) {
@@ -144,6 +155,7 @@ const lessonsSlice = createSlice({
                 //revisar sintaxis del error
                 state.error = action.error;
             })
+            
             .addCase(fetchLessonsByID.fulfilled, (state, {payload}) => {
                 state.lesson = payload;
                 state.error = '';
@@ -173,6 +185,21 @@ const lessonsSlice = createSlice({
                 //revisar sintaxis del error
                 state.error = action.error;
             })
+            .addCase(fetchLessonByName.fulfilled, (state, {payload}) => {
+                state.error = '';
+                state.status = fulfilled;
+                state.lessons = payload;
+            }
+            )
+            .addCase(fetchLessonByName.pending, (state, action) => {
+                state.status = pending;
+                state.error = '';
+            })
+            .addCase(fetchLessonByName.rejected, (state, action) => {
+                state.status = rejected;
+                //revisar sintaxis del error
+                state.error = action.error;
+            })
     }
 })
 
@@ -185,4 +212,4 @@ export const selectError = (state) => state.lessons.error;
 
 export default lessonsSlice.reducer;
 export const { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest, sortByType, sortByIntensityandType, sortByIntensity, clearLessons, clearLesson } = lessonsSlice.actions;
-export { fetchAllLessons, fetchLessonsByID, fetchAllLessonsDashboard }
+export { fetchAllLessons, fetchLessonsByID, fetchAllLessonsDashboard, fetchLessonByName}
