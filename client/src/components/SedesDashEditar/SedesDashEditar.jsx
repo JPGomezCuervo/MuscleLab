@@ -5,13 +5,14 @@ import style from "./SedesDashEditar.module.css";
 import arrowIcon from "../../assets/icons/arrow-yellow.png";
 import { validate } from "../SedesDashCrear/validation";
 import { weekDays } from "../../utils/constants";
+import { URL } from "../../utils/constants";
 const SedesDashEditar = () => {
   const params = useParams();
   const sId = params.id;
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/branchoffice/${sId}`)
+      .get(`${URL}/branchoffice/${sId}`)
       .then((response) => {
         setSedes({
           name: response.data.branchoffice.name,
@@ -92,7 +93,7 @@ const SedesDashEditar = () => {
       alert("Debe completar los campos obligatorios y corregir los errores.");
     } else {
       const id = params.id;
-      const url = `http://localhost:3001/branchoffice/update/${id}`;
+      const url = `${URL}/branchoffice/update/${id}`;
       const confirmacion = window.confirm(
         "¿Estás seguro de guardar los cambios?"
       );
@@ -117,7 +118,7 @@ const SedesDashEditar = () => {
 
   const eliminarSede = () => {
     const id = params.id;
-    const url = `http://localhost:3001/branchoffice/delete/${id}`;
+    const url = `${URL}/branchoffice/delete/${id}`;
 
     // Ventana emergente de confirmación
     const confirmacion = window.confirm(

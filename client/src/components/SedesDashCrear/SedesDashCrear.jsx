@@ -5,7 +5,7 @@ import style from "./SedesDashCrear.module.css";
 import arrowIcon from "../../assets/icons/arrow-yellow.png";
 import { validate } from "./validation";
 import { weekDays } from "../../utils/constants";
-
+import { URL } from "../../utils/constants";
 const SedesDashCrear = () => {
   const [dias, setDias] = useState([]);
   const [horaInicio, setHoraInicio] = useState("");
@@ -86,7 +86,7 @@ const SedesDashCrear = () => {
       console.error("Errores de validación:", errors);
     } else {
       axios
-        .post("http://localhost:3001/branchoffice/create", sedes)
+        .post(`${URL}/branchoffice/create`, sedes)
         .then((res) => {
           alert("Sede creada exitosamente");
           // Realizar acciones adicionales después de crear la sede si es necesario

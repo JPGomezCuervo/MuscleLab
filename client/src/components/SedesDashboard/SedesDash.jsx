@@ -10,6 +10,7 @@ import {
 } from "../../redux/features/officesSlice";
 import edit from "../../assets/icons/edit.png";
 import trash from "../../assets/icons/trash-bin.png";
+import { URL } from "../../utils/constants";
 
 const SedesDash = () => {
   const sedes = useSelector(selectAllOffices);
@@ -69,19 +70,13 @@ const SedesDash = () => {
 
     if (confirmation) {
       try {
-        await fetch(
-          `http://localhost:3001/branchoffice/delete/${id}`,
-          { method: "DELETE" }
-        );
+        await fetch(`${URL}/branchoffice/delete/${id}`, { method: "DELETE" });
 
         setServerResponse(true);
         alert("Borrado con éxito!");
 
         dispatch(clearOffice(id));
-       
-      } catch (error) {
-        
-      }
+      } catch (error) {}
     } else {
       alert("Cancelado por el usuario");
     }
