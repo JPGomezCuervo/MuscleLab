@@ -1,6 +1,6 @@
 const { User } = require("../../db");
 
-let createUser = async (id, fullName, password, email, phone, isMonitor) => {
+let createUser = async (id, fullName, password, email, phone, isMonitor,isAdmin) => {
   const foundedUser = await User.findOne({ where: { email: email } });
   if (foundedUser) {
     throw new Error("That email has already been registered ");
@@ -13,6 +13,7 @@ let createUser = async (id, fullName, password, email, phone, isMonitor) => {
         email,
         phone,
         isMonitor,
+        isAdmin,
       });
 
       return newUser;

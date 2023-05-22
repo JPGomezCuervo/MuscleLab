@@ -21,7 +21,7 @@ const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 
 // Syncing all the models at once.
-
+// !para la base online
 conn
   .sync({ alter: true })
   .then(() => {
@@ -32,6 +32,7 @@ conn
   .catch((error) => {
     console.error("Error syncing models:", error);
   });
+
 //   //!para el local host
 // conn
 // .sync({ alter: true })
@@ -43,3 +44,4 @@ conn
 // .catch((error) => {
 //   console.error("Error syncing models:", error);
 // });
+

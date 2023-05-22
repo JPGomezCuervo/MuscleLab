@@ -13,13 +13,14 @@ const getEveryLesson = require('../Handlers/Lessons/getEveryLessonHandler');
 
 server.get('/', getAllLessonsHandler);
 server.get('/all', getEveryLesson);
+server.get('/:name', getDetailLessonHandler);
 server.get('/deleted', getDeletedLessons);
 server.post("/create", createNewLesson);
 server.get('/detail/:id', getLessonById);
 server.delete("/delete/:id", deleteMyLesson);
 server.put('/restore/:id', restoreDeletedLesson);
 server.put('/update/:id', updateLessons);
-server.get('/:name', getDetailLessonHandler);
+
 
 
 module.exports = server;
