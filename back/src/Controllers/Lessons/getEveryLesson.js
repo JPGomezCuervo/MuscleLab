@@ -18,6 +18,7 @@ const getEveryLesson =async ()=>{
                         effort: el.effort,
                         goals: el.goals,
                         shortDescription: shortDescription[i].shortDescription,
+                        description:el.description,
                         scheduleDays: el.scheduleDays,
                         scheduleHourStart: el.scheduleHourStart,
                         scheduleHourFinish: el.scheduleHourFinish,
