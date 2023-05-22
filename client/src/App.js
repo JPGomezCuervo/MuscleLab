@@ -66,7 +66,7 @@ function App() {
         {/* {isAdmin ? (
           <> */}
             <Route path="/dashboard" element={<LessonsDash />} />
-            <Route path="/dashboard/clases" element={<LessonsDash />} />
+            <Route path="dashboard/clases" element={<LessonsDash />} />
             <Route path="/dashboard/clases/editar/:id" element={<Wrapper />} />
             <Route path="/dashboard/clases/crear" element={<Wrapper />} />
             <Route path="/dashboard/profesores" element={<TrainerDash />} />
@@ -81,8 +81,8 @@ function App() {
             <Route path="/dashboard/usuarios" element={<Users />} />
             <Route path="/dashboard/usuarios/crear" element={<CreateUser />} />
           {/* </>
-        ) : ( */}
-          {/* <Route path="/denegado" element={<login />}></Route>
+        ) : (
+          <Route path="/denegado" element={<login />}></Route>
         )} */}
       </Routes>
       {location.includes("dashboard") ? null : <Footer />}
