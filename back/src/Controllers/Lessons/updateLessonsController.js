@@ -1,14 +1,14 @@
 const { Lessons } = require("../../db");
 
-const updateLesson = async (id, effort, shortDescription, image, goals) => {
-  console.log("antes de founded", id, effort, shortDescription, image, goals);
+const updateLesson = async (idLesson, effort, shortDescription, image, goals) => {
+  console.log("antes de founded", idLesson, effort, shortDescription, image, goals);
   const foundedLesson = await Lessons.findOne({
     where: {
-      id: id,
+      id: idLesson,
     },
   });
   console.log("founded", foundedLesson);
-  console.log("deps de founded", id, effort, shortDescription, image, goals);
+  console.log("deps de founded", idLesson, effort, shortDescription, image, goals);
   if (!foundedLesson) {
     console.log("falla en founded");
     throw new Error("La clase que quieres modificar no existe");

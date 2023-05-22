@@ -1,4 +1,9 @@
 
+.BigBigContainer {
+  position: absolute;
+  display: inline-block;
+  overflow-y: scroll;
+}
 .contenedor{
     
     margin-top: 2rem;    
