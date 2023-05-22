@@ -1,22 +1,28 @@
-
-const  { User }  = require("../../db.js");
+const { User } = require("../../db.js");
 const bcryptjs = require("bcryptjs");
 
-const updateUser = async (id, fullName, password, email, phone) =>{
+const updateUser = async (
+  id,
+  fullName,
+  password,
+  email,
+  phone,
+  isMonitor,
+  isAdmin
+) => {
   try {
     const foundedUser = await User.findOne({
-      where:{
-        id:id
-      }
+      where: {
+        id: id,
+      },
     });
-
-    if(!foundedUser){
-      throw new Error('El usuario que deseas modificar no existe');
-    };
-    if(!fullName || !email || !phone || !password){
-      throw new Error('todos los campos son obligatorios');
-    };
-    if(password){
+    if (!foundedUser) {
+      throw new Error("El usuario que deseas modificar no existe");
+    }
+    if (!fullName || !email || !phone || !password) {
+      throw new Error("todos los campos son obligatorios");
+    }
+    if (password) {
       const passwordHash = await bcryptjs.hash(password, 8);
       foundedUser.password = passwordHash;
     }
@@ -24,13 +30,13 @@ const updateUser = async (id, fullName, password, email, phone) =>{
     foundedUser.fullName = fullName;
     foundedUser.email = email;
     foundedUser.phone = phone;
-
+    foundedUser.isAdmin = isAdmin;
+    foundedUser.isMonitor = isMonitor;
     await foundedUser.save();
-    return "Usuario actualizado correctamente"
+    return "Usuario actualizado correctamente";
   } catch (error) {
     throw new Error(error.message);
   }
 };
 
 module.exports = updateUser;
- 
