@@ -8,6 +8,13 @@
         background-color: rgb(255, 255, 255);
 }
 
+.BigBigContainer {
+    position: absolute;
+    display: inline-block;
+    overflow-y: scroll;
+    height: 60wh;
+  }
+
 .ArrowIcon{
     height: 3.5rem;
     transform: rotate(90deg);
