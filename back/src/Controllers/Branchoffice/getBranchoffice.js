@@ -1,8 +1,13 @@
 const { BranchOffice } = require("../../db");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const getBranchOffice = async () => {
   const branchOffice = await BranchOffice.findAll({
+=======
+const getBranchoffice = async () => {
+  const branchoffice = await BranchOffice.findAll({
+>>>>>>> parent of 8837a9b (log create lesson)
 =======
 const getBranchoffice = async () => {
   const branchoffice = await BranchOffice.findAll({

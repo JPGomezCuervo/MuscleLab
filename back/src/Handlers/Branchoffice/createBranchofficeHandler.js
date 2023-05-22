@@ -13,7 +13,11 @@ const createNewBranchOffice = async (req, res) => {
     res.status(201).json({
       message: "sucursal creada correctamente",
 <<<<<<< HEAD
+<<<<<<< HEAD
       branchOffice: newBranchOffice,
+=======
+      branchoffice: newBranchoffice,
+>>>>>>> parent of 8837a9b (log create lesson)
 =======
       branchoffice: newBranchoffice,
 >>>>>>> parent of 8837a9b (log create lesson)
