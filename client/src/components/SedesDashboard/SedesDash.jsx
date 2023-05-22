@@ -91,6 +91,7 @@ const SedesDash = () => {
   
 
   return (
+    <div className={style.BigBigContainer}>
     <div className={style.ImageContainer}>
 
       <div className={style.contNombre}>
@@ -136,6 +137,7 @@ const SedesDash = () => {
 
 
 
+    </div>
     </div>
   )
 }
