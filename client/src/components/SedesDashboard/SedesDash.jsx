@@ -22,8 +22,6 @@ const SedesDash = () => {
     dispatch(fetchAllOffices());
   }, [dispatch, serverResponse]);
 
-  console.log(sedes);
-
   // const removeSedeHandler = async (id) => {
   //   //const id = event.target.name;
   //  // console.log(event)
@@ -64,6 +62,7 @@ const SedesDash = () => {
   // }
 
   const removeSedeHandler = async (id) => {
+    console.log(id);
     const confirmation = window.confirm(
       "Esta acción no se podrá revertir!\nPulse OK o Cancelar."
     );
@@ -71,7 +70,7 @@ const SedesDash = () => {
     if (confirmation) {
       try {
         await fetch(
-          `https://musclelabii.onrender.com/branchoffice/delete/${id}`,
+          `http://localhost:3001/branchoffice/delete/${id}`,
           { method: "DELETE" }
         );
 
@@ -79,10 +78,9 @@ const SedesDash = () => {
         alert("Borrado con éxito!");
 
         dispatch(clearOffice(id));
-        // Eliminar la sede eliminada del estado
+       
       } catch (error) {
-        console.log(error);
-        // Manejar el error de red aquí
+        
       }
     } else {
       alert("Cancelado por el usuario");
@@ -109,9 +107,12 @@ const SedesDash = () => {
                   <div className={style.detalle}>
                     <h2 className={style.texto}>Nombre: {sede.name}</h2>
                     <h2 className={style.texto}>Dirección: {sede.location}</h2>
-                    <h2 className={style.texto}>Días: {sede.scheduleDays?.join(", ")}</h2>
                     <h2 className={style.texto}>
-                      Horario de atanción: {sede.scheduleHourStart}hs - {sede.scheduleHourFinish}hs
+                      Días: {sede.scheduleDays?.join(", ")}
+                    </h2>
+                    <h2 className={style.texto}>
+                      Horario de atanción: {sede.scheduleHourStart}hs -{" "}
+                      {sede.scheduleHourFinish}hs
                     </h2>
 
                     <div className={style.divCont}>
