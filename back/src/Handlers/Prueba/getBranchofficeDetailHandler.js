@@ -1,6 +1,6 @@
-const getDetail = require("../../Controllers/Branchoffice/getBranchofficeDetail");
+const getDetail = require("../../Controllers/Prueba/getBranchofficeDetail");
 
-const getBranchofficeDetail = async (req, res) => {
+const getBranchOfficeDetail = async (req, res) => {
   const { id } = req.params;
   try {
     let branchoffice = await getDetail(id);
@@ -9,4 +9,4 @@ const getBranchofficeDetail = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-module.exports = getBranchofficeDetail;
+module.exports = getBranchOfficeDetail;

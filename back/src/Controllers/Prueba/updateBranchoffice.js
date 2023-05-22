@@ -1,5 +1,5 @@
 const { BranchOffice } = require("../../db");
-let updateBranchoffice = async (
+let updateBranchOffice = async (
   id,
   name,
   location,
@@ -19,4 +19,4 @@ let updateBranchoffice = async (
   return `Sucursal ${toUpdate.name} fue editada con exito`;
 
 };
-module.exports = updateBranchoffice;
+module.exports = updateBranchOffice;
