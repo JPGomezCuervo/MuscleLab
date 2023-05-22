@@ -27,8 +27,8 @@ import AdminBar from "./components/AdminBar/AdminBar";
 import Wrapper from "./components/Wrapper/Wrapper";
 import TrainerDash from "./components/TrainerDash/TrainerDash";
 import EditTrainerDash from './components/EditTrainerDash/EditTrainerDash';
-
-
+import CreatePlan from './components/CreatePlan/CreatePlan'
+import PlanDashEditar from './components/EditarPlan/EditarPlan'
 
 function App() {
   const location = useLocation().pathname;
@@ -59,6 +59,9 @@ function App() {
       <Route path='/dashboard/profesores' element={<TrainerDash/>} />
       <Route path= 'dashboard/clases' element={<LessonsDash/>} />
       <Route path= '/dashboard/profesores/editar/:id' element={<EditTrainerDash/>}/>
+      <Route path= '/dashboard/profesores/crear' element={<CreateUser/>}/>
+      <Route path= '/dashboard/plans/crear' element={<CreatePlan/>}/>
+      <Route path= '/dashboard/plans/editar/:id' element={<PlanDashEditar/>}/>
       
        
 

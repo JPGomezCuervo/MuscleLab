@@ -1,10 +1,18 @@
 import style from "./Plans.module.css"
+import { fetchAllMemberships ,  selectAllMemberships } from "../../redux/features/membershipsSlice"
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 import muscleIcon from "../../assets/icons/Bicep.png"
 import muscleManIcon from "../../assets/icons/man-silhouette.png"
 import clockIcon from "../../assets/icons/clock.png"
 import checkIcon from "../../assets/icons/check.png"
 
-const Plans = () =>{
+const Plans = ( plan, index) =>{
+    
+
+    const {name, price, benefits, duration}= plan;
+
+
     return(
             <div className={style.BGContainer}>
                 <div className={style.TitleContainer}>
@@ -18,24 +26,24 @@ const Plans = () =>{
                         <div className={style.Title}>Plan Standard</div>
                         <div className={style.PlanContainer1}>
                             <img className={style.MainIcon} src={clockIcon} alt="" />
-                            <h2>Muscle Standard</h2>
+                            <h2>{name}</h2>
 
                             <div className={style.OpcionsContainer}>
                                 <img className={style.CheckIcon} src={checkIcon} alt="" />
-                                <h3>Lorem Ipsum</h3>
+                                <h3>{benefits}</h3>
                             </div>
                                 
-                            <div className={style.OpcionsContainer}>
+                            {/* <div className={style.OpcionsContainer}>
                                 <img className={style.CheckIcon} src={checkIcon} alt="" />
-                                <h3>Lorem Ipsum</h3>
-                            </div>
+                                <h3>{price}</h3>
+                            </div> */}
 
                             <div className={style.OpcionsContainer}>
                                 <img className={style.CheckIcon} src={checkIcon} alt="" />
-                                <h3>Lorem Ipsum</h3>
+                                <h3>{duration}</h3>
                             </div>
 
-                            <h4>ARS 114.950 por mes</h4>
+                            <h4>{price}</h4>
                             <button>Compra ahora</button>
                         </div>
                     </div>
