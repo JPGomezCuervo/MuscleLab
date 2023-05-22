@@ -182,7 +182,7 @@
 .ButtonContainer{
     margin: 0 auto;
     margin-top: 30rem;
-    width: 27.5rem;
+    width: 12rem;
     margin-bottom: 2rem;
 }
 
@@ -219,6 +219,7 @@
     font-size: 1.25rem;
     cursor: pointer;
     transition: 0.2s;
+    margin: 0 auto;
 }
 
 .SaveButton:hover{
@@ -317,6 +318,23 @@
     padding-bottom: .5rem;
     margin-bottom: 2rem;
     
+}
+
+.AdvertiseButton3{
+    display: block;
+    background-color: #ffc300;
+    color: white;
+    font-family: 'Montserrat-Regular';
+    font-weight: 900;
+    border: 0;
+    border-radius: .4rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: .3s;
+    width: 7rem;
+    height: 4rem;
+    margin: 0 auto;
+    text-decoration: none;
 }
 
 .AdvertiseButton1:hover, .AdvertiseButton2:hover{

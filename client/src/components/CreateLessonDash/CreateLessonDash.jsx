@@ -543,7 +543,9 @@ class EditLessonDash extends Component {
                     <div>
                         {this.state.message && <button className={style.AdvertiseButton1} onClick={this.handleConfirmarClick}>Confirmar</button>}
                         {this.state.message && <button className={style.AdvertiseButton2} onClick={this.handleVolverClick}>Volver</button>}
-                    {this.state.serverResponse && <button className={style.AdvertiseButton2} onClick={this.handleVolverClick}>Volver</button>}
+                        
+                        {this.state.serverResponse && <a href='http://localhost:3000/dashboard/clases' className={style.AdvertiseButton3} >Volver</a>}
+               
                     </div>
                 </div>
             </div>
