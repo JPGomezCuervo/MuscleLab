@@ -38,7 +38,7 @@ const validations = (value, name, errors, lessonAttributes) => {
         case 'monitor':
             return monitorValidation(value, errors, name);
 
-        case 'branchOffice':
+        case 'branchoffice':
             return branchOfficeValidation(value, errors, name);
 
         default:

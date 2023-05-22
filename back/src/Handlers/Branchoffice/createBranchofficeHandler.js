@@ -1,4 +1,4 @@
-const createBranchOffice = require("../../Controllers/BranchOffice/createBranchOffice")
+const createBranchOffice = require("../../Controllers/BranchOffice/createBranchoffice")
 
 const createNewBranchOffice = async (req, res) => {
   const { id, name, location, scheduleDays, scheduleHours } = req.body;

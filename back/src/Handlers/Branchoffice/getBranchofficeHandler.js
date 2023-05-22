@@ -1,4 +1,4 @@
-const getBranchOffice = require("../../Controllers/BranchOffice/getBranchOffice");
+const getBranchOffice = require("../../Controllers/BranchOffice/getBranchoffice");
 
 const getAllBranchOffice = async (req, res) => {
   try {
