@@ -279,15 +279,16 @@ class EditLessonDash extends Component {
         axios.post(`${URL}/lessons/create`, this.state.lessonAttributes)
         .then((res) => {
             console.log(res);
-            this.setState({
-                serverResponse: res.data,
-                message: '',
-            });
+            // this.setState({
+            //     serverResponse: res.data,
+            //     message: '',
+            //  });
         }).catch((err) => {
-            this.setState({
-                serverResponse: err.data,
-                message: '',
-            });
+            console.log(err)
+            // this.setState({
+            //     serverResponse: err.data,
+            //     message: '',
+            // });
         })
     };
 
