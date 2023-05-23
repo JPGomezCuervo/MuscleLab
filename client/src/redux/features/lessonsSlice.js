@@ -49,10 +49,8 @@ const fetchLessonsByID = createAsyncThunk(
 const fetchLessonByName = createAsyncThunk(
   "lessons/fetchLessonByName",
   async (name) => {
-    console.log("llega a hacer");
     try {
       const response = await axios.get(`${URL}/lessons/${name}`);
-      console.log("esto es :", response.data);
       return response.data;
     } catch (error) {
       console.log(error.message);

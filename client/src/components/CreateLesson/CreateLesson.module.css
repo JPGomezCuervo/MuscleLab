@@ -143,3 +143,7 @@ select {
   margin-top: 1rem;
   cursor: pointer;
 }
+
+ .Error {
+  color: #E11D1D;
+}

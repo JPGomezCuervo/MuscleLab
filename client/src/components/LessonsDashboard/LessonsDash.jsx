@@ -11,8 +11,6 @@ import plusIcon from '../../assets/icons/plus.png'
 
 
 
-console.log("estas aca?");
-
 
 const LessonsDash = ()=> {
 
@@ -38,7 +36,6 @@ const LessonsDash = ()=> {
     //   const id = event.target.name;    
     //   let text = "Esta acción no se podrá revertir!\nPulse OK o Cancelar.";
     //   if (window.confirm(text) === true) {
-    //     console.log(id)
     //     fetch("https://musclelabii.onrender.com/lessons/delete/" + id, { method: "DELETE" })
     //       .then((response) => {
     //         setServerResponse(true, response);
@@ -59,7 +56,6 @@ const LessonsDash = ()=> {
     
       let text = "Esta acción no se podrá revertir!\nPulse OK o Cancelar.";
       if (window.confirm(text) === true) {
-        console.log(id);
         // Eliminar directamente del servidor
         fetch("https://musclelabii.onrender.com/lessons/delete/" + id, { method: "DELETE" })
           .then((response) => {

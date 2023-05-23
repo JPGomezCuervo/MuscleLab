@@ -98,7 +98,6 @@ const SedesDashEditar = () => {
         "¿Estás seguro de guardar los cambios?"
       );
       if (confirmacion) {
-        console.log(sedes);
         axios
           .put(url, sedes)
           .then((res) => {
