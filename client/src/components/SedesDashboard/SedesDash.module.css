@@ -1,9 +1,15 @@
 
+.BigBigContainer {
+  position: absolute;
+  display: inline-block;
+  overflow-y: scroll;
+}
 .contenedor{
     
     margin-top: 2rem;    
     display: flex;
     flex-wrap: wrap;
+    height: 60vh;
 
 }
 

@@ -36,8 +36,6 @@ const getLessonDetailId = async (id) => {
             }
         }
     });
-    console.log(lesson);
-    //console.log(monitorRaw);
     const offices = officeRaw.map(o => { return { name: o.dataValues.name, lessons: o.dataValues.lessonDetails } });
     const monitors = monitorRaw.map(m => { return { name: m.dataValues.fullName, lesson: m.dataValues.lessonDetails } });
     const types = lesson.dataValues.exercisesTypes.map((e) => {

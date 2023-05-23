@@ -19,10 +19,14 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       scheduleDays: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: false,
+      },
+      scheduleHourStart: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      scheduleHours: {
+      scheduleHourFinish: {
         type: DataTypes.STRING,
         allowNull: false,
       },

@@ -75,7 +75,7 @@ const NavBar = () => {
         <div className={style.LogOpcions}>
           {/* <Link to={"/login"}> */}
           {token && (
-            <Link to="dashboard">
+            <Link to="dashboard/clases">
               <button className={style.btnRegistro1} >dashboard</button>
             </Link>
           )}

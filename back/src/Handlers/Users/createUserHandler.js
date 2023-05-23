@@ -1,7 +1,8 @@
 const createUser = require("../../Controllers/Users/createUser");
 const bcryptjs = require("bcryptjs");
 const createNewUser = async (req, res) => {
-  const { id, fullName, email, phone, isMonitor } = req.body;
+  
+  const { id, fullName, email, phone, isMonitor, isAdmin } = req.body;
   const password = req.body.password;
   try {
     let passwordHash = await bcryptjs.hash(password, 8);
@@ -11,7 +12,8 @@ const createNewUser = async (req, res) => {
       passwordHash,
       email,
       phone,
-      isMonitor
+      isMonitor,
+      isAdmin
     );
     res.status(201).json({
       message: "Usuario creado correctamente",

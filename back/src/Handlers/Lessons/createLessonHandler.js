@@ -16,7 +16,6 @@ const createNewLesson = async (req, res) => {
     monitor,
     branchoffice,
   } = req.body;
-  console.log("esto es el req.body", req.body);
   try {
     const newLesson = await createLesson(
       id,
@@ -37,7 +36,7 @@ const createNewLesson = async (req, res) => {
       .status(201)
       .json({ message: "Lesson created succesfully", lesson: newLesson });
   } catch (error) {
-    res.status(400).json(error.message);
+    res.status(400).json({error:error.message});
   }
 };
 module.exports = createNewLesson;
