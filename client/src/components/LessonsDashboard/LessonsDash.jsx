@@ -1,12 +1,12 @@
 import React from "react";
 import style from "./LessonsDash.module.css"
-import { selectAllLessonsDashboard, fetchAllLessonsDashboard, clearLesson } from "../../redux/features/lessonsSlice";
+import { selectAllLessonsDashboard, fetchAllLessonsDashboard, clearLesson, selectStatus } from "../../redux/features/lessonsSlice";
 import { selectSelectedTypes, setSelectedTypes } from "../../redux/features/filtersSlice";
 import { useSelector , useDispatch} from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect , useState} from "react";
 import edit from "../../assets/icons/edit.png"
-import trash from "../../assets/icons/trash-bin-blue.png"
+import loadingGif from '../../assets/gifs/loading.gif'
 import plusIcon from '../../assets/icons/plus.png'
 
 
@@ -15,16 +15,13 @@ import plusIcon from '../../assets/icons/plus.png'
 const LessonsDash = ()=> {
 
     const allLessons = useSelector(selectAllLessonsDashboard);
-
+    const status = useSelector(selectStatus);
     
 
     const selectedTypes = useSelector(selectSelectedTypes);
 
     const dispatch = useDispatch();
     const navigate= useNavigate();
-
-   
-    
     
     const [serverResponse, setServerResponse] = useState(true);
 
@@ -103,7 +100,6 @@ const LessonsDash = ()=> {
 
 return(
   <>
-
   <div className={style.contenedor}>
 
     <Link to= 'crear'>
@@ -115,7 +111,7 @@ return(
     <hr className={style.hr}/>  
 
     <div className={style.divSelect}>
-      <select onChange={handleFilterTypes} value={selectedTypes} className={style.seleccion}>
+      <select onChange={handleFilterTypes}className={style.seleccion}>
         <option value="">All</option>
         <option value="Fuerza">Fuerza</option>
         <option value="Cardio">Cardio</option>
@@ -133,6 +129,7 @@ return(
       </select>
     </div>
 
+      {status === "loading" && <img className={style.LoadingIcon} src={loadingGif} alt=""/>}
     <div className={style.contenedorTodo}>
       {allLessons ? (
         allLessons

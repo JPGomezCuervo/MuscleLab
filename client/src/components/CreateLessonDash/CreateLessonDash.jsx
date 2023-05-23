@@ -380,7 +380,7 @@ class EditLessonDash extends Component {
                             <label>Intensidad*</label>
                             <input placeholder='Intensidad' value={lessonAttributes.effort} type='text' id='effort' name='effort' onChange={this.handleChange}/>
                         </div>
-                        {errors.effort && <p className={style.Error}>{errors.effort}</p>}
+                        {errors.effort && <p className={style.Errors}>{errors.effort}</p>}
                         
                         <div className={style.SelectorContainer}>
                             <div>
