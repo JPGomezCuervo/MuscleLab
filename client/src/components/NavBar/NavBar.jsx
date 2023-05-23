@@ -19,17 +19,6 @@ const NavBar = () => {
   const handleClickPlan = () => {
     dispatch(setPlansCLick(true));
   };
-
-  const {
-    loginWithPopup,
-    //loginWithRedirect,
-    logout,
-    user,
-    isLoading,
-    error,
-    isAuthenticated,
-    getAccessTokenSilent,
-  } = useAuth0();
   const token = localStorage.getItem("token");
   const handleLogOut = () => {
     localStorage.removeItem("token");
@@ -76,46 +65,25 @@ const NavBar = () => {
           {/* <Link to={"/login"}> */}
           {token && (
             <Link to="dashboard/clases">
-              <button className={style.btnRegistro1} >dashboard</button>
+              <button className={style.btnRegistro1}>dashboard</button>
             </Link>
           )}
-
-          <Link to="/login">
-            <button className={style.btnRegistro1} onClick={handleLogOut}>
-              logout
-            </button>
-          </Link>
-          {!isAuthenticated && (
-            <button className={style.btnRegistro1} onClick={loginWithPopup}>
-              Sign Up / Login
-            </button>
+          {token && (
+            <Link to="/profile">
+              <button className={style.btnRegistro1}>Mi Perfil</button>
+            </Link>
           )}
-
-          {error && <p>Authentication Error</p>}
-          {!error && isLoading && <p>Loading...</p>}
-          {!error && !isLoading && isAuthenticated && (
-            <button className={style.btnRegistro} onClick={logout}>
-              Cerrar sesion
-            </button>
-          )}
-
-          {/* </Link> */}
-
-          {isAuthenticated && (
-            <div className={style.userLogin}>
-              <span className={style.userName}>
-                Hola, {user.name.split(" ")[0]}
-              </span>
-            </div>
-          )}
-          {isAuthenticated && (
-            <Link to={"/user-face"}>
-              <img
-                className={style.adminIcon}
-                src={adminIcon}
-                alt={user.name}
-              />
-              {/* {<button className={style.btnRegistro}></button>} */}
+          {token ? (
+            <Link to="/login">
+              <button className={style.btnRegistro1} onClick={handleLogOut}>
+                Cerrar sesion
+              </button>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <button className={style.btnRegistro1} onClick={handleLogOut}>
+                Iniciar sesión
+              </button>
             </Link>
           )}
         </div>
