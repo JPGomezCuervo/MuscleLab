@@ -12,6 +12,7 @@ const getDeletedUsers = require("../Handlers/Users/getDeletedUsersHandler");
 const restoreDeletedUser = require("../Handlers/Users/restoreDeletedUserHandler");
 const updateUsers = require("../Handlers/Users/udpateUserHandler");
 const associateLessonHandler= require('../Handlers/Users/associateLessonHandler');
+const removeLessonHandler= require('../Handlers/Users/removeLessonHandler');
 
 server.get("/", getAllUsers);
 server.get("/monitor", getAllMonitor);
@@ -23,5 +24,6 @@ server.post("/login", loginUser);
 server.put("/restore/:id", restoreDeletedUser);
 server.put("/update/:id", updateUsers);
 server.put("/addLesson/:id", associateLessonHandler);
+server.put('/removeLesson/:id', removeLessonHandler);
 
 module.exports = server;
