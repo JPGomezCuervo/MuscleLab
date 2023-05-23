@@ -45,7 +45,6 @@ const Login = () => {
           setPasswordError(response.data.login.message);
         }
       } catch (error) {
-        console.log("entramos al catch");
         alert(error.message);
       }
     }

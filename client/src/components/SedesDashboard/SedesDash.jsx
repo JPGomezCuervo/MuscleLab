@@ -25,8 +25,6 @@ const SedesDash = () => {
 
   // const removeSedeHandler = async (id) => {
   //   //const id = event.target.name;
-  //  // console.log(event)
-  //  console.log(id)
   //   let text = "Esta acción no se podrá revertir!\nPulse OK o Cancelar.";
   //   if (true) {
   //     //console.log(id);
@@ -63,7 +61,6 @@ const SedesDash = () => {
   // }
 
   const removeSedeHandler = async (id) => {
-    console.log(id);
     const confirmation = window.confirm(
       "Esta acción no se podrá revertir!\nPulse OK o Cancelar."
     );

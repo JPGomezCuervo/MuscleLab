@@ -11,7 +11,6 @@ import SignUp from "./components/SignUp/SignUp";
 import NewLessons from "./components/NewLessons/NewLessons";
 import Nosotros from "./components/Nosotros/Nosotros";
 import Dashboard from "./components/Dashboard/Dashboard";
-import CreateLesson from "./components/CreateLesson/CreateLesson";
 import Sedes from "./components/Sedes/Sedes";
 import Users from "./components/Users/Users";
 import CreateUser from "./components/CreateUser/CreateUser";
@@ -34,9 +33,6 @@ import SedeHomeDetalle from "./components/SedeHomeDetalle/SedeHomeDetalle";
 function App() {
   const location = useLocation().pathname;
   const dashAuth = useSelector(selectDashAuth);
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
 
   // let isAdmin = false; // Declaración inicial con valor predeterminado
   // const token = localStorage.getItem("token");
@@ -60,7 +56,6 @@ function App() {
         <Route path="/contactanos" element={<ContactUs />} />
         <Route path="/clases/:name" element={<DetailLesson />} />
         <Route path="/nosotros" element={<Nosotros />} />
-        <Route path="/create" element={<CreateLesson />} />
         <Route path="/sedes" element={<Sedes />} />
         <Route path="/sedes/detalles/:id" element={<SedeHomeDetalle />} />
         {/* <Route path='/dashboard' element={<LessonsDash/>}>

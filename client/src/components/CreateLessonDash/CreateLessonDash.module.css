@@ -370,3 +370,8 @@
     margin-bottom: 2rem; 
     flex-direction: row;
 }
+
+.DetailContainer .Error {
+    color: #E11D1D;
+    font-family: 'Montserrat-Bold';
+  }

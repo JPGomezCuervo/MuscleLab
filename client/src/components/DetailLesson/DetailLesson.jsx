@@ -24,7 +24,7 @@ const DetailLesson = () => {
   useEffect(() => {
     dispatch(fetchLessonByName(params.name));
   }, [dispatch, params.name]);
-console.log(lesson);
+
   return (
     <div>
       <NavBar />
