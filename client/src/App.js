@@ -84,7 +84,7 @@ function App() {
         <Route path="/dashboard/usuarios" element={<Users />} />
         <Route path="/dashboard/usuarios/crear" element={<CreateUser />} />
         <Route path="/dashboard/sedes" element={<SedesDash />} />
-        <Route path="/dashboard/sedes/editar" element={<SedesDashEditar />} />
+        <Route path="/dashboard/sedes/editar:id" element={<SedesDashEditar />} />
         <Route path="/dashboard/sedes/crear" element={<SedesDashCrear />} />
         {/* </>
         ) : (
