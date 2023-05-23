@@ -30,7 +30,8 @@ server.use((req, res, next) => {
   next();
 });
 
-// {//? MIDDLEWARE------------------------------------
+{
+//? MIDDLEWARE------------------------------------
 // const verifyToken = (req, res, next) => {
 //   const bearerHeader = req.headers["authorization"];
 //   if (typeof bearerHeader !== "undefined") {
@@ -78,16 +79,15 @@ server.use((req, res, next) => {
 //       res.json({ contraseñas: ["clave 1", "clave 2", "clave 3"] });
 //     }
 //   });
-// });}
+// });
+}
+
 
 isLooggedIn = (req, res, next) => {
   req.user ? next() : res.sendStatus(401);
 };
 server.get("/", (req, res) => {
   res.send('<a href="/auth/google">Auth with google </a>');
-});
-server.get("/protected", isLooggedIn, (req, res) => {
-  res.send(`Hola! ${req.user.displayName}`);
 });
 server.get(
   "/auth/google",
@@ -104,6 +104,10 @@ server.get("/auth/failure", (req, res) => {
   res.send("something went wrong..");
 });
 
+server.get("/protected", isLooggedIn, (req, res) => {
+  console.log(req.user);
+  res.send(`Hola! ${req.user.fullName}`);
+});
 server.get("/logout", (req, res) => {
   req.session.destroy();
   res.send("ADIOS");
