@@ -1,5 +1,6 @@
 const { Lessons, LessonDetail, User, BranchOffice, ExercisesType } = require("../../db");
 const {Op}= require("sequelize");
+const cloudinary = require('cloudinary').v2;
 
 const updateLesson = async (
   id, 

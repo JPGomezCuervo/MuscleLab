@@ -6,27 +6,20 @@ import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { Auth0Provider } from "@auth0/auth0-react";
-const domain = "dev-6vdarqnmyh1ejaoz.us.auth0.com";
-const clientId = "WsPbppwSiybx7h6ZLLXG0lLaBZydNP4Y";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { clientId } from "./utils/constants";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Auth0Provider
-      domain={domain}
-      clientId={clientId}
-      redirectUri={window.location.origin}
-      audience="musclelabgyms"
-      scope="openid profile email"
-    >
+  <GoogleOAuthProvider clientId={clientId}>
+    <React.StrictMode>
       <Provider store={store}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
       </Provider>
-    </Auth0Provider>
-  </React.StrictMode>
+    </React.StrictMode>
+  </GoogleOAuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

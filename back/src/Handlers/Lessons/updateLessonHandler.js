@@ -1,5 +1,13 @@
 const updateLesson = require("../../Controllers/Lessons/updateLessonsController");
-const { LessonDetail } = require("../../db");
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config;
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET
+});
+
 const updateLessons = async (req, res) => {
   const { id } = req.params;
   const { 
@@ -18,11 +26,18 @@ const updateLessons = async (req, res) => {
     types
   } = req.body;
   try {
+
+    let updatedImage = image;
+    if (image) {
+      const uploadedImage = await cloudinary.uploader.upload(image);
+      updatedImage = uploadedImage.secure_url;
+    }
+
     const updatedLesson = await updateLesson(
       id,
       effort,
       shortDescription,
-      image,
+      updatedImage,
       goals,
       name, 
       description, 
