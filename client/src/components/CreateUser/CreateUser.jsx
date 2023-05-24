@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
 import styles from './CreateUser.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllUsers, selectAllUsers } from '../../redux/features/usersSlice';
@@ -42,7 +42,8 @@ import validation from './validation';
    // eslint-disable-next-line react-hooks/exhaustive-deps
    
   //Mapping server response by Select All Users
-  const mappedUsers = users.user && users?.user.map(user => {
+  const mappedUsers = 
+    users.users && users?.user.map(user => {
     return {
       email: user.email,
     };
@@ -89,7 +90,7 @@ const emailFiltered = mappedUsers && mappedUsers.filter((email) => mappedUsers.e
     return (
     
         <div className={styles.containerCuerpoPpal}>
-           <Link to={'/users'}><button className={styles.btnBack}>Volver usuarios</button></Link>
+           <a href='http://localhost:3000/dashboard/usuarios'><button className={styles.btnBack}>Volver usuarios</button></a>
         <div className={styles.formContainer}>
         <h2 className={styles.title1}>Crear usuario:</h2>
           <form className={styles.form} onSubmit={(e) => createUserHandler(e)}>

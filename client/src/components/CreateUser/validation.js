@@ -41,7 +41,7 @@ export default function validation(inputs) {
      
     //validate phone
      if (!regexPhone.test(inputs.phone)) {
-      errors.phone = "Telefono solo numeros hasta 10 digitos";
+      errors.phone = "Telefono solo numeros, hasta 10 digitos";
        errors.disabled = true;
        errors.edit = true;
      }

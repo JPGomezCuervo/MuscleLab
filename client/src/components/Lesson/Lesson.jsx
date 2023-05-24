@@ -22,10 +22,10 @@ const Lesson = ({lesson, index}) => {
                 <p>{shortDescription}</p>
 
 
-                {<p>Tipo de ejercicio: {exercisesTypes.join(', ')}</p>}
+                {<p>Tipo de ejercicio: {exercisesTypes?.join(', ')}</p>}
                 {<p>Intensidad: {effort}</p>} 
 
-                <Link to={`/clases/detalles/${id}`}>
+                <Link to={`/clases/${name}`}>
                   <button>Más info</button>
                 </Link>
               </div>
@@ -39,7 +39,7 @@ const Lesson = ({lesson, index}) => {
                 {<p>Tipo de ejercicio: {exercisesTypes.join(', ')}</p>}
                 {<p>Intensidad: {effort}</p>} 
 
-                <Link to={`/clases/detalles/${id}`}>
+                <Link to={`/clases/${name}`}>
                   <button>Más info</button>
                 </Link>
               </div>

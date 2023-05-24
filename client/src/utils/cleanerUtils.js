@@ -16,7 +16,10 @@ const individualLessonCleaner = (data) => {
 };
 
 const typesCleaner = (data) => {
-    return data.map((type) =>type.name);
+    return data.map((type) => type.name);
+};
+const goalsCleaner = (data) => {
+    return data.map((goal) => goal.name);
 };
 
 const userCleaner = (data) => {
@@ -27,6 +30,11 @@ const monitorsCleaner = (data) => {
     return data.monitor;
 };
 
-export { cleaner, individualLessonCleaner, typesCleaner, userCleaner, monitorsCleaner}
+const branchOfficeCleaner = (data) => {
+    
+    return data.branchOffice;
+};
+
+export { cleaner, individualLessonCleaner, typesCleaner, userCleaner, monitorsCleaner, goalsCleaner, branchOfficeCleaner}
 
 

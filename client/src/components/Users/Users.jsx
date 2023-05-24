@@ -52,8 +52,9 @@ const Users = () => {
   };
 
   //Mapping server response by Select All Users
+  
   const mappedUsers =
-    users &&
+    users &&  
     users.user?.map((user) => {
       return {
         id: user.id,
@@ -64,9 +65,10 @@ const Users = () => {
         isAdmin: user.isAdmin,
         statusMembershipIdStatus: user.statusMemberShipIdStatus,
       };
-    });
+    })  
 
-  //console.log(users);
+  //console.log('usuarios desde FetchInit:',users);
+  //console.log('usuariosMapeados:',mappedUsers);
 
   //Delete user
   const removeUserHandler = async (event) => {
@@ -116,22 +118,22 @@ const Users = () => {
     if (serverResponse.error) alert("Algo salio mal, intente nuevamente");
   };
 
-  const userFiltered = mappedUsers.filter(
+  const userFiltered = mappedUsers?.filter(
     (user) => user.id === userSelectToEdit
   );
-  console.log("userselect", userSelectToEdit);
-  console.log("respuesta fetch editar", serverResponse.error);
+  //console.log("userselect", userSelectToEdit);
+  //console.log("respuesta fetch editar", serverResponse.error);
 
   return (
     <div className={styles.container}>
-      <div class={styles.buttonContainer}>
-        <h2 class={styles.title}>Formulario de Usuarios</h2>
-      </div>
+
+        <h2 className={styles.title}>Formulario de Usuarios</h2>
+
 
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.th}>.</th>
+            <th className={styles.th}>N°</th>
             <th className={styles.th}>Nombre:</th>
             <th className={styles.th}>Email:</th>
             <th className={styles.th}>Teléfono:</th>
@@ -148,10 +150,11 @@ const Users = () => {
           {!mappedUsers?.length ? (
             <div className={styles.empty}>
               <p>Upss! No hay usuarios para mostrar!</p>
+              <p className={styles.loading}>Loading...</p>
             </div>
           ) : (
             mappedUsers.map((user, index) => (
-              <tr key={user.id}>
+              <tr key={index}>
                 <td className={styles.td}>{index + 1}</td>
                 <td className={styles.td}>{user.fullName}</td>
                 <td className={styles.td}>{user.email}</td>
@@ -159,7 +162,7 @@ const Users = () => {
                 <td className={styles.td}>
                   {user.isMonitor ? "Entrenador" : "Deportista"}
                 </td>
-                <td className={styles.td}>
+                <td className={styles.td} >
                   {user.statusMemberShipIdStatus ? "Activo" : "Inactivo"}
                 </td>
                 <td className={styles.btnCrud}>
@@ -171,7 +174,7 @@ const Users = () => {
                     Editar
                   </button>
                   <button
-                    class={styles.btnEliminarUsuario}
+                    className={styles.btnEliminarUsuario}
                     name={user.id}
                     onClick={removeUserHandler}
                   >
@@ -184,7 +187,7 @@ const Users = () => {
         </tbody>
       </table>
       <div>
-        <Link to={"/users/createuser"}>
+        <Link to={"crear"}>
           <button className={styles.btnCrearUsuario}>Crear nuevo</button>
         </Link>
       </div>
@@ -192,12 +195,14 @@ const Users = () => {
       {/* Emergent window for user edition */}
 
       {windowVisible && (
+        <div>
+          <div className={styles.BigBigContainer}></div>
         <div className={styles.ventanaEmergente}>
           {userFiltered.map((user, index) => (
             <div className={styles.contenido} key={index}>
               {/*Filtrar Nombre de usuario con filter*/}
               <h2 className={styles.title1}>
-                Actualizar datos para Usuario: <p className={styles.title1a}>{user.fullName}</p>
+                 {user.fullName}
               </h2>
 
               <form onSubmit={(e) => editUserHandler(e)}>
@@ -238,8 +243,7 @@ const Users = () => {
                   onChange={(e) => handleChange(e)}
                   className={styles.input}
                 />
-
-                <label htmlFor="phone">Telefono:</label>
+                <label htmlFor="phone" >Telefono:</label>
                 <p className={styles.error}>{errors.edit && errors.phone}</p>
                 <input
                   type="text"
@@ -263,7 +267,7 @@ const Users = () => {
               /> */}
                 {errors.edit ? (
                   <p className={styles.errorForm}>
-                    ⚠️ Revisar el formato de los inputs antes de enviar! ⚠️
+                    ⚠️ Revisar inputs antes de enviar! ⚠️
                   </p>
                 ) : (
                   <p className={styles.validForm}>
@@ -283,6 +287,7 @@ const Users = () => {
               </button>
             </div>
           ))}
+        </div>  
         </div>
       )}
     </div>

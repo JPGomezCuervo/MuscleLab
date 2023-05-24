@@ -4,6 +4,9 @@ import checkIcon from '../../assets/icons/check.png'
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { fetchAllLessonTypes } from '../../redux/features/typesSlice';
+import { fetchAllLessonGoals } from '../../redux/features/goalsSlice';
+import { fetchAllMonitors } from '../../redux/features/usersSlice';
+import { fetchAllOffices } from '../../redux/features/officesSlice';
 import validations from './validations/mainValidation/index';
 import arrayValidations from './validations/arrayValidations/index';
 import { weekDays } from '../../utils/constants';
@@ -28,6 +31,9 @@ class EditLessonDash extends Component {
                 scheduleDays: [],
                 types: [],
                 goals: [],
+                isAvailable: null,
+                monitor: '',
+                branchOffice: [],
              },
             errors: {
                 name: '',
@@ -40,6 +46,8 @@ class EditLessonDash extends Component {
                 scheduleDays: '',
                 types: '',
                 goals: '',
+                monitor: '',
+                branchoffice: '',
             },
             horaInicio: '',
             allowSubmit: false,
@@ -95,6 +103,31 @@ class EditLessonDash extends Component {
         return hours.slice(1);
     }
     
+    generateAvailableOptions = () => {
+        return (
+            <>
+                <option value={true}>Activa</option>
+                <option value={false}> Inactiva </option>
+            </>
+        );
+    };
+
+    generateTrainersOptions = () => {
+
+        return this.props.monitors.map((monitor) => {
+            return (
+                <option key={monitor.id} value={monitor.fullName}>{monitor.fullName}</option>
+            )
+        })
+    };
+
+    generateBranchOfficeOptions = () => {
+        return this.props.offices.map((office) => {
+            return (
+                <option key={office.id} value={office.name}>{office.name}</option>
+            )
+        })
+    };
 
     handleChange = (event) => {
         const name = event.target.name;
@@ -107,16 +140,57 @@ class EditLessonDash extends Component {
             errors: validations(value, name, this.state.errors, this.state.lessonAttributes),
         }, () => {
                 this.setState({
-                    allowSubmit: Object.values(this.state.errors).every((item) => item === '') 
+                    allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
                 });   
         });
         
     };
 
+    handleTrainerOptions = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+            lessonAttributes: {
+                ...this.state.lessonAttributes,
+                [name]: value,
+            },
+        }, () =>{
+            this.setState({
+                errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
+            })
+        }, () => {
+            this.setState({
+                allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
+                });
+
+    });
+
+};
+
+    handleBranchOfficeOptions = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+            lessonAttributes: {
+                ...this.state.lessonAttributes,
+                [name]: [value],
+            },
+        }, () =>{
+            this.setState({
+                errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
+            })
+        }
+        , () => {
+            this.setState({
+                allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
+                });
+        }
+        );
+    };
+
     handleHoursBox = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        console.log(value);
 
         if (name === 'scheduleHourStart') {
             this.setState({
@@ -130,7 +204,7 @@ class EditLessonDash extends Component {
                     errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
                 },() =>{
                     this.setState({
-                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')
+                        allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
                     });
                 });
             });
@@ -147,7 +221,7 @@ class EditLessonDash extends Component {
 
                 }, () => {
                     this.setState({
-                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')
+                        allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
                         });
 
                 })
@@ -159,18 +233,19 @@ class EditLessonDash extends Component {
         const name = event.target.name;
         const value = event.target.value;
         const isChecked = event.target.checked;
+
         if (isChecked) {
             this.setState({
                 lessonAttributes: {
                     ...this.state.lessonAttributes,
                     [name]: [...this.state.lessonAttributes[name], value],
-                },
+                }
             }, () => {
                 this.setState({
                     errors: arrayValidations(this.state.lessonAttributes,this.state.errors, name)
                 }, () => {
                     this.setState({
-                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')});
+                        allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')}) 
                 });
                 
             });
@@ -185,7 +260,7 @@ class EditLessonDash extends Component {
                     errors: arrayValidations(this.state.lessonAttributes, this.state.errors, name)
                 }, () => {
                     this.setState({
-                        allowSubmit: Object.values(this.state.errors).every((item) => item === '')});
+                        allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')});
                     });
 
             });
@@ -199,21 +274,45 @@ class EditLessonDash extends Component {
         });
     };
     handleConfirmarClick = (event) => {
+        JSON.stringify(this.state.lessonAttributes)
         event.preventDefault();
         axios.post(`${URL}/lessons/create`, this.state.lessonAttributes)
         .then((res) => {
             console.log(res);
             this.setState({
-                serverResponse: res.data,
+                serverResponse: res.data.message,
                 message: '',
-            });
+             });
         }).catch((err) => {
-            console.log(err);
+            console.log(err)
             this.setState({
-                serverResponse: err.data,
+                serverResponse: err.message,
                 message: '',
             });
         })
+    };
+
+    handleIsAvailable = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        this.setState({
+            lessonAttributes: {
+                ...this.state.lessonAttributes,
+                [name]: value,
+            },
+        }, () => {
+            this.setState({
+                errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
+            }, () => {
+                this.setState({
+                    allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
+                })
+            })
+
+        });
+
+
     };
 
     handleVolverClick = (event) => {
@@ -223,6 +322,7 @@ class EditLessonDash extends Component {
             serverResponse: '',
         });
     };
+
     handlePrevArrow = (event) => {
         event.preventDefault();
         window.location.href = 'http://localhost:3000/dashboard/clases/';
@@ -230,13 +330,16 @@ class EditLessonDash extends Component {
 
 
     componentDidMount() {
-        const { fetchAllLessonTypes } = this.props;
-         fetchAllLessonTypes();
-         this.inputRef = React.createRef();
+        const { fetchAllLessonTypes, fetchAllLessonGoals, fetchAllMonitors, fetchAllOffices} = this.props;
+        fetchAllLessonTypes();
+        fetchAllLessonGoals();
+        fetchAllMonitors();
+        fetchAllOffices();
+        this.inputRef = React.createRef();
     };
 
     render() {
-        const {lessonsTypes} = this.props;
+        const {lessonsTypes, lessonsGoals} = this.props;
         const {lessonAttributes, errors} = this.state;
 
       return (
@@ -249,7 +352,9 @@ class EditLessonDash extends Component {
                 <h2>{lessonAttributes.name}</h2>
             </div>
 
-            <div className={style.Teacher}> Profesor: Brad Pitt</div>
+            <h1>CREA UNA CLASE</h1>
+
+            <div className={style.Teacher}> {`Profesor: ${lessonAttributes.monitor}`}</div>
             <div className={style.EditContainer}>
                 <div className={style.DetailContainer}>
                     <div className={style.leftContainer}>
@@ -258,6 +363,7 @@ class EditLessonDash extends Component {
                             <input placeholder='Nombre' value={lessonAttributes.name} type='text' id='name' name='name' onChange={this.handleChange}/>
                         </div>
                         {errors.name && <p className={style.Error}>{errors.name}</p>}
+                        
                         <div className={style.Description}>
                             <label>Descripción*</label>
                             <input placeholder='Descripción' value={lessonAttributes.description} id='description' type='text' name='description' onChange={this.handleChange}/>
@@ -274,18 +380,40 @@ class EditLessonDash extends Component {
                             <label>Intensidad*</label>
                             <input placeholder='Intensidad' value={lessonAttributes.effort} type='text' id='effort' name='effort' onChange={this.handleChange}/>
                         </div>
-                        {errors.effort && <p className={style.Error}>{errors.effort}</p>}
+                        {errors.effort && <p className={style.Errors}>{errors.effort}</p>}
+                        
+                        <div className={style.SelectorContainer}>
+                            <div>
+                                <label className={style.Profesor}>Profesor*</label>
+                                <select onChange={this.handleTrainerOptions} name='monitor'>
+                                    <option value='Seleccione'>Seleccione</option>
+                                    {this.generateTrainersOptions().map((option) => option)}
+                                </select>    
+                            </div>
+                            {errors.monitor && <p className={style.Error}>{errors.monitor}</p>}
+                            <div>
+                                <label className={style.Profesor}>Sede*</label>
+                                <select onChange={this.handleBranchOfficeOptions} name='branchoffice'>
+                                    <option value='Seleccione'>Seleccione</option>
+                                    {this.generateBranchOfficeOptions().map((option) => option)}
+                                </select>
+                            </div>
+                            {errors.branchoffice && <p className={style.Error}>{errors.branchoffice}</p>}
+                        </div>
+                        
+                        
 
                         <div className={style.Description}>
-                            <label>Imagen</label>
+                            <label>Imagen*</label>
                             <input ref={this.inputRef} placeholder='Imagen' value={lessonAttributes.image} id='image' type='text' name='image' onChange={this.handleChange}/>
                         </div>
                         {errors.image && <p className={style.Error}>{errors.image}</p>}
-                        
+                        <div className={style.leftContainer}>
                         <div className={style.ImageContainer}>
                             <img src={this.inputRef?.current?.value} alt="Tu imagen" />
-
                         </div>
+                        </div>
+                        
                     </div>
 
                     <div className={style.RightContainer}>
@@ -357,7 +485,7 @@ class EditLessonDash extends Component {
                         <div className={`${style.RightSubContainer} ${style.LastSubContainer}`}>
                             <h2>Objetivos</h2>
                             <div className={style.TiposDeEjercicio}>
-                                {lessonsTypes.map((lesson) => (
+                                {lessonsGoals.map((lesson) => (
                                     <div key={lesson}>
                                         <label>
                                             <input
@@ -372,8 +500,17 @@ class EditLessonDash extends Component {
                                     </div>
                                 ))}
                             </div>
+                            {errors.goals && <p className={style.Error}>{errors.goals}</p>}
 
                         </div>
+                        <div className={`${style.RightSubContainer} ${style.LastSubContainer}`}>
+                            <h2>Estatus de la clase</h2>
+                            <select name='isAvailable' onChange={this.handleIsAvailable}>
+                                <option>Seleccione</option>
+                                {this.generateAvailableOptions()}
+                            </select>
+                        </div>
+                        {errors.isAvailable && <p className={style.Error}>{errors.isAvailable}</p>}
 
                     </div>
 
@@ -406,6 +543,9 @@ class EditLessonDash extends Component {
                     <div>
                         {this.state.message && <button className={style.AdvertiseButton1} onClick={this.handleConfirmarClick}>Confirmar</button>}
                         {this.state.message && <button className={style.AdvertiseButton2} onClick={this.handleVolverClick}>Volver</button>}
+                        
+                        {this.state.serverResponse && <a href='http://localhost:3000/dashboard/clases' className={style.AdvertiseButton3} >Volver</a>}
+               
                     </div>
                 </div>
             </div>
@@ -419,16 +559,22 @@ class EditLessonDash extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        lessonsTypes: state.types.types
+        lessonsTypes: state.types.types,
+        lessonsGoals: state.goals.goals,
+        monitors: state.users.monitors,
+        offices: state.offices.offices,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
-        fetchAllLessonTypes: () => dispatch(fetchAllLessonTypes())
+        fetchAllLessonTypes: () => dispatch(fetchAllLessonTypes()),
+        fetchAllLessonGoals: () => dispatch(fetchAllLessonGoals()),
+        fetchAllMonitors: () => dispatch(fetchAllMonitors()),
+        fetchAllOffices: () => dispatch(fetchAllOffices()),
     }
 }
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditLessonDash);
