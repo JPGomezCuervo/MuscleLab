@@ -19,7 +19,6 @@ class EditLessonDash extends Component {
         super(props);
         this.inputRef = null;
         this.id = props.id;
-        this.formData = new FormData();
         this.state = {
             lessonAttributes: {
                 name: '',
@@ -269,13 +268,21 @@ class EditLessonDash extends Component {
     };
 
     handleImageChange = (event) => {
-        console.log(event.target.files)
-        const file = event.target.files[0];
+        const name = event.target.name;
+        const value = event.target.files[0];
+
         this.setState({
             lessonAttributes: {
                 ...this.state.lessonAttributes,
-                image: file,
+                image: value,
             },
+            }, () => {
+                this.setState({
+                    errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
+                }, () => {
+                    this.setState({
+                        allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')});
+                    });
             });
     };
 
@@ -286,10 +293,12 @@ class EditLessonDash extends Component {
         });
     };
     handleConfirmarClick = (event) => {
-        console.log(this.state.lessonAttributes);
         event.preventDefault();
-        this.formData.append('image', this.state.lessonAttributes.image);
-        this.formData.append('lessonAttributes', JSON.stringify(this.state.lessonAttributes));
+        const formData = new FormData();
+        console.log(this.state.lessonAttributes);
+
+        formData.append('image', this.state.lessonAttributes.image);
+        formData.append('lessonAttributes', JSON.stringify(this.state.lessonAttributes));
         console.log(this.formData)
         axios.post(`${URL}/lessons/create`, this.formData)
         .then((res) => {
@@ -530,10 +539,10 @@ class EditLessonDash extends Component {
 
                 </div>
                 <div className={style.ButtonContainer}>
-                    {/* <button className={this.state.allowSubmit === false ?`${style.SaveButton} ${style.Disable}`: style.SaveButton} disabled={!this.state.allowSubmit} onClick={this.handleConfirmCreate}>
+                    <button className={this.state.allowSubmit === false ?`${style.SaveButton} ${style.Disable}`: style.SaveButton} disabled={!this.state.allowSubmit} onClick={this.handleConfirmCreate}>
                         Crear Clase
-                    </button> */}
-                    <button onClick={this.handleConfirmCreate}>crear CLase</button>
+                    </button>
+                    {/* <button onClick={this.handleConfirmCreate}>crear CLase</button> */}
 
                 </div>
             </div>
