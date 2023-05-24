@@ -346,3 +346,7 @@
     margin: 0 auto;
     width: fit-content;
 }
+.DetailContainer .Error {
+    color: #E11D1D;
+    font-family: 'Montserrat-Bold';
+}

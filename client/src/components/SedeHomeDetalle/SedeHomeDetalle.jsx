@@ -10,7 +10,6 @@ const SedeHomeDetalle = () => {
   const params = useParams();
   const office = useSelector(selectOffice);
 
-  console.log(office)
 
   useEffect(() => {
     dispatch(fetchOfficeByID(params.id));

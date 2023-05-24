@@ -277,7 +277,6 @@ class DetailLessonDash extends Component {
         };
         
         handleConfirmarClick = (event) => {
-            console.log(JSON.stringify(this.state.lessonAttributes))
             if (this.state.message.includes('modificar')){
                 event.preventDefault();
                 axios.put(`${URL}/lessons/update/${this.props.id}`, {
@@ -323,7 +322,6 @@ class DetailLessonDash extends Component {
         };
 
         handleIsAvailable = (event) => {
-            console.log(event.target.value);
             const name = event.target.name;
             const value = event.target.value;
 

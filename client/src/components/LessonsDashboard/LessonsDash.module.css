@@ -3,7 +3,12 @@
   position: absolute;
     
 }
-
+.LoadingIcon {
+  position: absolute;
+  top: 50%;
+  left: 45rem;
+  transform: translate(-50%, -50%);
+  }
 
 .button{
     margin: auto 0;

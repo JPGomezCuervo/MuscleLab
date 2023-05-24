@@ -6,7 +6,13 @@
     margin-right: 5%;
 }
 
-
+.LoadingIcon {
+    position: absolute;
+    top: 50%;
+    left: 45rem;
+    transform: translate(-50%, -50%);
+    }
+    
 .Navigator{
     font-size: 3rem;
     font-family: 'Montserrat-Bold';

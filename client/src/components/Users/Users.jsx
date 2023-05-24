@@ -67,8 +67,8 @@ const Users = () => {
       };
     })  
 
-  console.log('usuarios desde FetchInit:',users);
-  console.log('usuariosMapeados:',mappedUsers);
+  //console.log('usuarios desde FetchInit:',users);
+  //console.log('usuariosMapeados:',mappedUsers);
 
   //Delete user
   const removeUserHandler = async (event) => {
@@ -121,19 +121,19 @@ const Users = () => {
   const userFiltered = mappedUsers?.filter(
     (user) => user.id === userSelectToEdit
   );
-  console.log("userselect", userSelectToEdit);
-  console.log("respuesta fetch editar", serverResponse.error);
+  //console.log("userselect", userSelectToEdit);
+  //console.log("respuesta fetch editar", serverResponse.error);
 
   return (
     <div className={styles.container}>
 
-        <h2 class={styles.title}>Formulario de Usuarios</h2>
+        <h2 className={styles.title}>Formulario de Usuarios</h2>
 
 
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.th}>.</th>
+            <th className={styles.th}>N°</th>
             <th className={styles.th}>Nombre:</th>
             <th className={styles.th}>Email:</th>
             <th className={styles.th}>Teléfono:</th>
@@ -154,7 +154,7 @@ const Users = () => {
             </div>
           ) : (
             mappedUsers.map((user, index) => (
-              <tr key={user.id}>
+              <tr key={index}>
                 <td className={styles.td}>{index + 1}</td>
                 <td className={styles.td}>{user.fullName}</td>
                 <td className={styles.td}>{user.email}</td>
@@ -162,7 +162,7 @@ const Users = () => {
                 <td className={styles.td}>
                   {user.isMonitor ? "Entrenador" : "Deportista"}
                 </td>
-                <td className={styles.td}>
+                <td className={styles.td} >
                   {user.statusMemberShipIdStatus ? "Activo" : "Inactivo"}
                 </td>
                 <td className={styles.btnCrud}>
@@ -174,7 +174,7 @@ const Users = () => {
                     Editar
                   </button>
                   <button
-                    class={styles.btnEliminarUsuario}
+                    className={styles.btnEliminarUsuario}
                     name={user.id}
                     onClick={removeUserHandler}
                   >
@@ -243,8 +243,7 @@ const Users = () => {
                   onChange={(e) => handleChange(e)}
                   className={styles.input}
                 />
-
-                <label htmlFor="phone">Telefono:</label>
+                <label htmlFor="phone" >Telefono:</label>
                 <p className={styles.error}>{errors.edit && errors.phone}</p>
                 <input
                   type="text"
@@ -268,7 +267,7 @@ const Users = () => {
               /> */}
                 {errors.edit ? (
                   <p className={styles.errorForm}>
-                    ⚠️ Revisar el formato de los inputs antes de enviar! ⚠️
+                    ⚠️ Revisar inputs antes de enviar! ⚠️
                   </p>
                 ) : (
                   <p className={styles.validForm}>

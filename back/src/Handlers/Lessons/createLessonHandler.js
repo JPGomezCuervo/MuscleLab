@@ -1,4 +1,12 @@
 const createLesson = require("../../Controllers/Lessons/createLesson");
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config;
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET
+});
 
 const createNewLesson = async (req, res) => {
   const {
@@ -17,6 +25,8 @@ const createNewLesson = async (req, res) => {
     branchoffice,
   } = req.body;
   try {
+    const uploadedImage = await cloudinary.uploader.upload(image)
+    
     const newLesson = await createLesson(
       id,
       name,
@@ -27,7 +37,7 @@ const createNewLesson = async (req, res) => {
       scheduleDays,
       scheduleHourStart,
       scheduleHourFinish,
-      image,
+      uploadedImage.secure_url,
       types,
       monitor,
       branchoffice
