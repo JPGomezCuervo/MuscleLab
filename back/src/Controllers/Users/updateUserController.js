@@ -19,24 +19,23 @@ const updateUser = async (
 
     if (!foundedUser) {
       throw new Error("El usuario que deseas modificar no existe");
-    }
-    if (!fullName || !email || !phone || !password) {
-      throw new Error("todos los campos son obligatorios");
-    }
-    if (password) {
-      const passwordHash = await bcryptjs.hash(password, 8);
-      foundedUser.password = passwordHash;
-    }
+    } else {
+      if (password) {
+        const passwordHash = await bcryptjs.hash(password, 8);
+        foundedUser.password = passwordHash;
+        password
+          ? (foundedUser.fullNmame = passwordHash)
+          : foundedUser.password;
+      }
+      fullName ? (foundedUser.fullName = fullName) : foundedUser.fullName;
+      email ? (foundedUser.email = email) : foundedUser.email;
+      phone ? (foundedUser.phone = phone) : foundedUser.phone;
+      isMonitor ? (foundedUser.isMonitor = isMonitor) : foundedUser.isMonitor;
+      isAdmin ? (foundedUser.isAdmin = isAdmin) : foundedUser.isAdmin;
 
-    foundedUser.fullName = fullName;
-    foundedUser.email = email;
-    foundedUser.phone = phone;
-    foundedUser.isMonitor = isMonitor;
-    foundedUser.isAdmin = isAdmin;
-   
-
-    await foundedUser.save();
-    return "Usuario actualizado correctamente";
+      await foundedUser.save();
+      return "Usuario actualizado correctamente";
+    }
   } catch (error) {
     throw new Error(error.message);
   }
