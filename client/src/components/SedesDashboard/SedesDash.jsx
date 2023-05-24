@@ -3,6 +3,8 @@ import style from "./SedesDash.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import ReactModal from "react-modal";
+
 import {
   fetchAllOffices,
   selectAllOffices,
@@ -18,6 +20,8 @@ const SedesDash = () => {
   const dispatch = useDispatch();
 
   const [serverResponse, setServerResponse] = useState(true);
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
+  const [confirmationId,setConfirmationId] = useState(null);
 
   useEffect(() => {
     dispatch(fetchAllOffices());
@@ -60,24 +64,45 @@ const SedesDash = () => {
   //   }
   // }
 
+  // const removeSedeHandler = async (id) => {
+  //   const confirmation = window.confirm(
+  //     "Esta acción no se podrá revertir!\nPulse OK o Cancelar."
+  //   );
+
+  //   if (confirmation) {
+  //     try {
+  //       await fetch(`${URL}/branchoffice/delete/${id}`, { method: "DELETE" });
+
+  //       setServerResponse(true);
+  //       alert("Borrado con éxito!");
+
+  //       dispatch(clearOffice(id));
+  //     } catch (error) {}
+  //   } else {
+  //     alert("Cancelado por el usuario");
+  //   }
+  // };
+
   const removeSedeHandler = async (id) => {
-    const confirmation = window.confirm(
-      "Esta acción no se podrá revertir!\nPulse OK o Cancelar."
-    );
-
-    if (confirmation) {
-      try {
-        await fetch(`${URL}/branchoffice/delete/${id}`, { method: "DELETE" });
-
-        setServerResponse(true);
-        alert("Borrado con éxito!");
-
-        dispatch(clearOffice(id));
-      } catch (error) {}
-    } else {
-      alert("Cancelado por el usuario");
-    }
+    setConfirmationOpen(true);
+    setConfirmationId(id);
   };
+  
+  const handleConfirmation = async (id) => {
+  try {
+    await fetch(`${URL}/branchoffice/delete/${id}`, { method: "DELETE" });
+
+    setServerResponse(true);
+    // Mostrar el mensaje de éxito utilizando un modal de React o cualquier otro componente de notificación.
+
+    dispatch(clearOffice(id));
+  } catch (error) {
+    // Manejar el error si ocurre.
+  }
+
+  setConfirmationOpen(false);
+};
+
 
   return (
     <div className={style.BigBigContainer}>
@@ -120,6 +145,17 @@ const SedesDash = () => {
                       >
                         <img src={trash} alt="trash" className={style.icono} />
                       </button>
+
+                      <ReactModal  className={style.modal}isOpen={confirmationOpen} onRequestClose={() => setConfirmationOpen(false)}>
+  <h2 className={style.text}>Confirmación</h2>
+  <p className={style.text}>Esta acción no se podrá revertir!</p>
+  <p className={style.text}>Pulse OK o Cancelar.</p>
+  <div className={style.botones}>
+  <button className={style.SaveButton} onClick={() => handleConfirmation(confirmationId)}>OK</button>
+  <button className={style.DeleteButton} onClick={() => setConfirmationOpen(false)}>Cancelar</button>
+  </div>
+</ReactModal>
+
                     </div>
                   </div>
                 </div>

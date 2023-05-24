@@ -104,9 +104,10 @@ const SedesDashEditar = () => {
       navigate("/dashboard/sedes");
     };
     
-    const cancelarEliminar = () => {
+    const cancelarEliminar =  () => {
       setModalConfirmacionAbierta(false); // Cierra la ventana modal de confirmación
-      setSedeEditada(null); // Establece la sede editada en null
+     setModalCancelacionAbierta(true) // Establece la sede editada en null
+     navigate("/dashboard/sedes")
     };
     
 
@@ -303,6 +304,7 @@ const SedesDashEditar = () => {
   <h2 className={style.text}>Error</h2>
   <p className={style.text}>Debe completar los campos obligatorios y corregir los errores.</p>
   <button  
+  className={style.modalButton}
   onClick={() => {
     setModalErrorAbierta(false); // Cierra la ventana modal de error
   }}>

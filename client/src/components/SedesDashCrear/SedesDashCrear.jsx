@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
+import ReactModal from 'react-modal';
 import axios from "axios";
 import style from "./SedesDashCrear.module.css";
 import arrowIcon from "../../assets/icons/arrow-yellow.png";
@@ -8,6 +8,13 @@ import { validate } from "./validation";
 import { weekDays } from "../../utils/constants";
 import { URL } from "../../utils/constants";
 const SedesDashCrear = () => {
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalDaysOpen, setModalDaysOpen] = useState(false);
+  const [validacion, setValidacion] = useState(false);
+  const[modalCreacionExito, setModalCreacionExito] = useState(false);
+  const [errorCreacion, setErrorCreacion] = useState(false);
+
   const [dias, setDias] = useState([]);
   const [horaInicio, setHoraInicio] = useState("");
   const [horaFin, setHoraFin] = useState("");
@@ -41,14 +48,31 @@ const SedesDashCrear = () => {
     }
     return options;
   };
+
+  // const validateHours = () => {
+  //   if (!horaInicio) {
+  //     errors.scheduleHourStart = "Debe seleccionar hora de inicio";
+  //     alert("debe seleccionar hora de inicio");
+  //     return false;
+  //   } else if (!horaFin) {
+  //     errors.scheduleHourFinish = "Debe seleccionar hora de fin";
+  //     alert("debe seleccionar hora de fin");
+  //     return false;
+  //   } else {
+  //     sedes.scheduleHourStart = horaInicio;
+  //     sedes.scheduleHourFinish = horaFin;
+  //     return true;
+  //   }
+  // };
+  //////////////////////////////////////////////////////////////////////////////
   const validateHours = () => {
     if (!horaInicio) {
       errors.scheduleHourStart = "Debe seleccionar hora de inicio";
-      alert("debe seleccionar hora de inicio");
+      setModalOpen(true); // Abre el modal correspondiente al error de hora de inicio
       return false;
     } else if (!horaFin) {
       errors.scheduleHourFinish = "Debe seleccionar hora de fin";
-      alert("debe seleccionar hora de fin");
+      setModalOpen(true); // Abre el modal correspondiente al error de hora de fin
       return false;
     } else {
       sedes.scheduleHourStart = horaInicio;
@@ -56,6 +80,10 @@ const SedesDashCrear = () => {
       return true;
     }
   };
+  
+
+  ///////////////////////////////////////////////////////////////////////////
+
   const handleDayChange = (e) => {
     const dia = e.target.value;
     const isChecked = e.target.checked;
@@ -64,16 +92,34 @@ const SedesDashCrear = () => {
       : dias.filter((d) => d !== dia);
     setDias(updatedDias);
   };
-  const validatedays = () => {
-    if (dias.length !== 0) {
-      sedes.scheduleDays = dias;
-      return true;
-    } else {
-      errors.scheduleDays = "Debe seleccionar al menos un día";
-      alert("Debe seleccionar al menos un día");
-      return false;
+///////////////////////////////////////////////////
+  // const validatedays = () => {
+  //   if (dias.length !== 0) {
+  //     sedes.scheduleDays = dias;
+  //     return true;
+  //   } else {
+  //     errors.scheduleDays = "Debe seleccionar al menos un día";
+  //     alert("Debe seleccionar al menos un día");
+  //     return false;
+  //   }
+  // };
+
+  //////////////////////////////////////////////////////////////
+  
+    const validatedays = ()=>{
+      if (dias.length !== 0) {
+           sedes.scheduleDays = dias;
+           return true;
     }
-  };
+    else {
+       errors.scheduleDays = "Debe seleccionar al menos un día";
+      setModalDaysOpen(true)
+           return false;
+         }
+       };
+
+  ///////////////////////////////////////////////////////////////////
+
   const handleChange = (e) => {
     const field = e.target.name;
     const value = e.target.value;
@@ -88,11 +134,12 @@ const SedesDashCrear = () => {
     console.log("entramos con", sedes);
     if (!validatedays() || !validateHours() || errors.name || errors.location) {
       console.error("Errores de validación:", errors);
+      setValidacion(true)
     } else {
       axios
         .post(`${URL}/branchoffice/create`, sedes)
         .then((res) => {
-          alert("Sede creada exitosamente");
+          setModalCreacionExito(true)
           // Realizar acciones adicionales después de crear la sede si es necesario
           setSedes({
             name: "",
@@ -101,13 +148,15 @@ const SedesDashCrear = () => {
             scheduleHours: "",
           });
           // Redireccionar a la página correspondiente
-          navigate("/dashboard/sedes");
+          navigate("/dashboard/sedes")
         })
         .catch((error) => {
           console.error("Error al crear la sede:", error);
+          setErrorCreacion(true);
           // Manejar el error si es necesario
         });
     }
+   
   };
 
   return (
@@ -197,6 +246,34 @@ const SedesDashCrear = () => {
             </div>
           </div>
 
+<ReactModal isOpen={modalOpen} className={style.modal} onRequestClose={() => setModalOpen(false)}>
+  <h2 className={style.text}>Error</h2>
+  <p className={style.text}>Debe elegir un horario correcto</p>
+  <button className={style.DeleteButton} onClick={() => setModalOpen(false)}>Cerrar</button>
+</ReactModal>
+
+<ReactModal className={style.modal} isOpen={modalDaysOpen} onRequestClose={() => setModalDaysOpen(false)}>
+  <h2 className={style.text}>Error</h2>
+  <p className={style.text}>Debe elegir al menos un dia</p>
+  <button className={style.DeleteButton} onClick={() => setModalDaysOpen(false)}>Cerrar</button>
+</ReactModal>
+<ReactModal className={style.modal} isOpen={validacion} onRequestClose={() => setValidacion(false)}>
+  <h2 className={style.text}>Error</h2>
+  <p className={style.text}>Complete los campos requeridos</p>
+  <button className={style.DeleteButton} onClick={() => setValidacion(false)}>Cerrar</button>
+</ReactModal>
+
+<ReactModal isOpen={modalCreacionExito} onRequestClose={() => setModalCreacionExito(true)}>
+  <h2 className={style.text}>Exito</h2>
+  <p className={style.text}>Sede creada correctamente</p>
+  <button className={style.SaveButton} onClick={() => setModalCreacionExito(false)}>Aceptar</button> 
+</ReactModal>
+
+<ReactModal className={style.modal} isOpen={errorCreacion} onRequestClose={() => setErrorCreacion(true)}>
+  <h2 className={style.text}>Error</h2>
+  <p className={style.text}>No se pudo crear la sede</p>
+  <button className={style.SaveButton} onClick={() => setErrorCreacion(false)}>Aceptar</button> 
+</ReactModal>
 
           <button onClick={crearSede} className={style.SaveButton}>
             Crear
