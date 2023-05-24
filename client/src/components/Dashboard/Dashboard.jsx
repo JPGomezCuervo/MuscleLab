@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { selectAllLessons } from "../../redux/features/lessonsSlice";
 import { useSelector, useDispatch } from "react-redux";
-import styles from "./Dashboard.module.css";
+import style from "./Dashboard.module.css";
 import { fetchAllLessons } from "../../redux/features/lessonsSlice";
 
 
@@ -35,32 +35,32 @@ const Dashboard = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={style.container}>
       <hr />
       <h1>Dashboard</h1>
-      <div className={styles.title}>Clases: {lessons.length}</div>
-      <div className={styles.containerTable}>
+      <div className={style.title}>Clases: {lessons.length}</div>
+      <div className={style.containerTable}>
         {!lessons.length ? (
-          <div className={styles.empty}>
+          <div className={style.empty}>
             <p>No hay clases para mostrar!</p>
           </div>
         ) : (
           lessons.map((lesson) => (
-            <div key={lesson.id} className={styles.item}>
+            <div key={lesson.id} className={style.item}>
               {lesson.name}
               <div />
-              <div className={styles.item}>
+              <div className={style.item}>
                 <img
                   src={lesson.image}
                   alt={lesson.name}
-                  className={`${styles.img}`}
+                  className={`${style.img}`}
                 />
               </div>
               <div>
                 <button
                   name={lesson.id}
                   onClick={removeLessonHandler}
-                  className={styles.btn}
+                  className={style.btn}
                 >
                   Borrar
                 </button>

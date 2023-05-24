@@ -1,7 +1,7 @@
 .MainConteiner {
   margin: 0 auto;
   padding-top: 1rem;
-  width: 40rem;
+  width: 60rem;
   height: 40rem;
   box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
   border-radius: 0.4rem;
@@ -11,17 +11,20 @@
 .DaysContainer {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-}
+  font-family: "Montserrat-Bold";}
+
+
 .DaysContainer p {
   text-align: center;
   margin-right: 1rem;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   margin-top: 0.6rem;
   margin-bottom: 0.5rem;
 }
 .DaysContainer input {
   margin-top: 1rem;
   margin-bottom: 0.2rem;
+  
 }
 .BigBigContainer {
   margin: 0 auto;
@@ -37,7 +40,9 @@
 
 .Description {
   margin-bottom: 1rem;
-  width: 30vw;
+  margin-left: 1rem;
+  width: 40vw;
+  
 }
 .Description input {
   background-color: #f3f3f3;
@@ -45,16 +50,16 @@
   width: 100%;
   min-height: 3.5rem;
   margin-top: 0.4rem;
-  margin-left: 2rem;
+  margin-left: 2.5rem;
 }
 
 .SaveButton {
   height: 3rem;
-  color: #ffffff;
   width: 13rem;
+  color: #ffffff;
   background-color: #ffc300;
-  border: 0;
   border-radius: 0.4rem;
+  border: 0;
   font-family: "Montserrat-Bold";
   font-size: 1.25rem;
   cursor: pointer;
@@ -102,8 +107,9 @@
 
 .texto {
   font-family: "Montserrat-Bold";
-  font-size: 1.25rem;
+  font-size: 1.85rem;
   margin-left: 1rem;
+  
 }
 
 .tex {
@@ -119,4 +125,100 @@
 .Navigation {
   display: flex;
   margin-top: 6rem;
+}
+
+.Options{
+  font-family: "Montserrat-Bold";
+  font-size: 1.50rem;
+}
+
+.select{
+  font-family: "Montserrat-Bold";
+  font-size: 1.30rem;
+}
+
+.check{
+font-size: 1.20rem;
+}
+
+.horario{
+ 
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+}
+
+.errores{
+  background-color: #fcfcfc;
+  color: rgb(255, 0, 0);
+  font-size: 1.25rem;
+  height: 2rem;
+  width: fit-content;
+  margin-left: 3rem;
+  font-family:"Montserrat-Bold";
+  
+
+}
+
+.modal{
+ 
+  flex-direction: column;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+  background-color: white;
+  box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+  border-radius: .4rem;
+  min-height: 20rem;
+  min-width: 30rem;
+}
+
+
+
+.text{
+  font-family: 'Montserrat-Medium';
+  font-weight: 500;
+  color: #013565;
+  text-align: center;
+  width: 27rem;
+  margin: 0 auto;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.botones{
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 40rem;
+}
+
+.modalButton{
+  height: 4rem;
+  width: 10rem;
+  color: #ffffff;
+  background-color: #ffc300;
+  border-radius: 0.4rem;
+  border: 0;
+  font-family: "Montserrat-Bold";
+  font-size: 2rem;
+}
+
+.modalButton:hover {
+  background-color: #ffaf00;
+}
+.modalButton:active {
+  background-color: #ffc300;
+}
+
+.contenedorBoton{
+  display: flex;
+  align-items: center;
+ 
 }

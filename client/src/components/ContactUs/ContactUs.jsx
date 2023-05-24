@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
-import styles from "./ContactUs.module.css";
+import style from "./ContactUs.module.css";
 
 
 
@@ -36,8 +36,8 @@ const ContactUs = () => {
   return (
     <main>
       <>
-        <section class={styles.sectionContact}>
-          <div class={styles.container}>
+        <section class={style.sectionContact}>
+          <div class={style.container}>
             <h1>Contacta a nuestro Equipo!</h1>
             <p>
               Rellene el siguiente formulario para ponerse en contacto con un
@@ -46,7 +46,7 @@ const ContactUs = () => {
               utilizar el formulario.
             </p>
             <form ref={form} onSubmit={sendEmail}>
-              <div class={styles.formGroup}>
+              <div class={style.formGroup}>
                 <label htmlFor="user_name">Nombre completo*</label>
                 
                 <input
@@ -54,12 +54,12 @@ const ContactUs = () => {
                   name="user_name"
                   id="user_name"
                   required
-                  class={styles.formElement}
+                  class={style.formElement}
                   placeholder="John Doe"
                   
                 />
               </div>
-              <div class={styles.formGroup}>
+              <div class={style.formGroup}>
                 <label HtmlFor="subject">Asunto*</label>
                 
                 <input
@@ -67,12 +67,12 @@ const ContactUs = () => {
                   name="subject"
                   id="subject"
                   required
-                  class={styles.formElement}
+                  class={style.formElement}
                   placeholder="Asunto"
                   
                 />
               </div>
-              <div class={styles.formGroup}>
+              <div class={style.formGroup}>
                 <label htmlFor="user_email">Email*</label>
                 
                 <input
@@ -80,32 +80,32 @@ const ContactUs = () => {
                   name="user_email"
                   id="user_email"
                   required
-                  class={styles.formElement}
+                  class={style.formElement}
                   placeholder="john.doe@example.com"
                   
                 />
               </div>
-              <div class={styles.formGroup}>
+              <div class={style.formGroup}>
                 <label HtmlFor="company">Empresa</label>
                 <input
                   type="text"
                   name="company"
                   id="company"
-                  class={styles.formElement}
+                  class={style.formElement}
                   placeholder="john.doe@example.com"
                 />
               </div>
-              <div class={`${styles.formGroup} ${styles.full}`}>
+              <div class={`${style.formGroup} ${style.full}`}>
                 <label htmlFor="message">En que podemos ayudarte?</label>
                 <textarea
                   name="message"
                   id="message"
-                  class={styles.formElement}
+                  class={style.formElement}
                   placeholder="Escribe aqui tu mensaje...."
                   
                 ></textarea>
               </div>
-              <div class={styles.submitGroup}>
+              <div class={style.submitGroup}>
                 <input type="submit" value="ENVIAR" />
               </div>
             </form>

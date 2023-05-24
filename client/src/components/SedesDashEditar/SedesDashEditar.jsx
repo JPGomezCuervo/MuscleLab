@@ -6,6 +6,9 @@ import arrowIcon from "../../assets/icons/arrow-yellow.png";
 import { validate } from "../SedesDashCrear/validation";
 import { weekDays } from "../../utils/constants";
 import { URL } from "../../utils/constants";
+import ReactModal from 'react-modal';
+
+
 const SedesDashEditar = () => {
   const params = useParams();
   const sId = params.id;
@@ -22,11 +25,14 @@ const SedesDashEditar = () => {
           scheduleHourFinish: response.data.branchoffice.scheduleHourFinish,
         });
         setDias(response.data.branchoffice.scheduleDays);
+        setSedeEditada(response.data.branchoffice);
       })
       .catch((error) => {
         console.error("Error al obtener los datos del objeto:", error);
       });
   }, [sId]);
+
+  const [sedeEditada, setSedeEditada] = useState(null);
 
   const [dias, setDias] = useState([]);
   const [horaInicio, setHoraInicio] = useState("");
@@ -47,99 +53,62 @@ const SedesDashEditar = () => {
     scheduleHourFinish: "",
   });
 
+  const [modalErrorAbierta, setModalErrorAbierta] = useState(false);
+  const [modalConfirmacionAbierta, setModalConfirmacionAbierta] = useState(false);
+  const [modalConfirmacionAbierta1, setModalConfirmacionAbierta1] = useState(false);
+  const [modalExitoAbierta, setModalExitoAbierta] = useState(false);
+  const [modalCancelacionAbierta, setModalCancelacionAbierta] = useState(false);
+  
+
+
   const navigate = useNavigate();
-
-  // const validarFormulario = () => {
-  //   const regexNombre = /^[A-Za-z\s,]+$/;
-  //   const regexDireccion = /^[A-Za-z0-9\s]+$/;
-  //   const regexDias = /^[A-Za-z\s,]+$/;
-  //   const regexHorario = /^\d{2}-\d{2}$/;
-
-  //   let newErrors = {};
-
-  //   if (sedes.name.trim() === "") {
-  //     newErrors.name = "El campo de nombre es requerido.";
-  //   } else if (!regexNombre.test(sedes.name)) {
-  //     newErrors.name = "El nombre debe contener solo letras, espacios y comas.";
-  //   }
-
-  //   if (sedes.location.trim() === "") {
-  //     newErrors.location = "El campo de dirección es requerido.";
-  //   } else if (!regexDireccion.test(sedes.location)) {
-  //     newErrors.location =
-  //       "La dirección debe contener letras y números sin caracteres especiales.";
-  //   }
-
-  //   if (sedes.scheduleDays.trim() === "") {
-  //     newErrors.scheduleDays = "El campo de días de atención es requerido.";
-  //   } else if (!regexDias.test(sedes.scheduleDays)) {
-  //     newErrors.scheduleDays =
-  //       "Los días de atención deben contener solo palabras, espacios y comas.";
-  //   }
-
-  //   if (sedes.scheduleHours.trim() === "") {
-  //     newErrors.scheduleHours = "El campo de horario es requerido.";
-  //   } else if (!regexHorario.test(sedes.scheduleHours)) {
-  //     newErrors.scheduleHours =
-  //       "El horario debe tener el formato HH-HH (por ejemplo, 09-22).";
-  //   }
-
-  //   setErrors(newErrors);
-  // };
-
-  const guardarCambiosSede = () => {
-    console.log(sedes.scheduleHourStart, sedes.scheduleHourFinish);
-    if (errors.name || errors.location || !validateHours() || !validatedays()) {
-      alert("Debe completar los campos obligatorios y corregir los errores.");
-    } else {
-      const id = params.id;
-      const url = `${URL}/branchoffice/update/${id}`;
-      const confirmacion = window.confirm(
-        "¿Estás seguro de guardar los cambios?"
-      );
-      if (confirmacion) {
-        axios
-          .put(url, sedes)
-          .then((res) => {
-            console.log("Cambios guardados exitosamente");
-            alert("Cambios guardados exitosamente");
-            navigate("/dashboard/sedes");
-          })
-          .catch((error) => {
-            console.error("Error al guardar los cambios:", error);
-            // Manejar el error si es necesario
-          });
-      } else {
-        alert("Acción cancelada");
-      }
-    }
-  };
-
-  const eliminarSede = () => {
+  
+  // Dentro de la función guardarCambiosSedes
+  const confirmarGuardarCambios = () => {
     const id = params.id;
-    const url = `${URL}/branchoffice/delete/${id}`;
+    const url = `${URL}/branchoffice/update/${id}`;
+  
+    axios
+      .put(url, sedes)
+      .then((res) => {
+        console.log("Cambios guardados exitosamente");
+        setModalConfirmacionAbierta(false); // Cierra la ventana modal de confirmación
+       // Abre la ventana modal de éxito
+      })
+      .catch((error) => {
+        console.error("Error al guardar los cambios:", error);
+        // Manejar el error si es necesario
+      });
+      setModalExitoAbierta(true); 
+      navigate("/dashboard/sedes");
+    };
+  
 
-    // Ventana emergente de confirmación
-    const confirmacion = window.confirm(
-      "¿Estás seguro de eliminar la sede seleccionada?"
-    );
+    const eliminarSede = () => {
+      const id = params.id;
+      const url = `${URL}/branchoffice/delete/${id}`;      
+    
+     setModalConfirmacionAbierta1(true); // Abre la ventana modal de confirmación
 
-    if (confirmacion) {
-      axios
-        .delete(url)
-        .then((res) => {
-          console.log("Sede eliminada exitosamente");
-          alert("Sede eliminada exitosamente");
-          navigate("/dashboard/sedes");
-        })
-        .catch((error) => {
-          console.error("Error al eliminar la sede:", error);
-          // Manejar el error si es necesario
-        });
-    } else {
-      alert("Acción cancelada");
-    }
-  };
+     axios
+     .delete(url)
+     .then((res) => {
+       console.log("Sede eliminada exitosamente");
+       setModalConfirmacionAbierta(false); // Cierra la ventana modal de confirmación
+       setModalExitoAbierta(true); // Abre la ventana modal de éxito
+      })
+      .catch((error) => {
+        console.error("Error al eliminar la sede:", error);
+        // Manejar el error si es necesario
+      });
+      navigate("/dashboard/sedes");
+    };
+    
+    const cancelarEliminar = () => {
+      setModalConfirmacionAbierta(false); // Cierra la ventana modal de confirmación
+      setSedeEditada(null); // Establece la sede editada en null
+    };
+    
 
   const handleChange = (e) => {
     const field = e.target.name;
@@ -147,15 +116,7 @@ const SedesDashEditar = () => {
     const fieldErrors = validate(field, value);
     setErrors({ ...errors, [field]: fieldErrors[field] });
     setSedes({ ...sedes, [field]: value });
-    // validarFormulario({
-    //   ...sedes,
-    //   [e.target.name]: e.target.value,
-    // });
-
-    // setSedes({
-    //   ...sedes,
-    //   [e.target.name]: e.target.value,
-    // });
+  
   };
   const handleDayChange = (e) => {
     const dia = e.target.value;
@@ -234,7 +195,7 @@ const SedesDashEditar = () => {
               name="name"
             />
           </div>
-          {errors.name && <div style={{ color: "red" }}>{errors.name}</div>}
+          {errors.name && <div className={style.errores}>{errors.name}</div>}
 
           <div className={style.Description}>
             <label htmlFor="location" className={style.texto}>
@@ -250,7 +211,7 @@ const SedesDashEditar = () => {
           </div>
 
           {errors.location && (
-            <div style={{ color: "red" }}>{errors.location}</div>
+            <div className={style.errores}>{errors.location}</div>
           )}
 
           <div className={style.Description}>
@@ -267,7 +228,7 @@ const SedesDashEditar = () => {
                       onChange={handleDayChange}
                       checked={sedes.scheduleDays.includes(dia)}
                     />
-                    <p>{dia}</p>
+                    <p className={style.check}>{dia}</p>
                   </label>
                 </div>
               ))}
@@ -277,17 +238,20 @@ const SedesDashEditar = () => {
             <label htmlFor="scheduleHours" className={style.texto}>
               Horario: *
             </label>
+            <div className={style.horario}>
+
             <div className={`${style.HourContainer} ${style.HourContainer1}`}>
               <label className={style.Options}>Hora inicio</label>
               <select
-                value={sedes.scheduleHourStart}
-                onChange={(e) => {
-                  setHoraInicio(parseInt(e.target.value));
-                  setSedes({
-                    ...sedes,
-                    scheduleHourStart: parseInt(e.target.value),
-                  });
-                }}
+              className={style.select}
+              value={sedes.scheduleHourStart}
+              onChange={(e) => {
+                setHoraInicio(parseInt(e.target.value));
+                setSedes({
+                  ...sedes,
+                  scheduleHourStart: parseInt(e.target.value),
+                });
+              }}
               >
                 <option value="">Seleccione</option>
                 {[...Array(24)].map((_, index) => (
@@ -301,14 +265,15 @@ const SedesDashEditar = () => {
             <div className={`${style.HourContainer} ${style.HourContainer2}`}>
               <label className={style.Options}>Hora fin</label>
               <select
-                value={sedes.scheduleHourFinish}
-                onChange={(e) => {
-                  setHoraFin(parseInt(e.target.value));
-                  setSedes({
-                    ...sedes,
-                    scheduleHourFinish: parseInt(e.target.value),
-                  });
-                }}
+              className={style.select}
+              value={sedes.scheduleHourFinish}
+              onChange={(e) => {
+                setHoraFin(parseInt(e.target.value));
+                setSedes({
+                  ...sedes,
+                  scheduleHourFinish: parseInt(e.target.value),
+                });
+              }}
               >
                 <option value="">Seleccione</option>
                 {generateHourOptions()}
@@ -316,17 +281,113 @@ const SedesDashEditar = () => {
             </div>
           </div>
 
-          <div className={style.ButtonConteiner}>
-            <button onClick={guardarCambiosSede} className={style.SaveButton}>
-              Guardar Cambios
-            </button>
-            <button
-              type="button"
-              onClick={eliminarSede}
-              className={style.DeleteButton}
-            >
-              Eliminar
-            </button>
+          <button onClick={() => {
+  if (errors.name || errors.location || !validateHours() || !validatedays()) {
+    setModalErrorAbierta(true); // Abre la ventana modal de error si hay errores
+  } else {
+    setModalConfirmacionAbierta(true); // Abre la ventana modal de confirmación
+  }
+}} className={style.SaveButton}>
+  Guardar cambios
+</button>
+
+<div className={style.content}>
+
+
+<ReactModal
+  isOpen={modalErrorAbierta}
+  onRequestClose={() => setModalErrorAbierta(false)}
+  contentLabel="Error al guardar cambios"
+  className={style.modal}
+>
+  <h2 className={style.text}>Error</h2>
+  <p className={style.text}>Debe completar los campos obligatorios y corregir los errores.</p>
+  <button  
+  onClick={() => {
+    setModalErrorAbierta(false); // Cierra la ventana modal de error
+  }}>
+    Aceptar
+  </button>
+</ReactModal>
+
+<ReactModal
+  isOpen={modalConfirmacionAbierta}
+  onRequestClose={() => setModalConfirmacionAbierta(false)}
+  contentLabel="Confirmar guardar cambios"
+  className={style.modal}
+>
+  <h2 className={style.text}>Confirmación</h2>
+  <p className={style.text}>¿Estás seguro de guardar los cambios?</p>
+  <div className={style.botones}>
+  <button onClick={confirmarGuardarCambios} className={style.SaveButton}>Guardar</button>
+  <button onClick={() => setModalConfirmacionAbierta(false)} className={style.SaveButton}>Cancelar</button>
+  </div>
+</ReactModal>
+
+<ReactModal 
+  isOpen={modalExitoAbierta}
+  onRequestClose={() => setModalExitoAbierta(false)}
+  contentLabel="Guardado exitoso"
+  className={style.modal}
+>
+  <h2 className={style.text}>Éxito</h2>
+  <p className={style.text}>Cambios guardados exitosamente.</p>
+  <button onClick={() => setModalExitoAbierta(false)}>Aceptar</button>
+</ReactModal>
+</div>
+
+
+
+<button
+  type="button"
+  onClick={() => setModalConfirmacionAbierta1(true)}
+  className={style.DeleteButton}
+>
+  Eliminar
+</button>
+
+<div className={style.content}>
+
+            <ReactModal
+  isOpen={modalConfirmacionAbierta1}
+  onRequestClose={() => setModalConfirmacionAbierta1(false)}
+  contentLabel="Confirmar eliminación de sede"
+  className={style.modal}
+>
+  <h2 className={style.text}>Confirmación</h2> 
+  <p className={style.text}>¿Estás seguro de eliminar la sede seleccionada?</p> 
+    <div className={style.botones}>
+  <button className={style.DeleteButton} onClick={eliminarSede}>Eliminar</button> 
+  <button className={style.SaveButton} onClick={cancelarEliminar}>Cancelar</button>
+    </div>
+  </ReactModal>
+<ReactModal
+  isOpen={modalExitoAbierta}
+  onRequestClose={() => setModalExitoAbierta(false)}
+  contentLabel="Eliminación exitosa de sede"
+  className={style.modal}
+>
+  <h2 className={style.text}>Éxito</h2> 
+  <p className={style.text}>Sede eliminada exitosamente.</p> 
+  <button className={style.SaveButton} onClick={() => setModalExitoAbierta(false)}>Aceptar</button> 
+</ReactModal>
+
+<ReactModal
+  isOpen={modalCancelacionAbierta}
+  onRequestClose={() => setModalCancelacionAbierta(false)}
+  contentLabel="Cancelación de eliminación de sede"
+  className={style.modal}
+>
+  <h2 className={style.text}>Acción cancelada</h2> 
+  <div className={style.contenedorBoton}>
+  <button className={style.modalButton} onClick={() => setModalCancelacionAbierta(false)}>Aceptar</button>
+  </div>
+</ReactModal>
+  </div>
+
+
+
+
           </div>
         </div>
       </div>

@@ -1,11 +1,11 @@
-import styles from './NewLessons.module.css'
+import style from './NewLessons.module.css'
 
 const NewLessons= ()=>{
     return(
-        <div className={styles.container}>
+        <div className={style.container}>
 
     <h1> New Lesson</h1>
-        <div className={styles.log}>
+        <div className={style.log}>
 
         <h3>Lesson name</h3>
         <input id="name" type="text" class="form-control"name="lesson name" placeholder="Lesson name..."></input>
@@ -25,7 +25,7 @@ const NewLessons= ()=>{
         <h3>Description</h3>
         <input id="description" type="text" class="form-control"name="description" placeholder="Description..."></input>
 
-        <button className={styles.button1}>Create Lesson</button>
+        <button className={style.button1}>Create Lesson</button>
         </div>
         </div>
     )
