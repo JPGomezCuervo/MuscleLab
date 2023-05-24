@@ -26,8 +26,8 @@ const CrearPlanes = ()=>{
       const crearPlan = () => {
         const regexNombre = /^[A-Za-z\s,]+$/;
         const regexBenefits = /^[A-Za-z0-9\s]+$/;
-        const regexDias = /^[A-Za-z\s,]+$/;
-        const regexHorario = /^\d{2}-\d{2}$/;
+        const regexDuracion = /^[1-9][0-9]*$/;
+        const regexPrecio = /^\d+(\.\d{1,2})?$/;
       
         const errors = {};
       
@@ -45,14 +45,14 @@ const CrearPlanes = ()=>{
       
         if (addPlan.duration.trim() === "") {
           errors.duration = "El campo de duracion es requerido.";
-        } else if (!regexDias.test(addPlan.duration)) {
-          errors.duration = "Los días de atención deben contener solo palabras sin números.";
+        } else if (!regexDuracion.test(addPlan.duration)) {
+          errors.duration = "Seleccionar la cantidad de meses en numeros.";
         }
       
         if (addPlan. price.trim() === "") {
-          errors. price = "El campo de horario es requerido.";
-        } else if (!regexHorario.test(addPlan. price)) {
-          errors. price = "El horario debe tener el formato HH-HH (por ejemplo, 09-22).";
+          errors. price = "El campo de precio es requerido.";
+        } else if (!regexPrecio.test(addPlan. price)) {
+          errors. price = "El precio debe tener el formato adecuado.";
         }
       
         if (Object.keys(errors).length === 0) {
@@ -80,10 +80,6 @@ const CrearPlanes = ()=>{
         }
       };
       
-      
-
-   
-
 
       return (
         <div>

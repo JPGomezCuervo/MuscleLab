@@ -31,35 +31,33 @@ const PlanDashEditar = () => {
   const validarFormulario = () => {
     const regexNombre = /^[A-Za-z\s,]+$/;
     const regexBenefits = /^[A-Za-z0-9\s]+$/;
-    const regexDias = /^[A-Za-z\s,]+$/;
-    const regexHorario = /^\d{2}-\d{2}$/;
-
+    const regexDuracion = /^[1-9][0-9]*$/;
+    const regexPrecio = /^\d+(\.\d{1,2})?$/;
     let errors = {};
 
     if (addPlan.name.trim() === "") {
-        errors.name = "El campo de nombre es requerido.";
-      } else if (!regexNombre.test(addPlan.name)) {
-        errors.name = "El nombre debe contener solo letras.";
-      }
-
-      if (addPlan.benefits.trim() === "") {
-        errors.benefits = "El campo de beneficios es requerido.";
-      } else if (!regexBenefits.test(addPlan.benefits)) {
-        errors.benefits = "Los beneficios debe contener letras y números sin caracteres especiales.";
-      }
-
-      if (addPlan.duration.trim() === "") {
-        errors.duration = "El campo de duracion es requerido.";
-      } else if (!regexDias.test(addPlan.duration)) {
-        errors.duration = "Los días de atención deben contener solo palabras sin números.";
-      }
-
-      if (addPlan. price.trim() === "") {
-        errors. price = "El campo de horario es requerido.";
-      } else if (!regexHorario.test(addPlan. price)) {
-        errors. price = "El horario debe tener el formato HH-HH (por ejemplo, 09-22).";
-      }
-
+      errors.name = "El campo de nombre es requerido.";
+    } else if (!regexNombre.test(addPlan.name)) {
+      errors.name = "El nombre debe contener solo letras.";
+    }
+  
+    if (addPlan.benefits.trim() === "") {
+      errors.benefits = "El campo de beneficios es requerido.";
+    } else if (!regexBenefits.test(addPlan.benefits)) {
+      errors.benefits = "Los beneficios debe contener letras y números sin caracteres especiales.";
+    }
+  
+    if (addPlan.duration.trim() === "") {
+      errors.duration = "El campo de duracion es requerido.";
+    } else if (!regexDuracion.test(addPlan.duration)) {
+      errors.duration = "Seleccionar la cantidad de meses en numeros.";
+    }
+  
+    if (addPlan. price.trim() === "") {
+      errors. price = "El campo de precio es requerido.";
+    } else if (!regexPrecio.test(addPlan. price)) {
+      errors. price = "El precio debe tener el formato adecuado.";
+    }
      setErrors(errors)
   };
 

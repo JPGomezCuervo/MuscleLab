@@ -1,16 +1,16 @@
 import style from "./Plans.module.css"
-import { fetchAllMemberships ,  selectAllMemberships } from "../../redux/features/membershipsSlice"
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import {selectAllMemberships} from "../../redux/features/membershipsSlice"
 import muscleIcon from "../../assets/icons/Bicep.png"
 import muscleManIcon from "../../assets/icons/man-silhouette.png"
 import clockIcon from "../../assets/icons/clock.png"
 import checkIcon from "../../assets/icons/check.png"
+import { useSelector } from "react-redux"
 
-const Plans = ( plan, index) =>{
+const Plans = () =>{
+
+    const memberships = useSelector(selectAllMemberships)
+    console.log(memberships)
     
-
-    const {name, price, benefits, duration}= plan;
 
 
     return(
@@ -23,80 +23,29 @@ const Plans = ( plan, index) =>{
                 <div className={style.PlansContainer}>
 
                     <div className={`${style.Plan} ${style.Plan1}`}>
-                        <div className={style.Title}>Plan Standard</div>
                         <div className={style.PlanContainer1}>
-                            <img className={style.MainIcon} src={clockIcon} alt="" />
-                            <h2>{name}</h2>
 
-                            <div className={style.OpcionsContainer}>
-                                <img className={style.CheckIcon} src={checkIcon} alt="" />
-                                <h3>{benefits}</h3>
-                            </div>
+                            {
+                                memberships?.map(membership=>{
+                                    return(
+                                        
+                                        <div>
                                 
-                            {/* <div className={style.OpcionsContainer}>
-                                <img className={style.CheckIcon} src={checkIcon} alt="" />
-                                <h3>{price}</h3>
-                            </div> */}
-
-                            <div className={style.OpcionsContainer}>
-                                <img className={style.CheckIcon} src={checkIcon} alt="" />
-                                <h3>{duration}</h3>
-                            </div>
-
-                            <h4>{price}</h4>
-                            <button>Compra ahora</button>
-                        </div>
-                    </div>
-
-                    <div className={`${style.Plan} ${style.Plan2}`}>
-                        <div className={style.Title}>Plan Plus</div>
-                        <div className={style.PlanContainer2}>
-                            <img className={style.MainIcon} src={muscleIcon} alt="" />
-                            <h2>Muscle Plus</h2>
-
-                            <div className={style.OpcionsContainer}>
-                                <img className={style.CheckIcon} src={checkIcon} alt="" />
-                                <h3>Lorem Ipsum</h3>
-                            </div>
+                                   <div className={style.color}>
+                                        <div className={style.Title}><h2> {membership.name}</h2></div>
+                                            <img className={style.MainIcon} src={clockIcon} alt="" />
                                 
-                            <div className={style.OpcionsContainer}>
-                                <img className={style.CheckIcon} src={checkIcon} alt="" />
-                                <h3>Lorem Ipsum</h3>
-                            </div>
-
-                            <div className={style.OpcionsContainer}>
-                                <img className={style.CheckIcon} src={checkIcon} alt="" />
-                                <h3>Lorem Ipsum</h3>
-                            </div>
-
-                            <h4>ARS 114.950 por mes</h4>
-                            <button>Compra ahora</button>
-                        </div>
-                    </div>
-
-                    <div className={`${style.Plan} ${style.Plan3}`}>
-                        <div className={style.Title}>Plan Premium</div>
-                        <div className={style.PlanContainer3}>
-                            <img className={style.MainIcon} src={muscleManIcon} alt="" />
-                            <h2>Muscle Premium</h2>
-
-                            <div className={style.OpcionsContainer}>
-                                <img className={style.CheckIcon} src={checkIcon} alt="" />
-                                <h3>Lorem Ipsum</h3>
-                            </div>
+                                <h2>{membership.duration}</h2>
+                                <h2> {membership.benefits}</h2>
+                                <h2> {membership.price}</h2>
                                 
-                            <div className={style.OpcionsContainer}>
-                                <img className={style.CheckIcon} src={checkIcon} alt="" />
-                                <h3>Lorem Ipsum</h3>
-                            </div>
 
-                            <div className={style.OpcionsContainer}>
-                                <img className={style.CheckIcon} src={checkIcon} alt="" />
-                                <h3>Lorem Ipsum</h3>
-                            </div>
-
-                            <h4>ARS 114.950 por mes</h4>
-                            <button>Compra ahora</button>
+                                    <button>Compra ahora</button>
+                                    </div>
+                                    </div>
+                                    )
+                            })}
+                           
                         </div>
                     </div>
                 </div>

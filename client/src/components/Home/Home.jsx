@@ -1,3 +1,4 @@
+
 import ExtraInfo from "../ExtraInfo/ExtraInfo";
 import Gallery from "../Gallery/Gallery";
 import Plans from "../Plans/Plans";
@@ -11,6 +12,7 @@ const Home = () => {
     const dispatch = useDispatch();
     const plansCLick = useSelector(selectPlansClicked);
     const plansRef = useRef(null);
+
   
     const handleOnclick = () => {
         plansRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -32,7 +34,12 @@ const Home = () => {
             <Gallery handleOnclick ={handleOnclick}/>
             <ExtraInfo/>
             <section ref={plansRef}>
-                <Plans/>
+
+                
+
+                    <Plans/>
+                    
+                
             </section>
         </>
     )
