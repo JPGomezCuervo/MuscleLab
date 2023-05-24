@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import style from "./Login.module.css";
 import axios from "axios";
-import { GoogleLogin } from "react-google-login";
-import { gapi } from "gapi-script";
+import { GoogleLogin } from "@react-oauth/google";
 import { Link } from "react-router-dom";
+import { URL, clientId } from "../../utils/constants";
+import decodejwt from "../../utils/decodejwt";
 
 const Login = () => {
   const [user, setUser] = useState();
@@ -11,18 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  useEffect(() => {
-    const start = () => {
-      gapi.auth2.init({
-        client_id:
-          "1060018757623-sk8opucj3l59lu8u1e6qmsuggnqtgr0h.apps.googleusercontent.com",
-      });
-    };
-    gapi.load("client:auth2", start);
-  }, []);
 
-  const clientId =
-    "1060018757623-sk8opucj3l59lu8u1e6qmsuggnqtgr0h.apps.googleusercontent.com";
   const handleLogin = async () => {
     if (!email || !password) {
       alert("complete los campos");
@@ -44,7 +34,6 @@ const Login = () => {
           setPasswordError(response.data.login.message);
         }
       } catch (error) {
-        console.log("entramos al catch");
         alert(error.message);
       }
     }
@@ -59,26 +48,30 @@ const Login = () => {
     setPassword(e.target.value);
     setPasswordError("");
   };
-  const onSuccess = async (response) => {
-    const usuario = await axios.post("http://localhost:3001/users/login", {
-      email: response.profileObj.email,
-      password: response.profileObj.googleId,
-    });
-    console.log(usuario);
-    if (usuario.data.login.success) {
-      localStorage.setItem("token", usuario.data.login.token);
-      window.location.href = "/";
-    } else {
-      const usuario = await axios.post("http://localhost:3001/users/create", {
-        fullName: response.profileObj?.email.split("@")[0],
-        email: response.profileObj?.email,
-        password: response.profileObj?.googleId,
+  const onSuccess = async (credentialResponse) => {
+    if (credentialResponse.credential) {
+      const { payload } = decodejwt(credentialResponse.credential);
+
+      const usuario = await axios.post(`${URL}/users/login`, {
+        email: payload.email,
+        password: payload.email,
       });
-      if (usuario.data.success) {
-        localStorage.setItem("token", usuario.data.user.token);
+      if (usuario.data.login.success) {
+        localStorage.setItem("token", usuario.data.login.token);
         window.location.href = "/";
       } else {
-        alert("error");
+        const usuario = await axios.post(`${URL}/users/create`, {
+          fullName: payload.name,
+          email: payload.email,
+          password: payload.email,
+        });
+
+        if (usuario.data.success) {
+          localStorage.setItem("token", usuario.data.user.token);
+          window.location.href = "/";
+        } else {
+          alert("Error al validar con Google");
+        }
       }
     }
   };
@@ -118,7 +111,6 @@ const Login = () => {
           clientId={clientId}
           onSuccess={onSuccess}
           onFailure={onFailure}
-          cookiePolicy="single_host_policy"
         />
         <hr></hr>
 

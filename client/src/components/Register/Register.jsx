@@ -1,20 +1,10 @@
 import style from "../Login/Login.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { GoogleLogin } from "react-google-login";
+import { GoogleLogin } from "@react-oauth/google";
 import { Link } from "react-router-dom";
-import { gapi } from "gapi-script";
 
 const Register = () => {
-  useEffect(() => {
-    const start = () => {
-      gapi.auth2.init({
-        client_id:
-          "1060018757623-sk8opucj3l59lu8u1e6qmsuggnqtgr0h.apps.googleusercontent.com",
-      });
-    };
-    gapi.load("client:auth2", start);
-  }, []);
   const clientId =
     "1060018757623-sk8opucj3l59lu8u1e6qmsuggnqtgr0h.apps.googleusercontent.com";
   const [emailError, setEmailError] = useState("");
@@ -51,23 +41,6 @@ const Register = () => {
       alert(error.message);
     }
   };
-  const onSuccess = async (response) => {
-    const usuario = await axios.post("http://localhost:3001/users/create", {
-      fullName: response.profileObj?.email.split("@")[0],
-      email: response.profileObj?.email,
-      password: response.profileObj?.googleId,
-    });
-    if (usuario.data.success) {
-      localStorage.setItem("token", usuario.data.user.token);
-      window.location.href = "/";
-    } else {
-      alert("error");
-    }
-  };
-
-  const onFailure = () => {
-    console.log("hubo un error");
-  };
   return (
     <div className={style.BGContainer}>
       <div className={style.Container}>
@@ -97,12 +70,6 @@ const Register = () => {
           Regístrate
         </button>
 
-        {/* <GoogleLogin
-          clientId={clientId}
-          onSuccess={onSuccess}
-          onFailure={onFailure}
-          cookiePolicy="single_host_policy"
-        /> */}
         <hr />
         <Link to="/login">
           <button className={style.ButtonCreate}>inicia sesión</button>

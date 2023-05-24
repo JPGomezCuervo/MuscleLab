@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, Outlet, Navigate } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 import Lessons from "./components/Lessons/Lessons";
@@ -17,7 +17,6 @@ import Users from "./components/Users/Users";
 import CreateUser from "./components/CreateUser/CreateUser";
 import { useSelector } from "react-redux";
 import { selectDashAuth } from "./redux/features/authSlice";
-import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import NavBardDash from "./components/NavBarDash/NavBarDash";
 import LessonsDash from "./components/LessonsDashboard/LessonsDash";

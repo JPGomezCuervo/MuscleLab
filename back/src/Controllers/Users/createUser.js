@@ -24,9 +24,10 @@ let createUser = async (
         isMonitor,
         isAdmin,
       });
-      const token = generateToken(newUser.id, newUser.isAdmin);
-
-      return  {newUser, token};
+      const token = generateToken(
+        newUser
+      );
+      return { newUser, token };
     } catch (error) {
       throw new Error(error.message);
     }
@@ -36,7 +37,7 @@ const generateToken = (user) => {
   const token = jwt.sign(
     {
       id: user.id,
-      nombre: user.nombre,
+      nombre: user.fullName,
       isAdmin: user.isAdmin,
     },
     "secretKey"

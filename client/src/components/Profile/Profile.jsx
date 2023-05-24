@@ -1,10 +1,10 @@
-import jwt_decode from "jwt-decode";
+import decodeJwt from "../../utils/decodejwt";
 const Profile = () => {
   const token = localStorage.getItem("token");
-  const decodedToken = jwt_decode(token);
-  const isAdmin = decodedToken.isAdmin;
-  const nombre = decodedToken.nombre;
-  const id = decodedToken.id;
+  const decoded = decodeJwt(token);
+  const isAdmin = decoded.payload.isAdmin;
+  const nombre = decoded.payload.nombre;
+  const id = decoded.payload.id;
 
   return (
     <div>
