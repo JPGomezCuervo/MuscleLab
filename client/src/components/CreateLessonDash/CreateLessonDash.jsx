@@ -21,7 +21,7 @@ class EditLessonDash extends Component {
         this.id = props.id;
         this.state = {
             lessonAttributes: {
-                 name: '',
+                name: '',
                 description: '',
                 shortDescription: '',
                 effort: '',
@@ -33,7 +33,7 @@ class EditLessonDash extends Component {
                 goals: [],
                 isAvailable: null,
                 monitor: '',
-                branchOffice: [],
+                branchoffice: ''
              },
             errors: {
                 name: '',
@@ -47,7 +47,7 @@ class EditLessonDash extends Component {
                 types: '',
                 goals: '',
                 monitor: '',
-                branchoffice: '',
+                branchOffice: '',
             },
             horaInicio: '',
             allowSubmit: false,
@@ -267,6 +267,25 @@ class EditLessonDash extends Component {
         }
     };
 
+    handleImageChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.files[0];
+
+        this.setState({
+            lessonAttributes: {
+                ...this.state.lessonAttributes,
+                image: value,
+            },
+            }, () => {
+                this.setState({
+                    errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
+                }, () => {
+                    this.setState({
+                        allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')});
+                    });
+            });
+    };
+
     handleConfirmCreate = (event) => {
         event.preventDefault();
         this.setState({
@@ -274,9 +293,14 @@ class EditLessonDash extends Component {
         });
     };
     handleConfirmarClick = (event) => {
-        JSON.stringify(this.state.lessonAttributes)
         event.preventDefault();
-        axios.post(`${URL}/lessons/create`, this.state.lessonAttributes)
+        const formData = new FormData();
+        console.log(this.state.lessonAttributes);
+
+        formData.append('image', this.state.lessonAttributes.image);
+        formData.append('lessonAttributes', JSON.stringify(this.state.lessonAttributes));
+        console.log(this.formData)
+        axios.post(`${URL}/lessons/create`, this.formData)
         .then((res) => {
             console.log(res);
             this.setState({
@@ -405,7 +429,7 @@ class EditLessonDash extends Component {
 
                         <div className={style.Description}>
                             <label>Imagen*</label>
-                            <input ref={this.inputRef} placeholder='Imagen' value={lessonAttributes.image} id='image' type='text' name='image' onChange={this.handleChange}/>
+                            <input ref={this.inputRef} id='image' type='file' name='image' onChange={this.handleImageChange}/>
                         </div>
                         {errors.image && <p className={style.Error}>{errors.image}</p>}
                         <div className={style.leftContainer}>
@@ -501,7 +525,6 @@ class EditLessonDash extends Component {
                                 ))}
                             </div>
                             {errors.goals && <p className={style.Error}>{errors.goals}</p>}
-
                         </div>
                         <div className={`${style.RightSubContainer} ${style.LastSubContainer}`}>
                             <h2>Estatus de la clase</h2>
@@ -519,6 +542,7 @@ class EditLessonDash extends Component {
                     <button className={this.state.allowSubmit === false ?`${style.SaveButton} ${style.Disable}`: style.SaveButton} disabled={!this.state.allowSubmit} onClick={this.handleConfirmCreate}>
                         Crear Clase
                     </button>
+                    {/* <button onClick={this.handleConfirmCreate}>crear CLase</button> */}
 
                 </div>
             </div>

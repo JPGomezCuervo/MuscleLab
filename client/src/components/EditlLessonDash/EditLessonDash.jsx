@@ -13,6 +13,7 @@ import arrayValidations from './validations/arrayValidations/index';
 import { weekDays } from '../../utils/constants';
 import axios from 'axios';
 import { URL } from '../../utils/constants';
+import loadingGif from '../../assets/gifs/loading.gif'
 
 
 class DetailLessonDash extends Component {
@@ -395,7 +396,7 @@ class DetailLessonDash extends Component {
     };
 
     render() {
-        const {lessonsTypes, lessonsGoals} = this.props;
+        const {lessonsTypes, lessonsGoals, status} = this.props;
         const {lessonAttributes, errors} = this.state;
 
       return (
@@ -407,7 +408,7 @@ class DetailLessonDash extends Component {
                 <h2>{lessonAttributes.name}</h2>
             </div>
             <h1>EDITA UNA CLASE</h1>
-
+            {status === "loading" && <img className={style.LoadingIcon} src={loadingGif} alt=""/>}
             <div className={style.Teacher}>{`Profesor: ${lessonAttributes.monitors}`}</div>
             <div className={style.EditContainer}>
                 <div className={style.DetailContainer}>
@@ -435,7 +436,7 @@ class DetailLessonDash extends Component {
                         </div>
                         {errors.effort && <p className={style.Error}>{errors.effort}</p>}
 
-                        {/* <div className={style.SelectorContainer}>
+                        <div className={style.SelectorContainer}>
                             <div>
                                 <label className={style.Profesor}>Profesor*</label>
                                 <select onChange={this.handleTrainerOptions} name='monitor'>
@@ -452,7 +453,7 @@ class DetailLessonDash extends Component {
                                 </select>
                             </div>
                             {errors.branchoffice && <p className={style.Error}>{errors.branchoffice}</p>}
-                        </div> */}
+                        </div>
 
                         <div className={style.Description}>
                             <label>Imagen</label>
@@ -615,6 +616,7 @@ const mapStateToProps = (state) => {
         lessonsGoals: state.goals.goals,
         monitors: state.users.monitors,
         offices: state.offices.offices,
+        status: state.lessons.status,
     }
 }
 

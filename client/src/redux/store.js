@@ -9,6 +9,7 @@ import authReducer from './features/authSlice';
 import officesReducer from './features/officesSlice';
 import membershipsReducer from './features/membershipsSlice';
 import goalsReducer from './features/goalsSlice';
+import lessonsDashboardReducer from './features/lessonsDashSlice';
 
 const store = configureStore({
     reducer: {
@@ -20,7 +21,8 @@ const store = configureStore({
         filters: filtersReducer,
         auth: authReducer,
         offices: officesReducer,
-        memberships: membershipsReducer 
+        memberships: membershipsReducer,
+        lessonsDashboard: lessonsDashboardReducer 
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
     devTools: process.env.NODE_ENV !== 'production'

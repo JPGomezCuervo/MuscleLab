@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./LessonsDash.module.css"
-import { selectAllLessonsDashboard, fetchAllLessonsDashboard, clearLesson, selectStatus } from "../../redux/features/lessonsSlice";
+import { fetchAllLessonsDashboard, selectAllLessonsDashboard, selectStatus } from "../../redux/features/lessonsDashSlice";
 import { selectSelectedTypes, setSelectedTypes } from "../../redux/features/filtersSlice";
 import { useSelector , useDispatch} from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -28,63 +28,6 @@ const LessonsDash = ()=> {
     useEffect(()=>{
         dispatch(fetchAllLessonsDashboard())
     },[dispatch])
-
-    // const removeLessonHandler = (event) => {
-    //   const id = event.target.name;    
-    //   let text = "Esta acción no se podrá revertir!\nPulse OK o Cancelar.";
-    //   if (window.confirm(text) === true) {
-    //     fetch("https://musclelabii.onrender.com/lessons/delete/" + id, { method: "DELETE" })
-    //       .then((response) => {
-    //         setServerResponse(true, response);
-    //         alert("Borrado con éxito!");
-    //       })
-    //       .catch((error) => {
-    //         setServerResponse(false, error);
-    //         alert("Error al borrar la lección.");
-    //       });
-    //   } else {
-    //     alert("Cancelado por el usuario");
-    //   }
-       
-    // };
-
-    const removeLessonHandler = (event) => {
-      const id = event.target.name;
-    
-      let text = "Esta acción no se podrá revertir!\nPulse OK o Cancelar.";
-      if (window.confirm(text) === true) {
-        // Eliminar directamente del servidor
-        fetch("https://musclelabii.onrender.com/lessons/delete/" + id, { method: "DELETE" })
-          .then((response) => {
-            if (response.status === 200) {
-              // Eliminación exitosa
-              setServerResponse(true);
-              alert("Borrado con éxito!");
-              // Llamar a la acción clearLesson para actualizar el estado local
-              dispatch(clearLesson(id));
-            } else if (response.status === 400) {
-              // Error en el servidor
-              setServerResponse(false);
-              return response.json();
-            } else {
-              // Otro código de estado
-              throw new Error("Error");
-            }
-          })
-          .then((data) => {
-            // Manejar el mensaje de error del servidor
-            if (data && data.error) {
-              alert(data.error);
-            }
-          })
-          .catch((error) => {
-            alert(error.message);
-          });
-      } else {
-        alert("Cancelado por el usuario");
-      }
-    };
-    
 
 
     const handleFilterTypes = (event) => {
