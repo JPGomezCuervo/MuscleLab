@@ -18,7 +18,7 @@ const Profile = () => {
       <p>NIY</p>
       <p>Nombre: {nombre}</p>
       <p>id: {id}</p>
-      <p>Eres admin :{isAdmin ? <a> Si</a> : <a> No</a>}</p>
+      <p>Eres admin :{isAdmin ? <p> Si</p> : <p> No</p>}</p>
     </div>
   );
 };
