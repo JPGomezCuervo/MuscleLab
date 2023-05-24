@@ -14,14 +14,16 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState("");
 
   const handleLogin = async () => {
+    console.log("clickaste iniciar con: ", email, password);
     if (!email || !password) {
       alert("complete los campos");
     } else {
       try {
-        const response = await axios.post("http://localhost:3001/users/login", {
+        const response = await axios.post(`${URL}/users/login`, {
           email,
           password,
         });
+        console.log(response);
         if (response.data.login.success) {
           localStorage.setItem("token", response.data.login.token);
           window.location.href = "/";
