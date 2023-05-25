@@ -8,7 +8,6 @@ import DetailLesson from "./components/DetailLesson/DetailLesson";
 import ContactUs from "./components/ContactUs/ContactUs";
 import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
-import NewLessons from "./components/NewLessons/NewLessons";
 import Nosotros from "./components/Nosotros/Nosotros";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Sedes from "./components/Sedes/Sedes";
