@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, Outlet, Navigate } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 import Lessons from "./components/Lessons/Lessons";
@@ -15,7 +15,6 @@ import Users from "./components/Users/Users";
 import CreateUser from "./components/CreateUser/CreateUser";
 import { useSelector } from "react-redux";
 import { selectDashAuth } from "./redux/features/authSlice";
-import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import NavBardDash from "./components/NavBarDash/NavBarDash";
 import LessonsDash from "./components/LessonsDashboard/LessonsDash";
@@ -29,9 +28,16 @@ import SedesDash from "./components/SedesDashboard/SedesDash";
 import SedesDashEditar from "./components/SedesDashEditar/SedesDashEditar";
 import SedesDashCrear from "./components/SedesDashCrear/SedesDashCrear";
 import SedeHomeDetalle from "./components/SedeHomeDetalle/SedeHomeDetalle";
+import Register from "./components/Register/Register";
+import Profile from "./components/Profile/Profile";
+import UserUpdate from "./components/UserUpdate/UserUpdate";
+import jwt_decode from "jwt-decode";
 function App() {
   const location = useLocation().pathname;
   const dashAuth = useSelector(selectDashAuth);
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
 
   // let isAdmin = false; // Declaración inicial con valor predeterminado
   // const token = localStorage.getItem("token");
@@ -40,7 +46,13 @@ function App() {
   //   const decodedToken = jwt_decode(token);
   //   isAdmin = decodedToken.isAdmin;
   // } else {
-  //   isAdmin = false; // Establecer isAdmin en false si no hay token
+  //   isAdmin = false;
+  // }
+
+  // if (!token && location.includes("dashboard")) {
+  //   return <Navigate to="/login" />;
+  // } else if (!isAdmin && location.includes("dashboard")) {
+  //   return <Navigate to="/" />;
   // }
 
   return (
@@ -48,6 +60,8 @@ function App() {
       {location.includes("dashboard") ? <NavBardDash /> : <NavBar />}
       {location.includes("dashboard") ? <AdminBar /> : null}
       <Routes>
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/clases" element={<Lessons />} />
@@ -78,12 +92,17 @@ function App() {
         <Route path="/dashboard/usuarios" element={<Users />} />
         <Route path="/dashboard/usuarios/crear" element={<CreateUser />} />
         <Route path="/dashboard/sedes" element={<SedesDash />} />
-        <Route path="/dashboard/sedes/editar/:id" element={<SedesDashEditar />} />
+        <Route
+          path="/dashboard/sedes/editar/:id"
+          element={<SedesDashEditar />}
+        />
         <Route path="/dashboard/sedes/crear" element={<SedesDashCrear />} />
+        <Route path="/profile/editar/:id" element={<UserUpdate />} />
         {/* </>
-        ) : (
-          <Route path="/denegado" element={<login />}></Route>
-        )} */}
+        ) : ( */}
+        <Route path="/denegado" element={<login />}></Route>
+        {/* )} */}
+
       </Routes>
       {location.includes("dashboard") ? null : <Footer />}
     </>

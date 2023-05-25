@@ -9,7 +9,17 @@ import SignUp from "../SignUp/SignUp";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import adminIcon from "../../assets/icons/admin.png";
+import jwt_decode from "jwt-decode";
 
+let isAdmin = false; // Declaración inicial con valor predeterminado
+const token = localStorage.getItem("token");
+
+if (token) {
+  const decodedToken = jwt_decode(token);
+  isAdmin = decodedToken.isAdmin;
+} else {
+  isAdmin = false; // Establecer isAdmin en false si no hay token
+}
 const NavBar = () => {
   const dispatch = useDispatch();
 
@@ -19,17 +29,6 @@ const NavBar = () => {
   const handleClickPlan = () => {
     dispatch(setPlansCLick(true));
   };
-
-  const {
-    loginWithPopup,
-    //loginWithRedirect,
-    logout,
-    user,
-    isLoading,
-    error,
-    isAuthenticated,
-    getAccessTokenSilent,
-  } = useAuth0();
   const token = localStorage.getItem("token");
   const handleLogOut = () => {
     localStorage.removeItem("token");
@@ -74,48 +73,28 @@ const NavBar = () => {
 
         <div className={style.LogOpcions}>
           {/* <Link to={"/login"}> */}
+
           {token && (
             <Link to="dashboard/clases">
-              <button className={style.btnRegistro1} >dashboard</button>
+              <button className={style.btnRegistro1}>dashboard</button>
             </Link>
           )}
-
-          <Link to="/login">
-            <button className={style.btnRegistro1} onClick={handleLogOut}>
-              logout
-            </button>
-          </Link>
-          {!isAuthenticated && (
-            <button className={style.btnRegistro1} onClick={loginWithPopup}>
-              Sign Up / Login
-            </button>
+          {token && (
+            <Link to="/profile">
+              <button className={style.btnRegistro1}>Mi Perfil</button>
+            </Link>
           )}
-
-          {error && <p>Authentication Error</p>}
-          {!error && isLoading && <p>Loading...</p>}
-          {!error && !isLoading && isAuthenticated && (
-            <button className={style.btnRegistro} onClick={logout}>
-              Cerrar sesion
-            </button>
-          )}
-
-          {/* </Link> */}
-
-          {isAuthenticated && (
-            <div className={style.userLogin}>
-              <span className={style.userName}>
-                Hola, {user.name.split(" ")[0]}
-              </span>
-            </div>
-          )}
-          {isAuthenticated && (
-            <Link to={"/user-face"}>
-              <img
-                className={style.adminIcon}
-                src={adminIcon}
-                alt={user.name}
-              />
-              {/* {<button className={style.btnRegistro}></button>} */}
+          {token ? (
+            <Link to="/login">
+              <button className={style.btnRegistro1} onClick={handleLogOut}>
+                Cerrar sesion
+              </button>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <button className={style.btnRegistro1} onClick={handleLogOut}>
+                Iniciar sesión
+              </button>
             </Link>
           )}
         </div>

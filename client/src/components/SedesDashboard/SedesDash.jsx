@@ -3,6 +3,8 @@ import style from "./SedesDash.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import ReactModal from "react-modal";
+
 import {
   fetchAllOfficesDashboard,
   selectAllOffices,
@@ -21,29 +23,57 @@ const SedesDash = () => {
 
   const dispatch = useDispatch();
 
+  const [serverResponse, setServerResponse] = useState(true);
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
+  const [confirmationId,setConfirmationId] = useState(null);
+  const [confirmationType,setConfirmationType] = useState(false);
 
   useEffect(() => {
     dispatch(fetchAllOfficesDashboard());
   }, [dispatch]);
 
 
+  // const removeSedeHandler = async (id) => {
+  //   const confirmation = window.confirm(
+  //     "Esta acción no se podrá revertir!\nPulse OK o Cancelar."
+  //   );
+
+  //   if (confirmation) {
+  //     try {
+  //       await fetch(`${URL}/branchoffice/delete/${id}`, { method: "DELETE" });
+
+  //       setServerResponse(true);
+  //       alert("Borrado con éxito!");
+
+  //       dispatch(clearOffice(id));
+  //     } catch (error) {}
+  //   } else {
+  //     alert("Cancelado por el usuario");
+  //   }
+  // };
+
   const removeSedeHandler = async (id) => {
-    const confirmation = window.confirm(
-      "Esta acción no se podrá revertir!\nPulse OK o Cancelar."
-    );
+    setConfirmationOpen(true);
+    setConfirmationId(id);
+  };
+  
+  const handleConfirmation = async (id) => {
+  try {
+    await fetch(`${URL}/branchoffice/delete/${id}`, { method: "DELETE" });
 
-    if (confirmation) {
-      try {
-        await fetch(`${URL}/branchoffice/delete/${id}`, { method: "DELETE" });
-
+        setServerResponse(true);
         alert("Borrado con éxito!");
 
-        dispatch(clearOfficeDashboard(id));
-      } catch (error) {}
-    } else {
-      alert("Cancelado por el usuario");
-    }
-  };
+    dispatch(clearOfficeDashboard(id));
+      setConfirmationType(true)
+
+  } catch (error) {
+    // Manejar el error si ocurre.
+  }
+
+  setConfirmationOpen(false);
+};
+
 
   return (
     <div className={style.BigBigContainer}>
@@ -86,6 +116,31 @@ const SedesDash = () => {
                       >
                         <img src={trash} alt="trash" className={style.icono} />
                       </button>
+
+  <ReactModal  className={style.modal}isOpen={confirmationOpen} onRequestClose={() => setConfirmationOpen(true)}>
+  <h2 className={style.text}>Confirmación</h2>
+  <p className={style.text}>Esta acción no se podrá revertir!</p>
+  <p className={style.text}>Pulse OK o Cancelar.</p>
+  <div className={style.botones}>
+  <button className={style.SaveButton} onClick={() => handleConfirmation(confirmationId)}>OK</button>
+  <button className={style.DeleteButton} onClick={() => setConfirmationOpen(false)}>Cancelar</button>
+  </div>
+</ReactModal>
+
+<ReactModal  className={style.modal} isOpen={confirmationType} onRequestClose={() => setConfirmationType(true)}>
+  <h2 className={style.text}>Confirmación</h2>
+  <p className={style.text}>Sede borrada con exito</p>
+  
+  <div className={style.botones}>
+  <button className={style.SaveButton} onClick={() => handleConfirmation(confirmationId)}>OK</button>
+
+  </div>
+  </ReactModal>
+{/* const handleDeleteOk = ()=>{
+  handleConfirmation(confirmationId)
+  setConfirmationOpen(false)
+} */}
+
                     </div>
                   </div>
                 </div>

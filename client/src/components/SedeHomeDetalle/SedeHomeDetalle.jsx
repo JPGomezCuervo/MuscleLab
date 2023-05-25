@@ -15,8 +15,10 @@ const SedeHomeDetalle = () => {
     dispatch(fetchOfficeByID(params.id));
   }, [dispatch, params.id]);
 
-  console.log(params.id)
+  // console.log(params.id)
 
+  // console.log(office.branchoffice)
+  
   return (
     <div>
       {  Object.keys(office).length !== 0
@@ -26,8 +28,10 @@ const SedeHomeDetalle = () => {
         <div className={style.card}>
           <h1 className={style.h1}>{office?.branchoffice.name}</h1>
           <p className={style.text}>Dirección: {office?.branchoffice.location}</p>
-          <p className={style.text}>Días de atención: {office?.branchoffice.scheduleDays}</p>
-          <p className={style.text}>Horario: {office?.branchoffice.scheduleHours}</p>
+          <p className={style.text}>Días de atención: {office?.branchoffice.scheduleDays?.join(", ")}</p>
+          <p className={style.text}>Horario: {office?.branchoffice.scheduleHourStart
+            } a {office.branchoffice.scheduleHourFinish
+            }</p>
         </div>)
        : 
         <p>Loading</p>

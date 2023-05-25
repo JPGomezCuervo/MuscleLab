@@ -1,6 +1,9 @@
 const updateLesson = require("../../Controllers/Lessons/updateLessonsController");
 const cloudinary = require('cloudinary').v2;
-require('dotenv').config;
+const multer = require('multer');
+const fs = require('fs');
+require('dotenv').config();
+
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -8,12 +11,23 @@ cloudinary.config({
   api_secret: process.env.API_SECRET
 });
 
+const storage = multer.diskStorage({
+  destination: "uploads/", //se almacena en un directorio temporal de multer
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage });
+
 const updateLessons = async (req, res) => {
   const { id } = req.params;
+  console.log("esta es la peticion", req.file);
+  const lessonAttributes = JSON.parse(req.body.lessonAttributes);
+  console.log(lessonAttributes);
   const { 
     effort, 
     shortDescription, 
-    image, 
     goals, 
     name, 
     description, 
@@ -24,20 +38,21 @@ const updateLessons = async (req, res) => {
     monitor,
     branchOffice,
     types
-  } = req.body;
+  } = lessonAttributes;
   try {
 
     let updatedImage = image;
     if (image) {
-      const uploadedImage = await cloudinary.uploader.upload(image);
+      const uploadedImage = await cloudinary.uploader.upload(req.file.path);
       updatedImage = uploadedImage.secure_url;
+      fs.unlinkSync(req.file.path);
     }
 
     const updatedLesson = await updateLesson(
       id,
       effort,
       shortDescription,
-      updatedImage,
+      updatedImage.secure_url,
       goals,
       name, 
       description, 
@@ -55,4 +70,7 @@ const updateLessons = async (req, res) => {
   }
 };
 
-module.exports = updateLessons;
+module.exports = {
+  upload: upload.single("image"),
+  updateLessons: updateLessons
+};

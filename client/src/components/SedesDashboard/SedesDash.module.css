@@ -157,3 +157,120 @@
 .button:hover{
 background-color:#002141;
 }
+/* //////////////////////// */
+
+
+.modal{
+ 
+  flex-direction: column;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+  background-color: white;
+  box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+  border-radius: .4rem;
+  min-height: 20rem;
+  min-width: 30rem;
+}
+
+
+
+.text{
+  font-family: 'Montserrat-Medium';
+  font-weight: 600;
+  color: #013565;
+  text-align: center;
+  width: 27rem;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  font-size: 1.5rem;
+}
+
+.botones{
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 40rem;
+ 
+ margin-bottom: 1rem;
+
+}
+
+.modalButton{
+  height: 4rem;
+  width: 10rem;
+  color: #ffffff;
+  background-color: #ffc300;
+  border-radius: 0.4rem;
+  border: 0;
+  font-family: "Montserrat-Bold";
+  font-size: 2rem;
+
+}
+
+.modalButton:hover {
+  background-color: #ffaf00;
+}
+.modalButton:active {
+  background-color: #ffc300;
+}
+
+.contenedorBoton{
+  display: flex;
+  align-items: center;
+ 
+}
+
+.SaveButton {
+  height: 3rem;
+  color: #ffffff;
+  width: 13rem;
+  background-color: #ffc300;
+  border: 0;
+  border-radius: 0.4rem;
+  font-family: "Montserrat-Bold";
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: 0.2s;
+  display: block;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+
+.SaveButton:hover {
+  background-color: #ffaf00;
+}
+.SaveButton:active {
+  background-color: #ffc300;
+}
+
+.DeleteButton {
+  width: 12rem;
+  height: 3rem;
+  color: #ffffff;
+  background-color: #e11d1d;
+  border: 0;
+  border-radius: 0.4rem;
+  font-family: "Montserrat-Bold";
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: 0.2s;
+  float: right;
+  margin-right: 10%;
+  margin-top: 3rem;
+}
+
+.DeleteButton:hover {
+  background-color: rgb(182, 22, 22);
+}
+
+.DeleteButton:active {
+  background-color: #e11d1d;
+}
