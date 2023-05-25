@@ -92,3 +92,17 @@
 .text {
   color: #ffaf00;
 }
+.PasswordIcon {
+  margin-left: -30px;
+  margin-right: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+.PasswordInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.Input {
+  padding-right: 30px;
+}

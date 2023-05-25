@@ -2,7 +2,7 @@ import style from "../Login/Login.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import { validate } from "./validate";
 const Register = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -12,11 +12,16 @@ const Register = () => {
     password: "",
     phone: "",
   });
+
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
   const changeHandler = (event) => {
     const field = event.target.name;
     const value = event.target.value;
-    // const fieldErrors = validate(field, value);
-    // setErrors({ ...errors, [field]: fieldErrors[field] });
+    const fieldErrors = validate(field, value);
+    setErrors({ ...errors, [field]: fieldErrors[field] });
     setForm({ ...form, [field]: value });
   };
 
@@ -41,7 +46,7 @@ const Register = () => {
       <div className={style.Container}>
         <h1>Regístrate</h1>
         <h2 className={style.Description}>Para continuar con MuscleLab</h2>
-        {/* {fullNameError && <p className={style.ErrorMessage}>{fullNameError}</p>} */}
+        
         <input
           type="text"
           name="email"
@@ -49,7 +54,7 @@ const Register = () => {
           value={form.email}
           onChange={changeHandler}
         />
-        {emailError && <p className={style.ErrorMessage}>{emailError}</p>}
+        {errors.email && <p className={style.ErrorMessage}>{errors.email}</p>}
         <input
           type="password"
           name="password"
@@ -57,7 +62,7 @@ const Register = () => {
           value={form.password}
           onChange={changeHandler}
         />
-        {passwordError && <p className={style.ErrorMessage}>{passwordError}</p>}
+        {errors.password && <p className={style.ErrorMessage}>{errors.password}</p>}
 
         {/* {phoneError && <p className={style.ErrorMessage}>{phoneError}</p>} */}
 
