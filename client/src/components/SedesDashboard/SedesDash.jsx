@@ -22,6 +22,7 @@ const SedesDash = () => {
   const [serverResponse, setServerResponse] = useState(true);
   const [confirmationOpen, setConfirmationOpen] = useState(false);
   const [confirmationId,setConfirmationId] = useState(null);
+  const [confirmationType,setConfirmationType] = useState(false);
 
   useEffect(() => {
     dispatch(fetchAllOffices());
@@ -96,6 +97,8 @@ const SedesDash = () => {
     // Mostrar el mensaje de éxito utilizando un modal de React o cualquier otro componente de notificación.
 
     dispatch(clearOffice(id));
+      setConfirmationType(true)
+
   } catch (error) {
     // Manejar el error si ocurre.
   }
@@ -146,7 +149,7 @@ const SedesDash = () => {
                         <img src={trash} alt="trash" className={style.icono} />
                       </button>
 
-                      <ReactModal  className={style.modal}isOpen={confirmationOpen} onRequestClose={() => setConfirmationOpen(false)}>
+  <ReactModal  className={style.modal}isOpen={confirmationOpen} onRequestClose={() => setConfirmationOpen(true)}>
   <h2 className={style.text}>Confirmación</h2>
   <p className={style.text}>Esta acción no se podrá revertir!</p>
   <p className={style.text}>Pulse OK o Cancelar.</p>
@@ -155,6 +158,20 @@ const SedesDash = () => {
   <button className={style.DeleteButton} onClick={() => setConfirmationOpen(false)}>Cancelar</button>
   </div>
 </ReactModal>
+
+<ReactModal  className={style.modal} isOpen={confirmationType} onRequestClose={() => setConfirmationType(true)}>
+  <h2 className={style.text}>Confirmación</h2>
+  <p className={style.text}>Sede borrada con exito</p>
+  
+  <div className={style.botones}>
+  <button className={style.SaveButton} onClick={() => handleConfirmation(confirmationId)}>OK</button>
+
+  </div>
+  </ReactModal>
+{/* const handleDeleteOk = ()=>{
+  handleConfirmation(confirmationId)
+  setConfirmationOpen(false)
+} */}
 
                     </div>
                   </div>

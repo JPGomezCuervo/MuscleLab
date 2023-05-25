@@ -136,9 +136,12 @@ const SedesDashCrear = () => {
       console.error("Errores de validación:", errors);
       setValidacion(true)
     } else {
+      console.log("envia la accion")
       axios
         .post(`${URL}/branchoffice/create`, sedes)
         .then((res) => {
+          console.log(res)
+          console.log(sedes)
           setModalCreacionExito(true)
           // Realizar acciones adicionales después de crear la sede si es necesario
           setSedes({
@@ -148,7 +151,7 @@ const SedesDashCrear = () => {
             scheduleHours: "",
           });
           // Redireccionar a la página correspondiente
-          navigate("/dashboard/sedes")
+         //navigate("/dashboard/sedes")
         })
         .catch((error) => {
           console.error("Error al crear la sede:", error);
@@ -158,6 +161,11 @@ const SedesDashCrear = () => {
     }
    
   };
+
+  const handleAceptarClick = ()=>{
+    setModalCreacionExito(false)
+    navigate("/dashboard/sedes")
+  }
 
   return (
     <div className={style.BigBigContainer}>
@@ -266,7 +274,7 @@ const SedesDashCrear = () => {
 <ReactModal isOpen={modalCreacionExito} onRequestClose={() => setModalCreacionExito(true)}>
   <h2 className={style.text}>Exito</h2>
   <p className={style.text}>Sede creada correctamente</p>
-  <button className={style.SaveButton} onClick={() => setModalCreacionExito(false)}>Aceptar</button> 
+  <button className={style.SaveButton} onClick={handleAceptarClick}>Aceptar</button> 
 </ReactModal>
 
 <ReactModal className={style.modal} isOpen={errorCreacion} onRequestClose={() => setErrorCreacion(true)}>
