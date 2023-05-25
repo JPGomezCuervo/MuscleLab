@@ -295,12 +295,11 @@ class EditLessonDash extends Component {
     handleConfirmarClick = (event) => {
         event.preventDefault();
         const formData = new FormData();
-        console.log(this.state.lessonAttributes);
 
         formData.append('image', this.state.lessonAttributes.image);
         formData.append('lessonAttributes', JSON.stringify(this.state.lessonAttributes));
-        console.log(this.formData)
-        axios.post(`${URL}/lessons/create`, this.formData)
+        console.log(formData)
+        axios.post(`${URL}/lessons/create`, formData)
         .then((res) => {
             console.log(res);
             this.setState({
