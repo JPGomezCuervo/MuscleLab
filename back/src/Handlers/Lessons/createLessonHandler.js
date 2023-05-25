@@ -1,6 +1,7 @@
 const createLesson = require("../../Controllers/Lessons/createLesson");
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
+const fs = require('fs');
 require('dotenv').config();
 
 cloudinary.config({
@@ -20,6 +21,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const createNewLesson = async (req, res) => {
+  console.log("esta es la peticion", req.file);
+  const lessonAttributes = JSON.parse(req.body.lessonAttributes);
+  console.log(lessonAttributes);
   const {
     id,
     name,
@@ -33,12 +37,8 @@ const createNewLesson = async (req, res) => {
     types,
     monitor,
     branchoffice,
-  } = req.body;
+  } = lessonAttributes;
   try {
-    if (!req.file) {
-      return res.status(400).json({ error: "No se proporcionó ninguna imagen" });
-    };
-
     const uploadedImage = await cloudinary.uploader.upload(req.file.path);
     
     const newLesson = await createLesson(
@@ -61,10 +61,11 @@ const createNewLesson = async (req, res) => {
 
     res.status(200).json({ message: "Lección creada con éxito", lesson: newLesson });
   } catch (error) {
+    console.log(error);
     res.status(400).json({error:error.message});
   }
 };
 module.exports = {
-  upload,
-  createNewLesson
+  upload: upload.single("image"), // Middleware para procesar la imagen
+  createNewLesson: createNewLesson
 };

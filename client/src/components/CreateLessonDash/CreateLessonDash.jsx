@@ -21,7 +21,7 @@ class EditLessonDash extends Component {
         this.id = props.id;
         this.state = {
             lessonAttributes: {
-                 name: '',
+                name: '',
                 description: '',
                 shortDescription: '',
                 effort: '',
@@ -33,7 +33,7 @@ class EditLessonDash extends Component {
                 goals: [],
                 isAvailable: null,
                 monitor: '',
-                branchOffice: [],
+                branchoffice: ''
              },
             errors: {
                 name: '',
@@ -47,8 +47,9 @@ class EditLessonDash extends Component {
                 types: '',
                 goals: '',
                 monitor: '',
-                branchoffice: '',
+                branchOffice: '',
             },
+            imagePreviewUrl: '',
             horaInicio: '',
             allowSubmit: false,
             message:'',
@@ -267,6 +268,36 @@ class EditLessonDash extends Component {
         }
     };
 
+    handleImageChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.files[0];
+      
+        const reader = new FileReader();
+        
+        reader.onloadend = () => {
+          this.setState(
+            {
+              lessonAttributes: {
+                ...this.state.lessonAttributes,
+                image: value,
+              },
+              imagePreviewUrl: reader.result, 
+            },
+            () => {
+              this.setState(
+                {
+                  errors: validations(value, name, this.state.errors, this.state.lessonAttributes),
+                  allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item) === true) && Object.values(this.state.errors).every((item) => item === ''),
+                }
+              );
+            }
+          );
+        };
+        
+        reader.readAsDataURL(value);
+      };
+      
+
     handleConfirmCreate = (event) => {
         event.preventDefault();
         this.setState({
@@ -274,9 +305,13 @@ class EditLessonDash extends Component {
         });
     };
     handleConfirmarClick = (event) => {
-        JSON.stringify(this.state.lessonAttributes)
         event.preventDefault();
-        axios.post(`${URL}/lessons/create`, this.state.lessonAttributes)
+        const formData = new FormData();
+
+        formData.append('image', this.state.lessonAttributes.image);
+        formData.append('lessonAttributes', JSON.stringify(this.state.lessonAttributes));
+        console.log(formData)
+        axios.post(`${URL}/lessons/create`, formData)
         .then((res) => {
             console.log(res);
             this.setState({
@@ -380,7 +415,7 @@ class EditLessonDash extends Component {
                             <label>Intensidad*</label>
                             <input placeholder='Intensidad' value={lessonAttributes.effort} type='text' id='effort' name='effort' onChange={this.handleChange}/>
                         </div>
-                        {errors.effort && <p className={style.Errors}>{errors.effort}</p>}
+                        {errors.effort && <p className={style.Error}>{errors.effort}</p>}
                         
                         <div className={style.SelectorContainer}>
                             <div>
@@ -403,15 +438,16 @@ class EditLessonDash extends Component {
                         
                         
 
-                        <div className={style.Description}>
+                        <div className={style.FileInput}>
                             <label>Imagen*</label>
-                            <input ref={this.inputRef} placeholder='Imagen' value={lessonAttributes.image} id='image' type='text' name='image' onChange={this.handleChange}/>
+                            <input id='image' type='file' name='image' onChange={ this.handleImageChange } />
                         </div>
                         {errors.image && <p className={style.Error}>{errors.image}</p>}
+                        
                         <div className={style.leftContainer}>
-                        <div className={style.ImageContainer}>
-                            <img src={this.inputRef?.current?.value} alt="Tu imagen" />
-                        </div>
+                            {this.state.imagePreviewUrl &&(<div className={style.ImageContainer}>
+                                {lessonAttributes.image && <img src={this.state.imagePreviewUrl} alt="Tu imagen" />}
+                            </div>)}
                         </div>
                         
                     </div>
@@ -501,7 +537,6 @@ class EditLessonDash extends Component {
                                 ))}
                             </div>
                             {errors.goals && <p className={style.Error}>{errors.goals}</p>}
-
                         </div>
                         <div className={`${style.RightSubContainer} ${style.LastSubContainer}`}>
                             <h2>Estatus de la clase</h2>
@@ -519,6 +554,7 @@ class EditLessonDash extends Component {
                     <button className={this.state.allowSubmit === false ?`${style.SaveButton} ${style.Disable}`: style.SaveButton} disabled={!this.state.allowSubmit} onClick={this.handleConfirmCreate}>
                         Crear Clase
                     </button>
+                    {/* <button onClick={this.handleConfirmCreate}>crear CLase</button> */}
 
                 </div>
             </div>

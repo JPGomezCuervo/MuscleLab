@@ -186,20 +186,6 @@ const lessonsSlice = createSlice({
         //revisar sintaxis del error
         state.error = action.error;
       })
-      .addCase(fetchAllLessonsDashboard.fulfilled, (state, { payload }) => {
-        state.lessonsDashboard = payload;
-        state.error = "";
-        state.status = fulfilled;
-      })
-      .addCase(fetchAllLessonsDashboard.pending, (state, action) => {
-        state.status = pending;
-        state.error = "";
-      })
-      .addCase(fetchAllLessonsDashboard.rejected, (state, action) => {
-        state.status = rejected;
-        //revisar sintaxis del error
-        state.error = action.error;
-      })
       .addCase(fetchLessonByName.fulfilled, (state, { payload }) => {
         state.error = "";
         state.status = fulfilled;
@@ -218,8 +204,6 @@ const lessonsSlice = createSlice({
 });
 
 export const selectAllLessons = (state) => state.lessons.lessons;
-export const selectAllLessonsDashboard = (state) =>
-  state.lessons.lessonsDashboard;
 export const selectLesson = (state) => state.lessons.lesson;
 export const selectStatus = (state) => state.lessons.status;
 export const selectError = (state) => state.lessons.error;
