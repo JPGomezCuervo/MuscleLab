@@ -5,12 +5,29 @@ const stripe = require('stripe')('sk_test_51NBkBJFPcDe3Fz6KjLlzjI35wfptX5dwAkeq7
 
 
 server.post('/create_checkout',async (req,res)=>{
-    res.status(200).json({msg:"Hola"});
-    // const session=await stripe.checkout.sessions.create({
-    //     line_items:[{
+    //res.status(200).json({msg:"Hola"});
+    const {name, benefits, price}=req.body;
+    console.log(name, benefits, price);
+    const charge=Number(price)*100;
+    console.log(charge);
+    const session=await stripe.checkout.sessions.create({
+        line_items:[{
+            price_data:{
+                currency: "USD",
+                product_data:{
+                    name:name,
+                    description:benefits,
+                    unit_amount:charge,
+                }
+            },
+            quantity: 1
+        }],
+        mode:'payment',
+        success_url: 'https://localhost:3000/profile',
+        cancel_url:'https://localhost:3000/sedes'
+    });
 
-    //     }]
-    // })
+    res.redirect(303, session.url);
     
 });
 
