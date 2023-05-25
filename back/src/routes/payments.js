@@ -14,7 +14,7 @@ server.post('/create_checkout',async (req,res)=>{
             price_data:{
                 currency: "USD",
                 product_data:{
-                    name:Plus,
+                    name:name,
                     description:benefits,
                 },
                 unit_amount:charge,
