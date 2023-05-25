@@ -18,6 +18,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
 const createNewBranchOffice = async (req, res) => {
   const lessonAttributes = JSON.parse(req.body.lessonAttributes);
   console.log(lessonAttributes);
@@ -35,12 +36,15 @@ const createNewBranchOffice = async (req, res) => {
     const newBranchOffice = await createBranchOffice(
       id,
       name,
+      uploadedImage.secure_url,
       location,
       scheduleDays,
       scheduleHourStart,
       scheduleHourFinish
     );
+
     fs.unlinkSync(req.file.path);
+
     res.status(201).json({
       message: "sucursal creada correctamente",
       branchOffice: newBranchOffice,
@@ -49,4 +53,7 @@ const createNewBranchOffice = async (req, res) => {
     res.status(400).json(error.message);
   }
 };
-module.exports = createNewBranchOffice;
+module.exports = {
+  upload: upload.single("image"),
+  createNewBranchOffice: createNewBranchOffice
+};
