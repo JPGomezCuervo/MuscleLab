@@ -27,7 +27,7 @@ server.post('/create_checkout',async (req,res)=>{
         cancel_url:'https://localhost:3000/sedes'
     });
     
-    res.redirect(session.url, 303);
+    res.redirect(session.url);
     
 });
 
