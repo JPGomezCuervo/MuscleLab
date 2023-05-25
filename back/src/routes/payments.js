@@ -11,9 +11,10 @@ server.post('/checkout',async (req,res)=>{
         amount: amount,
         currency: "USD",
         description: description,
-        payment_method: id
-    })
-    res.status(200);
+        payment_method: id,
+        confirm: true
+    });
+    res.status(200).json(payment);
 });
 
 module.exports = server;
