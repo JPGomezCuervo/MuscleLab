@@ -6,11 +6,11 @@ const stripe = require('stripe')('sk_test_51NBkBJFPcDe3Fz6KjLlzjI35wfptX5dwAkeq7
 
 server.post('/create_checkout',async (req,res)=>{
     res.status(200).json({msg:"Hola"});
-    const session=await stripe.checkout.sessions.create({
-        line_items:[{
+    // const session=await stripe.checkout.sessions.create({
+    //     line_items:[{
 
-        }]
-    })
+    //     }]
+    // })
     
 });
 
