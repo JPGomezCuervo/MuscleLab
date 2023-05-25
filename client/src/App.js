@@ -40,21 +40,21 @@ function App() {
     console.log(location);
   }, [location]);
 
-  let isAdmin = false; // Declaración inicial con valor predeterminado
-  const token = localStorage.getItem("token");
+  // let isAdmin = false; // Declaración inicial con valor predeterminado
+  // const token = localStorage.getItem("token");
 
-  if (token) {
-    const decodedToken = jwt_decode(token);
-    isAdmin = decodedToken.isAdmin;
-  } else {
-    isAdmin = false;
-  }
+  // if (token) {
+  //   const decodedToken = jwt_decode(token);
+  //   isAdmin = decodedToken.isAdmin;
+  // } else {
+  //   isAdmin = false;
+  // }
 
-  if (!token && location.includes("dashboard")) {
-    return <Navigate to="/login" />;
-  } else if (!isAdmin && location.includes("dashboard")) {
-    return <Navigate to="/" />;
-  }
+  // if (!token && location.includes("dashboard")) {
+  //   return <Navigate to="/login" />;
+  // } else if (!isAdmin && location.includes("dashboard")) {
+  //   return <Navigate to="/" />;
+  // }
 
   return (
     <>
