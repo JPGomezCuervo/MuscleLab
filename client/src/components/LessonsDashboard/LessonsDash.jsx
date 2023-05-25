@@ -101,26 +101,17 @@ return(
                 {/* <button className={style.btnIcono2} onClick={removeLessonHandler} name={`${el.id}`}>
                   <img src={trash} alt="trash" className={style.icono}/>
                 </button> */}
-              
-              </div>
-            
-            </div>
-
-          </div>
-        ))
-        ) : (
+                    </div>
+                  </div>
+                </div>
+              ))
+          ) : (
             <p>Loading</p>
-            )}
-        </div>       
-  </div>
-  </>
+          )}
+        </div>
+      </div>
+    </>
   );
 };
 
-
-
-
-
 export default LessonsDash;
-
-                
