@@ -40,15 +40,21 @@ function App() {
     console.log(location);
   }, [location]);
 
-  // let isAdmin = false; // Declaración inicial con valor predeterminado
-  // const token = localStorage.getItem("token");
+  let isAdmin = false; // Declaración inicial con valor predeterminado
+  const token = localStorage.getItem("token");
 
-  // if (token) {
-  //   const decodedToken = jwt_decode(token);
-  //   isAdmin = decodedToken.isAdmin;
-  // } else {
-  //   isAdmin = false; // Establecer isAdmin en false si no hay token
-  // }
+  if (token) {
+    const decodedToken = jwt_decode(token);
+    isAdmin = decodedToken.isAdmin;
+  } else {
+    isAdmin = false;
+  }
+
+  if (!token && location.includes("dashboard")) {
+    return <Navigate to="/login" />;
+  } else if (!isAdmin && location.includes("dashboard")) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <>
@@ -69,7 +75,6 @@ function App() {
         {/* <Route path='/dashboard' element={<LessonsDash/>}>
         <Route path= '/dashboard/lessons/detail/:id' element={<LessonsDash/>}/> 
       <Route/>  */}
-
         {/* {isAdmin ? (
           <> */}
         <Route path="/dashboard" element={<LessonsDash />} />
@@ -98,6 +103,7 @@ function App() {
         ) : ( */}
         <Route path="/denegado" element={<login />}></Route>
         {/* )} */}
+
       </Routes>
       {location.includes("dashboard") ? null : <Footer />}
     </>
