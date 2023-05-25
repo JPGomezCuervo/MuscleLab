@@ -9,7 +9,6 @@ const fetchAllOffices = createAsyncThunk(
             const response = await axios.get(`${URL}/branchoffice`);
             return response.data
         } catch (error){
-            console.log(error.response.data);
             throw new Error (error.response)
         }
     }

@@ -26,42 +26,6 @@ const SedesDash = () => {
     dispatch(fetchAllOfficesDashboard());
   }, [dispatch]);
 
-  // const removeSedeHandler = async (id) => {
-  //   //const id = event.target.name;
-  //   let text = "Esta acción no se podrá revertir!\nPulse OK o Cancelar.";
-  //   if (true) {
-  //     //console.log(id);
-  //     // Eliminar directamente del servidor
-  //    await fetch("https://musclelabii.onrender.com/branchoffice/delete/" + id, { method: "DELETE" })
-  //       .then((response) => {
-  //         if (response.status === 200) {
-  //           // Eliminación exitosa
-  //           setServerResponse(true);
-  //           alert("Borrado con éxito!");
-
-  //           dispatch(clearOffice(id));
-  //         } else if (response.status === 400) {
-  //           // Error en el servidor
-  //           setServerResponse(false);
-  //           return response.json();
-  //         } else {
-  //           // Otro código de estado
-  //           throw new Error("Error de red");
-  //         }
-  //       })
-  //       .then((data) => {
-  //         // Manejar el mensaje de error del servidor
-  //         if (data && data.error) {
-  //         // alert(data.error);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //       // alert(error.message);
-  //       });
-  //   } else {
-  //    //alert("Cancelado por el usuario");
-  //   }
-  // }
 
   const removeSedeHandler = async (id) => {
     const confirmation = window.confirm(
