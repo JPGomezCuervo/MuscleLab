@@ -15,10 +15,10 @@ server.post('/create_checkout',async (req,res)=>{
             price_data:{
                 currency: "USD",
                 product_data:{
-                    name:name,
-                    description:benefits,
+                    name:"Plus",
+                    description:"Cositas",
                 },
-                unit_amount:charge,
+                unit_amount:2000,
             },
             quantity: 1
         }],
@@ -27,7 +27,7 @@ server.post('/create_checkout',async (req,res)=>{
         cancel_url:'https://localhost:3000/sedes'
     });
     
-    res.redirect(session.url);
+    res.status(303).redirect(session.url);
     
 });
 
