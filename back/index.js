@@ -22,6 +22,10 @@ const { conn } = require("./src/db.js");
 
 // Syncing all the models at once.
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3d3fcdbcc4122c82f24e70ec0e3f7a90c703da3
 conn
   .sync({ alter: true })
   .then(() => {
@@ -32,10 +36,18 @@ conn
   .catch((error) => {
     console.error("Error syncing models:", error);
   });
+<<<<<<< HEAD
 //   //!para el local host
 // conn
 // .sync({ alter: true })
 // .then(() => {
+=======
+//!para el local host
+
+//conn
+//.sync({ alter: true })
+//.then(() => {
+>>>>>>> b3d3fcdbcc4122c82f24e70ec0e3f7a90c703da3
 //   server.listen(3001, () => {
 //     console.log("Server listening on port 3001"); // eslint-disable-line no-console
 //   });
