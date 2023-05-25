@@ -28,7 +28,6 @@ const updateLessons = async (req, res) => {
   const { 
     effort, 
     shortDescription, 
-    image, 
     goals, 
     name, 
     description, 
