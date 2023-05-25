@@ -1,6 +1,8 @@
 const createLesson = require("../../Controllers/Lessons/createLesson");
 const cloudinary = require('cloudinary').v2;
-require('dotenv').config;
+const multer = require('multer');
+const fs = require('fs');
+require('dotenv').config();
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -8,7 +10,20 @@ cloudinary.config({
   api_secret: process.env.API_SECRET
 });
 
+//configuracion de multer para cargar archivos desde pc
+const storage = multer.diskStorage({
+  destination: "uploads/", //se almacena en un directorio temporal de multer
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage });
+
 const createNewLesson = async (req, res) => {
+  console.log("esta es la peticion", req.file);
+  const lessonAttributes = JSON.parse(req.body.lessonAttributes);
+  console.log(lessonAttributes);
   const {
     id,
     name,
@@ -19,13 +34,12 @@ const createNewLesson = async (req, res) => {
     scheduleDays,
     scheduleHourStart,
     scheduleHourFinish,
-    image,
     types,
     monitor,
     branchoffice,
-  } = req.body;
+  } = lessonAttributes;
   try {
-    const uploadedImage = await cloudinary.uploader.upload(image)
+    const uploadedImage = await cloudinary.uploader.upload(req.file.path);
     
     const newLesson = await createLesson(
       id,
@@ -42,11 +56,16 @@ const createNewLesson = async (req, res) => {
       monitor,
       branchoffice
     );
-    res
-      .status(201)
-      .json({ message: "Lesson created succesfully", lesson: newLesson });
+
+    fs.unlinkSync(req.file.path); //eliminar el archivo del directorio temporal de multer
+
+    res.status(200).json({ message: "Lección creada con éxito", lesson: newLesson });
   } catch (error) {
+    console.log(error);
     res.status(400).json({error:error.message});
   }
 };
-module.exports = createNewLesson;
+module.exports = {
+  upload: upload.single("image"), // Middleware para procesar la imagen
+  createNewLesson: createNewLesson
+};

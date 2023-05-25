@@ -32,7 +32,7 @@ conn
   .catch((error) => {
     console.error("Error syncing models:", error);
   });
-//!para el local host
+//   //!para el local host
 // conn
 // .sync({ alter: true })
 // .then(() => {
