@@ -4,7 +4,7 @@ export const validate = (field, value) => {
     case "email":
       if (!value) {
         errors.email = "El email es obligatorio";
-      } else if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
         errors.email = "Debe ingresar un correo electrónico válido";
       }
       break;

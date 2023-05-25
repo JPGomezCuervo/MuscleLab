@@ -1,26 +1,9 @@
 .BGContainer {
   padding-top: 12rem;
 }
-.GoogleButton {
-  background-color: #ffffff;
-  color: #737373;
-  font-size: 14px;
-  border: 1px solid #737373;
-  border-radius: 4px;
-  padding: 10px 15px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-.GoogleButton img {
-  width: 18px;
-  height: 18px;
-  margin-right: 10px;
-}
 .Container {
   border: solid 0.1rem #b8b8b8;
-  width: fit-content;
+  width: 25%;
   padding: 2rem;
   margin: 0 auto;
   border-radius: 3%;
