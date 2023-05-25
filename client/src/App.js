@@ -30,7 +30,9 @@ import SedesDashCrear from "./components/SedesDashCrear/SedesDashCrear";
 import SedeHomeDetalle from "./components/SedeHomeDetalle/SedeHomeDetalle";
 import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
+import StripeRender from "./components/StripeRender/StripeRender";
 import jwt_decode from "jwt-decode";
+
 
 function App() {
   const location = useLocation().pathname;
@@ -65,6 +67,8 @@ function App() {
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/sedes" element={<Sedes />} />
         <Route path="/sedes/detalles/:id" element={<SedeHomeDetalle />} />
+        
+        <Route path="/stripe" element={<StripeRender/>}/>
         {/* <Route path='/dashboard' element={<LessonsDash/>}>
         <Route path= '/dashboard/lessons/detail/:id' element={<LessonsDash/>}/> 
       <Route/>  */}
