@@ -49,44 +49,6 @@ const SedesDashEditar = () => {
 
   const navigate = useNavigate();
 
-  // const validarFormulario = () => {
-  //   const regexNombre = /^[A-Za-z\s,]+$/;
-  //   const regexDireccion = /^[A-Za-z0-9\s]+$/;
-  //   const regexDias = /^[A-Za-z\s,]+$/;
-  //   const regexHorario = /^\d{2}-\d{2}$/;
-
-  //   let newErrors = {};
-
-  //   if (sedes.name.trim() === "") {
-  //     newErrors.name = "El campo de nombre es requerido.";
-  //   } else if (!regexNombre.test(sedes.name)) {
-  //     newErrors.name = "El nombre debe contener solo letras, espacios y comas.";
-  //   }
-
-  //   if (sedes.location.trim() === "") {
-  //     newErrors.location = "El campo de dirección es requerido.";
-  //   } else if (!regexDireccion.test(sedes.location)) {
-  //     newErrors.location =
-  //       "La dirección debe contener letras y números sin caracteres especiales.";
-  //   }
-
-  //   if (sedes.scheduleDays.trim() === "") {
-  //     newErrors.scheduleDays = "El campo de días de atención es requerido.";
-  //   } else if (!regexDias.test(sedes.scheduleDays)) {
-  //     newErrors.scheduleDays =
-  //       "Los días de atención deben contener solo palabras, espacios y comas.";
-  //   }
-
-  //   if (sedes.scheduleHours.trim() === "") {
-  //     newErrors.scheduleHours = "El campo de horario es requerido.";
-  //   } else if (!regexHorario.test(sedes.scheduleHours)) {
-  //     newErrors.scheduleHours =
-  //       "El horario debe tener el formato HH-HH (por ejemplo, 09-22).";
-  //   }
-
-  //   setErrors(newErrors);
-  // };
-
   const guardarCambiosSede = () => {
     console.log(sedes.scheduleHourStart, sedes.scheduleHourFinish);
     if (errors.name || errors.location || !validateHours() || !validatedays()) {
@@ -147,15 +109,6 @@ const SedesDashEditar = () => {
     const fieldErrors = validate(field, value);
     setErrors({ ...errors, [field]: fieldErrors[field] });
     setSedes({ ...sedes, [field]: value });
-    // validarFormulario({
-    //   ...sedes,
-    //   [e.target.name]: e.target.value,
-    // });
-
-    // setSedes({
-    //   ...sedes,
-    //   [e.target.name]: e.target.value,
-    // });
   };
   const handleDayChange = (e) => {
     const dia = e.target.value;
@@ -214,7 +167,7 @@ const SedesDashEditar = () => {
       <div className={style.BigBigContainer}>
         <div className={style.Navigation}>
           <Link to="/dashboard/sedes">
-            <a href="http://localhost:3000/dashboard/sedes">
+            <a href={`${URL}/dashboard/sedes`}>
               <img className={style.ArrowIcon} src={arrowIcon} alt="" />
             </a>
           </Link>

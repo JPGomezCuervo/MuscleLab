@@ -1,4 +1,4 @@
-.general{
+.general {
   padding-top: 150px;
 }
 .container {
@@ -23,16 +23,17 @@
   text-align: center;
   margin-bottom: 2rem;
 }
-.container h2 {
+.container label {
   font-family: "Montserrat-Medium";
   font-size: 1.4rem;
   color: #202124;
   font-weight: 400;
-  text-align: left;
+  float: left;
 }
-.insignias {
-  display: flex;
-  justify-content: start;
+.info input {
+  background-color: #f3f3f3;
+  border-radius: 0.4rem;
+  padding: 0.6rem;
 }
 .insignias span {
   color: #fff;
@@ -50,17 +51,7 @@
 .insignias span:nth-child(2) {
   margin-left: 1rem;
 }
-.Description {
-  width: fit-content;
-  margin: 0 auto;
-  margin-bottom: 2rem;
-}
-.info p {
-  background-color: #f3f3f3;
-  border-radius: 0.4rem;
-  padding: 0.6rem;
-}
-.ButtonEdit {
+.ButtonSave {
   display: block;
   color: #ffaf00;
   background-color: transparent;

@@ -4,7 +4,7 @@ const updateUsers = async (req, res) => {
   const { id } = req.params;
   const { fullName, password, email, phone, lessons, isMonitor, isAdmin } =
     req.body;
-  console.log(req.body);
+    console.log(req.body);
   try {
     const updatedUser = await updateUser(
       id,

@@ -8,48 +8,42 @@ import { fetchUserByID, selectUserByID } from "../../redux/features/usersSlice";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
+  const user = useSelector(selectUserByID);
   const token = localStorage.getItem("token");
   const decoded = decodeJwt(token);
-  const nombre = decoded.payload.nombre;
   const id = decoded.payload.id;
+  const isAdmin = user.isAdmin;
   const dispatch = useDispatch();
-  const user = useSelector(selectUserByID);
 
   useEffect(() => {
     dispatch(fetchUserByID(id));
   }, [dispatch, id]);
 
   const phone = user.phone;
-  const isAdmin = user.isAdmin;
+
   const isMonitor = user.isMonitor;
 
   return (
-    <div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+    <div className={style.general}>
       <div className={style.container}>
         <div className={style.insignias}>
           {isAdmin ? <span> Admin</span> : <p></p>}
           {isMonitor ? <span> Profesor</span> : <p></p>}
         </div>
 
-        <h1>{nombre}</h1>
+        <h1>{user.fullName}</h1>
         <div className={style.info}>
-          <h2>id</h2>
-          <p>{id}</p>
+          <h2>Nombre de Usuario</h2>
+          <p>{user.fullName}</p>
         </div>
+
         <div className={style.info}>
           <h2>Email</h2>
           <p>{user.email}</p>
         </div>
         <div className={style.info}>
           <h2>Numero de teléfono</h2>
-          {phone ? <p>phone </p> : <p>No proporcionado</p>}
+          {phone ? <p>{user.phone} </p> : <p>No proporcionado</p>}
         </div>
         <hr />
         <Link to={`/profile/editar/${id}`}>
