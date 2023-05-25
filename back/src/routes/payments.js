@@ -17,8 +17,8 @@ server.post('/create_checkout',async (req,res)=>{
                 product_data:{
                     name:name,
                     description:benefits,
-                    unit_amount:charge,
-                }
+                },
+                unit_amount:charge,
             },
             quantity: 1
         }],
