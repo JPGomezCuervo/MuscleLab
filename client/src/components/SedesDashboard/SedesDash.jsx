@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {
-  fetchAllOffices,
+  fetchAllOfficesDashboard,
   selectAllOffices,
-  clearOffice,
+  clearOfficeDashboard,
   selectStatus
   
-} from "../../redux/features/officesSlice";
+} from "../../redux/features/officesDashSlice";
 import edit from "../../assets/icons/edit.png";
 import trash from "../../assets/icons/trash-bin.png";
 import { URL } from "../../utils/constants";
@@ -23,7 +23,7 @@ const SedesDash = () => {
 
 
   useEffect(() => {
-    dispatch(fetchAllOffices());
+    dispatch(fetchAllOfficesDashboard());
   }, [dispatch]);
 
   // const removeSedeHandler = async (id) => {
@@ -74,7 +74,7 @@ const SedesDash = () => {
 
         alert("Borrado con éxito!");
 
-        dispatch(clearOffice(id));
+        dispatch(clearOfficeDashboard(id));
       } catch (error) {}
     } else {
       alert("Cancelado por el usuario");
