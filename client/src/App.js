@@ -31,8 +31,8 @@ import SedesDashCrear from "./components/SedesDashCrear/SedesDashCrear";
 import SedeHomeDetalle from "./components/SedeHomeDetalle/SedeHomeDetalle";
 import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
+import UserUpdate from "./components/UserUpdate/UserUpdate";
 import jwt_decode from "jwt-decode";
-
 function App() {
   const location = useLocation().pathname;
   const dashAuth = useSelector(selectDashAuth);
@@ -93,6 +93,7 @@ function App() {
           element={<SedesDashEditar />}
         />
         <Route path="/dashboard/sedes/crear" element={<SedesDashCrear />} />
+        <Route path="/profile/editar/:id" element={<UserUpdate />} />
         {/* </>
         ) : ( */}
         <Route path="/denegado" element={<login />}></Route>
