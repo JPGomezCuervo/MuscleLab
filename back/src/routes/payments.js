@@ -26,8 +26,8 @@ server.post('/create_checkout',async (req,res)=>{
         success_url: 'https://localhost:3000/profile',
         cancel_url:'https://localhost:3000/sedes'
     });
-
-    res.redirect(303, session.url);
+    console.log(session.url);
+    res.status(303).redirect(session.url);
     
 });
 
