@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import styles from "./Users.module.css";
+import style from "./Users.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllUsers, selectAllUsers } from "../../redux/features/usersSlice";
 import validation from "../CreateUser/validation";
@@ -125,56 +125,56 @@ const Users = () => {
   //console.log("respuesta fetch editar", serverResponse.error);
 
   return (
-    <div className={styles.container}>
+    <div className={style.container}>
 
-        <h2 className={styles.title}>Formulario de Usuarios</h2>
+        <h2 className={style.title}>Formulario de Usuarios</h2>
 
 
-      <table className={styles.table}>
+      <table className={style.table}>
         <thead>
           <tr>
-            <th className={styles.th}>N°</th>
-            <th className={styles.th}>Nombre:</th>
-            <th className={styles.th}>Email:</th>
-            <th className={styles.th}>Teléfono:</th>
-            <th className={styles.th}>Rol:</th>
-            <th className={styles.th}>status Membresia:</th>
-            <th className={styles.th}>
-              Acciones: <span className={styles.crud1}>CR</span>
-              <span className={styles.crud2}>U</span>
-              <span className={styles.crud3}>D</span>
+            <th className={style.th}>N°</th>
+            <th className={style.th}>Nombre:</th>
+            <th className={style.th}>Email:</th>
+            <th className={style.th}>Teléfono:</th>
+            <th className={style.th}>Rol:</th>
+            <th className={style.th}>status Membresia:</th>
+            <th className={style.th}>
+              Acciones: <span className={style.crud1}>CR</span>
+              <span className={style.crud2}>U</span>
+              <span className={style.crud3}>D</span>
             </th>
           </tr>
         </thead>
         <tbody>
           {!mappedUsers?.length ? (
-            <div className={styles.empty}>
+            <div className={style.empty}>
               <p>Upss! No hay usuarios para mostrar!</p>
-              <p className={styles.loading}>Loading...</p>
+              <p className={style.loading}>Loading...</p>
             </div>
           ) : (
             mappedUsers.map((user, index) => (
               <tr key={index}>
-                <td className={styles.td}>{index + 1}</td>
-                <td className={styles.td}>{user.fullName}</td>
-                <td className={styles.td}>{user.email}</td>
-                <td className={styles.td}>{user.phone}</td>
-                <td className={styles.td}>
+                <td className={style.td}>{index + 1}</td>
+                <td className={style.td}>{user.fullName}</td>
+                <td className={style.td}>{user.email}</td>
+                <td className={style.td}>{user.phone}</td>
+                <td className={style.td}>
                   {user.isMonitor ? "Entrenador" : "Deportista"}
                 </td>
-                <td className={styles.td} >
+                <td className={style.td} >
                   {user.statusMemberShipIdStatus ? "Activo" : "Inactivo"}
                 </td>
-                <td className={styles.btnCrud}>
+                <td className={style.btnCrud}>
                   <button
-                    className={styles.btnEditarUsuario}
+                    className={style.btnEditarUsuario}
                     name={user.id}
                     onClick={openWindowVisible}
                   >
                     Editar
                   </button>
                   <button
-                    className={styles.btnEliminarUsuario}
+                    className={style.btnEliminarUsuario}
                     name={user.id}
                     onClick={removeUserHandler}
                   >
@@ -188,7 +188,7 @@ const Users = () => {
       </table>
       <div>
         <Link to={"crear"}>
-          <button className={styles.btnCrearUsuario}>Crear nuevo</button>
+          <button className={style.btnCrearUsuario}>Crear nuevo</button>
         </Link>
       </div>
 
@@ -196,18 +196,18 @@ const Users = () => {
 
       {windowVisible && (
         <div>
-          <div className={styles.BigBigContainer}></div>
-        <div className={styles.ventanaEmergente}>
+          <div className={style.BigBigContainer}></div>
+        <div className={style.ventanaEmergente}>
           {userFiltered.map((user, index) => (
-            <div className={styles.contenido} key={index}>
+            <div className={style.contenido} key={index}>
               {/*Filtrar Nombre de usuario con filter*/}
-              <h2 className={styles.title1}>
+              <h2 className={style.title1}>
                  {user.fullName}
               </h2>
 
               <form onSubmit={(e) => editUserHandler(e)}>
                 <label htmlFor="fullName">Nombre: </label>
-                <p className={styles.error}>{errors.edit && errors.fullName}</p>
+                <p className={style.error}>{errors.edit && errors.fullName}</p>
                 <input
                   type="text"
                   id="fullName"
@@ -215,12 +215,12 @@ const Users = () => {
                   placeholder="*Nombre completo"
                   value={editUser.fullName}
                   onChange={(e) => handleChange(e)}
-                  className={styles.input}
+                  className={style.input}
                 />
-                <label className={styles.label} htmlFor="password">
+                <label className={style.label} htmlFor="password">
                   Password:{" "}
                 </label>
-                <p className={styles.error}>{errors.edit && errors.password}</p>
+                <p className={style.error}>{errors.edit && errors.password}</p>
 
                 <input
                   type="password"
@@ -229,10 +229,10 @@ const Users = () => {
                   placeholder="Password"
                   value={editUser.password}
                   onChange={(e) => handleChange(e)}
-                  className={styles.input}
+                  className={style.input}
                 />
                 <label htmlFor="email">Email:</label>
-                <p className={styles.error}>{errors.edit && errors.email}</p>
+                <p className={style.error}>{errors.edit && errors.email}</p>
                 <input
                   type="email"
                   id="email"
@@ -241,10 +241,10 @@ const Users = () => {
                   placeholder="*Correo electronico"
                   value={editUser.email}
                   onChange={(e) => handleChange(e)}
-                  className={styles.input}
+                  className={style.input}
                 />
                 <label htmlFor="phone" >Telefono:</label>
-                <p className={styles.error}>{errors.edit && errors.phone}</p>
+                <p className={style.error}>{errors.edit && errors.phone}</p>
                 <input
                   type="text"
                   id="phone"
@@ -252,7 +252,7 @@ const Users = () => {
                   placeholder="*Telefono: XXXXXXXXXX "
                   value={editUser.phone}
                   onChange={(e) => handleChange(e)}
-                  className={styles.input}
+                  className={style.input}
                 />
 
                 {/* <label htmlFor="status">Status:</label>
@@ -263,26 +263,26 @@ const Users = () => {
                 placeholder="*Status digite 'yes' para activacion"
                 value={editUser.statusMembershipIdStatus}
                 onChange={(e)=>handleChange(e)}
-                className={styles.input}
+                className={style.input}
               /> */}
                 {errors.edit ? (
-                  <p className={styles.errorForm}>
+                  <p className={style.errorForm}>
                     ⚠️ Revisar inputs antes de enviar! ⚠️
                   </p>
                 ) : (
-                  <p className={styles.validForm}>
+                  <p className={style.validForm}>
                     Actualizar datos de usuario! ✔️
                   </p>
                 )}
                 <button
-                  className={styles.save}
+                  className={style.save}
                   type="submit"
                   onClick={editUserHandler}
                 >
                   Guardar
                 </button>
               </form>
-              <button className={styles.close} onClick={closeWindowVisible}>
+              <button className={style.close} onClick={closeWindowVisible}>
                 Cerrar
               </button>
             </div>

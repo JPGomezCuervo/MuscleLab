@@ -24,7 +24,7 @@ const validations = (value, name, errors, lessonAttributes) => {
             return effortValidation(value, errors, name);
 
         case 'image':
-            return imageValidation(value, errors, name);
+            return imageValidation(value, errors, name, lessonAttributes);
 
         case 'scheduleHourStart':
             return scheduleHourStartValidation(value, errors, name, lessonAttributes);
