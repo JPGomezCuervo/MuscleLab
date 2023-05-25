@@ -1,6 +1,6 @@
 const imageValidation = (value, errors, name, lessonAttributes) => {
     const { image } = lessonAttributes;
-    const type = image.name.split('.')[1];
+    const type = image.name.split('.')[1].toLowerCase();
     const validTypes = ['jpg', 'jpeg', 'png'];
    
     if (!value.name) return { ...errors, [name]: 'La imagen es requerida' };

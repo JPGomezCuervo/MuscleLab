@@ -36,7 +36,7 @@ class DetailLessonDash extends Component {
                 goals: [],
                 isAvailable:null,
                 monitor: '',
-                branchoffice: [],
+                branchoffice:'',
                 monitors: '',
              },
             errors: {
@@ -57,6 +57,7 @@ class DetailLessonDash extends Component {
             allowSubmit: true,
             message:'',
             serverResponse: '',
+            imagePreviewUrl: '',
         };
     };
 
@@ -276,35 +277,58 @@ class DetailLessonDash extends Component {
                 });
             }
         };
+
+        handleImageChange = (event) => {
+            const name = event.target.name;
+            const value = event.target.files[0];
+          
+            const reader = new FileReader();
+            
+            reader.onloadend = () => {
+              this.setState(
+                {
+                  lessonAttributes: {
+                    ...this.state.lessonAttributes,
+                    image: value,
+                  },
+                  imagePreviewUrl: reader.result, 
+                },
+                () => {
+                  this.setState(
+                    {
+                      errors: validations(value, name, this.state.errors, this.state.lessonAttributes),
+                      allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item) === true) && Object.values(this.state.errors).every((item) => item === ''),
+                    }
+                  );
+                }
+              );
+            };
+            
+            reader.readAsDataURL(value);
+          };
         
         handleConfirmarClick = (event) => {
+            event.preventDefault();
             if (this.state.message.includes('modificar')){
-                event.preventDefault();
-                axios.put(`${URL}/lessons/update/${this.props.id}`, {
-                    effort: this.state.lessonAttributes.effort,
-                    shortDescription: this.state.lessonAttributes.shortDescription,
-                    image: this.state.lessonAttributes.image,
-                    goals: this.state.lessonAttributes.goals})
+                const formData = new FormData();
+        
+                formData.append('image', this.state.lessonAttributes.image);
+                formData.append('lessonAttributes', JSON.stringify(this.state.lessonAttributes));
+                
+                axios.post(`${URL}/update/${this.props.id}`, formData)
                 .then((res) => {
+                    console.log(res);
                     this.setState({
-                        serverResponse: res.data,
-                        message: ''});
-                        console.log(res.data);
-                        console.log(res)
+                        serverResponse: res.data.message,
+                        message: '',
+                     });
                 }).catch((err) => {
+                    console.log(err)
                     this.setState({
-                        serverResponse: err.data,
-                        message: ''});
-                        console.log(err.data);
+                        serverResponse: err.message,
+                        message: '',
+                    });
                 });
-                axios.put(`${URL}/lessons/updateDetail/${this.props.id}`, {
-                    name: this.state.lessonAttributes.name,
-                    description: this.state.lessonAttributes.description,
-                    scheduleDays: this.state.lessonAttributes.scheduleDays,
-                    scheduleHourStart: this.state.lessonAttributes.scheduleHourStart,
-                    scheduleHourFinish: this.state.lessonAttributes.scheduleHourFinish,
-                    isAvailable: this.state.lessonAttributes.isAvailable
-                })
 
             } else {
                 event.preventDefault();
@@ -455,15 +479,23 @@ class DetailLessonDash extends Component {
                             {errors.branchoffice && <p className={style.Error}>{errors.branchoffice}</p>}
                         </div>
 
-                        <div className={style.Description}>
-                            <label>Imagen</label>
-                            <input ref={this.inputRef} placeholder='Imagen' value={lessonAttributes.image} id='image' type='text' name='image' onChange={this.handleChange}/>
+
+                        <div className={style.FileInput}>
+                            <label>Imagen*</label>
+                            <input id='image' type='file' name='image' onChange={ this.handleImageChange } />
                         </div>
                         
-                        <div className={style.ImageContainer}>
-                            <img src={this.inputRef?.current?.value} alt="Tu imagen" />
-
+                        {errors.image && <p className={style.Error}>{errors.image}</p>}
+                        
+                        <div className={style.leftContainer}>
+                            {this.state.imagePreviewUrl &&(<div className={style.ImageContainer}>
+                                {lessonAttributes.image && <img src={this.state.imagePreviewUrl} alt="Tu imagen" />}
+                            </div>)}
+                            {lessonAttributes.image && (<div className={style.ImageContainer}>
+                                {lessonAttributes.image && <img src={lessonAttributes.image} alt="Tu imagen" />}
+                            </div>)}
                         </div>
+
                     </div>
 
                     <div className={style.RightContainer}>
