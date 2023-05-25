@@ -12,6 +12,12 @@
     height: 60vh;
 
 }
+.LoadingIcon {
+  position: absolute;
+  top: 50%;
+  left: 45rem;
+  transform: translate(-50%, -50%);
+  }
 
 /* .card{
     background-color: violet;

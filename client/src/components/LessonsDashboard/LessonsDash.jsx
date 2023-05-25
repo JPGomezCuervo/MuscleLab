@@ -6,8 +6,8 @@ import { useSelector , useDispatch} from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect , useState} from "react";
 import edit from "../../assets/icons/edit.png"
-import loadingGif from '../../assets/gifs/loading.gif'
-import plusIcon from '../../assets/icons/plus.png'
+import loadingGif from '../../assets/gifs/loading.gif';
+import plusIcon from '../../assets/icons/plus.png';
 
 
 
@@ -21,9 +21,7 @@ const LessonsDash = ()=> {
     const selectedTypes = useSelector(selectSelectedTypes);
 
     const dispatch = useDispatch();
-    const navigate= useNavigate();
     
-    const [serverResponse, setServerResponse] = useState(true);
 
     useEffect(()=>{
         dispatch(fetchAllLessonsDashboard())

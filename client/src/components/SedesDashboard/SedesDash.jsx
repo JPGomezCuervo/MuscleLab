@@ -7,21 +7,24 @@ import {
   fetchAllOffices,
   selectAllOffices,
   clearOffice,
+  selectStatus
+  
 } from "../../redux/features/officesSlice";
 import edit from "../../assets/icons/edit.png";
 import trash from "../../assets/icons/trash-bin.png";
 import { URL } from "../../utils/constants";
+import loadingGif from '../../assets/gifs/loading.gif'
 
 const SedesDash = () => {
   const sedes = useSelector(selectAllOffices);
+  const status = useSelector(selectStatus);
 
   const dispatch = useDispatch();
 
-  const [serverResponse, setServerResponse] = useState(true);
 
   useEffect(() => {
     dispatch(fetchAllOffices());
-  }, [dispatch, serverResponse]);
+  }, [dispatch]);
 
   // const removeSedeHandler = async (id) => {
   //   //const id = event.target.name;
@@ -69,7 +72,6 @@ const SedesDash = () => {
       try {
         await fetch(`${URL}/branchoffice/delete/${id}`, { method: "DELETE" });
 
-        setServerResponse(true);
         alert("Borrado con éxito!");
 
         dispatch(clearOffice(id));
@@ -90,7 +92,7 @@ const SedesDash = () => {
         <Link to="/dashboard/sedes/crear">
           <button className={style.button}>Crear Sede</button>
         </Link>
-
+        {status === "loading" && <img className={style.LoadingIcon} src={loadingGif} alt=""/>}
         <div className={style.contenedor}>
           {sedes ? (
             sedes?.map((sede) => {

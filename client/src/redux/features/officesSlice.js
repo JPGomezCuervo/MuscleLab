@@ -82,6 +82,7 @@ const officesSlice = createSlice({
 
 export const selectAllOffices = (state) => state.offices.offices;
 export const selectOffice = (state) => state.offices.office;
+export const selectStatus = (state) => state.offices.status;
 export default officesSlice.reducer;
 export const {clearOffice} = officesSlice.actions;
 export { fetchAllOffices, fetchOfficeByID };
