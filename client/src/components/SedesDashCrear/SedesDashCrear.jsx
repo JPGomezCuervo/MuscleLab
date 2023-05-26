@@ -18,6 +18,7 @@ const SedesDashCrear = () => {
   const [dias, setDias] = useState([]);
   const [horaInicio, setHoraInicio] = useState("");
   const [horaFin, setHoraFin] = useState("");
+
   const [sedes, setSedes] = useState({
     name: "",
     location: "",
@@ -49,30 +50,14 @@ const SedesDashCrear = () => {
     return options;
   };
 
-  // const validateHours = () => {
-  //   if (!horaInicio) {
-  //     errors.scheduleHourStart = "Debe seleccionar hora de inicio";
-  //     alert("debe seleccionar hora de inicio");
-  //     return false;
-  //   } else if (!horaFin) {
-  //     errors.scheduleHourFinish = "Debe seleccionar hora de fin";
-  //     alert("debe seleccionar hora de fin");
-  //     return false;
-  //   } else {
-  //     sedes.scheduleHourStart = horaInicio;
-  //     sedes.scheduleHourFinish = horaFin;
-  //     return true;
-  //   }
-  // };
-  //////////////////////////////////////////////////////////////////////////////
   const validateHours = () => {
     if (!horaInicio) {
       errors.scheduleHourStart = "Debe seleccionar hora de inicio";
-      setModalOpen(true); // Abre el modal correspondiente al error de hora de inicio
+      alert("debe seleccionar hora de inicio");
       return false;
     } else if (!horaFin) {
       errors.scheduleHourFinish = "Debe seleccionar hora de fin";
-      setModalOpen(true); // Abre el modal correspondiente al error de hora de fin
+      alert("debe seleccionar hora de fin");
       return false;
     } else {
       sedes.scheduleHourStart = horaInicio;
@@ -80,6 +65,8 @@ const SedesDashCrear = () => {
       return true;
     }
   };
+  //////////////////////////////////////////////////////////////////////////////
+
   
 
   ///////////////////////////////////////////////////////////////////////////
@@ -93,30 +80,20 @@ const SedesDashCrear = () => {
     setDias(updatedDias);
   };
 ///////////////////////////////////////////////////
-  // const validatedays = () => {
-  //   if (dias.length !== 0) {
-  //     sedes.scheduleDays = dias;
-  //     return true;
-  //   } else {
-  //     errors.scheduleDays = "Debe seleccionar al menos un día";
-  //     alert("Debe seleccionar al menos un día");
-  //     return false;
-  //   }
-  // };
+  const validatedays = () => {
+    if (dias.length !== 0) {
+      sedes.scheduleDays = dias;
+      return true;
+    } else {
+      errors.scheduleDays = "Debe seleccionar al menos un día";
+      alert("Debe seleccionar al menos un día");
+      return false;
+    }
+  };
 
   //////////////////////////////////////////////////////////////
   
-    const validatedays = ()=>{
-      if (dias.length !== 0) {
-           sedes.scheduleDays = dias;
-           return true;
-    }
-    else {
-       errors.scheduleDays = "Debe seleccionar al menos un día";
-      setModalDaysOpen(true)
-           return false;
-         }
-       };
+    
 
   ///////////////////////////////////////////////////////////////////
 
@@ -130,37 +107,83 @@ const SedesDashCrear = () => {
 
   const navigate = useNavigate();
 
-  const crearSede = () => {
-    console.log("entramos con", sedes);
+  // const crearSede = () => {
+  //   console.log("entramos con", sedes);
+  //   if (!validatedays() || !validateHours() || errors.name || errors.location) {
+  //     console.error("Errores de validación:", errors);
+      
+  //   } else {
+  //     console.log("envia la accion")
+  //     console.log(sedes)
+  //     axios.post("https://musclelabii.onrender.com/branchoffice/create", sedes)
+  //       .then((res) => {
+  //         console.log(res)
+  //         console.log(sedes)
+  //        alert("Sede creada con  exito")
+          
+  //         // Realizar acciones adicionales después de crear la sede si es necesario
+  //         setSedes({
+  //           name: "",
+  //           location: "",
+  //           scheduleDays: "",
+  //           scheduleHourStart: "",
+  //           scheduleHourFinish: "",
+  //         });
+  //         // Redireccionar a la página correspondiente
+  //        navigate("/dashboard/sedes")
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error al crear la sede:", error);
+         
+  //         // Manejar el error si es necesario
+  //       });
+  //   }
+   
+  // };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  
     if (!validatedays() || !validateHours() || errors.name || errors.location) {
       console.error("Errores de validación:", errors);
-      setValidacion(true)
     } else {
-      console.log("envia la accion")
+      console.log(sedes)
       axios
-        .post(`${URL}/branchoffice/create`, sedes)
+        .post(`${URL}/branchoffice/create`, {
+          // No se especifica en el controlador, puedes dejarlo vacío o asignar un valor si es necesario
+          name: sedes.name,
+          location: sedes.location,
+          scheduleDays: sedes.scheduleDays,
+          scheduleHourStart: sedes.scheduleHourStart,
+          scheduleHourFinish: sedes.scheduleHourFinish,
+        })
         .then((res) => {
-          console.log(res)
-          console.log(sedes)
-          setModalCreacionExito(true)
-          // Realizar acciones adicionales después de crear la sede si es necesario
-          setSedes({
-            name: "",
-            location: "",
-            scheduleDays: "",
-            scheduleHours: "",
-          });
-          // Redireccionar a la página correspondiente
-         //navigate("/dashboard/sedes")
+          console.log(res);
+          if (res.data.error) {
+            // Manejar el caso en el que se devuelve un error del servidor
+            console.error("Error al crear la sede:", res.data.error);
+            // Mostrar un mensaje de error al usuario si es necesario
+          } else {
+            alert("Sede creada con éxito");
+            setSedes({
+              name: "",
+              location: "",
+              scheduleDays: "",
+              scheduleHourStart: "",
+              scheduleHourFinish: "",
+            });
+            // Redireccionar a la página correspondiente
+            navigate("/dashboard/sedes");
+          }
         })
         .catch((error) => {
           console.error("Error al crear la sede:", error);
-          setErrorCreacion(true);
           // Manejar el error si es necesario
         });
     }
-   
   };
+  
+
 
   const handleAceptarClick = ()=>{
     setModalCreacionExito(false)
@@ -283,7 +306,7 @@ const SedesDashCrear = () => {
   <button className={style.SaveButton} onClick={() => setErrorCreacion(false)}>Aceptar</button> 
 </ReactModal>
 
-          <button onClick={crearSede} className={style.SaveButton}>
+          <button onClick={handleSubmit} className={style.SaveButton}>
             Crear
           </button>
         </div>
