@@ -19,6 +19,11 @@ export const validate = (field, value) => {
         errors.password = "La contraseña debe tener al menos 8 caracteres";
       }
       break;
+    case "phone":
+      if (!/^[0-9]+$/.test(value)) {
+        errors.phone = "El telefono solo puede contener números";
+      }
+      break;
     default:
       errors[field] = "";
   }
