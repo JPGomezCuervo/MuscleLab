@@ -12,7 +12,7 @@
     width:100vw;
     gap: 60px;
 }
-input{
+.input{
     align-items: center;
     background-color: #FFC300;
     width: 100%;

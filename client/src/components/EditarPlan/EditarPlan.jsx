@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState,useEffect  } from "react";
 import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import style from "./EditarPlan.module.css";
 import arrowIcon from '../../assets/icons/arrow-yellow.png';
+import { URL } from "../../utils/constants";
 
 
 const PlanDashEditar = () => {
+  
+
   const [addPlan, setPlan] = useState({
-    name:"",
+      name:"",
         price:"",
         benefits:"",
         duration:"",
@@ -128,10 +131,10 @@ const PlanDashEditar = () => {
   };
 
   return (
-    <div>
+    <div className={style.MainConteiner}>
 
       <div>
-        <Link to="/dashboard/sedes">
+        <Link to="/dashboard/plans">
         <button>
           <img className={style.ArrowIcon} src={arrowIcon} alt="" />
         </button>
@@ -141,7 +144,7 @@ const PlanDashEditar = () => {
       </div>
 
 
-      <div className={style.MainConteiner}>
+      
         <div className={style.Description}>
           <label htmlFor="name" className={style.texto}>Nombre: *</label>
           <input
@@ -202,7 +205,7 @@ const PlanDashEditar = () => {
         </div>
 
       </div>
-    </div>
+    
   );
 };
 

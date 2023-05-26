@@ -11,7 +11,7 @@
     width:100vw;
     gap: 60px;
 }
-input{
+.input{
     outline: 0;
     
     background-color:#FFC300;

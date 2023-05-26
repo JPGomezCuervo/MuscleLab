@@ -32,6 +32,9 @@ import SedesDashCrear from "./components/SedesDashCrear/SedesDashCrear";
 import SedeHomeDetalle from "./components/SedeHomeDetalle/SedeHomeDetalle";
 import CreatePlan from './components/CreatePlan/CreatePlan'
 import PlanDashEditar from './components/EditarPlan/EditarPlan'
+import Review from "./components/Review/Review";
+import Plans from "./components/Plans/Plans";
+import DashPlans from "./components/DashPlans/DashPlans";
 function App() {
   const location = useLocation().pathname;
   const dashAuth = useSelector(selectDashAuth);
@@ -86,6 +89,9 @@ function App() {
 
         <Route path= '/dashboard/plans/crear' element={<CreatePlan/>}/>
       <Route path= '/dashboard/plans/editar/:id' element={<PlanDashEditar/>}/>
+      <Route path= '/dashboard/plans' element={<DashPlans/>}/>
+      <Route path= '/review' element={<Review />}/>
+      
         {/* </>
         ) : (
           <Route path="/denegado" element={<login />}></Route>
