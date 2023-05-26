@@ -30,26 +30,36 @@ const Plans = () =>{
                                     return(
                                         
                                         <div>
-                                
-                                   <div className={style.color}>
-                                        <div className={style.Title}><h2> {membership.name}</h2></div>
-                                            <img className={style.MainIcon} src={clockIcon} alt="" />
-                                
-                                <h2>{membership.duration}</h2>
-                                <h2> {membership.benefits}</h2>
-                                <h2> {membership.price}</h2>
+                                            <div className={style.card}>
+                            <div class={style.firstcontent}>
+                        <span>Nombre: {membership.name}</span>
+                        
+                         <img className={style.MainIcon} src={clockIcon} alt="" />
+                        <h4>Duracion: {membership.duration}</h4>
+                            </div>
+                            <div class={style.secondcontent}>
+                            <h4> Beneficios: {membership.benefits}</h4>
+                        
+                        <h4>Precio: {membership.price}</h4>
+
+                                    <button>Compra ahora </button>
+                            </div>
+                             </div>
+                                   
                                 
 
-                                    <button>Compra ahora</button>
-                                    </div>
+                                    
                                     </div>
                                     )
                             })}
                            
+                      
+
+  </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            
     )
 }
 
