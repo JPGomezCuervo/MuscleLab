@@ -12,6 +12,17 @@ const createReviewsController = async (
             if(!user || !lesson){
                 throw new Error('Usuario o lección no encontrada');
             }
+            //virifica si el usuario ya hizo una review para la lesson
+            const existingReview = await Reviews.findOne({
+                where: {
+                  UserId: userId,
+                  LessonId: lessonId,
+                },
+              });
+          
+              if (existingReview) {
+                throw new Error('El usuario ya ha realizado una review para esta lección');
+              }
 
             const newReview = await Reviews.create({
                 stars,
