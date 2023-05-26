@@ -34,10 +34,6 @@ import UserUpdate from "./components/UserUpdate/UserUpdate";
 import jwt_decode from "jwt-decode";
 function App() {
   const location = useLocation().pathname;
-  const dashAuth = useSelector(selectDashAuth);
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
 
   // let isAdmin = false; // Declaración inicial con valor predeterminado
   // const token = localStorage.getItem("token");

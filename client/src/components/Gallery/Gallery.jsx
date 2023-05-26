@@ -59,6 +59,10 @@ const Gallery = ({handleOnclick}) => {
       };
     });
        
+    useEffect(() => {
+        nextSlide();
+
+    }, []);
 
 
     return (
