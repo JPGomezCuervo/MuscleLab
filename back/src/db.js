@@ -60,6 +60,7 @@ const {
   User,
   StatusMemberships,
   ExercisesType,
+  Reviews
 } = sequelize.models;
 
 // Aca vendrian las relaciones
@@ -89,6 +90,12 @@ StatusMemberships.belongsToMany(BranchOffice, {
 BranchOffice.belongsToMany(StatusMemberships, {
   through: "Status_BranchOffice",
 });
+
+User.hasMany(Reviews);  
+Reviews.belongsTo(User); 
+
+Lessons.hasMany(Reviews);
+Reviews.belongsTo(Lessons);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
