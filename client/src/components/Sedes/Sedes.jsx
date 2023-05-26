@@ -16,7 +16,7 @@ const Sedes = () => {
 
 useEffect(()=>{
     dispatch(fetchAllOffices())
-})
+}, [dispatch])
 
 
 

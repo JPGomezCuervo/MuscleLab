@@ -7,16 +7,22 @@ import { validate } from "./validation";
 import { weekDays } from "../../utils/constants";
 import { URL } from "../../utils/constants";
 const SedesDashCrear = () => {
+  const navigate = useNavigate();
   const [dias, setDias] = useState([]);
   const [horaInicio, setHoraInicio] = useState("");
   const [horaFin, setHoraFin] = useState("");
+
+  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+
   const [sedes, setSedes] = useState({
     name: "",
     location: "",
     scheduleDays: "",
     scheduleHourStart: "",
     scheduleHourFinish: "",
+    image: null,
   });
+
   const [errors, setErrors] = useState({
     name: "",
     location: "",
@@ -24,12 +30,13 @@ const SedesDashCrear = () => {
     scheduleHourStart: "",
     scheduleHourFinish: "",
   });
+
   const generateHourOptions = () => {
     const options = [];
     for (let i = 1; i <= 24; i++) {
       if (i > horaInicio) {
         options.push(
-          <option key={i} value={i}>
+          <option key={i}>
             {i}:00
           </option>
         );
@@ -58,8 +65,9 @@ const SedesDashCrear = () => {
     const updatedDias = isChecked
       ? [...dias, dia]
       : dias.filter((d) => d !== dia);
-    setDias(updatedDias);
+    setSedes({ ...sedes, scheduleDays: updatedDias });
   };
+
   const validatedays = () => {
     if (dias.length !== 0) {
       sedes.scheduleDays = dias;
@@ -78,16 +86,27 @@ const SedesDashCrear = () => {
     setSedes({ ...sedes, [field]: value });
   };
 
-  const navigate = useNavigate();
+  const handleStartHourChange = (e) => {
+    const value = e.target.value;
+    setSedes({ ...sedes, scheduleHourStart: value });
+    setHoraInicio(value);
+  };
+
+  const handleFinishHourChange = (e) => {
+    const value = e.target.value;
+    setSedes({ ...sedes, scheduleHourFinish: value });
+    setHoraFin(value);
+  };
+
 
   const crearSede = () => {
-    console.log("entramos con", sedes);
     if (!validatedays() || !validateHours() || errors.name || errors.location) {
       console.error("Errores de validación:", errors);
     } else {
       axios
         .post(`${URL}/branchoffice/create`, sedes)
         .then((res) => {
+          console.log(res);
           alert("Sede creada exitosamente");
           // Realizar acciones adicionales después de crear la sede si es necesario
           setSedes({
@@ -104,6 +123,21 @@ const SedesDashCrear = () => {
           // Manejar el error si es necesario
         });
     }
+  };
+
+  const handleImageChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.files[0];
+  
+    const reader = new FileReader();
+    
+    reader.onloadend = () => {
+      setSedes({ ...sedes, [name]: value });
+      setImagePreviewUrl(reader.result);
+    };
+        
+    
+    reader.readAsDataURL(value);
   };
 
   return (
@@ -169,25 +203,55 @@ const SedesDashCrear = () => {
             <label htmlFor="scheduleHours" className={style.texto}>
               Horario: *
             </label>
-            <div className={`${style.HourContainer} ${style.HourContainer1}`}>
-              <label className={style.Options}>Hora inicio</label>
-              <select onChange={(e) => setHoraInicio(parseInt(e.target.value))}>
-                <option value="">Seleccione</option>
-                {[...Array(24)].map((_, index) => (
-                  <option key={index + 1} value={index + 1}>
-                    {index + 1}:00
-                  </option>
-                ))}
-              </select>
-            </div>
+            <div className={style.SelectorContainer}>
+              <div className={`${style.HourContainer} ${style.HourContainer1}`}>
+                <label className={style.Options}>Hora inicio</label>
+                <select onChange={handleStartHourChange}>
+                  <option value="">Seleccione</option>
+                  {[...Array(24)].map((_, index) => (
+                    <option key={index + 1}>
+                      {index + 1}:00
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-            <div className={`${style.HourContainer} ${style.HourContainer2}`}>
-              <label className={style.Options}>Hora fin</label>
-              <select onChange={(e) => setHoraFin(parseInt(e.target.value))}>
-                <option value="">Seleccione</option>
-                {generateHourOptions()}
-              </select>
+              <div className={`${style.HourContainer} ${style.HourContainer2}`}>
+                <label className={style.Options}>Hora fin</label>
+                <select onChange={handleFinishHourChange}>
+                  <option value="">Seleccione</option>
+                  {generateHourOptions()}
+                </select>
+              </div>
             </div>
+          </div>
+          <div className={style.FileInput}>
+            <label>Imagen*</label>
+            <input
+              id="image"
+              type="file"
+              name="image"
+              onChange={handleImageChange}
+            />
+          </div>
+
+          {errors.image && <p className={style.Error}>{errors.image}</p>}
+
+          <div className={style.leftContainer}>
+            {imagePreviewUrl && (
+              <div className={style.ImageContainer}>
+                {sedes.image && (
+                  <img src={imagePreviewUrl} alt="Tu imagen" />
+                )}
+              </div>
+            )}
+            {sedes.image && (
+              <div className={style.ImageContainer}>
+                {sedes.image && (
+                  <img src={sedes.image} alt="Tu imagen" />
+                )}
+              </div>
+            )}
           </div>
 
           <button onClick={crearSede} className={style.SaveButton}>

@@ -25,15 +25,15 @@ const fetchOfficeByID = createAsyncThunk(
     }
 );
 
-export const cacheMiddlewareOffices = (store) => (next) => (action) => { 
-    if (
-        action.type === fetchAllOffices.fulfilled.type &&
-        store.getState().offices.offices.length > 0
-    ) {
-        return Promise.resolve();
-    }
-    return next(action);
-};
+// export const cacheMiddlewareOffices = (store) => (next) => (action) => { 
+//     if (
+//         action.type === fetchAllOffices.fulfilled.type &&
+//         store.getState().offices.offices.length > 0
+//     ) {
+//         return Promise.resolve();
+//     }
+//     return next(action);
+// };
 
 const initialState = {
     offices: [],

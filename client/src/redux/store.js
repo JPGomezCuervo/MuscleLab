@@ -27,8 +27,8 @@ const store = configureStore({
         lessonsDashboard: lessonsDashboardReducer,
         officesDashboard: officesDashboardReducer, 
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware)
-    .concat(cacheMiddlewareOffices),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
+    // .concat(cacheMiddlewareOffices),
     devTools: process.env.NODE_ENV !== 'production'
 })
 
