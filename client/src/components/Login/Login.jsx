@@ -5,14 +5,18 @@ import { GoogleLogin } from "@react-oauth/google";
 import { Link } from "react-router-dom";
 import { URL, clientId } from "../../utils/constants";
 import decodejwt from "../../utils/decodejwt";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const Login = () => {
   const [user, setUser] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const handleLogin = async () => {
     console.log("clickaste iniciar con: ", email, password);
     if (!email || !password) {
@@ -96,13 +100,21 @@ const Login = () => {
         />
         {emailError && <p className={style.ErrorMessage}>{emailError}</p>}
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={handlePasswordChange}
-        />
+        <div className={style.PasswordInput}>
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Contraseña"
+            value={password}
+            onChange={handlePasswordChange}
+            className={`${style.Input} ${style.PasswordInput}`}
+          />
+          <FontAwesomeIcon
+            icon={showPassword ? faEyeSlash : faEye}
+            className={style.PasswordIcon}
+            onClick={togglePasswordVisibility}
+          />
+        </div>
         {passwordError && <p className={style.ErrorMessage}>{passwordError}</p>}
 
         <button className={style.ButtonLogIn} onClick={handleLogin}>
@@ -114,6 +126,7 @@ const Login = () => {
           onSuccess={onSuccess}
           onFailure={onFailure}
         />
+
         <hr></hr>
 
         <Link to="/register">

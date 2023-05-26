@@ -30,8 +30,8 @@ import SedesDashCrear from "./components/SedesDashCrear/SedesDashCrear";
 import SedeHomeDetalle from "./components/SedeHomeDetalle/SedeHomeDetalle";
 import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
+import UserUpdate from "./components/UserUpdate/UserUpdate";
 import jwt_decode from "jwt-decode";
-
 function App() {
   const location = useLocation().pathname;
   const dashAuth = useSelector(selectDashAuth);
@@ -46,7 +46,13 @@ function App() {
   //   const decodedToken = jwt_decode(token);
   //   isAdmin = decodedToken.isAdmin;
   // } else {
-  //   isAdmin = false; // Establecer isAdmin en false si no hay token
+  //   isAdmin = false;
+  // }
+
+  // if (!token && location.includes("dashboard")) {
+  //   return <Navigate to="/login" />;
+  // } else if (!isAdmin && location.includes("dashboard")) {
+  //   return <Navigate to="/" />;
   // }
 
   return (
@@ -68,7 +74,6 @@ function App() {
         {/* <Route path='/dashboard' element={<LessonsDash/>}>
         <Route path= '/dashboard/lessons/detail/:id' element={<LessonsDash/>}/> 
       <Route/>  */}
-
         {/* {isAdmin ? (
           <> */}
         <Route path="/dashboard" element={<LessonsDash />} />
@@ -92,10 +97,12 @@ function App() {
           element={<SedesDashEditar />}
         />
         <Route path="/dashboard/sedes/crear" element={<SedesDashCrear />} />
+        <Route path="/profile/editar/:id" element={<UserUpdate />} />
         {/* </>
         ) : ( */}
         <Route path="/denegado" element={<login />}></Route>
         {/* )} */}
+
       </Routes>
       {location.includes("dashboard") ? null : <Footer />}
     </>
