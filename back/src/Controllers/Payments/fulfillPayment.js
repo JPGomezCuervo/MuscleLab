@@ -11,7 +11,7 @@ const fulfillOrder = async(session) => {
         }
         const buyer = await User.findOne({where:{email:userEmail}});
         if(!buyer){
-            throw new Error('Usuario no encontrado')
+            throw new Error('Usuario no encontrado');
         }
         const duration=membershipToAdd.duration.split(' ')[0];
         const final=new Date();

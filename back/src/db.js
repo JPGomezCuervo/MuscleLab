@@ -56,7 +56,6 @@ const {
   BranchOffice,
   LessonDetail,
   Lessons,
-  Membership,
   User,
   StatusMemberships,
   ExercisesType,
@@ -80,12 +79,6 @@ LessonDetail.belongsTo(Lessons);
 LessonDetail.belongsToMany(BranchOffice, { through: "Lesson_BranchOffice" });
 BranchOffice.belongsToMany(LessonDetail, { through: "Lesson_BranchOffice" });
 
-StatusMemberships.belongsToMany(BranchOffice, {
-  through: "Status_BranchOffice",
-});
-BranchOffice.belongsToMany(StatusMemberships, {
-  through: "Status_BranchOffice",
-});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
