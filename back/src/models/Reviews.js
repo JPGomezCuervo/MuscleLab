@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
                 defaultValue: DataTypes.UUIDV4,
             },
             stars: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.DECIMAL,
                 allowNull: false,
                 validate: {
                     min: 1,

@@ -10,6 +10,8 @@ import officesReducer from './features/officesSlice';
 import membershipsReducer from './features/membershipsSlice';
 import goalsReducer from './features/goalsSlice';
 import lessonsDashboardReducer from './features/lessonsDashSlice';
+import officesDashboardReducer from './features/officesDashSlice';
+import { cacheMiddlewareOffices } from './features/officesSlice';
 
 const store = configureStore({
     reducer: {
@@ -22,9 +24,11 @@ const store = configureStore({
         auth: authReducer,
         offices: officesReducer,
         memberships: membershipsReducer,
-        lessonsDashboard: lessonsDashboardReducer 
+        lessonsDashboard: lessonsDashboardReducer,
+        officesDashboard: officesDashboardReducer, 
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
+    // .concat(cacheMiddlewareOffices),
     devTools: process.env.NODE_ENV !== 'production'
 })
 

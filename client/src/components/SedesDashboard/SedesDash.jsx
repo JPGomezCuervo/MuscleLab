@@ -6,16 +6,20 @@ import { Link } from "react-router-dom";
 import ReactModal from "react-modal";
 
 import {
-  fetchAllOffices,
+  fetchAllOfficesDashboard,
   selectAllOffices,
-  clearOffice,
-} from "../../redux/features/officesSlice";
+  clearOfficeDashboard,
+  selectStatus
+  
+} from "../../redux/features/officesDashSlice";
 import edit from "../../assets/icons/edit.png";
 import trash from "../../assets/icons/trash-bin.png";
 import { URL } from "../../utils/constants";
+import loadingGif from '../../assets/gifs/loading.gif'
 
 const SedesDash = () => {
   const sedes = useSelector(selectAllOffices);
+  const status = useSelector(selectStatus);
 
   const dispatch = useDispatch();
 
@@ -25,45 +29,9 @@ const SedesDash = () => {
   const [confirmationType,setConfirmationType] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchAllOffices());
-  }, [dispatch, serverResponse]);
+    dispatch(fetchAllOfficesDashboard());
+  }, [dispatch]);
 
-  // const removeSedeHandler = async (id) => {
-  //   //const id = event.target.name;
-  //   let text = "Esta acción no se podrá revertir!\nPulse OK o Cancelar.";
-  //   if (true) {
-  //     //console.log(id);
-  //     // Eliminar directamente del servidor
-  //    await fetch("https://musclelabii.onrender.com/branchoffice/delete/" + id, { method: "DELETE" })
-  //       .then((response) => {
-  //         if (response.status === 200) {
-  //           // Eliminación exitosa
-  //           setServerResponse(true);
-  //           alert("Borrado con éxito!");
-
-  //           dispatch(clearOffice(id));
-  //         } else if (response.status === 400) {
-  //           // Error en el servidor
-  //           setServerResponse(false);
-  //           return response.json();
-  //         } else {
-  //           // Otro código de estado
-  //           throw new Error("Error de red");
-  //         }
-  //       })
-  //       .then((data) => {
-  //         // Manejar el mensaje de error del servidor
-  //         if (data && data.error) {
-  //         // alert(data.error);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //       // alert(error.message);
-  //       });
-  //   } else {
-  //    //alert("Cancelado por el usuario");
-  //   }
-  // }
 
   // const removeSedeHandler = async (id) => {
   //   const confirmation = window.confirm(
@@ -93,10 +61,10 @@ const SedesDash = () => {
   try {
     await fetch(`${URL}/branchoffice/delete/${id}`, { method: "DELETE" });
 
-    setServerResponse(true);
-    // Mostrar el mensaje de éxito utilizando un modal de React o cualquier otro componente de notificación.
+        setServerResponse(true);
+        alert("Borrado con éxito!");
 
-    dispatch(clearOffice(id));
+    dispatch(clearOfficeDashboard(id));
       setConfirmationType(true)
 
   } catch (error) {
@@ -118,7 +86,7 @@ const SedesDash = () => {
         <Link to="/dashboard/sedes/crear">
           <button className={style.button}>Crear Sede</button>
         </Link>
-
+        {status === "loading" && <img className={style.LoadingIcon} src={loadingGif} alt=""/>}
         <div className={style.contenedor}>
           {sedes ? (
             sedes?.map((sede) => {

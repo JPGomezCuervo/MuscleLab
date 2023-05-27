@@ -35,3 +35,5 @@ const createReviewsController = async (
             throw new Error(error.message);
         }
     }
+
+    module.exports = createReviewsController;
