@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const createNewLesson = async (req, res) => {
-  console.log("esta es la peticion", req.file);
+  console.log("esta es la imagen", req.file);
   const lessonAttributes = JSON.parse(req.body.lessonAttributes);
   console.log(lessonAttributes);
   const {

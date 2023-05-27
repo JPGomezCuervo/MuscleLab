@@ -93,6 +93,8 @@ const SedesDash = () => {
               return (
                 <div className={style.todo} key={sede.id}>
                   <div className={style.detalle}>
+                    <img src={sede.image} alt="imagen" className={style.imagen}/>
+                    <div className={style.info}>
                     <h2 className={style.texto}>Nombre: {sede.name}</h2>
                     <h2 className={style.texto}>Dirección: {sede.location}</h2>
                     <h2 className={style.texto}>
@@ -102,8 +104,10 @@ const SedesDash = () => {
                       Horario de atanción: {sede.scheduleHourStart}hs -{" "}
                       {sede.scheduleHourFinish}hs
                     </h2>
+                    </div>
 
                     <div className={style.divCont}>
+                      <div className={style.botones}>
                       <Link to={`editar/${sede.id}`}>
                         <button className={style.btnIcono1}>
                           <img src={edit} alt="edit" className={style.icono} />
@@ -113,9 +117,10 @@ const SedesDash = () => {
                         className={style.btnIcono2}
                         onClick={() => removeSedeHandler(sede.id)}
                         name={sede.id}
-                      >
+                        >
                         <img src={trash} alt="trash" className={style.icono} />
                       </button>
+                        </div>
 
   <ReactModal  className={style.modal}isOpen={confirmationOpen} onRequestClose={() => setConfirmationOpen(true)}>
   <h2 className={style.text}>Confirmación</h2>

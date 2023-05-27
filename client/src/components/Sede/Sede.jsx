@@ -41,7 +41,7 @@ const Sede = ({ sede, index }) => {
           </div>
 
           <div className={style.ImageContainer}>
-            <img src={fachada2} alt="fachada 2" />
+            <img src={image} alt="fachada 2" />
           </div>
         </div>
       )}
