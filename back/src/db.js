@@ -56,7 +56,6 @@ const {
   BranchOffice,
   LessonDetail,
   Lessons,
-  Membership,
   User,
   StatusMemberships,
   ExercisesType,
@@ -65,11 +64,8 @@ const {
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-User.hasOne(Membership);
-Membership.belongsToMany(User, { through: "membership_user" });
-
-User.hasOne(StatusMemberships, { foreignKey: "user_id" });
-StatusMemberships.hasOne(User);
+User.hasOne(StatusMemberships);
+StatusMemberships.belongsTo(User);
 
 Lessons.belongsToMany(ExercisesType, { through: "Lessons_Type" });
 ExercisesType.belongsToMany(Lessons, { through: "Lessons_Type" });
@@ -83,12 +79,6 @@ LessonDetail.belongsTo(Lessons);
 LessonDetail.belongsToMany(BranchOffice, { through: "Lesson_BranchOffice" });
 BranchOffice.belongsToMany(LessonDetail, { through: "Lesson_BranchOffice" });
 
-StatusMemberships.belongsToMany(BranchOffice, {
-  through: "Status_BranchOffice",
-});
-BranchOffice.belongsToMany(StatusMemberships, {
-  through: "Status_BranchOffice",
-});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
