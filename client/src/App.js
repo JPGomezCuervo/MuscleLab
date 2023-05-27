@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 import Lessons from "./components/Lessons/Lessons";
@@ -32,7 +32,7 @@ import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
 import StripeRender from "./components/StripeRender/StripeRender";
 import jwt_decode from "jwt-decode";
-
+import UserUpdate from "./components/UserUpdate/UserUpdate";
 
 function App() {
   const location = useLocation().pathname;
@@ -41,19 +41,23 @@ function App() {
     console.log(location);
   }, [location]);
 
-  // let isAdmin = false; // Declaración inicial con valor predeterminado
-  // const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  let isAdmin = false;
 
-  // if (token) {
-  //   const decodedToken = jwt_decode(token);
-  //   isAdmin = decodedToken.isAdmin;
-  // } else {
-  //   isAdmin = false; // Establecer isAdmin en false si no hay token
-  // }
+  if (token) {
+    const decodedToken = jwt_decode(token);
+    isAdmin = decodedToken.isAdmin;
+  } else {
+    isAdmin = false;
+  }
+  if (!isAdmin && location.includes("dashboard")) {
+    navigate("/");
+  }
 
   return (
     <>
-      {location.includes("dashboard") ? <NavBardDash /> : <NavBar />}
+      {location.includes("dashboard") && isAdmin ? <NavBardDash /> : <NavBar />}
       {location.includes("dashboard") ? <AdminBar /> : null}
       <Routes>
         <Route path="/profile" element={<Profile />} />
@@ -67,6 +71,7 @@ function App() {
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/sedes" element={<Sedes />} />
         <Route path="/sedes/detalles/:id" element={<SedeHomeDetalle />} />
+
         
         <Route path="/stripe" element={<StripeRender/>}/>
         {/* <Route path='/dashboard' element={<LessonsDash/>}>
@@ -100,8 +105,8 @@ function App() {
         ) : ( */}
         <Route path="/denegado" element={<login />}></Route>
         {/* )} */}
+
       </Routes>
-      {location.includes("dashboard") ? null : <Footer />}
     </>
   );
 }

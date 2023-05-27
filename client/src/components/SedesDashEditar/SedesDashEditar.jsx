@@ -117,7 +117,7 @@ const SedesDashEditar = () => {
     const fieldErrors = validate(field, value);
     setErrors({ ...errors, [field]: fieldErrors[field] });
     setSedes({ ...sedes, [field]: value });
-  
+
   };
   const handleDayChange = (e) => {
     const dia = e.target.value;
@@ -176,7 +176,7 @@ const SedesDashEditar = () => {
       <div className={style.BigBigContainer}>
         <div className={style.Navigation}>
           <Link to="/dashboard/sedes">
-            <a href="http://localhost:3000/dashboard/sedes">
+            <a href={`${URL}/dashboard/sedes`}>
               <img className={style.ArrowIcon} src={arrowIcon} alt="" />
             </a>
           </Link>
