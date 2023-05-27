@@ -25,3 +25,5 @@ const createReviewHandler = async (req, res) => {
         res.status(400).json({ message: 'Ocurrió un error al crear la review' });
     }
 }
+
+module.exports = createReviewHandler;
