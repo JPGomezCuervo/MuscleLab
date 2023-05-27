@@ -139,7 +139,6 @@ return (
                 <div className={style.DropMenuContainer}>
                     <ul className={style.DropMenu}>
                         {lessonsAttributes?.map((atribute, index) => {
-                            console.log(atribute);
                             return(
                                 <li key={atribute.id || index}>
                                     <button className={selectedTypes.includes(atribute) ? `${style.DropMenuBtn} ${style.Active}` : style.DropMenuBtn} onClick={handleTypeClick} name={atribute}>

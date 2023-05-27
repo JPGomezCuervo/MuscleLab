@@ -6,10 +6,13 @@ const stripe = require('stripe')('sk_test_51NBkBJFPcDe3Fz6KjLlzjI35wfptX5dwAkeq7
 
 server.post('/create_checkout',async (req,res)=>{
     const {name, benefits, price}=req.body;
-    console.log(name, benefits, price);
+    //aca customer probablemente sea el token del usuario loggeado por lo que habria que usar jwt para decodificar y sacar su email
+    const customer = "Admin2@gmail.com"
     const charge=Number(price)*100;
     console.log(charge);
     const session=await stripe.checkout.sessions.create({
+        //aca el valor de customer email deberia ser, efectivamente el email una vez sacado del token
+        customer_email:customer,
         line_items:[{
             price_data:{
                 currency: "USD",
@@ -22,8 +25,8 @@ server.post('/create_checkout',async (req,res)=>{
             quantity: 1
         }],
         mode:'payment',
-        success_url: 'https://localhost:3000/profile',
-        cancel_url:'https://localhost:3000/sedes'
+        success_url: 'http://localhost:3000/clases',
+        cancel_url:'http://localhost:3000/sedes'
     });
     
     res.status(200).json({redirect_url:session.url});
