@@ -62,7 +62,7 @@ const fetchLessonByName = createAsyncThunk(
 export const cacheMiddleware = (store) => (next) => (action) => {
   if (
     action.type === "lessons/fetchAllLessons/fulfilled" &&
-    store.getState().lessons.lessons.length > 0
+    store.getState().lessons.lessons.length > 0 && store.getState().filters.alphabetFilter && store.getState().filters.intensityFilter
   ) {
     return Promise.resolve();
   }

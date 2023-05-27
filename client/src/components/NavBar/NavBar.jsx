@@ -2,6 +2,7 @@ import React from "react";
 import style from "./NavBar.module.css";
 import iconMan from "../../assets/icons/man-silhouette.png";
 import iconWeight from "../../assets/icons/dumbbell.png";
+import menuIcon from "../../assets/icons/menu.png"
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setPlansCLick } from "../../redux/features/utilsSlice";
@@ -10,6 +11,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import adminIcon from "../../assets/icons/admin.png";
 import jwt_decode from "jwt-decode";
+import {useState, useRef} from "react"
 
 let isAdmin = false; // Declaración inicial con valor predeterminado
 const token = localStorage.getItem("token");
@@ -50,23 +52,78 @@ const NavBar = () => {
             alt="Icono de pesa"
           />
         </div>
-        <div className={style.OpcionsContainer}>
-          <Link to={"/sedes"}>
-            <p className={style.Navbutton}>Sedes</p>
-          </Link>
+        
 
-          <a className={style.Navbutton} href="http://localhost:3000/clases">
-            Clases
-          </a>
 
-          <Link to={"/nosotros"}>
-            <p className={style.Navbutton}>Nosotros</p>
-          </Link>
+        <input type="checkbox" className={style.Checkbox} name="checkbox" id="checkbox"/>
+        <label className={style.Label} htmlFor="checkbox">
+          <img src={menuIcon} alt="" />
+        </label>
 
-          <Link to={"/contactanos"}>
-            <p className={style.Navbutton}>Contáctanos</p>
-          </Link>
+        <div className={style.DropMenuPhoneContainer}>
+            <ul className={style.OptionsContainer}>
+          {/* <Link to={"/login"}> */}
+
+          {token && (
+            <li className ={style.LogOpcion1}>
+                <Link to="dashboard/clases">
+                  <button className={style.btnRegistro1}>dashboard</button>
+                </Link>
+            </li>
+          )}
+          {token && (
+            <li className ={style.LogOpcion1}>
+                <Link to="/profile">
+                  <button className={style.btnRegistro1}>Mi Perfil</button>
+                </Link>
+            </li>
+          )}
+          {token ? (
+            <li className ={style.LogOpcion1}>
+              <Link to="/login">
+                <button className={style.btnRegistro1} onClick={handleLogOut}>
+                  Cerrar sesion
+                </button>
+              </Link>
+            </li>
+          ) : (
+            <li className ={style.LogOpcion1}>
+              <Link to="/login">
+                <button className={style.btnRegistro1} onClick={handleLogOut}>
+                  Iniciar sesión
+                </button>
+              </Link>
+            </li>
+          )}
+
+              <li>
+                <Link to={"/sedes"}>
+                  <p className={style.Navbutton}>Sedes</p>
+                </Link>
+              </li>
+
+              <li>
+                <a className={style.Navbutton} href="http://localhost:3000/clases">
+                  <p>Clases</p>
+                </a>
+              </li>
+
+              <li>
+                <Link to={"/nosotros"}>
+                  <p className={style.Navbutton}>Nosotros</p>
+                </Link>
+              </li>
+
+              <li>
+                <Link to={"/contactanos"}>
+                  <p className={style.Navbutton}>Contáctanos</p>
+                </Link>
+              </li>
+
+            </ul>
+
         </div>
+        
         <Link to={"/"} className={style.btnPlanes} onClick={handleClickPlan}>
           <button className={style.btnPlanes}>Planes</button>
         </Link>

@@ -3,6 +3,7 @@ import style from "./UserUpdate.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { URL } from "../../utils/constants";
+import { validate } from "../Register/validate";
 const UserUpdate = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -12,6 +13,10 @@ const UserUpdate = () => {
     phone: "",
     isAdmin: "",
     isMonitor: "",
+  });
+  const [errors, setErrors] = useState({
+    password: "",
+    phone: "",
   });
   useEffect(() => {
     axios.get(`${URL}/users/${id}`).then((response) => {
@@ -29,6 +34,8 @@ const UserUpdate = () => {
   const handleChange = (event) => {
     const field = event.target.name;
     const value = event.target.value;
+    const fieldErrors = validate(field, value);
+    setErrors({ ...errors, [field]: fieldErrors[field] });
     setForm({ ...form, [field]: value });
   };
   const handleSubmit = async (e) => {
@@ -67,6 +74,9 @@ const UserUpdate = () => {
               onChange={handleChange}
             ></input>
           </div>
+          {errors.password && (
+            <p className={style.ErrorMessage}>{errors.password}</p>
+          )}
 
           <div className={style.info}>
             <label>Numero de teléfono</label>
@@ -77,6 +87,7 @@ const UserUpdate = () => {
               onChange={handleChange}
             ></input>
           </div>
+          {errors.phone && <p className={style.ErrorMessage}>{errors.phone}</p>}
 
           <hr />
           <button className={style.ButtonSave} onClick={handleSubmit}>
