@@ -6,7 +6,7 @@ const getMembershipsController = async () =>{
             deletedAt: null
         }
     });
-    if(memberships.length===0){
+    if(!memberships){
         const members=[
             {
                 name:"Standar",
@@ -30,6 +30,16 @@ const getMembershipsController = async () =>{
                 duration:"6 mes",
                 }
         ]
+        for(let i=0;i<members.length;i++){
+            const toCreate=members[i];
+            Membership.create({
+                name:toCreate.name,
+                price:toCreate.price,
+                benefits:toCreate.benefits,
+                promo:toCreate.promo,
+                duration:toCreate.duration
+            });
+        }
     }
     return memberships;
 };
