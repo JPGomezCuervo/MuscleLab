@@ -3,10 +3,12 @@ const { BranchOffice } = require("../../db");
 let createBranchOffice = async (
   id,
   name,
+  image,
   location,
   scheduleDays,
   scheduleHourStart,
-  scheduleHourFinish
+  scheduleHourFinish,
+  
 ) => {
   const foundedBranchOffice = await BranchOffice.findOne({
     where: { name: name },
@@ -26,6 +28,7 @@ let createBranchOffice = async (
   const newBranchOffice = await BranchOffice.create({
     id,
     name,
+    image,
     location,
     scheduleDays,
     scheduleHourStart,
