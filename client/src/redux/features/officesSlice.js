@@ -9,7 +9,6 @@ const fetchAllOffices = createAsyncThunk(
             const response = await axios.get(`${URL}/branchoffice`);
             return response.data
         } catch (error){
-            console.log(error.response.data);
             throw new Error (error.response)
         }
     }
@@ -25,6 +24,16 @@ const fetchOfficeByID = createAsyncThunk(
         }
     }
 );
+
+// export const cacheMiddlewareOffices = (store) => (next) => (action) => { 
+//     if (
+//         action.type === fetchAllOffices.fulfilled.type &&
+//         store.getState().offices.offices.length > 0
+//     ) {
+//         return Promise.resolve();
+//     }
+//     return next(action);
+// };
 
 const initialState = {
     offices: [],
@@ -82,6 +91,9 @@ const officesSlice = createSlice({
 
 export const selectAllOffices = (state) => state.offices.offices;
 export const selectOffice = (state) => state.offices.office;
+export const selectStatus = (state) => state.offices.status;
+export const selectError = (state) => state.offices.error;
+
 export default officesSlice.reducer;
 export const {clearOffice} = officesSlice.actions;
 export { fetchAllOffices, fetchOfficeByID };

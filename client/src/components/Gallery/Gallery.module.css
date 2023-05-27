@@ -162,3 +162,60 @@
         top: 40rem;
     }
 }
+
+@media screen and (max-width: 414px) {
+    .DivContainer{
+        padding-top: 6.5rem;
+    }
+    .Slide img {
+        width: 40%;
+        height: auto;
+        transform: translateY(-1rem) translateX(-9.8rem);
+    }
+
+    .SlideShow {
+        height: 30rem;
+    }
+
+    .TextImg h2{
+        font-size: 2.5rem;
+        width: 30rem;
+        left: 3rem;
+        top: 23rem;
+        display: none;
+    }
+
+    .btnPlanes {
+        z-index: 999999;
+        position: absolute;
+        top: 22rem;
+        left: 7.5rem;
+        width: 12rem;
+        height: 5rem;
+        padding: 0;
+        font-size: 1.3rem;
+        line-height: 1.4rem;
+    }
+
+    .Arrows{
+        top: 19rem;
+    }
+
+    .ArrowLeft {
+        position: absolute;
+        height: 2rem;
+        width: 2rem;
+        right: -1rem;
+    }
+
+    .ArrowRight{
+        position: absolute;
+        height: 2rem;
+        width: 2rem;
+        left: 21rem;
+    }
+
+    .Arrows h2 {
+        display: none;
+    } 
+}

@@ -8,24 +8,18 @@ import { validate } from "./validation";
 import { weekDays } from "../../utils/constants";
 import { URL } from "../../utils/constants";
 const SedesDashCrear = () => {
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalDaysOpen, setModalDaysOpen] = useState(false);
-  const [validacion, setValidacion] = useState(false);
-  const[modalCreacionExito, setModalCreacionExito] = useState(false);
-  const [errorCreacion, setErrorCreacion] = useState(false);
-
   const [dias, setDias] = useState([]);
   const [horaInicio, setHoraInicio] = useState("");
   const [horaFin, setHoraFin] = useState("");
-
   const [sedes, setSedes] = useState({
     name: "",
     location: "",
     scheduleDays: "",
     scheduleHourStart: "",
     scheduleHourFinish: "",
+    image: null,
   });
+
   const [errors, setErrors] = useState({
     name: "",
     location: "",
@@ -33,15 +27,12 @@ const SedesDashCrear = () => {
     scheduleHourStart: "",
     scheduleHourFinish: "",
   });
-
-
-
   const generateHourOptions = () => {
     const options = [];
     for (let i = 1; i <= 24; i++) {
       if (i > horaInicio) {
         options.push(
-          <option key={i} value={i}>
+          <option key={i}>
             {i}:00
           </option>
         );
@@ -77,9 +68,8 @@ const SedesDashCrear = () => {
     const updatedDias = isChecked
       ? [...dias, dia]
       : dias.filter((d) => d !== dia);
-    setDias(updatedDias);
+    setSedes({ ...sedes, scheduleDays: updatedDias });
   };
-///////////////////////////////////////////////////
   const validatedays = () => {
     if (dias.length !== 0) {
       sedes.scheduleDays = dias;
@@ -105,66 +95,29 @@ const SedesDashCrear = () => {
     setSedes({ ...sedes, [field]: value });
   };
 
-  const navigate = useNavigate();
+  const handleStartHourChange = (e) => {
+    const value = e.target.value;
+    setSedes({ ...sedes, scheduleHourStart: value });
+    setHoraInicio(value);
+  };
 
-  // const crearSede = () => {
-  //   console.log("entramos con", sedes);
-  //   if (!validatedays() || !validateHours() || errors.name || errors.location) {
-  //     console.error("Errores de validación:", errors);
-      
-  //   } else {
-  //     console.log("envia la accion")
-  //     console.log(sedes)
-  //     axios.post("https://musclelabii.onrender.com/branchoffice/create", sedes)
-  //       .then((res) => {
-  //         console.log(res)
-  //         console.log(sedes)
-  //        alert("Sede creada con  exito")
-          
-  //         // Realizar acciones adicionales después de crear la sede si es necesario
-  //         setSedes({
-  //           name: "",
-  //           location: "",
-  //           scheduleDays: "",
-  //           scheduleHourStart: "",
-  //           scheduleHourFinish: "",
-  //         });
-  //         // Redireccionar a la página correspondiente
-  //        navigate("/dashboard/sedes")
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error al crear la sede:", error);
-         
-  //         // Manejar el error si es necesario
-  //       });
-  //   }
-   
-  // };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-  
+  const handleFinishHourChange = (e) => {
+    const value = e.target.value;
+    setSedes({ ...sedes, scheduleHourFinish: value });
+    setHoraFin(value);
+  };
+
+
+  const crearSede = () => {
+    console.log("entramos con", sedes);
     if (!validatedays() || !validateHours() || errors.name || errors.location) {
       console.error("Errores de validación:", errors);
     } else {
-      const formData = new FormData();
-      formData.append("lessonAttributes", JSON.stringify(sedes));
-      formData.append("image", sedes.image);
-  
-      try {
-        const response = await axios.post(`${URL}/branchoffice/create`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-  
-        console.log(response.data);
-  
-        if (response.data.error) {
-          // Manejar el caso en el que se devuelve un error del servidor
-          console.error("Error al crear la sede:", response.data.error);
-          // Mostrar un mensaje de error al usuario si es necesario
-        } else {
-          alert("Sede creada con éxito");
+      axios
+        .post(`${URL}/branchoffice/create`, sedes)
+        .then((res) => {
+          alert("Sede creada exitosamente");
+          // Realizar acciones adicionales después de crear la sede si es necesario
           setSedes({
             name: "",
             location: "",
@@ -175,11 +128,11 @@ const SedesDashCrear = () => {
           });
           // Redireccionar a la página correspondiente
           navigate("/dashboard/sedes");
-        }
-      } catch (error) {
+        })
+       .catch((error)=> {
         console.error("Error al crear la sede:", error);
         // Manejar el error si es necesario
-      }
+      })
     }
   };
   
@@ -190,6 +143,21 @@ const SedesDashCrear = () => {
     setModalCreacionExito(false)
     navigate("/dashboard/sedes")
   }
+
+  const handleImageChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.files[0];
+  
+    const reader = new FileReader();
+    
+    reader.onloadend = () => {
+      setSedes({ ...sedes, [name]: value });
+      setImagePreviewUrl(reader.result);
+    };
+        
+    
+    reader.readAsDataURL(value);
+  };
 
   return (
     <div className={style.BigBigContainer}>
@@ -254,58 +222,26 @@ const SedesDashCrear = () => {
             <label htmlFor="scheduleHours" className={style.texto}>
               Horario: *
             </label>
-            <div className={style.horario}>
+            <div className={`${style.HourContainer} ${style.HourContainer1}`}>
+              <label className={style.Options}>Hora inicio</label>
+              <select onChange={(e) => setHoraInicio(parseInt(e.target.value))}>
+                <option value="">Seleccione</option>
+                {[...Array(24)].map((_, index) => (
+                  <option key={index + 1} value={index + 1}>
+                    {index + 1}:00
+                  </option>
+                ))}
+              </select>
+            </div>
 
-              <div className={`${style.HourContainer} ${style.HourContainer1}`}>
-                <label className={style.Options}>Hora inicio</label>
-                <select onChange={(e) => setHoraInicio(parseInt(e.target.value))} className={style.select}>
-                  <option value="">Seleccione</option>
-                  {[...Array(24)].map((_, index) => (
-                    <option key={index + 1} value={index + 1}>
-                      {index + 1}:00
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className={`${style.HourContainer} ${style.HourContainer2}`}>
-                <label className={style.Options}>Hora fin</label>
-                <select className={style.select} onChange={(e) => setHoraFin(parseInt(e.target.value))}>
-                  <option value="">Seleccione</option>
-                  {generateHourOptions()}
-                </select>
-              </div>
+            <div className={`${style.HourContainer} ${style.HourContainer2}`}>
+              <label className={style.Options}>Hora fin</label>
+              <select onChange={(e) => setHoraFin(parseInt(e.target.value))}>
+                <option value="">Seleccione</option>
+                {generateHourOptions()}
+              </select>
             </div>
           </div>
-
-<ReactModal isOpen={modalOpen} className={style.modal} onRequestClose={() => setModalOpen(false)}>
-  <h2 className={style.text}>Error</h2>
-  <p className={style.text}>Debe elegir un horario correcto</p>
-  <button className={style.DeleteButton} onClick={() => setModalOpen(false)}>Cerrar</button>
-</ReactModal>
-
-<ReactModal className={style.modal} isOpen={modalDaysOpen} onRequestClose={() => setModalDaysOpen(false)}>
-  <h2 className={style.text}>Error</h2>
-  <p className={style.text}>Debe elegir al menos un dia</p>
-  <button className={style.DeleteButton} onClick={() => setModalDaysOpen(false)}>Cerrar</button>
-</ReactModal>
-<ReactModal className={style.modal} isOpen={validacion} onRequestClose={() => setValidacion(false)}>
-  <h2 className={style.text}>Error</h2>
-  <p className={style.text}>Complete los campos requeridos</p>
-  <button className={style.DeleteButton} onClick={() => setValidacion(false)}>Cerrar</button>
-</ReactModal>
-
-<ReactModal isOpen={modalCreacionExito} onRequestClose={() => setModalCreacionExito(true)}>
-  <h2 className={style.text}>Exito</h2>
-  <p className={style.text}>Sede creada correctamente</p>
-  <button className={style.SaveButton} onClick={handleAceptarClick}>Aceptar</button> 
-</ReactModal>
-
-<ReactModal className={style.modal} isOpen={errorCreacion} onRequestClose={() => setErrorCreacion(true)}>
-  <h2 className={style.text}>Error</h2>
-  <p className={style.text}>No se pudo crear la sede</p>
-  <button className={style.SaveButton} onClick={() => setErrorCreacion(false)}>Aceptar</button> 
-</ReactModal>
 
           <button onClick={handleSubmit} className={style.SaveButton}>
             Crear
