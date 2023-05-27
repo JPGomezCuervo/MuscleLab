@@ -140,48 +140,49 @@ const SedesDashCrear = () => {
   //   }
    
   // };
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
   
     if (!validatedays() || !validateHours() || errors.name || errors.location) {
       console.error("Errores de validación:", errors);
     } else {
-      console.log(sedes)
-      axios
-        .post(`${URL}/branchoffice/create`, {
-          // No se especifica en el controlador, puedes dejarlo vacío o asignar un valor si es necesario
-          name: sedes.name,
-          location: sedes.location,
-          scheduleDays: sedes.scheduleDays,
-          scheduleHourStart: sedes.scheduleHourStart,
-          scheduleHourFinish: sedes.scheduleHourFinish,
-        })
-        .then((res) => {
-          console.log(res);
-          if (res.data.error) {
-            // Manejar el caso en el que se devuelve un error del servidor
-            console.error("Error al crear la sede:", res.data.error);
-            // Mostrar un mensaje de error al usuario si es necesario
-          } else {
-            alert("Sede creada con éxito");
-            setSedes({
-              name: "",
-              location: "",
-              scheduleDays: "",
-              scheduleHourStart: "",
-              scheduleHourFinish: "",
-            });
-            // Redireccionar a la página correspondiente
-            navigate("/dashboard/sedes");
-          }
-        })
-        .catch((error) => {
-          console.error("Error al crear la sede:", error);
-          // Manejar el error si es necesario
+      const formData = new FormData();
+      formData.append("lessonAttributes", JSON.stringify(sedes));
+      formData.append("image", sedes.image);
+  
+      try {
+        const response = await axios.post(`${URL}/branchoffice/create`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         });
+  
+        console.log(response.data);
+  
+        if (response.data.error) {
+          // Manejar el caso en el que se devuelve un error del servidor
+          console.error("Error al crear la sede:", response.data.error);
+          // Mostrar un mensaje de error al usuario si es necesario
+        } else {
+          alert("Sede creada con éxito");
+          setSedes({
+            name: "",
+            location: "",
+            scheduleDays: "",
+            scheduleHourStart: "",
+            scheduleHourFinish: "",
+            image: null,
+          });
+          // Redireccionar a la página correspondiente
+          navigate("/dashboard/sedes");
+        }
+      } catch (error) {
+        console.error("Error al crear la sede:", error);
+        // Manejar el error si es necesario
+      }
     }
   };
+  
   
 
 
