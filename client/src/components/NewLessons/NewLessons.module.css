@@ -1,8 +1,9 @@
 
 .container{
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8uMI5fxu1cRxJH4Kuj5NfXpYVMbYA4yFM0Q&usqp=CAU');
+    background-color: #003566;
     background-repeat: no-repeat;
     background-size: cover; 
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,17 +13,19 @@
     gap: 60px;
 }
 .input{
-    outline: 0;
-    
-    background-color:#FFC300;
+    align-items: center;
+    background-color: #FFC300;
     width: 100%;
-    border: 0;
     margin: 0 0 15px;
     padding: 15px;
     box-sizing: border-box;
     font-size: 14px;
+    border-radius: 1rem;
+    
+    
+    
 }
-.button3 {
+.button1 {
 
     background-color: #FFC300;
     border: none;
@@ -36,23 +39,22 @@
     height: 2.8rem;
    }
    
-   .button3:active {
+   .button1:active {
     color: white;
     box-shadow: 0 0.2rem #dfd9d9;
     transform: translateY(0.2rem);
    }
    
-   .button3:hover:not(:disabled) {
+   .button1:hover:not(:disabled) {
     background: #003566;
     color: white;
     text-shadow: 0 0.1rem #bcb4b4;
    }
    
-   .button3:disabled {
+   .button1:disabled {
     cursor: auto;
     color: grey;
    }
-    
 
 .log{
     font-size: larger;

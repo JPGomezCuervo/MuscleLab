@@ -32,7 +32,15 @@ import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
 import StripeRender from "./components/StripeRender/StripeRender";
 import jwt_decode from "jwt-decode";
+
+import CreatePlan from './components/CreatePlan/CreatePlan'
+import PlanDashEditar from './components/EditarPlan/EditarPlan'
+import Review from "./components/Review/Review";
+import Plans from "./components/Plans/Plans";
+import DashPlans from "./components/DashPlans/DashPlans";
+
 import UserUpdate from "./components/UserUpdate/UserUpdate";
+
 
 function App() {
   const location = useLocation().pathname;
@@ -97,6 +105,16 @@ function App() {
           element={<SedesDashEditar />}
         />
         <Route path="/dashboard/sedes/crear" element={<SedesDashCrear />} />
+
+        <Route path="/profile/editar/:id" element={<UserUpdate />} />
+
+        <Route path= '/dashboard/plans/crear' element={<CreatePlan/>}/>
+      <Route path= '/dashboard/plans/editar/:id' element={<PlanDashEditar/>}/>
+      <Route path= '/dashboard/plans' element={<DashPlans/>}/>
+      <Route path= '/review' element={<Review />}/>
+      
+
+
         {/* </>
         ) : ( */}
         <Route path="/denegado" element={<login />}></Route>
