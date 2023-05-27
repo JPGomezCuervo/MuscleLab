@@ -1,3 +1,4 @@
+
 import ExtraInfo from "../ExtraInfo/ExtraInfo";
 import Gallery from "../Gallery/Gallery";
 import Plans from "../Plans/Plans";
@@ -24,6 +25,7 @@ const Home = () => {
     dispatch(fetchAllMemberships());
   }, [dispatch]);
 
+  
 
   useEffect(() => {
     if (plansCLick) {
