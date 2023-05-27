@@ -1,9 +1,26 @@
 import styles from './Review.module.css'
+import axios from 'axios';
+import { URL } from '../../utils/constants';
+import { fetchLessonsByID } from '../../redux/features/lessonsSlice';
 
 const Review = ()=>{
 
 
   
+  // const [review, setReview] = useState({
+  //   review:'',
+  //   rating:'',
+    
+
+  // });
+  
+    
+
+  // const [error, setError] = useState({
+  //   review:'',
+  //   rating:'',
+    
+  // });
   
 
 return(
