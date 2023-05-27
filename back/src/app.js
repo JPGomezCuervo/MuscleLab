@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
@@ -5,7 +6,7 @@ const morgan = require("morgan");
 const routes = require("./routes/index.js");
 const server = express();
 const stripe = require('stripe')('sk_test_51NBkBJFPcDe3Fz6KjLlzjI35wfptX5dwAkeq7TnXdPy9YEBmqirmm4YdUIktaK82RmXCH8WU1dxyp6cR5G6CbMMM00zSOxlAwo');
-const endpointSecret="whsec_b5082ce3c79b262f7f9305bfb3bb1ec1680ba313ddfb35ee84b9cba78f7403cc";
+const {ENDPOINT_SECRET_STRIPE}=process.env;
 const fulfillOrder=require('./Controllers/Payments/fulfillPayment.js');
 let event;
 
@@ -32,7 +33,7 @@ server.use((req, res, next) => {
     const sig = req.headers['stripe-signature'];
 
   try {
-    event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+    event = stripe.webhooks.constructEvent(payload, sig, ENDPOINT_SECRET_STRIPE);
   } catch (err) {
     console.log(err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
@@ -50,7 +51,11 @@ server.use((req, res, next) => {
       
       // Fulfill the purchase...
       //descomentar para hacer efectiva las relaciones entre usuarios y sus membresias (terminar esas realciones)
-      //fulfillOrder(sessionWithLineItems);
+      try {
+        fulfillOrder(sessionWithLineItems);
+      } catch (error) {
+        res.status(400).json({error:error.message});
+      }
     }
     res.status(200).end();
     
