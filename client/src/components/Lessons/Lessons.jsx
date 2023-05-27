@@ -20,16 +20,20 @@ const Lessons = () => {
     };
     
     useEffect(() => {
-        window.scrollTo({top: 0, left:0, behavior: 'auto'})
         dispatch(fetchAllLessons());
         dispatch(fetchAllLessonTypes());
     }, [dispatch]);
+    
+    useEffect(() => {
+        window.scrollTo({top: 0, left:0, behavior: 'auto'})
+
+    }, [])
 
     
 
     return (
             <div className={style.Frame}>  
-            <FilterBar lessonsAtributtes= {lessonTypes} retryButton ={retryButton} setRetryButton={setRetryButton}/>
+            <FilterBar lessonsAttributes= {lessonTypes} retryButton ={retryButton} setRetryButton={setRetryButton}/>
             <div className={style.Container}>
                 {error && <div className={style.Error}>{error}</div>}
                 {error && <button className ={style.RetryButton}onClick={handleRetryClick}>Intenta de nuevo</button>}

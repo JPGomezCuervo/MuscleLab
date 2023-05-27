@@ -36,10 +36,6 @@ import UserUpdate from "./components/UserUpdate/UserUpdate";
 
 function App() {
   const location = useLocation().pathname;
-  const dashAuth = useSelector(selectDashAuth);
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
