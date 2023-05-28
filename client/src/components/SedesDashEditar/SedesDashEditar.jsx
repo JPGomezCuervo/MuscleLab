@@ -66,7 +66,7 @@ const SedesDashEditar = () => {
 
   const navigate = useNavigate();
 
-  Dentro de la función guardarCambiosSedes
+ // Dentro de la función guardarCambiosSedes
   const confirmarGuardarCambios = () => {
     const id = params.id;
     const url = `${URL}/branchoffice/update/${id}`;
