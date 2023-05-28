@@ -32,7 +32,7 @@ const SedesDashEditar = () => {
   }, [sId]);
 
   const [sedeEditada, setSedeEditada] = useState(null);
-
+  const [image, setImage] = useState("");
   const [dias, setDias] = useState([]);
   const [horaInicio, setHoraInicio] = useState("");
   const [horaFin, setHoraFin] = useState("");
@@ -68,19 +68,23 @@ const SedesDashEditar = () => {
     const id = params.id;
     const url = `${URL}/branchoffice/update/${id}`;
 
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("officeAttributes", JSON.stringify(sedes));
     axios
-      .put(url, sedes)
+      .put(url, formData)
       .then((res) => {
         console.log("Cambios guardados exitosamente");
         setModalConfirmacionAbierta(false); // Cierra la ventana modal de confirmación
         // Abre la ventana modal de éxito
+        navigate("/dashboard/sedes");
       })
       .catch((error) => {
         console.error("Error al guardar los cambios:", error);
         // Manejar el error si es necesario
       });
-    setModalExitoAbierta(true);
-    navigate("/dashboard/sedes");
+    // setModalExitoAbierta(true);
+    // navigate("/dashboard/sedes");
   };
 
   const eliminarSede = () => {
@@ -172,15 +176,14 @@ const SedesDashEditar = () => {
   const handleImageChange = (event) => {
     const name = event.target.name;
     const value = event.target.files[0];
-  
+
     const reader = new FileReader();
-    
+
     reader.onloadend = () => {
-      setSedes({ ...sedes, [name]: value });
+      setImage(value);
       setImagePreviewUrl(reader.result);
     };
-        
-    
+
     reader.readAsDataURL(value);
   };
 
@@ -295,33 +298,29 @@ const SedesDashEditar = () => {
             </div>
 
             <div className={style.FileInput}>
-            <label>Imagen*</label>
-            <input
-              id="image"
-              type="file"
-              name="image"
-              onChange={handleImageChange}
-            />
-          </div>
+              <label>Imagen*</label>
+              <input
+                id="image"
+                type="file"
+                name="image"
+                onChange={handleImageChange}
+              />
+            </div>
 
-          {errors.image && <p className={style.Error}>{errors.image}</p>}
+            {errors.image && <p className={style.Error}>{errors.image}</p>}
 
-          <div className={style.leftContainer}>
-            {imagePreviewUrl && (
-              <div className={style.ImageContainer}>
-                {sedes.image && (
-                  <img src={imagePreviewUrl} alt="Tu imagen" />
-                )}
-              </div>
-            )}
-            {sedes.image && (
-              <div className={style.ImageContainer}>
-                {sedes.image && (
-                  <img src={sedes.image} alt="Tu imagen" />
-                )}
-              </div>
-            )}
-          </div>
+            <div className={style.leftContainer}>
+              {imagePreviewUrl && (
+                <div className={style.ImageContainer}>
+                  {sedes.image && <img src={imagePreviewUrl} alt="Tu imagen" />}
+                </div>
+              )}
+              {sedes.image && (
+                <div className={style.ImageContainer}>
+                  {sedes.image && <img src={sedes.image} alt="Tu imagen" />}
+                </div>
+              )}
+            </div>
 
             <button
               onClick={() => {

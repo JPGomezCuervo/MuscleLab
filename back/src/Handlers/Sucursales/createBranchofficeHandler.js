@@ -20,11 +20,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const createNewBranchOffice = async (req, res) => {
-  console.log(req.file)
-  
-  //console.log("este es el body ", JSON.parse(req.body.officeAttributes))
+  console.log("este es el req.file: ", req.file);
+  console.log("este es el req.body: ", req.body);
   const officeAttributes = JSON.parse(req.body.officeAttributes);
-  console.log("este es el de office", officeAttributes);
+  
   const {
     id,
     name,
