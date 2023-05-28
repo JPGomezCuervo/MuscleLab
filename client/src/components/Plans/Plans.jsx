@@ -9,7 +9,6 @@ import { useSelector } from "react-redux"
 const Plans = () =>{
 
     const memberships = useSelector(selectAllMemberships)
-    console.log(memberships)
     
 
 
