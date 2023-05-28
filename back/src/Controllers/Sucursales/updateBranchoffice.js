@@ -2,6 +2,7 @@ const { BranchOffice } = require("../../db");
 let updateBranchOffice = async (
   id,
   name,
+  image,
   location,
   scheduleDays,
   scheduleHourStart,
@@ -13,6 +14,7 @@ let updateBranchOffice = async (
   }
   await toUpdate.update({
     name: name,
+    image: image,
     location: location,
     scheduleDays: scheduleDays,
     scheduleHourStart: scheduleHourStart,

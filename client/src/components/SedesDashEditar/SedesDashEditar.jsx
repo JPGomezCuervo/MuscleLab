@@ -12,6 +12,8 @@ const SedesDashEditar = () => {
   const params = useParams();
   const sId = params.id;
 
+  const [image, setImage] = useState("");
+
   useEffect(() => {
     axios
       .get(`${URL}/branchoffice/${sId}`)
@@ -25,6 +27,7 @@ const SedesDashEditar = () => {
         });
         setDias(response.data.branchoffice.scheduleDays);
         setSedeEditada(response.data.branchoffice);
+        setImage(response.data.branchoffice.image)
       })
       .catch((error) => {
         console.error("Error al obtener los datos del objeto:", error);
@@ -40,7 +43,7 @@ const SedesDashEditar = () => {
   const [sedes, setSedes] = useState({
     name: "",
     location: "",
-    scheduleDays: [],
+    scheduleDays: "",
     scheduleHourStart: "",
     scheduleHourFinish: "",
   });
@@ -63,14 +66,22 @@ const SedesDashEditar = () => {
 
   const navigate = useNavigate();
 
-  // Dentro de la función guardarCambiosSedes
+  Dentro de la función guardarCambiosSedes
   const confirmarGuardarCambios = () => {
     const id = params.id;
     const url = `${URL}/branchoffice/update/${id}`;
-
+    if (!validatedays() || !validateHours() || errors.name || errors.location) {
+      console.error("Errores de validación:", errors);
+    } else {
+    const formData = new FormData();
+    formData.append("image", image)
+    formData.append("officeAttributes",JSON.stringify(sedes))
+    console.log(JSON.stringify(sedes))
+    console.log(image)
     axios
-      .put(url, sedes)
+      .put(url, formData)
       .then((res) => {
+        
         console.log("Cambios guardados exitosamente");
         setModalConfirmacionAbierta(false); // Cierra la ventana modal de confirmación
         // Abre la ventana modal de éxito
@@ -82,6 +93,10 @@ const SedesDashEditar = () => {
     setModalExitoAbierta(true);
     navigate("/dashboard/sedes");
   };
+  }
+
+  
+
 
   const eliminarSede = () => {
     const id = params.id;
@@ -145,29 +160,67 @@ const SedesDashEditar = () => {
     }
     return options;
   };
+  // const validateHours = () => {
+  //   if (!sedes.scheduleHourStart) {
+  //     errors.scheduleHourStart = "Debe seleccionar hora de inicio";
+  //     alert("Debe seleccionar hora de inicio");
+  //     return false;
+  //   } else if (!sedes.scheduleHourFinish) {
+  //     errors.scheduleHourFinish = "Debe seleccionar hora de fin";
+  //     alert("Debe seleccionar hora de fin");
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // };
+
   const validateHours = () => {
+    let startError = '';
+    let finishError = '';
+  
     if (!sedes.scheduleHourStart) {
-      errors.scheduleHourStart = "Debe seleccionar hora de inicio";
+      startError = "Debe seleccionar hora de inicio";
       alert("Debe seleccionar hora de inicio");
-      return false;
-    } else if (!sedes.scheduleHourFinish) {
-      errors.scheduleHourFinish = "Debe seleccionar hora de fin";
-      alert("Debe seleccionar hora de fin");
-      return false;
-    } else {
-      return true;
     }
+  
+    if (!sedes.scheduleHourFinish) {
+      finishError = "Debe seleccionar hora de fin";
+      alert("Debe seleccionar hora de fin");
+    }
+  
+    setErrors({
+      ...errors,
+      scheduleHourStart: startError,
+      scheduleHourFinish: finishError
+    });
+  
+    return startError === '' && finishError === '';
   };
+  
+
+
+  // const validatedays = () => {
+  //   if (dias.length !== 0) {
+  //     sedes.scheduleDays = dias;
+  //     return true;
+  //   } else {
+  //     errors.scheduleDays = "Debe seleccionar al menos un día";
+  //     alert("Debe seleccionar al menos un día");
+  //     return false;
+  //   }
+  // };
+
   const validatedays = () => {
     if (dias.length !== 0) {
-      sedes.scheduleDays = dias;
+      const updatedSedes = { ...sedes, scheduleDays: dias };
+      setSedes(updatedSedes);
       return true;
     } else {
-      errors.scheduleDays = "Debe seleccionar al menos un día";
-      alert("Debe seleccionar al menos un día");
+      setErrors({ ...errors, scheduleDays: "Debe seleccionar al menos un día" });
       return false;
     }
   };
+  
 
   const handleImageChange = (event) => {
     const name = event.target.name;
@@ -176,7 +229,7 @@ const SedesDashEditar = () => {
     const reader = new FileReader();
     
     reader.onloadend = () => {
-      setSedes({ ...sedes, [name]: value });
+      setImage(value)
       setImagePreviewUrl(reader.result);
     };
         

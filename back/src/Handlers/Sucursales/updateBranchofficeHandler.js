@@ -21,14 +21,14 @@ const upload = multer({ storage });
 
 const updateMyBranchOffice = async (req, res) => {
   const { id } = req.params;
-  const lessonAttributes = JSON.parse(req.body.lessonAttributes);
+  const officeAttributes = JSON.parse(req.body.officeAttributes);
   const {
     name,
     location,
     scheduleDays,
     scheduleHourStart,
     scheduleHourFinish,
-  } = lessonAttributes;
+  } = officeAttributes;
   try {
 
     let updatedImage = image;
