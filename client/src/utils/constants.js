@@ -15,4 +15,3 @@ export const weekDays = [
 ];
 export const clientId =
   "1060018757623-sk8opucj3l59lu8u1e6qmsuggnqtgr0h.apps.googleusercontent.com";
-

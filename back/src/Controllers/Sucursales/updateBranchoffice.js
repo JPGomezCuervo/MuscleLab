@@ -14,13 +14,12 @@ let updateBranchOffice = async (
   }
   await toUpdate.update({
     name: name,
-    image: image,
+    image,
     location: location,
     scheduleDays: scheduleDays,
     scheduleHourStart: scheduleHourStart,
-    scheduleHourFinish:scheduleHourFinish
+    scheduleHourFinish: scheduleHourFinish,
   });
   return `Sucursal ${toUpdate.name} fue editada con exito`;
-
 };
 module.exports = updateBranchOffice;
