@@ -32,7 +32,7 @@ import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
 import StripeRender from "./components/StripeRender/StripeRender";
 import jwt_decode from "jwt-decode";
-
+import Modal from 'react-modal';
 import CreatePlan from './components/CreatePlan/CreatePlan'
 import PlanDashEditar from './components/EditarPlan/EditarPlan'
 import Review from "./components/Review/Review";
@@ -40,7 +40,7 @@ import Plans from "./components/Plans/Plans";
 import DashPlans from "./components/DashPlans/DashPlans";
 
 import UserUpdate from "./components/UserUpdate/UserUpdate";
-
+Modal.setAppElement('#root')
 
 function App() {
   const location = useLocation().pathname;

@@ -12,8 +12,6 @@ const SedesDashEditar = () => {
   const params = useParams();
   const sId = params.id;
 
-  const [image, setImage] = useState("");
-
   useEffect(() => {
     axios
       .get(`${URL}/branchoffice/${sId}`)
@@ -27,7 +25,6 @@ const SedesDashEditar = () => {
         });
         setDias(response.data.branchoffice.scheduleDays);
         setSedeEditada(response.data.branchoffice);
-        setImage(response.data.branchoffice.image)
       })
       .catch((error) => {
         console.error("Error al obtener los datos del objeto:", error);
@@ -43,7 +40,7 @@ const SedesDashEditar = () => {
   const [sedes, setSedes] = useState({
     name: "",
     location: "",
-    scheduleDays: "",
+    scheduleDays: [],
     scheduleHourStart: "",
     scheduleHourFinish: "",
   });
@@ -63,34 +60,38 @@ const SedesDashEditar = () => {
     useState(false);
   const [modalExitoAbierta, setModalExitoAbierta] = useState(false);
   const [modalCancelacionAbierta, setModalCancelacionAbierta] = useState(false);
+  const [modalCambiosExitoso, setModalCambiosExitoso] = useState(false);
+
+
+
 
   const navigate = useNavigate();
 
- // Dentro de la función guardarCambiosSedes
+
   const confirmarGuardarCambios = () => {
     const id = params.id;
     const url = `${URL}/branchoffice/update/${id}`;
-
+  
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("officeAttributes", JSON.stringify(sedes));
+    
     axios
       .put(url, formData)
       .then((res) => {
-        
         console.log("Cambios guardados exitosamente");
-        setModalConfirmacionAbierta(false); // Cierra la ventana modal de confirmación
-        // Abre la ventana modal de éxito
-        navigate("/dashboard/sedes");
+       // setModalConfirmacionAbierta(false); // Cierra el modal de confirmación
+        setModalCambiosExitoso(true);
+       // navigate("/dashboard/sedes");
+       // abrirModalCambiosExitoso(); // Abre el modal de cambios exitosos
       })
       .catch((error) => {
         console.error("Error al guardar los cambios:", error);
         // Manejar el error si es necesario
+      //  abrirModalError(); // Abre el modal de error
       });
-    // setModalExitoAbierta(true);
-    // navigate("/dashboard/sedes");
   };
-  }
-
   
-
 
   const eliminarSede = () => {
     const id = params.id;
@@ -102,21 +103,27 @@ const SedesDashEditar = () => {
       .delete(url)
       .then((res) => {
         console.log("Sede eliminada exitosamente");
-        setModalConfirmacionAbierta(false); // Cierra la ventana modal de confirmación
+        setModalConfirmacionAbierta1(false); // Cierra la ventana modal de confirmación
         setModalExitoAbierta(true); // Abre la ventana modal de éxito
       })
       .catch((error) => {
         console.error("Error al eliminar la sede:", error);
         // Manejar el error si es necesario
       });
-    navigate("/dashboard/sedes");
+ 
   };
+  
 
   const cancelarEliminar = () => {
-    setModalConfirmacionAbierta(false); // Cierra la ventana modal de confirmación
+    setModalConfirmacionAbierta1(false); // Cierra la ventana modal de confirmación
     setModalCancelacionAbierta(true); // Establece la sede editada en null
     navigate("/dashboard/sedes");
   };
+
+  const cerrarExito = ()=> {
+    setModalCambiosExitoso(false);
+    navigate("/dashboard/sedes")
+  }
 
   const handleChange = (e) => {
     const field = e.target.name;
@@ -154,67 +161,29 @@ const SedesDashEditar = () => {
     }
     return options;
   };
-  // const validateHours = () => {
-  //   if (!sedes.scheduleHourStart) {
-  //     errors.scheduleHourStart = "Debe seleccionar hora de inicio";
-  //     alert("Debe seleccionar hora de inicio");
-  //     return false;
-  //   } else if (!sedes.scheduleHourFinish) {
-  //     errors.scheduleHourFinish = "Debe seleccionar hora de fin";
-  //     alert("Debe seleccionar hora de fin");
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // };
-
   const validateHours = () => {
-    let startError = '';
-    let finishError = '';
-  
     if (!sedes.scheduleHourStart) {
-      startError = "Debe seleccionar hora de inicio";
+      errors.scheduleHourStart = "Debe seleccionar hora de inicio";
       alert("Debe seleccionar hora de inicio");
-    }
-  
-    if (!sedes.scheduleHourFinish) {
-      finishError = "Debe seleccionar hora de fin";
+      return false;
+    } else if (!sedes.scheduleHourFinish) {
+      errors.scheduleHourFinish = "Debe seleccionar hora de fin";
       alert("Debe seleccionar hora de fin");
+      return false;
+    } else {
+      return true;
     }
-  
-    setErrors({
-      ...errors,
-      scheduleHourStart: startError,
-      scheduleHourFinish: finishError
-    });
-  
-    return startError === '' && finishError === '';
   };
-  
-
-
-  // const validatedays = () => {
-  //   if (dias.length !== 0) {
-  //     sedes.scheduleDays = dias;
-  //     return true;
-  //   } else {
-  //     errors.scheduleDays = "Debe seleccionar al menos un día";
-  //     alert("Debe seleccionar al menos un día");
-  //     return false;
-  //   }
-  // };
-
   const validatedays = () => {
     if (dias.length !== 0) {
-      const updatedSedes = { ...sedes, scheduleDays: dias };
-      setSedes(updatedSedes);
+      sedes.scheduleDays = dias;
       return true;
     } else {
-      setErrors({ ...errors, scheduleDays: "Debe seleccionar al menos un día" });
+      errors.scheduleDays = "Debe seleccionar al menos un día";
+      alert("Debe seleccionar al menos un día");
       return false;
     }
   };
-  
 
   const handleImageChange = (event) => {
     const name = event.target.name;
@@ -223,12 +192,22 @@ const SedesDashEditar = () => {
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      setSedes({ ...sedes, [name]: value });
+      setImage(value);
       setImagePreviewUrl(reader.result);
     };
 
     reader.readAsDataURL(value);
   };
+
+  const cerrarEliminacion = ()=>{
+    setModalExitoAbierta(false);
+    navigate("/dashboard/sedes")
+      }
+
+  const guardadoExitoso = ()=>{
+    setModalCambiosExitoso(false)
+    navigate("/dashboard/sedes")
+  }
 
   return (
     <>
@@ -382,132 +361,133 @@ const SedesDashEditar = () => {
             >
               Guardar cambios
             </button>
-
-            <div className={style.content}>
-              <ReactModal
-                isOpen={modalErrorAbierta}
-                onRequestClose={() => setModalErrorAbierta(false)}
-                contentLabel="Error al guardar cambios"
-                className={style.modal}
-              >
-                <h2 className={style.text}>Error</h2>
-                <p className={style.text}>
-                  Debe completar los campos obligatorios y corregir los errores.
-                </p>
-                <button
-                  className={style.modalButton}
-                  onClick={() => {
-                    setModalErrorAbierta(false); // Cierra la ventana modal de error
-                  }}
-                >
-                  Aceptar
-                </button>
-              </ReactModal>
-
-              <ReactModal
-                isOpen={modalConfirmacionAbierta}
-                onRequestClose={() => setModalConfirmacionAbierta(false)}
-                contentLabel="Confirmar guardar cambios"
-                className={style.modal}
-              >
-                <h2 className={style.text}>Confirmación</h2>
-                <p className={style.text}>
-                  ¿Estás seguro de guardar los cambios?
-                </p>
-                <div className={style.botones}>
-                  <button
-                    onClick={confirmarGuardarCambios}
-                    className={style.SaveButton}
-                  >
-                    Guardar
-                  </button>
-                  <button
-                    onClick={() => setModalConfirmacionAbierta(false)}
-                    className={style.SaveButton}
-                  >
-                    Cancelar
-                  </button>
-                </div>
-              </ReactModal>
-
-              <ReactModal
-                isOpen={modalExitoAbierta}
-                onRequestClose={() => setModalExitoAbierta(false)}
-                contentLabel="Guardado exitoso"
-                className={style.modal}
-              >
-                <h2 className={style.text}>Éxito</h2>
-                <p className={style.text}>Cambios guardados exitosamente.</p>
-                <button onClick={() => setModalExitoAbierta(false)}>
-                  Aceptar
-                </button>
-              </ReactModal>
-            </div>
-
             <button
-              type="button"
-              onClick={() => setModalConfirmacionAbierta1(true)}
-              className={style.DeleteButton}
-            >
-              Eliminar
-            </button>
+  type="button"
+  onClick={() => setModalConfirmacionAbierta1(true)}
+  className={style.DeleteButton}
+>
+  Eliminar
+</button>
 
             <div className={style.content}>
-              <ReactModal
-                isOpen={modalConfirmacionAbierta1}
-                onRequestClose={() => setModalConfirmacionAbierta1(false)}
-                contentLabel="Confirmar eliminación de sede"
-                className={style.modal}
-              >
-                <h2 className={style.text}>Confirmación</h2>
-                <p className={style.text}>
-                  ¿Estás seguro de eliminar la sede seleccionada?
-                </p>
-                <div className={style.botones}>
-                  <button className={style.DeleteButton} onClick={eliminarSede}>
-                    Eliminar
-                  </button>
-                  <button
-                    className={style.SaveButton}
-                    onClick={cancelarEliminar}
-                  >
-                    Cancelar
-                  </button>
-                </div>
-              </ReactModal>
-              <ReactModal
-                isOpen={modalExitoAbierta}
-                onRequestClose={() => setModalExitoAbierta(false)}
-                contentLabel="Eliminación exitosa de sede"
-                className={style.modal}
-              >
-                <h2 className={style.text}>Éxito</h2>
-                <p className={style.text}>Sede eliminada exitosamente.</p>
-                <button
-                  className={style.SaveButton}
-                  onClick={() => setModalExitoAbierta(false)}
-                >
-                  Aceptar
-                </button>
-              </ReactModal>
+            <ReactModal
+  isOpen={modalErrorAbierta}
+  onRequestClose={() => setModalErrorAbierta(false)}
+  contentLabel="Error al guardar cambios"
+  className={style.modal}
+>
+  <h2 className={style.text}>Error</h2>
+  <p className={style.text}>
+    Debe completar los campos obligatorios y corregir los errores.
+  </p>
+  <button
+    className={style.modalButton}
+    onClick={() => {
+      setModalErrorAbierta(false); // Cierra la ventana modal de error
+    }}
+  >
+    Aceptar
+  </button>
+</ReactModal>
 
-              <ReactModal
-                isOpen={modalCancelacionAbierta}
-                onRequestClose={() => setModalCancelacionAbierta(false)}
-                contentLabel="Cancelación de eliminación de sede"
-                className={style.modal}
-              >
-                <h2 className={style.text}>Acción cancelada</h2>
-                <div className={style.contenedorBoton}>
-                  <button
-                    className={style.modalButton}
-                    onClick={() => setModalCancelacionAbierta(false)}
-                  >
-                    Aceptar
-                  </button>
-                </div>
-              </ReactModal>
+<ReactModal
+  isOpen={modalConfirmacionAbierta}
+  onRequestClose={() => setModalConfirmacionAbierta(false)}
+  contentLabel="Confirmar guardar cambios"
+  className={style.modal}
+>
+  <h2 className={style.text}>Confirmación</h2>
+  <p className={style.text}>
+    ¿Estás seguro de guardar los cambios?
+  </p>
+  <div className={style.botones}>
+    <button
+      onClick={confirmarGuardarCambios}
+      className={style.SaveButton}
+    >
+      Guardar
+    </button>
+    <button
+      onClick={cancelarEliminar}
+      className={style.SaveButton}
+    >
+      Cancelar
+    </button>
+  </div>
+</ReactModal>
+
+<ReactModal
+        isOpen={modalCambiosExitoso}
+        onRequestClose={() => setModalCambiosExitoso(false)}
+        contentLabel="Guardado exitoso"
+        className={style.modal}
+      >
+        <h2 className={style.text}>Éxito</h2>
+        <p className={style.text}>Cambios guardados exitosamente.</p>
+        <button onClick={() => cerrarExito()} className={style.SaveButton}> 
+          Aceptar
+        </button>
+      </ReactModal>
+
+<ReactModal
+  isOpen={modalConfirmacionAbierta1}
+  onRequestClose={() => setModalConfirmacionAbierta1(false)}
+  contentLabel="Confirmar eliminación de sede"
+  className={style.modal}
+>
+  <h2 className={style.text}>Confirmación</h2>
+  <p className={style.text}>
+    ¿Estás seguro de eliminar la sede seleccionada?
+  </p>
+  <div className={style.botones}>
+    <button className={style.DeleteButton} onClick={eliminarSede}>
+      Eliminar
+    </button>
+    <button
+      className={style.SaveButton}
+      onClick={cancelarEliminar}
+    >
+      Cancelar
+    </button>
+  </div>
+</ReactModal>
+
+<ReactModal
+  isOpen={modalExitoAbierta}
+  onRequestClose={() => setModalExitoAbierta(false)}
+  contentLabel="Eliminación exitosa de sede"
+  className={style.modal}
+>
+ 
+  <h2 className={style.text}>Éxito</h2>
+  <p className={style.text}>Sede eliminada exitosamente.</p>
+  <button
+    className={style.SaveButton}
+    onClick={() =>cerrarEliminacion() }
+  >
+    Aceptar
+  </button>
+</ReactModal>
+
+<ReactModal
+  isOpen={modalCancelacionAbierta}
+  onRequestClose={() => setModalCancelacionAbierta(false)}
+  contentLabel="Cancelación de eliminación de sede"
+  className={style.modal}
+>
+  <h2 className={style.text}>Acción cancelada</h2>
+  <div className={style.contenedorBoton}>
+    <button
+      className={style.modalButton}
+      onClick={() => setModalCancelacionAbierta(false)}
+    >
+      Aceptar
+    </button>
+  </div>
+</ReactModal>
             </div>
+
+     
           </div>
         </div>
       </div>
