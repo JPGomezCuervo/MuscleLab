@@ -33,6 +33,7 @@ import Profile from "./components/Profile/Profile";
 import StripeRender from "./components/StripeRender/StripeRender";
 import jwt_decode from "jwt-decode";
 import UserUpdate from "./components/UserUpdate/UserUpdate";
+import PasarelaPago from "./components/PasarelaPago/PasarelaPago";
 
 function App() {
   const location = useLocation().pathname;
@@ -71,6 +72,7 @@ function App() {
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/sedes" element={<Sedes />} />
         <Route path="/sedes/detalles/:id" element={<SedeHomeDetalle />} />
+        <Route path="/pagos" element={<PasarelaPago />} />
 
         
         <Route path="/stripe" element={<StripeRender/>}/>
