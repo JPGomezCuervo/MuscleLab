@@ -10,21 +10,21 @@ const getMembershipsController = async () =>{
         const members=[
             {
                 name:"Standar",
-                price:"$1",
+                price:"1",
                 benefits:"Asistir a dos clases",
                 promo:false,
                 duration:"1 mes",
                 },
                 {
                 name:"Plus",
-                price:"$3",
+                price:"3",
                 benefits:"Asistir a cuatro clases",
                 promo:false,
                 duration:"3 mes",
                 },
                 {
                 name:"Premium",
-                price:"$5",
+                price:"5",
                 benefits:"Asistir a seis clases",
                 promo:false,
                 duration:"6 mes",
