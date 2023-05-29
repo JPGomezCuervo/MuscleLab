@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const server = Router();
 const stripe = require('stripe')('sk_test_51NBkBJFPcDe3Fz6KjLlzjI35wfptX5dwAkeq7TnXdPy9YEBmqirmm4YdUIktaK82RmXCH8WU1dxyp6cR5G6CbMMM00zSOxlAwo');
-const {User}=require('../db');
+const {User, StatusMemberships}=require('../db');
 
 
 server.post('/create_checkout',async (req,res)=>{
@@ -9,6 +9,10 @@ server.post('/create_checkout',async (req,res)=>{
     const user=await User.findOne({where:{id:id}});
     if(!user){
         throw new Error("No se encontro al usuario");
+    }
+    const existing=await StatusMemberships.findOne({where:{userId:id}});
+    if(existing){
+        throw new Error(`Ya tiene una membresia activa. Vence el ${existing.final}`);
     }
     //aca customer probablemente sea el token del usuario loggeado por lo que habria que usar jwt para decodificar y sacar su email
     const customer = user.email;
