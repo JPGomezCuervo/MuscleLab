@@ -1,9 +1,12 @@
-const imageValidation = (value, errors, name) => {
-    if (!value) return {...errors, [name]: 'La imagen es requerida'};
-    if (!value.match(/^(http(s):\/\/.)[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/ 
-    )) return {...errors, [name]: 'La imagen debe ser una URL'};
-    if (value.length > 254) return {...errors, [name]: 'La URL debe ser menor a 254 caracteres'};
-    return {...errors, [name]: ''};
+const imageValidation = (value, errors, name, lessonAttributes) => {
+    const { image } = lessonAttributes;
+    const type = image.name.split('.')[1].toLowerCase();
+    const validTypes = ['jpg', 'jpeg', 'png'];
+   
+    if (!value.name) return { ...errors, [name]: 'La imagen es requerida' };
+    if (!validTypes.includes(type)) return { ...errors, [name]: 'La imagen debe ser jpg, jpeg o png' };
+
+    return { ...errors, [name]: '' };
 };
 
 export default imageValidation;

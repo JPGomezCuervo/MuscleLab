@@ -1,7 +1,6 @@
 const createUser = require("../../Controllers/Users/createUser");
 const bcryptjs = require("bcryptjs");
 const createNewUser = async (req, res) => {
-  
   const { id, fullName, email, phone, isMonitor, isAdmin } = req.body;
   const password = req.body.password;
   try {
@@ -17,6 +16,7 @@ const createNewUser = async (req, res) => {
     );
     res.status(201).json({
       message: "Usuario creado correctamente",
+      success: true,
       user: newUser,
     });
   } catch (error) {

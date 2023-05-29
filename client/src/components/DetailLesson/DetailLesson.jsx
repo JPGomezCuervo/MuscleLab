@@ -23,8 +23,9 @@ const DetailLesson = () => {
 
   useEffect(() => {
     dispatch(fetchLessonByName(params.name));
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [dispatch, params.name]);
-console.log(lesson);
+
   return (
     <div>
       <NavBar />

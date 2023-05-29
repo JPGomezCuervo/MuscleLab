@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, Outlet, Navigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 import Lessons from "./components/Lessons/Lessons";
@@ -8,16 +8,13 @@ import DetailLesson from "./components/DetailLesson/DetailLesson";
 import ContactUs from "./components/ContactUs/ContactUs";
 import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
-import NewLessons from "./components/NewLessons/NewLessons";
 import Nosotros from "./components/Nosotros/Nosotros";
 import Dashboard from "./components/Dashboard/Dashboard";
-import CreateLesson from "./components/CreateLesson/CreateLesson";
 import Sedes from "./components/Sedes/Sedes";
 import Users from "./components/Users/Users";
 import CreateUser from "./components/CreateUser/CreateUser";
 import { useSelector } from "react-redux";
 import { selectDashAuth } from "./redux/features/authSlice";
-import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import NavBardDash from "./components/NavBarDash/NavBarDash";
 import LessonsDash from "./components/LessonsDashboard/LessonsDash";
@@ -32,28 +29,43 @@ import SedesDashEditar from "./components/SedesDashEditar/SedesDashEditar";
 import SedesDashCrear from "./components/SedesDashCrear/SedesDashCrear";
 import SedeHomeDetalle from "./components/SedeHomeDetalle/SedeHomeDetalle";
 import Calendar from "./components/Calendar/Calendar";
+import Register from "./components/Register/Register";
+import Profile from "./components/Profile/Profile";
+import StripeRender from "./components/StripeRender/StripeRender";
+import jwt_decode from "jwt-decode";
+
+import CreatePlan from './components/CreatePlan/CreatePlan'
+import PlanDashEditar from './components/EditarPlan/EditarPlan'
+import Review from "./components/Review/Review";
+import DashPlans from "./components/DashPlans/DashPlans";
+import UserUpdate from "./components/UserUpdate/UserUpdate";
+
+
+
 function App() {
   const location = useLocation().pathname;
-  const dashAuth = useSelector(selectDashAuth);
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
 
-  // let isAdmin = false; // Declaración inicial con valor predeterminado
-  // const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  let isAdmin = false;
 
-  // if (token) {
-  //   const decodedToken = jwt_decode(token);
-  //   isAdmin = decodedToken.isAdmin;
-  // } else {
-  //   isAdmin = false; // Establecer isAdmin en false si no hay token
-  // }
+  if (token) {
+    const decodedToken = jwt_decode(token);
+    isAdmin = decodedToken.isAdmin;
+  } else {
+    isAdmin = false;
+  }
+  if (!isAdmin && location.includes("dashboard")) {
+    navigate("/");
+  }
 
   return (
     <>
-      {location.includes("dashboard") ? <NavBardDash /> : <NavBar />}
+      {location.includes("dashboard") && isAdmin ? <NavBardDash /> : <NavBar />}
       {location.includes("dashboard") ? <AdminBar /> : null}
       <Routes>
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/clases" element={<Lessons />} />
@@ -61,13 +73,17 @@ function App() {
         <Route path="/contactanos" element={<ContactUs />} />
         <Route path="/clases/:name" element={<DetailLesson />} />
         <Route path="/nosotros" element={<Nosotros />} />
-        <Route path="/create" element={<CreateLesson />} />
         <Route path="/sedes" element={<Sedes />} />
         <Route path="/sedes/detalles/:id" element={<SedeHomeDetalle />} />
         <Route path="/calendar" element={<Calendar />} />
+
+
+        
+        <Route path="/stripe" element={<StripeRender/>}/>
         {/* <Route path='/dashboard' element={<LessonsDash/>}>
         <Route path= '/dashboard/lessons/detail/:id' element={<LessonsDash/>}/> 
       <Route/>  */}
+
         {/* {isAdmin ? (
           <> */}
         <Route path="/dashboard" element={<LessonsDash />} />
@@ -86,12 +102,25 @@ function App() {
         <Route path="/dashboard/usuarios" element={<Users />} />
         <Route path="/dashboard/usuarios/crear" element={<CreateUser />} />
         <Route path="/dashboard/sedes" element={<SedesDash />} />
-        <Route path="/dashboard/sedes/editar/:id" element={<SedesDashEditar />} />
+        <Route
+          path="/dashboard/sedes/editar/:id"
+          element={<SedesDashEditar />}
+        />
         <Route path="/dashboard/sedes/crear" element={<SedesDashCrear />} />
+
+        <Route path="/profile/editar/:id" element={<UserUpdate />} />
+
+        <Route path= '/dashboard/plans/crear' element={<CreatePlan/>}/>
+      <Route path= '/dashboard/plans/editar/:id' element={<PlanDashEditar/>}/>
+      <Route path= '/dashboard/plans' element={<DashPlans/>}/>
+      <Route path= '/review' element={<Review />}/>
+
+
         {/* </>
-        ) : (
-          <Route path="/denegado" element={<login />}></Route>
-        )} */}
+        ) : ( */}
+        <Route path="/denegado" element={<login />}></Route>
+        {/* )} */}
+
       </Routes>
       {location.includes("dashboard") ? null : <Footer />}
     </>

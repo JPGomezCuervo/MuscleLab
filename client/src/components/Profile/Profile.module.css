@@ -1,0 +1,75 @@
+.general{
+  padding-top: 150px;
+}
+.container {
+  border: solid 0.1rem #b8b8b8;
+  width: 35%;
+  padding: 2rem;
+  margin: 0 auto;
+  border-radius: 3%;
+  text-align: center;
+  min-height: 20rem;
+}
+.container h1 {
+  background-color: #ffc300;
+  color: #202124;
+  font-family: "Montserrat-Medium";
+  font-size: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 0%;
+  border-radius: 0.4rem 0.4rem 0 0;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.container h2 {
+  font-family: "Montserrat-Medium";
+  font-size: 1.4rem;
+  color: #202124;
+  font-weight: 400;
+  text-align: left;
+}
+.insignias {
+  display: flex;
+  justify-content: start;
+}
+.insignias span {
+  color: #fff;
+  font-family: "Montserrat-Medium";
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 0.4rem;
+  width: 12%;
+  background-color: #6a1b9a;
+  border: 0.1rem solid #6a1b9a;
+  font-weight: bold;
+  padding: 0.4rem 0.8rem;
+}
+.insignias span:nth-child(2) {
+  margin-left: 1rem;
+}
+.Description {
+  width: fit-content;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+.info p {
+  background-color: #f3f3f3;
+  border-radius: 0.4rem;
+  padding: 0.6rem;
+}
+.ButtonEdit {
+  display: block;
+  color: #ffaf00;
+  background-color: transparent;
+  font-family: "Montserrat-SemiBold";
+  font-size: 1rem;
+  padding: 0;
+  padding-top: 0.3rem;
+  border: 0;
+  cursor: pointer;
+  width: 10rem;
+  margin: 0 auto;
+}

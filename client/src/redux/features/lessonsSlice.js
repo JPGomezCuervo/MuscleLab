@@ -49,10 +49,8 @@ const fetchLessonsByID = createAsyncThunk(
 const fetchLessonByName = createAsyncThunk(
   "lessons/fetchLessonByName",
   async (name) => {
-    console.log("llega a hacer");
     try {
       const response = await axios.get(`${URL}/lessons/${name}`);
-      console.log("esto es :", response.data);
       return response.data;
     } catch (error) {
       console.log(error.message);
@@ -64,7 +62,7 @@ const fetchLessonByName = createAsyncThunk(
 export const cacheMiddleware = (store) => (next) => (action) => {
   if (
     action.type === "lessons/fetchAllLessons/fulfilled" &&
-    store.getState().lessons.lessons.length > 0
+    store.getState().lessons.lessons.length > 0 && store.getState().filters.alphabetFilter && store.getState().filters.intensityFilter
   ) {
     return Promise.resolve();
   }
@@ -188,20 +186,6 @@ const lessonsSlice = createSlice({
         //revisar sintaxis del error
         state.error = action.error;
       })
-      .addCase(fetchAllLessonsDashboard.fulfilled, (state, { payload }) => {
-        state.lessonsDashboard = payload;
-        state.error = "";
-        state.status = fulfilled;
-      })
-      .addCase(fetchAllLessonsDashboard.pending, (state, action) => {
-        state.status = pending;
-        state.error = "";
-      })
-      .addCase(fetchAllLessonsDashboard.rejected, (state, action) => {
-        state.status = rejected;
-        //revisar sintaxis del error
-        state.error = action.error;
-      })
       .addCase(fetchLessonByName.fulfilled, (state, { payload }) => {
         state.error = "";
         state.status = fulfilled;
@@ -220,8 +204,6 @@ const lessonsSlice = createSlice({
 });
 
 export const selectAllLessons = (state) => state.lessons.lessons;
-export const selectAllLessonsDashboard = (state) =>
-  state.lessons.lessonsDashboard;
 export const selectLesson = (state) => state.lessons.lesson;
 export const selectStatus = (state) => state.lessons.status;
 export const selectError = (state) => state.lessons.error;

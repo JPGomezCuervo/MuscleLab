@@ -1,11 +1,11 @@
-import styles from './SignUp.module.css'
+import style from './SignUp.module.css'
 
 const SignUp=()=>{
 
     return(
 
-        <div className={styles.container}>
-        <div className={styles.log}>
+        <div className={style.container}>
+        <div className={style.log}>
             <h1>Create Acount</h1>
             <br />
             <h3>Name</h3>
@@ -21,7 +21,7 @@ const SignUp=()=>{
             <br />
             
     
-            <button className={styles.button3} >sign Up</button>
+            <button className={style.button3} >sign Up</button>
             
         </div>
     </div>

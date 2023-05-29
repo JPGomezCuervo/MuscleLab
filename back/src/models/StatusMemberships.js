@@ -2,22 +2,28 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
     sequelize.define('statusMemberships', {
-        idStatus: {
+        id:{
+            type:DataTypes.UUID,
+            primaryKey:true,
+            defaultValue:DataTypes.UUIDV4
+        },
+        name:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        status: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
-            primaryKey: true,
+            defaultValue:false
         },
         start: {
-            type: DataTypes.DATE,
-            allowNull: false,
+            type: DataTypes.DATE
         },
         end: {
-            type: DataTypes.DATE,
-            allowNull: false,
+            type: DataTypes.DATE
         },
         countRemain: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
+            type: DataTypes.INTEGER
         }
     })
 }

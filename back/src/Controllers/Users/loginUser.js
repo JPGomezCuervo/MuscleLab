@@ -12,7 +12,6 @@ const userLogin = async (email, password) => {
       success: false,
       message: "No se encontró un usuario con ese email",
     };
-
   } else {
     const match = await bcryptjs.compare(password, toLogin.password);
     if (match) {
@@ -23,7 +22,6 @@ const userLogin = async (email, password) => {
         success: false,
         message: "La contraseña ingresada es incorrecta",
       };
-
     }
   }
 };
@@ -39,4 +37,3 @@ const generateToken = (usuario) => {
   return token;
 };
 module.exports = userLogin;
-

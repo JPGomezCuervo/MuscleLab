@@ -1,14 +1,16 @@
 import style from './TrainerDash.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllMonitors, selectAllMonitors } from '../../redux/features/usersSlice';
+import { fetchAllMonitors, selectAllMonitors, selectStatus } from '../../redux/features/usersSlice';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import plusIcon from '../../assets/icons/plus.png'
 import editIcon from '../../assets/icons/edit.png'
+import loadingGif from '../../assets/gifs/loading.gif'
 
 const TrainerDash = () => {
     const dispatch = useDispatch();
     const monitors = useSelector(selectAllMonitors);
+    const status = useSelector(selectStatus);
     
     useEffect(() => {
         dispatch(fetchAllMonitors());
@@ -24,7 +26,7 @@ const TrainerDash = () => {
                 <h2 className={`${style.Title} ${style.Info}`}> Nombre</h2>
                 <h2 className={`${style.Title} ${style.Info}`}> Clase</h2>
             </div>
-
+            {status === "loading" && <img className={style.LoadingIcon} src={loadingGif} alt=""/>}
             <div className={style.BGContainer}>
                 <div className={style.Container}>
                     {monitors.map((monitor) =>(

@@ -1,13 +1,12 @@
 import style from './FilterBar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest, sortByType, sortByIntensityandType, sortByIntensity, fetchAllLessons, clearLessons } from '../../redux/features/lessonsSlice';
+import { orderFromAtoZ, orderFromZtoA,  sortByType, sortByIntensityandType, sortByIntensity, fetchAllLessons, clearLessons } from '../../redux/features/lessonsSlice';
 import { setAlphabetFilter, selectAlphabetFilter, setIntensityFilter, selectIntensityFilter, setSelectedTypes, selectSelectedTypes, setSelectedIntensities, selectSelectedIntensities } from '../../redux/features/filtersSlice';
-import { useEffect, useState } from 'react';
+import { useEffect  } from 'react';
 import trashIcon from "../../assets/icons/trash-bin.png"
 
-const FilterBar = ({lessonsAtributtes, retryButton, setRetryButton}) => {
+const FilterBar = ({lessonsAttributes, retryButton, setRetryButton}) => {
     const dispatch = useDispatch();
-
     const alphabetFilter = useSelector(selectAlphabetFilter);
     const intensityFilter = useSelector(selectIntensityFilter);
     const selectedTypes = useSelector(selectSelectedTypes);
@@ -31,9 +30,13 @@ const FilterBar = ({lessonsAtributtes, retryButton, setRetryButton}) => {
             await dispatch(fetchAllLessons());
             dispatch(setSelectedIntensities([]));
             dispatch(sortByType(selectedTypes));
-        } 
-
-        
+            return 1;
+        }
+        dispatch(setIntensityFilter(!intensityFilter));
+        dispatch(setSelectedIntensities([]));
+        dispatch(clearLessons());
+        dispatch(fetchAllLessons());
+       
     };
 
     const handleTipoEjercicioClick = async () => {
@@ -43,6 +46,10 @@ const FilterBar = ({lessonsAtributtes, retryButton, setRetryButton}) => {
             dispatch(setSelectedTypes([]));
             dispatch(sortByIntensity(selectedIntensities));
         }
+        dispatch(setSelectedTypes([]));
+        dispatch(setAlphabetFilter(false));
+        dispatch(clearLessons());
+        dispatch(fetchAllLessons());
     };
 
     const handleTypeClick = (event) => {
@@ -131,9 +138,9 @@ return (
                     <p onClick={handleTipoEjercicioClick}>Tipo de ejercicio</p>
                 <div className={style.DropMenuContainer}>
                     <ul className={style.DropMenu}>
-                        {lessonsAtributtes?.map((atribute) => {
+                        {lessonsAttributes?.map((atribute, index) => {
                             return(
-                                <li key={atribute.id}>
+                                <li key={atribute.id || index}>
                                     <button className={selectedTypes.includes(atribute) ? `${style.DropMenuBtn} ${style.Active}` : style.DropMenuBtn} onClick={handleTypeClick} name={atribute}>
                                         {atribute}
                                     </button>

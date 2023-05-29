@@ -3,16 +3,15 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
-const jwt = require("jsonwebtoken");
-
-require("./db.js");
-
 const server = express();
+const stripe = require('stripe')('sk_test_51NBkBJFPcDe3Fz6KjLlzjI35wfptX5dwAkeq7TnXdPy9YEBmqirmm4YdUIktaK82RmXCH8WU1dxyp6cR5G6CbMMM00zSOxlAwo');
+const endpointSecret="whsec_Ytl0XpVngPyJrlFOwTZq2bRE8pNgsyMa";
+const fulfillOrder=require('./Controllers/Payments/fulfillPayment.js');
+let event;
+
 
 server.name = "API";
 
-server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use((req, res, next) => {
@@ -21,62 +20,49 @@ server.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-  next();
-});
-
-//? MIDDLEWARE------------------------------------
-const verifyToken = (req, res, next) => {
-  const bearerHeader = req.headers["authorization"];
-  if (typeof bearerHeader !== "undefined") {
-    const token = bearerHeader.split(" ")[1];
-    req.token = token;
+    );
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
     next();
-  } else {
-    res.status(403);
+  });
+
+  
+  server.post('/webhook', bodyParser.raw({type: 'application/json'}),async (req,res)=>{
+    const payload=req.body;
+    //const payloadBuffer= Buffer.from(JSON.stringify(payload));
+    const sig = req.headers['stripe-signature'];
+
+  try {
+    event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+  } catch (err) {
+    console.log(err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
   }
-};
-//? PETICIONES---------------------------------------------
-//*cuando el usuario inica sesion se llama a la funcion jwt.sign para crearle un token
-server.post("/prueba/login", (req, res) => {
-  const user = {
-    name: "gaston",
-    email: "gaston@mail.com",
-    isAdmin: true,
-  };
-  jwt.sign({ user: user }, "secretKey", { expiresIn: "2h" }, (err, token) => {
-    res.json({
-      token: token,
-    });
-  });
-});
-
-//?Funcion de ejemplo para comprobar token
-server.post("/prueba/posts", verifyToken, (req, res) => {
-  jwt.verify(req.token, "secretKey", (error, authData) => {
-    if (error) {
-      res.status(403).json({ mensaje: "Acceso denegado" });
-    } else {
-      res.json({
-        mensaje: "post fue creado",
-        authData: authData,
-      });
+  
+  // Handle the checkout.session.completed event
+  if (event.type === 'checkout.session.completed') {
+    // Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
+    const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
+      event.data.object.id,
+      {
+        expand: ['line_items'],
+      }
+      );
+      
+      // Fulfill the purchase...
+      //descomentar para hacer efectiva las relaciones entre usuarios y sus membresias (terminar esas realciones)
+      try {
+        fulfillOrder(sessionWithLineItems);
+      } catch (error) {
+        res.status(400).json({error:error.message});
+      }
     }
-  });
-});
-//? Ruta protegida, a la que solo tiene acceso quien sea admin
-server.get("/password", verifyToken, (req, res) => {
-  jwt.verify(req.token, "secretKey", (error, authData) => {
-    if (!authData.user.isAdmin) {
-      res.status(403).json({ mensaje: "acceso denegado" });
-    } else {
-      res.json({ contraseñas: ["clave 1", "clave 2", "clave 3"] });
-    }
-  });
-});
-
-server.use("/", routes);
+    res.status(200).end();
+    
+  })
+  
+  server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+  server.use(bodyParser.json({ limit: "50mb" }));
+  server.use("/", routes);
 
 // Error catching endware.
 server.use((err, req, res, next) => {
