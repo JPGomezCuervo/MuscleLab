@@ -13,25 +13,36 @@ import Events from "./EventsMocks/EventsMocks";
 
 import { useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllUsers, selectAllUsers } from "../../redux/features/usersSlice";
 
-//pasar por props isAdmin, token desde app.js ej: <Calendar isAdmin={isAdmin} />
+//pasar por props isAdmin, token, desde app.js ej: <Calendar isAdmin={isAdmin} />
 function Calendar() {
- 
-  const {
-    user,
-    isAuthenticated,
-    } = useAuth0();
-
-  const location = useLocation().pathname;
-  useEffect(() => {
-    setEvents(Events())
-  }, [location]);
-
-  
   const [modalOpen, setModalOpen] = useState(false);
   const [events, setEvents] = useState([])
   const calendarRef = useRef(null);
 
+  // const [serverResponse, setServerResponse] = useState(true);
+  // const [userSelect, setUserSelect] = useState(null);
+
+  const {
+    user,
+    isAuthenticated,
+    } = useAuth0();
+    
+  const dispatch = useDispatch();
+  
+  const location = useLocation().pathname;
+  
+  useEffect(() => {
+    setEvents(Events())
+    dispatch(fetchAllUsers())
+  }, [location]);
+
+  const users = useSelector(selectAllUsers);
+  //console.log('Hay clases para user?', users.user[0].lessonDetails);
+   
+  //console.log('Token isLogin:',token);
   
   const onEventAdded = (event) => {
     let calendarApi = calendarRef.current.getApi();
@@ -48,6 +59,7 @@ function Calendar() {
   //   await axios.post("https://musclelabii.onrender.com/'calendar/create-event'", data.event)
   // }
   
+
   //request for get user's events(lessons) from db.
   async function handleDateSet(data) {
      const response = await axios
@@ -83,7 +95,7 @@ function Calendar() {
       <div className={styles.calendarBody} style={{ position: "relative", 
                   zIndex: 0, 
                    }}>
-        {/**modificar para admin */}
+        {/**modificar para admin, isAdmin */}
         {isAuthenticated && <button onClick={()=>setModalOpen(true)}>Nuevo Evento</button>}
         
         <Fullcalendar
@@ -130,6 +142,3 @@ function Calendar() {
   ));
 }
 export default Calendar
-
-
-
