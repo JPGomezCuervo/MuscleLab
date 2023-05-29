@@ -37,3 +37,17 @@
 .RetryButton:active{
     background-color: #ffc300;
 }
+
+.ContainerMobile {
+    display: none;
+}
+
+@media screen and (max-width: 414px) {
+    .ContainerMobile {
+        display: block;
+        margin-top: 8rem;
+    }
+    .Container {
+        display: none;
+    }
+}

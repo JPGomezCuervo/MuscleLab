@@ -40,6 +40,9 @@
 .formGroup label .formElement {
   grid-column: 1 / -1;
 }
+.formGroup input {
+  width: 74rem;
+}
 
 .sectionContact label {
   display: block;
@@ -66,10 +69,10 @@
   background-color: #888;
 }
 
-textarea {
+.formGroup textarea {
   resize: none;
   min-height: 100px;
-  width: 100px;
+  width: 74rem;
 }
 
 .submitGroup {
@@ -100,4 +103,39 @@ textarea {
   background-color: #ffaf00;
   font-weight: bold;
   transform: scale(1.1);
+}
+
+@media screen and (max-width: 414px) {
+  .sectionContact {
+    padding-top: 150px;
+    padding-bottom: 50px;
+  }
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .Title {
+    font-size: 24px;
+  }
+  .sectionContact p {
+    font-size: 14px;
+  }
+  .sectionContact form {
+    padding: 16px;
+  }
+  .formElement {
+    padding: 8px 12px;
+  }
+  .submitGroup > input {
+    width: 8rem;
+    font-size: 0.8rem;
+  }
+  .formGroup input {
+    width: 324px;
+  }
+  .formGroup textarea {
+    resize: none;
+    min-height: 100px;
+    width: 324px;
+  }
 }
