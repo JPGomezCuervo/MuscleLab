@@ -3,8 +3,19 @@ import muscleIcon from "../../assets/icons/Bicep.png";
 import muscleManIcon from "../../assets/icons/man-silhouette.png";
 import clockIcon from "../../assets/icons/clock.png";
 import checkIcon from "../../assets/icons/check.png";
+import { fetchAllMemberships, selectAllMemberships } from "../../redux/features/membershipsSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 const Plans = () =>{
+
+    const dispatch = useDispatch();
+    const memberships = useSelector(selectAllMemberships);
+    const [standardMembership, plusMembership, premiumMembership] = memberships;
+
+    useEffect(()=>{
+        dispatch(fetchAllMemberships());
+    }, [dispatch])
     return(
             <div className={style.BGContainer}>
                 <div className={style.TitleContainer}>
