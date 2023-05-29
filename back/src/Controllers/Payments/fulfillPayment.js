@@ -4,6 +4,7 @@ const fulfillOrder = async(session) => {
     // TODO: fill me in
     const userEmail=session.customer_email;
     const plan=session.line_items.data[0].description;
+    console.log(plan);
     if(session.payment_status==='paid'){
         const membershipToAdd = await Membership.findOne({where:{name:plan}});
         if(!membershipToAdd){
