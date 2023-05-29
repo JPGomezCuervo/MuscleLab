@@ -5,8 +5,8 @@ const {User}=require('../db');
 
 
 server.post('/create_checkout',async (req,res)=>{
-    const {name, benefits, price, duration, userId}=req.body;
-    const user=await User.findOne({where:{id:userId}});
+    const {name, benefits, price, duration, id}=req.body;
+    const user=await User.findOne({where:{id:id}});
     if(!user){
         throw new Error("No se encontro al usuario");
     }
