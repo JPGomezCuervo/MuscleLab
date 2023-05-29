@@ -6,7 +6,7 @@ const getMembershipsController = async () =>{
             deletedAt: null
         }
     });
-    if(!memberships){
+    if(memberships.length===0){
         const members=[
             {
                 name:"Standar",
@@ -40,6 +40,7 @@ const getMembershipsController = async () =>{
                 duration:toCreate.duration
             });
         }
+        return members;
     }
     return memberships;
 };
