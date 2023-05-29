@@ -10,10 +10,8 @@ server.post('/create_checkout',async (req,res)=>{
     if(!user){
         throw new Error("No se encontro al usuario");
     }
-    console.log(user);
     //aca customer probablemente sea el token del usuario loggeado por lo que habria que usar jwt para decodificar y sacar su email
     const customer = user.email;
-    console.log(customer);
     const charge=Number(price)*100;
     const description= benefits + ' ' + duration;
     const session=await stripe.checkout.sessions.create({

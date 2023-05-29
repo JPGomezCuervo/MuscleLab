@@ -32,7 +32,7 @@ server.use((req, res, next) => {
     const sig = req.headers['stripe-signature'];
 
   try {
-    event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+    event = stripe.webhooks.constructEvent(payload, sig);
   } catch (err) {
     console.log(err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
