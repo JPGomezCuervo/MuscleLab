@@ -49,22 +49,6 @@ const [image, setImage] = useState("");
     return options;
   };
 
-  // const validateHours = () => {
-  //   if (!horaInicio) {
-  //     errors.scheduleHourStart = "Debe seleccionar hora de inicio";
-  //     alert("debe seleccionar hora de inicio");
-  //     return false;
-  //   } else if (!horaFin) {
-  //     errors.scheduleHourFinish = "Debe seleccionar hora de fin";
-  //     alert("debe seleccionar hora de fin");
-  //     return false;
-  //   } else {
-  //     sedes.scheduleHourStart = horaInicio;
-  //     sedes.scheduleHourFinish = horaFin;
-  //     return true;
-  //   }
-  // };
-
   const validateHours = () => {
     if (!horaInicio) {
       setErrors((prevErrors) => ({
@@ -90,15 +74,6 @@ const [image, setImage] = useState("");
     }
   };
   
-
-  // const handleDayChange = (e) => {
-  //   const dia = e.target.value;
-  //   const isChecked = e.target.checked;
-  //   const updatedDias = isChecked
-  //     ? [...dias, dia]
-  //     : dias.filter((d) => d !== dia);
-  //     console.log(updatedDias)
-  //   setSedes({ ...sedes, scheduleDays: updatedDias });}
   const handleDayChange = (e) => {
     const dia = e.target.value;
     const isChecked = e.target.checked;
@@ -110,28 +85,10 @@ const [image, setImage] = useState("");
       updatedDias = updatedDias.filter((d) => d !== dia);
     }
   
-    console.log(updatedDias); // Verificar si los días se actualizan correctamente
-  
     setDias(updatedDias);
     setSedes({ ...sedes, scheduleDays: updatedDias });
   };
   
-
-    // setErrors((prevErrors)=> ({
-    //   ...prevErrors,
-    //   scheduleDays:"",
-    // }))
-  
-  // const validatedays = () => {
-  //   if (dias.length !== 0) {
-  //     sedes.scheduleDays = dias;
-  //     return true;
-  //   } else {
-  //     errors.scheduleDays = "Debe seleccionar al menos un día";
-  //     alert("Debe seleccionar al menos un día");
-  //     return false;
-  //   }
-  // };
 
   const validatedays = () => {
     if (dias.length !== 0) {
@@ -150,7 +107,6 @@ const [image, setImage] = useState("");
     }
   };
   
-
   const handleChange = (e) => {
     const field = e.target.name;
     const value = e.target.value;
@@ -178,11 +134,9 @@ const [image, setImage] = useState("");
  
 
   const crearSede = () => {
-    console.log("entramos con", sedes);
     if (!validatedays() || !validateHours() || errors.name || errors.location) {
       console.error("Errores de validación:", errors);
     } else {
-     // console.log(sedes)
        const formData = new FormData();
        formData.append("image", image)
        formData.append("officeAttributes",JSON.stringify(sedes))
