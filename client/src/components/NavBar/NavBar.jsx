@@ -43,7 +43,7 @@ const NavBar = () => {
           <img
             className={style.IconMan}
             src={iconMan}
-            alt="Icono silueta de hombre"
+            alt=""
           />
           <h2>Muscle Lab</h2>
           <img

@@ -9,12 +9,10 @@ import ContactUs from "./components/ContactUs/ContactUs";
 import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
 import Nosotros from "./components/Nosotros/Nosotros";
-import Dashboard from "./components/Dashboard/Dashboard";
 import Sedes from "./components/Sedes/Sedes";
 import Users from "./components/Users/Users";
 import CreateUser from "./components/CreateUser/CreateUser";
-import { useSelector } from "react-redux";
-import { selectDashAuth } from "./redux/features/authSlice";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import NavBardDash from "./components/NavBarDash/NavBarDash";
 import LessonsDash from "./components/LessonsDashboard/LessonsDash";
@@ -38,11 +36,12 @@ import PlanDashEditar from './components/EditarPlan/EditarPlan'
 import Review from "./components/Review/Review";
 import DashPlans from "./components/DashPlans/DashPlans";
 import UserUpdate from "./components/UserUpdate/UserUpdate";
+import { setIsAdmin, fetchUserAuth } from "./redux/features/authSlice";
 
 
 function App() {
   const location = useLocation().pathname;
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   let isAdmin = false;
@@ -56,6 +55,15 @@ function App() {
   if (!isAdmin && location.includes("dashboard")) {
     navigate("/");
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      dispatch(setIsAdmin(decodedToken.isAdmin));
+      dispatch(fetchUserAuth(decodedToken.id));
+    }
+  });
 
   return (
     <>

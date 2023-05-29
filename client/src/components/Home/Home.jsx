@@ -12,11 +12,14 @@ import {
   fetchAllMemberships,
   selectAllMemberships,
 } from "../../redux/features/membershipsSlice";
-const token = localStorage.getItem("token");
+import { selectIsActive } from "../../redux/features/authSlice";
+
 const Home = () => {
+  const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const plansCLick = useSelector(selectPlansClicked);
   const plansRef = useRef(null);
+  const isActive = useSelector(selectIsActive);
 
   const handleOnclick = () => {
     plansRef.current.scrollIntoView({ behavior: "smooth" });
@@ -38,9 +41,14 @@ const Home = () => {
     <>
       <Gallery handleOnclick={handleOnclick} />
       <ExtraInfo />
-      <section ref={plansRef}>
-        <Plans/>
-      </section>
+      {
+        !isActive ? null 
+        : (
+            <section ref={plansRef}>
+            <Plans/>
+            </section>
+        )
+      }
     </>
   );
 };

@@ -85,6 +85,11 @@ const Login = () => {
   const onFailure = () => {
     console.log("error al verificar con google");
   };
+  const handleKeyLogin = (event) => {
+    if (event.key === "Enter") {
+      handleLogin();
+    }
+  };
   return (
     <div className={style.BGContainer}>
       <div className={style.Container}>
@@ -97,6 +102,7 @@ const Login = () => {
           placeholder="Correo"
           value={email}
           onChange={handleEmailChange}
+          onKeyDown={handleKeyLogin}
         />
         {emailError && <p className={style.ErrorMessage}>{emailError}</p>}
 
@@ -107,6 +113,7 @@ const Login = () => {
             placeholder="Contraseña"
             value={password}
             onChange={handlePasswordChange}
+            onKeyDown={handleKeyLogin}
             className={`${style.Input} ${style.PasswordInput}`}
           />
           <FontAwesomeIcon
@@ -117,7 +124,7 @@ const Login = () => {
         </div>
         {passwordError && <p className={style.ErrorMessage}>{passwordError}</p>}
 
-        <button className={style.ButtonLogIn} onClick={handleLogin}>
+        <button className={style.ButtonLogIn} onClick={handleLogin} onKeyDown={handleKeyLogin}>
           Iniciar sesión
         </button>
 

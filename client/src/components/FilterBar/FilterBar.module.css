@@ -226,9 +226,49 @@
     background-color: #ffe185;
 }
 
+.Label{
+    display: none;
+    margin:0;
+    color: #ffffff;
+    font-family: 'Montserrat-Regular';
+    font-size: 1.2rem;
+    margin-left: 2%;
+}
+
+.Checkbox{
+    display: none;
+}
+
 
 @media screen and (max-width: 1366px){
     .DropMenuContainer{
         right: 9%;
     }
+}
+
+@media screen and (max-width: 414px){
+    .FilterBar{
+        width: 100%;
+    }
+
+    .FilterBar p{
+        display: none;
+    }
+
+    .Label{
+        display: initial;
+    }
+
+    .DropMenuIntensityContainer{
+        transition-delay: 0s;
+    }
+
+    .BtnOptionType:hover .DropMenuContainer, .BtnOptionType:hover .DropMenuIntensityContainer{
+        transition-delay: 0s;
+    }
+
+    .DropMenuContainer{
+        transition-delay: 0s;
+    }
+   
 }

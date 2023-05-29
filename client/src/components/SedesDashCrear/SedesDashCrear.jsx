@@ -281,10 +281,9 @@ const [image, setImage] = useState("");
 
           <div className={style.leftContainer}>
             {imagePreviewUrl && (
-              <div className={style.ImageContainer}>
-                {sedes.image && (
+              
+              <div className={style.ImageContainer}>        
                   <img src={imagePreviewUrl} alt="Tu imagen" />
-                )}
               </div>
             )}
             {sedes.image && (
