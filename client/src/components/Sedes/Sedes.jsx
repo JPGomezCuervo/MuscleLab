@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import Sede from "../Sede/Sede";
 import loadingGif from '../../assets/gifs/loading.gif';
+import SedeMobile from "../SedeMobile/SedeMobile";
 
 const Sedes = () => {
 
@@ -21,15 +22,21 @@ useEffect(()=>{
 
 
     return (
-        <div >
-            {status === "loading" && <img className={style.LoadingIcon} src={loadingGif} alt=""/>}
+        <div>
+                {status === "loading" && <img className={style.LoadingIcon} src={loadingGif} alt=""/>}
             <div className={style.Container}>
 
             {sedes?.map((sede, index)=> {
                 return <Sede key={sede.id} sede={sede} index={index} />
             })}
             </div>
+            <div className={style.ContainerMobile}>
+            {sedes?.map((sede, index)=> {
+                return <SedeMobile key={sede.id} sede={sede} index={index} />
 
+            }
+            )}
+            </div>
         </div>
     )
 }

@@ -39,7 +39,7 @@ const Home = () => {
       <Gallery handleOnclick={handleOnclick} />
       <ExtraInfo />
       <section ref={plansRef}>
-        <Plans />
+        <Plans/>
       </section>
     </>
   );
