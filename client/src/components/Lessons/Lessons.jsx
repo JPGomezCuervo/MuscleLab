@@ -5,6 +5,7 @@ import { fetchAllLessonTypes, selectAllLessonTypes } from '../../redux/features/
 import { useEffect, useState } from 'react';
 import FilterBar from '../FilterBar/FilterBar';
 import Lesson from '../Lesson/Lesson';
+import LessonMobile from '../LessonMobile/LessonMobile';
 
 const Lessons = () => {
     const dispatch = useDispatch();
@@ -39,6 +40,13 @@ const Lessons = () => {
                 {error && <button className ={style.RetryButton}onClick={handleRetryClick}>Intenta de nuevo</button>}
                 {lessons.map((lesson, index)=> {
                     return <Lesson key={lesson.id} lesson={lesson} index={index} />
+                })}
+            </div>
+            <div className={style.ContainerMobile}>
+                {error && <div className={style.Error}>{error}</div>}
+                {error && <button className ={style.RetryButton}onClick={handleRetryClick}>Intenta de nuevo</button>}
+                {lessons.map((lesson, index)=> {
+                    return <LessonMobile key={lesson.id} lesson={lesson} index={index} />
                 })}
             </div>
             </div>

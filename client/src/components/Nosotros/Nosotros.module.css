@@ -115,3 +115,31 @@ margin-left: 5rem;
 .divbtn{
   margin-left: 10rem;
 }
+
+@media screen and (max-width: 414px) {
+  .conteiner {
+    padding-top: 8rem;
+  }
+
+  .titulo {
+    margin: 0 auto;
+    font-size: 3.5rem;
+    margin-left: 1.5rem;
+  }
+
+  .texto1{
+    font-size: 1.5rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .texto2{
+    font-size: 1.5rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}

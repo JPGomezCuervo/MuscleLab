@@ -36,9 +36,7 @@ import jwt_decode from "jwt-decode";
 import CreatePlan from './components/CreatePlan/CreatePlan'
 import PlanDashEditar from './components/EditarPlan/EditarPlan'
 import Review from "./components/Review/Review";
-import Plans from "./components/Plans/Plans";
 import DashPlans from "./components/DashPlans/DashPlans";
-
 import UserUpdate from "./components/UserUpdate/UserUpdate";
 
 
@@ -112,7 +110,6 @@ function App() {
       <Route path= '/dashboard/plans/editar/:id' element={<PlanDashEditar/>}/>
       <Route path= '/dashboard/plans' element={<DashPlans/>}/>
       <Route path= '/review' element={<Review />}/>
-      
 
 
         {/* </>
@@ -121,6 +118,7 @@ function App() {
         {/* )} */}
 
       </Routes>
+      {location.includes("dashboard") ? null : <Footer />}
     </>
   );
 }
