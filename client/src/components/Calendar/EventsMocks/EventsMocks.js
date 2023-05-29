@@ -5,8 +5,8 @@ export default function Events(){
 const events = [
     {
       title: "Zumba",
-      start:   "2023-06-05T21:48:35.857Z",
-      end:  "2023-06-05T22:48:55.857Z",
+      start:   "2023-06-02T21:48:35.857Z",
+      end:  "2023-06-02T22:48:55.857Z",
     },
     {
       title: "Aerobics",

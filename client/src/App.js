@@ -31,6 +31,7 @@ import SedesDash from "./components/SedesDashboard/SedesDash";
 import SedesDashEditar from "./components/SedesDashEditar/SedesDashEditar";
 import SedesDashCrear from "./components/SedesDashCrear/SedesDashCrear";
 import SedeHomeDetalle from "./components/SedeHomeDetalle/SedeHomeDetalle";
+import Calendar from "./components/Calendar/Calendar";
 function App() {
   const location = useLocation().pathname;
   const dashAuth = useSelector(selectDashAuth);
@@ -63,6 +64,7 @@ function App() {
         <Route path="/create" element={<CreateLesson />} />
         <Route path="/sedes" element={<Sedes />} />
         <Route path="/sedes/detalles/:id" element={<SedeHomeDetalle />} />
+        <Route path="/calendar" element={<Calendar />} />
         {/* <Route path='/dashboard' element={<LessonsDash/>}>
         <Route path= '/dashboard/lessons/detail/:id' element={<LessonsDash/>}/> 
       <Route/>  */}

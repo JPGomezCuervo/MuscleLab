@@ -7,27 +7,27 @@ import AddEventModal from "./AddEventModal/AddEventModal";
 import interactionPlugin  from "@fullcalendar/interaction";
 import axios from "axios"
 import moment from "moment";
+import styles from "../Calendar/Calendar.module.css"
 
 import Events from "./EventsMocks/EventsMocks";
 
 import { useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
+//pasar por props isAdmin, token desde app.js ej: <Calendar isAdmin={isAdmin} />
 function Calendar() {
- let isAdmin = false; // Declaración inicial con valor predeterminado
-  const token = localStorage.getItem("token");
+ 
   const {
     user,
     isAuthenticated,
-  } = useAuth0();
+    } = useAuth0();
 
   const location = useLocation().pathname;
   useEffect(() => {
     setEvents(Events())
   }, [location]);
 
-  token && (isAdmin = true)
-
+  
   const [modalOpen, setModalOpen] = useState(false);
   const [events, setEvents] = useState([])
   const calendarRef = useRef(null);
@@ -59,9 +59,11 @@ function Calendar() {
     
   return (
       
-  (isAdmin || isAuthenticated  ) && (
-    <section>
-      <p style={{ 
+  (isAuthenticated ) && (
+    <section className={styles.calendar}>
+      <p 
+        
+        style={{ 
                 fontWeight:"bold", 
                 fontSize:"1.25rem", 
                 padding:".2px",
@@ -78,11 +80,11 @@ function Calendar() {
                   
                 }}
                 >Calendario </span></p>
-      <div style={{ position: "relative", 
+      <div className={styles.calendarBody} style={{ position: "relative", 
                   zIndex: 0, 
-                  background:"#01356519.5" }}>
+                   }}>
         {/**modificar para admin */}
-        {isAdmin && <button onClick={()=>setModalOpen(true)}>Nuevo Evento</button>}
+        {isAuthenticated && <button onClick={()=>setModalOpen(true)}>Nuevo Evento</button>}
         
         <Fullcalendar
           
