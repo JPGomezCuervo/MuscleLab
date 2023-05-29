@@ -12,40 +12,22 @@
 
 }
 
-.TitleContainer h2{
-    color: #2b567d;
-    font-family: 'Montserrat-Light';
-    font-size: 1.2rem;
-    width: 45rem;
-    margin: 0 auto;
-    text-align: center;
-}
 
 .PlansContainer{
-    display: flex;
+    display: grid;
     justify-content: center;
-    align-items: center;
+    align-items: initial;
     margin-top: 5rem;
     margin-bottom: 3rem;
 }
 
+
 .PlanContainer1{
     border: #bababa solid .1rem;
     padding-bottom: 1rem;
+    
 }
 
-.PlanContainer2{
-    border: #bababa solid .1rem;
-    border-right: 0;
-    border-left: 0;
-    padding-bottom: 1rem;
-}
-.PlanContainer3{
-    border: #7c7b7b solid .15rem;
-    border-top: white;
-    height: 30.5rem;
-    padding-bottom: .4rem;
-}
 
 .Plan{
     width: 18rem;
@@ -66,26 +48,14 @@
     height: 100%;
 }
 
-.Plan2{
-    height: 100%;
-}
 
-.Plan3{
-    width: 20rem;
-    height: 100%;
-}
 
 .Plan1 .Title{
     background-color: #0996dd;
 }
 
-.Plan2 .Title{
-    background-color: #8233ff;
-}
 
-.Plan3 .Title{
-    background-color: #391c76;
-}
+
 
 .Plan .MainIcon{
     display: block;
@@ -98,162 +68,83 @@
     height: 8rem;
 }
 
-.Plan h2{
-    text-align: center;
-    color: #003566;
-    font-family: 'Montserrat-Medium';
-    font-weight: 100;
-}
-.Plan h3{
-    text-align: center;
-    color: #003566 ;
-    font-family: 'Montserrat-SemiBold';
-}
-
-.Plan h4{
-    text-align: center;
-    font-size: 1.1rem;
-}
-
-.Plan button{
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 1rem;
+.card {
+    display: grid;
+    justify-content: flex-start;
+    width: 30rem;
+    height: 30rem;
+    background: rgb(103, 225, 255);
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 10px 5px  rgba(0, 0, 0, 0.705);
+            box-shadow: 0px 0px 10px 5px  rgba(0, 0, 0, 0.705);
+    font-size: 30px;
+    font-weight: 900;
+  }
+  
+  .card:hover {
+    border-radius: 15px;
     cursor: pointer;
-}
-
-.Plan .OpcionsContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-.Plan .OpcionsContainer h3{
-    margin: 0;
-    font-family: "Montserrat-Regular";
-    margin-bottom: 1rem;
-    font-size: 1rem;
-}
-
-.Plan .CheckIcon{
-    height: 1rem;
-    margin-right: 1rem;
-}
-
-.Plan button{
-    border: 0;
-    height: 2.4rem;
-    font-size: 1.1rem;
-    width: 10rem;
-    font-family:'Montserrat-Regular';
-    border-radius: .4rem;
-    color: white;
-}
-
-.Plan1 button{
-    background-color: #0996dd;
-}
-.Plan1 button:hover{
-    background-color: #0e7fc2;
-}
-.Plan1 button:active{
-    background-color: #0996dd;
-}
-
-.Plan2 button{
-    background-color: #8233ff;
-}
-.Plan2 button:hover{
-    background-color: #6b2dd6;
-}
-.Plan2 button:active{
-    background-color: #8233ff;
-}
-
-.Plan3 button{
-    background-color: #391c76;
-    height: 2.7rem;
-}
-.Plan3 button:hover{
-    background-color: #5b3f97;
-}
-.Plan3 button:active{
-    background-color: #391c76;
-}
-
-.Plan3 h2{
-    font-size: 1.6rem;
-}
-
-.Plan3 .OpcionsContainer h3{
-    font-size: 1.1rem;
-}
-
-.Plan3 h4{
-    font-size: 1.2rem;
-}
-@media screen and (max-width: 1366px){
-    .TitleContainer h1{
-      font-size: 3.5rem; 
-      margin-top: 2rem;
-    }
-
-    .TitleContainer h2{
-        font-size: 1.1rem;
-    }
-    .PlansContainer{
-        margin-top: 4rem;
-    }
-
-    .PlanContainer1{
-        padding-bottom: .5rem;
-    }
-
-    .PlanContainer2{
-        padding-bottom: .5rem;
-    }
-
-    .PlanContainer3{
-        padding-bottom: 1.3rem;
-        height: 29rem;
-    }
-
-    .Plan .MainIcon{
-        height: 5.5rem;
-    }
-
-    .Plan3 .MainIcon{
-        height: 7.5rem;
-    }
-
-    .Plan h2{
-        font-size: 1.3rem
-    }
-    .Plan .OpcionsContainer h3{
-        font-size: .9rem;
-    }
-
-    .Plan3 h2{
-        font-size: 1.5rem;
-    }
-   
-}
-
-@media screen and (max-width: 414px) {
-    .TitleContainer h1{
-        font-size: 2.5rem;
-    }
-
-    .TitleContainer h2 {
-        font-size: .9rem;
-        width: 100%;
-    }
-
-    .PlansContainer{
-        flex-direction: column-reverse;
-        margin-top: 2rem;
-    }
-}
-
-
+    -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+            transform: scale(1.2);
+    -webkit-box-shadow: 0px 0px 10px 5px  rgba(0, 0, 0, 0.705);
+            box-shadow: 0px 0px 10px 5px  rgba(0, 0, 0, 0.705);
+    background: rgb(103, 151, 255);
+  }
+  
+  .firstcontent {
+    height: 100%;
+    width: 100%;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: grid;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    opacity: 1;
+    border-radius: 15px;
+  }
+  
+  .card:hover .firstcontent {
+    height: 0px;
+    opacity: 0;
+  }
+  
+  .secondcontent {
+    height: 15%;
+    width: 100%;
+    opacity: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: grid;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    border-radius: 15px;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+    font-size: 0px;
+    -webkit-transform: rotate(90deg) scale(-1);
+        -ms-transform: rotate(90deg) scale(-1);
+            transform: rotate(90deg) scale(-1);
+  }
+  
+  .card:hover .secondcontent {
+    opacity: 1;
+    height: 80%;
+    font-size: 1.8rem;
+    -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  
