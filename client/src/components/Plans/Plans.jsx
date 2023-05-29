@@ -5,6 +5,7 @@ import muscleManIcon from "../../assets/icons/man-silhouette.png"
 import clockIcon from "../../assets/icons/clock.png"
 import checkIcon from "../../assets/icons/check.png"
 import { useSelector } from "react-redux"
+import {Link} from "react-router-dom";
 
 const Plans = () =>{
 
@@ -41,8 +42,9 @@ const Plans = () =>{
                             <h4> Beneficios: {membership.benefits}</h4>
                         
                         <h4>Precio: {membership.price}</h4>
-
+                                            <Link to="/pagos">
                                     <button>Compra ahora </button>
+                                            </Link>
                             </div>
                              </div>
                                    
