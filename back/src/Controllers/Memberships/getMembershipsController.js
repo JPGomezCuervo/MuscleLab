@@ -40,6 +40,7 @@ const getMembershipsController = async () =>{
                 duration:toCreate.duration
             });
         }
+        return members;
     }
     return memberships;
 };
