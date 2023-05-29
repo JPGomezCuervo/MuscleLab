@@ -7,21 +7,14 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setPlansCLick } from "../../redux/features/utilsSlice";
 import SignUp from "../SignUp/SignUp";
-import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import adminIcon from "../../assets/icons/admin.png";
 import jwt_decode from "jwt-decode";
 import { useState, useRef } from "react";
-let isAdmin = false; // Declaración inicial con valor predeterminado
 
 const NavBar = () => {
   const token = localStorage.getItem("token");
-  if (token) {
-    const decodedToken = jwt_decode(token);
-    isAdmin = decodedToken.isAdmin;
-  } else {
-    isAdmin = false; // Establecer isAdmin en false si no hay token
-  }
+  const isAdmin = token ? jwt_decode(token).isAdmin : false;
   const dispatch = useDispatch();
 
   const handleClickLogo = () => {
@@ -70,10 +63,7 @@ const NavBar = () => {
             </li>
 
             <li>
-              <a
-                className={style.Navbutton}
-                href="http://localhost:3000/clases"
-              >
+              <a className={style.Navbutton} href="/clases">
                 <p>Clases</p>
               </a>
             </li>
@@ -97,7 +87,7 @@ const NavBar = () => {
         </Link>
 
         <div className={style.LogOpcions}>
-          {token && (
+          {isAdmin && (
             <Link to="dashboard/clases">
               <button className={style.btnRegistro1}>dashboard</button>
             </Link>

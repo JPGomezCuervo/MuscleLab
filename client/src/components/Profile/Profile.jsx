@@ -8,20 +8,22 @@ import { fetchUserByID, selectUserByID } from "../../redux/features/usersSlice";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const user = useSelector(selectUserByID);
   const token = localStorage.getItem("token");
   const decoded = decodeJwt(token);
-  const id = decoded.payload.id;
-  const isAdmin = user.isAdmin;
   const dispatch = useDispatch();
+  const id = decoded.payload.id;
 
   useEffect(() => {
     dispatch(fetchUserByID(id));
   }, [dispatch, id]);
 
-  const phone = user.phone;
+  const usuario = useSelector(selectUserByID);
 
-  const isMonitor = user.isMonitor;
+  const user = usuario?.membresia ? usuario.detalle : usuario;
+
+  const isAdmin = decoded.payload.isAdmin;
+  const phone = user?.phone;
+  const isMonitor = user?.isMonitor;
 
   return (
     <div className={style.general}>
@@ -31,15 +33,15 @@ const Profile = () => {
           {isMonitor ? <span> Profesor</span> : <p></p>}
         </div>
 
-        <h1>{user.fullName}</h1>
+        <h1>{user?.fullName}</h1>
         <div className={style.info}>
           <h2>Nombre de Usuario</h2>
-          <p>{user.fullName}</p>
+          <p>{user?.fullName}</p>
         </div>
 
         <div className={style.info}>
           <h2>Email</h2>
-          <p>{user.email}</p>
+          <p>{user?.email}</p>
         </div>
         <div className={style.info}>
           <h2>Numero de teléfono</h2>
