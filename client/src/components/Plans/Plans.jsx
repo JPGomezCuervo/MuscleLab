@@ -12,7 +12,7 @@ const Plans = () =>{
     const memberships = useSelector(selectAllMemberships)
     console.log(memberships)
     
-
+    const id= memberships.id
 
     return(
             <div className={style.BGContainer}>
@@ -42,7 +42,7 @@ const Plans = () =>{
                             <h4> Beneficios: {membership.benefits}</h4>
                         
                         <h4>Precio: {membership.price}</h4>
-                                            <Link to="/pagos">
+                                            <Link to= {`/pagos/${id}`}>
                                     <button>Compra ahora </button>
                                             </Link>
                             </div>
