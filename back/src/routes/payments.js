@@ -12,7 +12,7 @@ server.post('/create_checkout',async (req,res)=>{
     }
     const existing=await StatusMemberships.findOne({where:{userId:id}});
     if(existing){
-        throw new Error(`Ya tiene una membresia activa. Vence el ${existing.final}`);
+        throw new Error(`Ya tiene una membresia activa. Vence el ${existing.end}`);
     }
     //aca customer probablemente sea el token del usuario loggeado por lo que habria que usar jwt para decodificar y sacar su email
     const customer = user.email;
