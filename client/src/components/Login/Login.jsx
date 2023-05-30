@@ -126,7 +126,7 @@ return (
         </div>
         {passwordError && <p className={style.ErrorMessage}>{passwordError}</p>}
 
-        <button className={`${style.ButtonLogIn} ${isHovered && style.ButtonHover}`}>
+        <button className={`${style.ButtonLogIn} ${isHovered && style.ButtonHover}`} onClick={handleLogin}>
           Iniciar sesión
         </button>
 

@@ -67,9 +67,10 @@
     height: 100%;
 }
 
-.FileInput  {
+.FileInput input  {
     background-color: #ffffff;
     text-align: center;
+    border: 0;
 }
 
 .FileInput input {
