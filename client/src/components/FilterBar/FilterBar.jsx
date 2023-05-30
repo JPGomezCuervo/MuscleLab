@@ -113,7 +113,7 @@ return (
             <p>Ordenar por:</p>
             <div className={style.OptionsContainer}>
                 <button className={(!alphabetFilter) ? (style.BtnOption) : (`${style.BtnOption} ${style.BtnOptionActive}`)} onClick={handleAlfabetoClick}><p>Alfabeto</p>
-                <label className={style.Label} htmlFor="checkbox1">Intensidad</label></button>
+                <label className={style.Label} htmlFor="checkbox1">Alfabeto</label></button>
                 
                 <ul className={(selectedIntensities.length !== 0) ? `${style.BtnOptionType} ${style.BtnActive} `: (style.BtnOptionType) }>
                     <p onClick={handleIntensidadClick}>Intensidad</p>
@@ -140,7 +140,7 @@ return (
 
                 <ul className={selectedTypes.length !== 0 ? `${style.BtnOptionType} ${style.BtnActive}` : style.BtnOptionType}>
                 <p onClick={handleTipoEjercicioClick}>Tipo de ejercicio</p>
-                <label className={style.Label} htmlFor="checkbox3">Tipo de ejercicio</label>
+                <label className={style.Label} htmlFor="checkbox3">Tipos</label>
                 <input type="checkbox" className={style.Checkbox} name="checkbox3" id="checkbox3"/>
 
                 <div className={style.DropMenuContainer}>

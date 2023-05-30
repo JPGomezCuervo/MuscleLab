@@ -247,6 +247,11 @@
 }
 
 @media screen and (max-width: 414px){
+
+    .DropMenuContainer{
+        right: 0;
+    }
+
     .FilterBar{
         width: 100%;
     }
@@ -257,6 +262,7 @@
 
     .Label{
         display: initial;
+        font-size: .8rem
     }
 
     .DropMenuIntensityContainer{
@@ -267,8 +273,37 @@
         transition-delay: 0s;
     }
 
+    .BtnOptionType{
+        width: 5rem
+    }
+
+    .BtnOption{
+        width: 5rem;
+    }
+
     .DropMenuContainer{
         transition-delay: 0s;
+    }
+
+    .FilterBtn{
+        width: 5rem;
+        font-size: 1.2rem;
+    }
+
+    .OptionsContainer{
+        padding: 0 .5rem;
+    }
+
+    .DropMenu{
+        gap:1rem;
+        padding-right: .4rem;
+        padding-left: .5rem;
+    }
+    .DropMenuIntensityContainer{
+        left: 18%
+    }
+    .TrashActive{
+        display: none;
     }
    
 }
