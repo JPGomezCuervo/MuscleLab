@@ -86,14 +86,18 @@
     background-color: #ffc300;
     border: 0;
     border-radius: .4rem;
-    width: 15rem;
+    width: 12.5rem;
     font-family:'Montserrat-Bold';
     font-size: 2rem;
     cursor: pointer;
     transition: .2s;
     line-height: 2.8rem;
-    margin-left: 8%;
+    text-align: center;
 
+}
+
+.BtnLink {
+    margin-left: 20%;
 }
 
 .btnPlanes:hover{
@@ -135,16 +139,17 @@
     padding: .3rem;
     background-color: transparent;
     color: white;
-    border: 1px solid white;
+    border: 0;
     border-radius: 5px;
     font-family: 'Montserrat-regular', sans-serif;
     font-weight: 100;
     font-size: 1rem;
-    margin-left: 2rem;
-    margin-right: 1.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     cursor: pointer;
     width: 8rem;
 }
+
 .btnInicioSesion{
     background-color: transparent;
     color: white;
@@ -160,9 +165,13 @@
 .LogOpcions{
     display: flex;
     align-items: center;
-    margin-right: 1.5%;
     width: fit-content;
-    margin-left: 1%;
+    margin-left: auto;
+}
+.LogOpciones2{
+    display: flex;
+    align-items: center;
+    width: fit-content;
 }
 
 .LogOpcion1{
