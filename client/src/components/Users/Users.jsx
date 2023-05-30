@@ -194,6 +194,11 @@ const Users = () => {
           <Link to={"crear"}>
             <button className={style.btnCrearUsuario}>Crear nuevo</button>
           </Link>
+          <Link to ="/dashboard/deletedusers">
+            <button className={style.btnCrearUsuario}>
+              Ver usuarios eliminados
+            </button>
+          </Link>
         </div>
 
         {/* Emergent window for user edition */}

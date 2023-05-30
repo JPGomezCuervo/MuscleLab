@@ -1,0 +1,91 @@
+.MainContainer {
+  display: inline-block;
+  position: absolute;
+  width: 78vw;
+  height: 99vh;
+  margin-right: 5%;
+}
+
+.LoadingIcon {
+  position: absolute;
+  top: 50%;
+  left: 45rem;
+  transform: translate(-50%, -50%);
+}
+
+.Navigator {
+  font-size: 3rem;
+  font-family: "Montserrat-Bold";
+  height: 3.5rem;
+  color: #013565;
+  margin-bottom: 6rem;
+  margin-top: 2rem;
+}
+
+.BGContainer {
+  box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+  padding-top: 1rem;
+  width: 70%;
+  margin: 0 auto;
+  height: fit-content;
+}
+
+.Container {
+  margin: 0 auto;
+  overflow-y: scroll;
+  height: 60vh;
+  overflow-x: hidden;
+  padding-right: 5rem;
+  padding-left: 1rem;
+}
+.icono{
+    height: 2rem;
+    width: 2rem;
+    border: none;
+  }
+.Info {
+  font-family: "Montserrat-Regular";
+  font-weight: 300;
+  text-align: center;
+  color: #013565;
+  margin: 0;
+}
+.Title {
+  background-color: #ffc300;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.InfoName {
+  display: block;
+  font-family: "Montserrat-Regular";
+  font-weight: 300;
+  color: #013565;
+  margin: 0;
+}
+
+.Status {
+  text-align: start;
+  width: 100%;
+}
+
+.TitleContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 70%;
+  margin: 0 auto;
+}
+
+.SectionContainer {
+  margin-left: 15%;
+  width: 70%;
+  display: flex;
+  align-items: center;
+  border-bottom: solid 0.3rem #f3f3f3;
+}
+
+.InfoNameContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
