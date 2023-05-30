@@ -22,14 +22,21 @@ const UserUpdate = () => {
 
   useEffect(() => {
     axios.get(`${URL}/users/${id}`).then((response) => {
-      console.log(response.data.user.detalle);
-      setForm({
-        fullName: response.data.user.detalle.fullName,
-        email: response.data.user.detalle.email,
-        phone: response.data.user.detalle.phone,
-        isMonitor: response.data.user.detalle.isMonitor,
-        isAdmin: response.data.user.detalle.isAdmin,
-      });
+      response.data.user.membresia
+        ? setForm({
+            fullName: response.data.user.detalle.fullName,
+            email: response.data.user.detalle.email,
+            phone: response.data.user.detalle.phone,
+            isMonitor: response.data.user.detalle.isMonitor,
+            isAdmin: response.data.user.detalle.isAdmin,
+          })
+        : setForm({
+            fullName: response.data.user.fullName,
+            email: response.data.user.email,
+            phone: response.data.user.phone,
+            isMonitor: response.data.user.isMonitor,
+            isAdmin: response.data.user.isAdmin,
+          });
     });
   }, [id]);
 
