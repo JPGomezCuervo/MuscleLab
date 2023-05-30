@@ -310,7 +310,6 @@ class EditLessonDash extends Component {
 
         formData.append('image', this.state.lessonAttributes.image);
         formData.append('lessonAttributes', JSON.stringify(this.state.lessonAttributes));
-        console.log(formData)
         axios.post(`${URL}/lessons/create`, formData)
         .then((res) => {
             console.log(res);

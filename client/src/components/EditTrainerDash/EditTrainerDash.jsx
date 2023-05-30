@@ -75,7 +75,6 @@ const EditTrainerDash = () => {
         //Pide lessons para editar, mi pregunta es si en la tabla lecciones, ya debe existir la relacion con profesores
         event.preventDefault();
         if(message.includes("modificar")) {
-            console.log(JSON.stringify(input))
             axios.put(`${URL}/users/update/${id}`, input)
             .then((res) => {
                 console.log(res);

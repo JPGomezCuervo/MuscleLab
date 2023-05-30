@@ -70,7 +70,6 @@ const PasarelaPago = () => {
             axios
                 .post(`${URL}/payments/create_checkout`, product)
                 .then((res) => {
-                    console.log(res.data);
                     window.location.href = res.data.redirect_url;
 
                 })

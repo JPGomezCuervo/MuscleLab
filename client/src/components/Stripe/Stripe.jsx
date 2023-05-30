@@ -41,7 +41,6 @@ const Stripe  = ()=>{
               amount: 10000, //cents
             }
           );
-          console.log(data);
   
           elements.getElement(CardElement).clear();
         } catch (error) {

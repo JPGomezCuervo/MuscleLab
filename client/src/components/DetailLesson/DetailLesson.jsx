@@ -48,7 +48,6 @@ const DetailLesson = () => {
     const name = event.target.name;
     const value = event.target.value;
     setInput({ ...input, [name]: value, lessonId : id });
-    console.log(event, id, "HOLA");
 
   };
 
