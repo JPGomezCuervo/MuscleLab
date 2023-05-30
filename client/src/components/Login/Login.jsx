@@ -18,7 +18,6 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
   const handleLogin = async () => {
-    console.log("clickaste iniciar con: ", email, password);
     if (!email || !password) {
       alert("complete los campos");
     } else {
@@ -83,10 +82,11 @@ const Login = () => {
   };
 
   const onFailure = () => {
-    console.log("error al verificar con google");
+    alert("error al verificar con google");
   };
   return (
     <div className={style.BGContainer}>
+      
       <div className={style.Container}>
         <h1>Inicia Sesión</h1>
         <h2 className={style.Description}>Para continuar con MuscleLab</h2>
