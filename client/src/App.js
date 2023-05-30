@@ -37,6 +37,7 @@ import PlanDashEditar from './components/EditarPlan/EditarPlan'
 import Review from "./components/Review/Review";
 import DashPlans from "./components/DashPlans/DashPlans";
 import UserUpdate from "./components/UserUpdate/UserUpdate";
+import PasarelaPago from "./components/PasarelaPago/PasarelaPago";
 
 import PasarelaPago from "./components/PasarelaPago/PasarelaPago";
 Modal.setAppElement('#root')
@@ -89,6 +90,7 @@ function App() {
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/sedes" element={<Sedes />} />
         <Route path="/sedes/detalles/:id" element={<SedeHomeDetalle />} />
+        <Route path="/pagos/:id" element={<PasarelaPago />} />
 
         <Route path="/pagos/:id" element={<PasarelaPago/>}/>
 
