@@ -12,7 +12,8 @@ import axios from 'axios'
 const EditTrainerDash = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
-    const user = useSelector(selectUserByID);
+    const usuario = useSelector(selectUserByID);
+    const user = usuario?.membresia ? usuario.detalle : usuario;
 
     const [input, setInput] = useState({
         fullName: "",
@@ -150,7 +151,7 @@ const EditTrainerDash = () => {
 
                 <div className={style.Description}>
                     <label htmlFor='telefono'>Teléfono*</label>
-                    <input placeholder='Nombre' value={input.phone} type='text' id='telefono' name='phone' onChange={handleInputChange}/>
+                    <input placeholder='teléfono' value={input.phone} type='text' id='telefono' name='phone' onChange={handleInputChange}/>
 
                     {errors.phone && <p>{errors.phone}</p>}   
                 </div>
