@@ -1,5 +1,72 @@
-.Container{
-    display: flex;
-    flex-direction: column;
-    padding-top: 8rem;
+.Card {
+    display: flex;  
+}
+
+.LoadingIcon {
+    margin-left: 35%;
+    }
+
+.ImageContainer {
+    width: 50%;
+    margin: 0;
+}
+.ImageContainer img {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+.InfoContainer {
+    width: 50%;
+    height: 100%;
+}
+.InfoContainer h2 {
+    font-family: 'Montserrat-Bold';
+    font-size: 5rem;
+    font-weight: 100;
+    color: #ffc300;
+    text-align: center;
+    margin-top: 20%;
+}
+.InfoContainer p {
+    font-family: 'Montserrat-Regular';
+    font-size: 1.25rem;
+    text-align: center;
+    color: #003566;
+}
+.InfoContainer button{
+    display: block;
+    margin: 10% auto;
+    height: 3rem;
+    color: #ffffff;
+    background-color: #ffc300;
+    border: 0;
+    border-radius: .4rem;
+    width: 15rem;
+    font-family:'Montserrat-Bold';
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .3s;
+
+}
+.InfoContainer button:hover{
+    background-color: #FFAF00;
+}
+
+.InfoContainer button:active{
+    background-color: #ffc300;
+}
+.ContainerMobile {
+    display: none;
+}
+
+
+@media screen and (max-width: 414px) {
+   .ContainerMobile {
+        display: block;
+        padding-top: 7rem;
+
+   }
+   .Container {
+        display: none;
+   }
 }

@@ -1,0 +1,80 @@
+.product{
+    background-color: aqua;
+    padding-top: 19rem;
+}
+
+.text{
+
+  font-family: 'Montserrat-Medium';
+  font-weight: 600;
+  color: #013565;
+  text-align: center;
+  width: 27rem;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  font-size: 1.3rem;
+}
+
+
+  .Button{
+    height: 4rem;
+    width: 10rem;
+    color: #ffffff;
+    background-color: #ffc300;
+    border-radius: 0.4rem;
+    border: 0;
+    font-family: "Montserrat-Bold";
+
+    font-size: 1.5rem;
+
+  }
+  
+  .Button:hover {
+    background-color: #ffaf00;
+  }
+  .Button:active {
+    background-color: #ffc300;
+  }
+
+  .card{
+    padding-top: 4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 2rem;
+    margin: 0 auto;
+    margin-bottom: 1.5rem;
+    background-color:white;
+    height: fit-content;
+    width:80rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+  }
+
+  .img{
+    width: 3rem;
+    height: 3rem;
+
+  }
+
+
+  .modal{
+ 
+    flex-direction: column;
+    display: flex;
+    position: fixed;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9998;
+    background-color: white;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+    border-radius: .4rem;
+    min-height: 20rem;
+    min-width: 30rem;
+
+  }

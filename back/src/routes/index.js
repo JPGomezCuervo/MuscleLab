@@ -6,6 +6,8 @@ const types = require("./types");
 const branchoffice = require("./branchoffice");
 const goals = require('./goals');
 const reviews = require('./reviews');
+const payments= require('./payments');
+
 const router = Router();
 
 router.use("/lessons", lessons);
@@ -15,5 +17,7 @@ router.use("/goals", goals);
 router.use("/memberships", memberships);
 router.use("/branchoffice", branchoffice);
 router.use('/reviews', reviews);
+router.use("/payments", payments)
+
 
 module.exports = router;
