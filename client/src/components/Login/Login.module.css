@@ -9,6 +9,10 @@
   border-radius: 3%;
   text-align: center;
   min-height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .Container h1 {
@@ -98,4 +102,6 @@
 }
 .Input {
   padding-right: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

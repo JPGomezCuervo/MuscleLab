@@ -210,6 +210,8 @@ background-color:#002141;
     }
 
     .PhoneHorarios span{
+        display: inline-block;
         font-weight: 900;
+        padding-right: 1rem;
     }
 }

@@ -52,6 +52,7 @@ function App() {
   } else {
     isAdmin = false;
   }
+  //esta es la verificacion que hace que cuando toque el boton de dash no me lleve
   if (!isAdmin && location.includes("dashboard")) {
     navigate("/");
   }
