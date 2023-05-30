@@ -6,13 +6,6 @@
   margin-right: 5%;
 }
 
-.LoadingIcon {
-  position: absolute;
-  top: 50%;
-  left: 45rem;
-  transform: translate(-50%, -50%);
-}
-
 .Navigator {
   font-size: 3rem;
   font-family: "Montserrat-Bold";
@@ -38,11 +31,11 @@
   padding-right: 5rem;
   padding-left: 1rem;
 }
-.icono{
-    height: 2rem;
-    width: 2rem;
-    border: none;
-  }
+.icono {
+  height: 2rem;
+  width: 2rem;
+  border: none;
+}
 .Info {
   font-family: "Montserrat-Regular";
   font-weight: 300;
@@ -64,11 +57,6 @@
   margin: 0;
 }
 
-.Status {
-  text-align: start;
-  width: 100%;
-}
-
 .TitleContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -77,13 +65,11 @@
 }
 
 .SectionContainer {
-  margin-left: 15%;
-  width: 70%;
+  width: 100%;
   display: flex;
   align-items: center;
   border-bottom: solid 0.3rem #f3f3f3;
 }
-
 .InfoNameContainer {
   width: 100%;
   display: flex;

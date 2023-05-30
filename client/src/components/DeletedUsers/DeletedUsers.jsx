@@ -27,22 +27,21 @@ const DeletedUsers = () => {
         <h2 className={`${style.Title} ${style.Info}`}> Nombre</h2>
         <h2 className={`${style.Title} ${style.Info}`}> Fecha de suspensión</h2>
       </div>
-      <div className={style.Container}>
-        {users?.map((user) => (
-          <div className={style.SectionContainer}>
-            <div className={style.InfoNameContainer}>
-              <h2 className={style.InfoName}>{user.email}</h2>
-              <h2 className={style.InfoName}>{user.fullName}</h2>
-              <h2 className={style.InfoName}>
-                {user.deletedAt.split("T")[0].split("-").reverse().join("-")}
-
-              </h2>
+      <div className={style.BGContainer}>
+        <div className={style.Container}>
+          {users?.map((user) => (
+            <div className={style.SectionContainer}>
+              <div className={style.InfoNameContainer}>
+                <h2 className={style.InfoName}>{user.email}</h2>
+                <h2 className={style.InfoName}>{user.fullName}</h2>
+                <h2 className={style.InfoName}>
+                  {user.deletedAt.split("T")[0].split("-").reverse().join("-")}
+                </h2>
+              </div>
             </div>
-          </div>
-        ))}
-        <img src={trash} alt="trash" className={style.icono} />
+          ))}
+        </div>
       </div>
-      
     </div>
   );
 };
