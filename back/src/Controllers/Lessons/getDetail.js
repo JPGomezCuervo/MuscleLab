@@ -20,6 +20,34 @@ const getDetailLesson = async (name) => {
       },
     },
   });
+
+  const detail = await LessonDetail.findAll({
+    include: {
+      model: Reviews,
+      include: {
+        model: User,
+        attributes: ["fullName"],
+      },
+    },
+    where: {
+      lessonId: lesson.id,
+      deletedAt: null,
+    },
+  });
+
+  const officeRaw = await BranchOffice.findAll({
+    include: {
+      model: LessonDetail,
+      attributes: ["name"],
+      through: {
+        attributes: [],
+      },
+      where: {
+        lessonId: lesson.id,
+      },
+    },
+  });
+
   const monitorRaw = await User.findAll({
     include: {
       model: LessonDetail,
@@ -35,18 +63,6 @@ const getDetailLesson = async (name) => {
       isMonitor: true,
     },
   });
-  const officeRaw = await BranchOffice.findAll({
-    include: {
-      model: LessonDetail,
-      attributes: ["name"],
-      through: {
-        attributes: [],
-      },
-      where: {
-        lessonId: lesson.id,
-      },
-    },
-  });
 
   const offices = officeRaw.map((o) => ({
     name: o.name,
@@ -60,52 +76,25 @@ const getDetailLesson = async (name) => {
 
   const types = lesson.exercisesTypes.map((e) => e.name);
 
-  const detail = await LessonDetail.findAll({
-    include:{
-      model: Reviews
-    },
-    where: { 
-      lessonId: lesson.id, 
-      deletedAt: null },
-  });  
-
   const final = [];
   for (const item of detail) {
-    let monitor;
-    let office;
-    let fullName = [];
-  for(let i = 0; i < item.reviews.length; i++){
-    const usuario = await User.findOne({
-      where:{
-        id: item.reviews[i].userId
-      }
-    });
-    fullName.push(usuario.fullName);
-  }
-  const reviewCount = item.reviews.length;
-  let totalStars = 0;
-  for(let i = 0; i < reviewCount; i++){
-    totalStars = totalStars + Number(item.reviews[i].stars);
-    
-  }
-  
-  console.log(totalStars);
-  const averageStars = reviewCount > 0 ? totalStars / reviewCount : 0;
+    const fullName = item.reviews.map((review) => review.user.fullName);
 
-    for (const m of monitors) {
-      if (m.lesson.some((lesson) => lesson.name === item.name)) {
-        monitor = m.name;
-        break;
-      }
-    }
+    const totalStars = item.reviews.reduce(
+      (sum, review) => sum + Number(review.stars),
+      0
+    );
 
-    for (const o of offices) {
-      if (o.lessons.some((lesson) => lesson.name === item.name)) {
-        office = o.name;
-        break;
-      }
-      
-    }
+    const reviewCount = item.reviews.length;
+    const averageStars = reviewCount > 0 ? totalStars / reviewCount : 0;
+
+    const monitor = monitors.find((m) =>
+      m.lesson.some((lesson) => lesson.name === item.name)
+    )?.name;
+
+    const office = offices.find((o) =>
+      o.lessons.some((lesson) => lesson.name === item.name)
+    )?.name;
 
     const objDetail = {
       id: item.id,
