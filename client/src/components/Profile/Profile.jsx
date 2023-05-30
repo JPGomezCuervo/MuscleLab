@@ -25,13 +25,49 @@ const Profile = () => {
   const phone = user?.phone;
   const isMonitor = user?.isMonitor;
 
+  const getInsigniaColor = () => {
+    if (membresia) {
+      const name = membresia.name;
+      if (name === "Standar") {
+        return "#CD7F32";
+      } else if (name === "Plus") {
+        return "#CCCCCC";
+      } else {
+        return "#FFD700";
+      }
+    }
+  };
+  const getBorderColor = () => {
+    if (membresia) {
+      const name = membresia.name;
+      if (name === "Standar") {
+        return "#CD7F32";
+      } else if (name === "Plus") {
+        return "#CCCCCC";
+      } else {
+        return "#FFD700";
+      }
+    }
+  };
+
   return (
     <div className={style.general}>
       <div className={style.container}>
         <div className={style.insignias}>
           {isAdmin ? <span> Admin</span> : <p></p>}
           {isMonitor ? <span> Profesor</span> : <p></p>}
-          {membresia ? <span>{membresia.name}</span> : <p></p>}
+          {membresia ? (
+            <span
+              style={{
+                backgroundColor: getInsigniaColor(),
+                border: getBorderColor(),
+              }}
+            >
+              {membresia.name}
+            </span>
+          ) : (
+            <p></p>
+          )}
         </div>
 
         <h1>{user?.fullName}</h1>
