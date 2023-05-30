@@ -34,7 +34,6 @@ const SedesDashEditar = () => {
         setSedes({
           name: response.data.branchoffice.name,
           location: response.data.branchoffice.location,
-          image: response.data.branchoffice.image,
           scheduleDays: response.data.branchoffice.scheduleDays,
           scheduleHourStart: parseInt(
             response.data.branchoffice.scheduleHourStart
@@ -43,7 +42,7 @@ const SedesDashEditar = () => {
             response.data.branchoffice.scheduleHourFinish
           ),
         });
-        setImage(response.data.branchoffice.image)
+        
         setDias(response.data.branchoffice.scheduleDays);
         setSedeEditada(response.data.branchoffice);
       })
