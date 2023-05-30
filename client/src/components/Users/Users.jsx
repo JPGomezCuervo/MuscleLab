@@ -127,19 +127,11 @@ const Users = () => {
 
   return (
 
-    <div className={styles.container}>
-      <div><Calendar/></div>
-        <h2 className={styles.title}>Formulario de Usuarios</h2>
-        
-      <table className={styles.table}>
-
     <div className={style.container}>
-      <div>
-        <Calendar />
-      </div>
-
-      <div className={style.container}>
+      <div><Calendar/></div>
         <h2 className={style.title}>Formulario de Usuarios</h2>
+        
+         
 
         <table className={style.table}>
           <thead>
@@ -304,7 +296,7 @@ const Users = () => {
           </div>
         )}
       </div>
-    </div>
+    
     
   )
 }
