@@ -9,6 +9,7 @@
     font-family: 'Montserrat-Bold';
     font-size: 4rem;
     margin-bottom: 1.5rem;
+    
 
 }
 
@@ -16,9 +17,11 @@
 .PlansContainer{
     display: grid;
     justify-content: center;
-    align-items: initial;
+    align-items: stretch;
     margin-top: 5rem;
     margin-bottom: 3rem;
+    
+    
 }
 
 
@@ -28,33 +31,13 @@
     
 }
 
-
-.Plan{
-    width: 18rem;
-    height: 30rem;
-    box-shadow: #d6d5d5 0 .4rem .2rem ;
-}
-
 .Plan .Title{
-    width: 100%;
-    color: white;
-    text-align: center;
-    height: 3rem;
-    line-height: 3rem;
-    font-size: 1.4rem;
+   
     font-family: "Montserrat-Regular";
 }
 .Plan1{
     height: 100%;
 }
-
-
-
-.Plan1 .Title{
-    background-color: #0996dd;
-}
-
-
 
 
 .Plan .MainIcon{
@@ -64,15 +47,15 @@
     padding-top: 2rem;
 }
 
-.Plan3 .MainIcon{
-    height: 8rem;
-}
+
 
 .card {
-    display: grid;
-    justify-content: flex-start;
-    width: 30rem;
-    height: 30rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+    width: 27rem;
+    height: 26rem;
     background: rgb(103, 225, 255);
     -webkit-transition: all 0.4s;
     transition: all 0.4s;
