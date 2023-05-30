@@ -1,8 +1,17 @@
-const { Lessons, LessonDetail, ExercisesType, User, BranchOffice } = require("../../db");
+const {
+  Lessons,
+  LessonDetail,
+  ExercisesType,
+  User,
+  BranchOffice,
+  Reviews,
+} = require("../../db");
 const { Op } = require("sequelize");
+const moment = require("moment");
 
 const getDetailLesson = async (name) => {
-  const lesson = await Lessons.findAll({
+  const lesson = await Lessons.findOne({
+    where: { name: { [Op.like]: name } },
     include: {
       model: ExercisesType,
       attributes: ["name"],
@@ -10,74 +19,119 @@ const getDetailLesson = async (name) => {
         attributes: [],
       },
     },
-    where: { name: { [Op.like]: name } },
   });
   const monitorRaw = await User.findAll({
     include: {
       model: LessonDetail,
       attributes: ["name"],
       through: {
-        attributes: []
+        attributes: [],
       },
       where: {
-        lessonId:lesson[0].id
-      }
+        lessonId: lesson.id,
+      },
     },
     where: {
-      isMonitor: true
-    }
+      isMonitor: true,
+    },
   });
   const officeRaw = await BranchOffice.findAll({
-    include:{
+    include: {
       model: LessonDetail,
       attributes: ["name"],
       through: {
-        attributes: []
+        attributes: [],
       },
       where: {
-        lessonId:lesson[0].id
-      }
-    }
+        lessonId: lesson.id,
+      },
+    },
   });
-  const offices = officeRaw.map(o=>{return{name:o.dataValues.name, lessons:o.dataValues.lessonDetails}});
-  const monitors = monitorRaw.map(m =>{return{name:m.dataValues.fullName, lesson:m.dataValues.lessonDetails}});
-  const types = lesson[0].dataValues.exercisesTypes.map((e) => {
-    return e.dataValues.name;
-  });
-  const detail = await LessonDetail.findAll({ where: { lessonId: lesson[0].id, deletedAt: null } });
+
+  const offices = officeRaw.map((o) => ({
+    name: o.name,
+    lessons: o.lessonDetails,
+  }));
+
+  const monitors = monitorRaw.map((m) => ({
+    name: m.fullName,
+    lesson: m.lessonDetails,
+  }));
+
+  const types = lesson.exercisesTypes.map((e) => e.name);
+
+  const detail = await LessonDetail.findAll({
+    include:{
+      model: Reviews
+    },
+    where: { 
+      lessonId: lesson.id, 
+      deletedAt: null },
+  });  
+
   const final = [];
-  for (let i = 0; i < detail.length; i++) {
+  for (const item of detail) {
     let monitor;
     let office;
-    for(let j=0;j<monitors.length;j++){
-      for(let k=0;k<monitors[j].lesson.length;k++){
-        if(detail[i].name===monitors[j].lesson[k].name){
-          monitor=monitors[j].name;
-        }  
+    let fullName = [];
+  for(let i = 0; i < item.reviews.length; i++){
+    const usuario = await User.findOne({
+      where:{
+        id: item.reviews[i].userId
+      }
+    });
+    fullName.push(usuario.fullName);
+  }
+  const reviewCount = item.reviews.length;
+  let totalStars = 0;
+  for(let i = 0; i < reviewCount; i++){
+    totalStars = totalStars + Number(item.reviews[i].stars);
+    
+  }
+  
+  console.log(totalStars);
+  const averageStars = reviewCount > 0 ? totalStars / reviewCount : 0;
+
+    for (const m of monitors) {
+      if (m.lesson.some((lesson) => lesson.name === item.name)) {
+        monitor = m.name;
+        break;
       }
     }
-    for(let j=0;j<offices.length;j++){
-      for(let k=0;k<offices[j].lessons.length;k++){
-        if(detail[i].name===offices[j].lessons[k].name){
-          office=offices[j].name;
-        }  
+
+    for (const o of offices) {
+      if (o.lessons.some((lesson) => lesson.name === item.name)) {
+        office = o.name;
+        break;
       }
+      
     }
+
     const objDetail = {
-      id: detail[i].id,
-      name: detail[i].name,
-      image: lesson[0].image,
-      effort: lesson[0].effort,
-      goals: lesson[0].goals,
-      description: detail[i].description,
-      scheduleDays: detail[i].scheduleDays,
-      scheduleHourStart: detail[i].scheduleHourStart,
-      scheduleHourFinish: detail[i].scheduleHourFinish,
-      isAvailable:detail[i].isAvailable,
-      types: types,
+      id: item.id,
+      name: item.name,
+      image: lesson.image,
+      effort: lesson.effort,
+      goals: lesson.goals,
+      description: item.description,
+      scheduleDays: item.scheduleDays,
+      scheduleHourStart: item.scheduleHourStart,
+      scheduleHourFinish: item.scheduleHourFinish,
+      isAvailable: item.isAvailable,
+      types,
       monitors: monitor,
-      office: office
-    }
+      office,
+      reviews: item.reviews.map((review, index) => ({
+        id: review.id,
+        stars: review.stars,
+        description: review.description,
+        user: fullName[index],
+        createdAt: moment(review.createdAt).fromNow(),
+      })),
+      reviewCount,
+      averageStars,
+    };
+
     final.push(objDetail);
   }
   return final;
