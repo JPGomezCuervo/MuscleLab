@@ -4,7 +4,20 @@ import facebook from "../../assets/icons/facebook.png"
 import instagram from "../../assets/icons/instagram.png"
 import linkedin from "../../assets/icons/linkedin.png"
 import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchAllOffices, selectAllOffices, selectStatus } from "../../redux/features/officesSlice"
+import { useEffect } from "react"
 const Footer = () =>{
+    const dispatch = useDispatch();
+    const sedes = useSelector(selectAllOffices)
+    const status = useSelector(selectStatus)
+     
+
+
+    useEffect(()=>{
+        dispatch(fetchAllOffices())
+    }, [dispatch])
+    
     return(
         <footer className={style.Footer}>
             <div className={style.IconContainer}>
@@ -33,9 +46,9 @@ const Footer = () =>{
                 <div className={style.Container}>
                     <div className={style.Info}>
                         <h3>Información</h3>
-                        <p>Aqui va la info</p>
-                        <p>Aqui va la info</p>
-                        <p>Aqui va la info</p>
+                        <p>Tel: 8352430032</p>
+                        <p>musclelabgym@gmail.com</p>
+                        <p>115</p>
                     </div>
                     <div className={style.Info}>
                         <h3>Navegación</h3>
@@ -45,16 +58,18 @@ const Footer = () =>{
                     </div>
                     <div className={style.Info}>
                         <h3>Nosotros</h3>
-                        <p>Aqui va la info</p>
-                        <p>Aqui va la info</p>
-                        <p>Aqui va la info</p>
+                       <Link to={'/nosotros'}><p>Nosotros</p></Link>
+                        <p></p>
+                        <p>FAQ</p>
                     </div>
-                    <div className={style.Info}>
+                      <div className={style.Info} >
                         <h3>Sedes</h3>
-                        <p>Aqui va la info</p>
-                        <p>Aqui va la info</p>
-                        <p>Aqui va la info</p>
+                        {sedes?.map((sede, index)=> (   
+                        <Link to={'sedes'} > <p key={index}>{sede.name}</p></Link>
+                        )
+                        )}
                     </div>
+                                     
                 </div>
             </div>
         </footer>

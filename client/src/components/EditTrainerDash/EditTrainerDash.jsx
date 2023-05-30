@@ -208,7 +208,7 @@ const EditTrainerDash = () => {
                 </div>
                 }
 
-            {serverResponse && 
+            {serverResponse.length  && 
                 <div>
                     <div className={style.AdvertiseContainer} ></div>
                     <div className={style.Advertise}>
