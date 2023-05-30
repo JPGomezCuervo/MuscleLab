@@ -20,10 +20,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const updateMyBranchOffice = async (req, res) => {
+
   const { id } = req.params;
-  console.log("este es el req.file: ", req.file);
-  console.log("este es el req.body: ", req.body);
+
   const officeAttributes = JSON.parse(req.body.officeAttributes);
+
   const {
     name,
     location,
@@ -43,7 +44,9 @@ const updateMyBranchOffice = async (req, res) => {
       scheduleHourStart,
       scheduleHourFinish
     );
+
     fs.unlinkSync(req.file.path);
+    
     res.status(200).json(toUpdate);
   } catch (error) {
     res.status(400).json({ error: error.message });
