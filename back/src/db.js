@@ -84,8 +84,8 @@ BranchOffice.belongsToMany(LessonDetail, { through: "Lesson_BranchOffice" });
 User.hasMany(Reviews);  
 Reviews.belongsTo(User);
 
-Lessons.hasMany(Reviews);
-Reviews.belongsTo(Lessons);
+LessonDetail.hasMany(Reviews);
+Reviews.belongsTo(LessonDetail);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

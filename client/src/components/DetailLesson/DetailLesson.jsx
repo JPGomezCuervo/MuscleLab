@@ -32,6 +32,7 @@ const DetailLesson = () => {
       {Object.keys(lesson).length !== 0 ? (
         lesson.map((lesson) => {
           return (
+            <>
             <div className={style.conteinerTodo}>
               <h1 className={style.h1}>{lesson?.name}</h1>
 
@@ -75,6 +76,41 @@ const DetailLesson = () => {
                 <p className={style.txt}>{lesson.description}</p>
               </div>
             </div>
+
+            <div className={style.PhoneContainer}>
+              <h1 className={style.h1}>{lesson?.name}</h1>
+
+              <div className={style.PhoneHorarios}>
+                <h2> <span>Dias:  </span>{lesson?.scheduleDays?.join(", ")}</h2>
+                <h2><span>Horario:  </span> {lesson?.scheduleHourStart}hs -{" "}
+                    {lesson?.scheduleHourFinish}hs</h2>
+                <h2><span>Objetivos:  </span> {lesson?.goals?.join(", ")}</h2>
+                <h2><span>Tipo de ejercicio:  </span> {lesson?.types?.join(", ")}</h2>
+                <h2><span>Sucursal:  </span> {lesson?.office}</h2>
+
+                <div>
+                  <div className={style.PhoneInstructorContainer}>
+                  <h2>Instructor:</h2>
+                  <img
+                    src={brad} alt="instructor" 
+                    className={style.img} 
+                  />
+
+                  </div>
+                <img
+                  src={lesson?.image}
+                  alt="mujer boxeando"
+                  className={style.imagenDeporte}
+                />
+
+
+
+
+                </div>
+
+              </div>
+            </div>
+            </>
           );
         })
       ) : (

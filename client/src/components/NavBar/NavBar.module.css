@@ -216,7 +216,7 @@
     }
 }
 
-@media screen and (max-width: 844px){
+@media screen and (max-width: 414px){
 
     .nav{
         left: 0;
@@ -243,6 +243,7 @@
 
     .Navbutton{
         text-align: start;
+        padding-left: 1.5rem;
     }
 
     .OptionsContainer{
@@ -277,7 +278,8 @@
     }
 
     .btnRegistro1 {
+        display: block;
         width: 20rem;
-        margin: 0;
+        
     }
 }

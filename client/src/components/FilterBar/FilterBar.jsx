@@ -112,10 +112,14 @@ return (
         <div className={style.FilterBar}>
             <p>Ordenar por:</p>
             <div className={style.OptionsContainer}>
-                <button className={(!alphabetFilter) ? (style.BtnOption) : (`${style.BtnOption} ${style.BtnOptionActive}`)} onClick={handleAlfabetoClick}><p>Alfabeto</p></button>
-
+                <button className={(!alphabetFilter) ? (style.BtnOption) : (`${style.BtnOption} ${style.BtnOptionActive}`)} onClick={handleAlfabetoClick}><p>Alfabeto</p>
+                <label className={style.Label} htmlFor="checkbox1">Alfabeto</label></button>
+                
                 <ul className={(selectedIntensities.length !== 0) ? `${style.BtnOptionType} ${style.BtnActive} `: (style.BtnOptionType) }>
                     <p onClick={handleIntensidadClick}>Intensidad</p>
+
+                    <label className={style.Label} htmlFor="checkbox2">Intensidad</label>
+                    <input type="checkbox" className={style.Checkbox} name="checkbox2" id="checkbox2"/>
 
                     <div className={style.DropMenuIntensityContainer}>
                         <ul className={style.DropMenuIntensity}>
@@ -135,7 +139,10 @@ return (
                 </ul>
 
                 <ul className={selectedTypes.length !== 0 ? `${style.BtnOptionType} ${style.BtnActive}` : style.BtnOptionType}>
-                    <p onClick={handleTipoEjercicioClick}>Tipo de ejercicio</p>
+                <p onClick={handleTipoEjercicioClick}>Tipo de ejercicio</p>
+                <label className={style.Label} htmlFor="checkbox3">Tipos</label>
+                <input type="checkbox" className={style.Checkbox} name="checkbox3" id="checkbox3"/>
+
                 <div className={style.DropMenuContainer}>
                     <ul className={style.DropMenu}>
                         {lessonsAttributes?.map((atribute, index) => {
@@ -151,8 +158,8 @@ return (
                     <button className={style.DeleteButton} onClick={handleOnDeleteType}>Borrar</button>
                 </div>
                 </ul>
-                
-                    <img className={selectedTypes.length !== 0 || selectedIntensities.length !== 0 || alphabetFilter !== false || intensityFilter !== false ? `${style.Trash} ${style.TrashActive}`: style.Trash} src={trashIcon} alt="Borrar filtros" onClick={handleDeleteAll} />
+
+                <img className={selectedTypes.length !== 0 || selectedIntensities.length !== 0 || alphabetFilter !== false || intensityFilter !== false ? `${style.Trash} ${style.TrashActive}`: style.Trash} src={trashIcon} alt="Borrar filtros" onClick={handleDeleteAll} />
         
                 <button className={style.FilterBtn} onClick={handleFilterClick}>filtrar</button>
             </div>

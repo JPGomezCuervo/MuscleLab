@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const routes = require("./routes/index.js");
 const server = express();
 const stripe = require('stripe')('sk_test_51NBkBJFPcDe3Fz6KjLlzjI35wfptX5dwAkeq7TnXdPy9YEBmqirmm4YdUIktaK82RmXCH8WU1dxyp6cR5G6CbMMM00zSOxlAwo');
-const endpointSecret="whsec_b5082ce3c79b262f7f9305bfb3bb1ec1680ba313ddfb35ee84b9cba78f7403cc";
+const endpointSecret="whsec_Ytl0XpVngPyJrlFOwTZq2bRE8pNgsyMa";
 const fulfillOrder=require('./Controllers/Payments/fulfillPayment.js');
 let event;
 

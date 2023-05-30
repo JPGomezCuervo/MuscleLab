@@ -9,6 +9,10 @@
   border-radius: 3%;
   text-align: center;
   min-height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .Container h1 {
@@ -58,6 +62,16 @@
   margin-bottom: 1rem;
 }
 
+.ButtonLogIn:hover{
+  background-color: #FFAF00;
+}
+.ButtonLogIn:active{
+  background-color: #ffc300;
+}
+.ButtonHover {
+  background-color: #FFAF00;
+}
+
 .ButtonCreate {
   display: block;
   color: #ffaf00;
@@ -88,4 +102,6 @@
 }
 .Input {
   padding-right: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

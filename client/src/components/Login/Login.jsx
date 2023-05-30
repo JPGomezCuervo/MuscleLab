@@ -14,11 +14,11 @@ const Login = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
   const handleLogin = async () => {
-    console.log("clickaste iniciar con: ", email, password);
     if (!email || !password) {
       alert("complete los campos");
     } else {
@@ -83,11 +83,18 @@ const Login = () => {
   };
 
   const onFailure = () => {
-    console.log("error al verificar con google");
+    alert("error al verificar con google");
   };
-  return (
+
+  const handleKeyLogin = (event) => {
+    if (event.key === "Enter") {
+      handleLogin();
+   }
+};
+return (
     <div className={style.BGContainer}>
-      <div className={style.Container}>
+      
+      <div className={style.Container} onKeyDown={handleKeyLogin} onMouseEnter={() => setIsHovered(true)}>
         <h1>Inicia Sesión</h1>
         <h2 className={style.Description}>Para continuar con MuscleLab</h2>
 
@@ -97,6 +104,7 @@ const Login = () => {
           placeholder="Correo"
           value={email}
           onChange={handleEmailChange}
+          onKeyDown={handleKeyLogin}
         />
         {emailError && <p className={style.ErrorMessage}>{emailError}</p>}
 
@@ -108,6 +116,7 @@ const Login = () => {
             value={password}
             onChange={handlePasswordChange}
             className={`${style.Input} ${style.PasswordInput}`}
+            
           />
           <FontAwesomeIcon
             icon={showPassword ? faEyeSlash : faEye}
@@ -117,7 +126,7 @@ const Login = () => {
         </div>
         {passwordError && <p className={style.ErrorMessage}>{passwordError}</p>}
 
-        <button className={style.ButtonLogIn} onClick={handleLogin}>
+        <button className={`${style.ButtonLogIn} ${isHovered && style.ButtonHover}`}>
           Iniciar sesión
         </button>
 

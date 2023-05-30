@@ -6,7 +6,9 @@ const getMembershipsController = async () =>{
             deletedAt: null
         }
     });
+
     if(memberships.length === 0){
+
         const members=[
             {
                 name:"Standar",

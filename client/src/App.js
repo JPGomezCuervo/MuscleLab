@@ -9,12 +9,10 @@ import ContactUs from "./components/ContactUs/ContactUs";
 import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
 import Nosotros from "./components/Nosotros/Nosotros";
-import Dashboard from "./components/Dashboard/Dashboard";
 import Sedes from "./components/Sedes/Sedes";
 import Users from "./components/Users/Users";
 import CreateUser from "./components/CreateUser/CreateUser";
-import { useSelector } from "react-redux";
-import { selectDashAuth } from "./redux/features/authSlice";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import NavBardDash from "./components/NavBarDash/NavBarDash";
 import LessonsDash from "./components/LessonsDashboard/LessonsDash";
@@ -28,6 +26,7 @@ import SedesDash from "./components/SedesDashboard/SedesDash";
 import SedesDashEditar from "./components/SedesDashEditar/SedesDashEditar";
 import SedesDashCrear from "./components/SedesDashCrear/SedesDashCrear";
 import SedeHomeDetalle from "./components/SedeHomeDetalle/SedeHomeDetalle";
+import Calendar from "./components/Calendar/Calendar";
 import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
 import StripeRender from "./components/StripeRender/StripeRender";
@@ -36,15 +35,20 @@ import Modal from 'react-modal';
 import CreatePlan from './components/CreatePlan/CreatePlan'
 import PlanDashEditar from './components/EditarPlan/EditarPlan'
 import Review from "./components/Review/Review";
-import Plans from "./components/Plans/Plans";
 import DashPlans from "./components/DashPlans/DashPlans";
 import UserUpdate from "./components/UserUpdate/UserUpdate";
+
 import PasarelaPago from "./components/PasarelaPago/PasarelaPago";
 Modal.setAppElement('#root')
 
+import { setIsAdmin, fetchUserAuth } from "./redux/features/authSlice";
+
+
+
+
 function App() {
   const location = useLocation().pathname;
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   let isAdmin = false;
@@ -55,9 +59,19 @@ function App() {
   } else {
     isAdmin = false;
   }
+  //esta es la verificacion que hace que cuando toque el boton de dash no me lleve
   if (!isAdmin && location.includes("dashboard")) {
     navigate("/");
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      dispatch(setIsAdmin(decodedToken.isAdmin));
+      dispatch(fetchUserAuth(decodedToken.id));
+    }
+  });
 
   return (
     <>
@@ -75,7 +89,12 @@ function App() {
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/sedes" element={<Sedes />} />
         <Route path="/sedes/detalles/:id" element={<SedeHomeDetalle />} />
+
         <Route path="/pagos/:id" element={<PasarelaPago/>}/>
+
+        <Route path="/calendar" element={<Calendar />} />
+
+
 
         
         <Route path="/stripe" element={<StripeRender/>}/>
@@ -113,7 +132,6 @@ function App() {
       <Route path= '/dashboard/plans/editar/:id' element={<PlanDashEditar/>}/>
       <Route path= '/dashboard/plans' element={<DashPlans/>}/>
       <Route path= '/review' element={<Review />}/>
-      
 
 
         {/* </>
@@ -122,6 +140,7 @@ function App() {
         {/* )} */}
 
       </Routes>
+      {location.includes("dashboard") ? null : <Footer />}
     </>
   );
 }

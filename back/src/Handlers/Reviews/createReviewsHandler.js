@@ -9,7 +9,7 @@ const createReviewHandler = async (req, res) => {
             description,
         } = req.body;
 
-        const newReview = await createReviewsController.createReview(
+        const newReview = await createReviewsController(
             userId, 
             lessonId, 
             stars, 
@@ -21,7 +21,7 @@ const createReviewHandler = async (req, res) => {
                 review: newReview
             });
     } catch (error) {
-        console.error('Error al crear la review:', error);
+        console.error(error);
         res.status(400).json({ message: 'Ocurrió un error al crear la review' });
     }
 }

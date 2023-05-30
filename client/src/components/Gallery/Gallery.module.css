@@ -166,6 +166,7 @@
 @media screen and (max-width: 414px) {
     .DivContainer{
         padding-top: 6.5rem;
+        overflow-x: hidden;
     }
     .Slide img {
         width: 40%;
