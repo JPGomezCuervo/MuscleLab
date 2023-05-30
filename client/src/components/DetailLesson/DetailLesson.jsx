@@ -163,7 +163,7 @@ const DetailLesson = () => {
                 <label htmlFor="">Comentario de la clase</label>
                 <input type="text" value={input.description} placeholder='Descripcion' onChange={(e) => handleInputChange(e,lesson.id)} name="description" className={style.text} />
 
-                <button onChange={handlerReview} className={style.button}>Enviar</button>
+                <button onClick={handlerReview} className={style.button}>Enviar</button>
               </div>
               ):(<div></div>)
             }

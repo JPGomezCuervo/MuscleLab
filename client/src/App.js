@@ -39,8 +39,7 @@ import DashPlans from "./components/DashPlans/DashPlans";
 import UserUpdate from "./components/UserUpdate/UserUpdate";
 import PasarelaPago from "./components/PasarelaPago/PasarelaPago";
 
-import PasarelaPago from "./components/PasarelaPago/PasarelaPago";
-Modal.setAppElement('#root')
+
 
 import { setIsAdmin, fetchUserAuth } from "./redux/features/authSlice";
 
@@ -131,8 +130,8 @@ function App() {
         <Route path="/profile/editar/:id" element={<UserUpdate />} />
 
         <Route path= '/dashboard/plans/crear' element={<CreatePlan/>}/>
-      <Route path= '/dashboard/plans/editar/:id' element={<PlanDashEditar/>}/>
-      <Route path= '/dashboard/plans' element={<DashPlans/>}/>
+      <Route path= '/dashboard/membresias/editar/:id' element={<PlanDashEditar/>}/>
+      <Route path= '/dashboard/membresias' element={<DashPlans/>}/>
       <Route path= '/review' element={<Review />}/>
 
 
