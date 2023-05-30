@@ -6,21 +6,26 @@ import { fetchLessonsByID } from '../../redux/features/lessonsSlice';
 const Review = ()=>{
 
 
-  
-  // const [review, setReview] = useState({
-  //   review:'',
-  //   rating:'',
-    
+  // const [name, setName] = useState('');
+  // const [review, setReview] = useState('');
 
-  // });
-  
-    
+  // const handleNameChange = (event) => {
+  //   setName(event.target.value);
+  // };
 
-  // const [error, setError] = useState({
-  //   review:'',
-  //   rating:'',
-    
-  // });
+  // const handleReviewChange = (event) => {
+  //   setReview(event.target.value);
+  // };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+
+  //   // Aquí puedes implementar la lógica para enviar la reseña al servidor o almacenarla en algún lugar
+
+  //   // Limpia los campos después de enviar la reseña
+  //   setName('');
+  //   setReview('');
+  // };
   
 
 return(
@@ -31,8 +36,7 @@ return(
   
 <div className={styles.container}>
 
-<h3>Datos de la clase</h3>
-  
+
 
 
 <div className={styles.rating}>
