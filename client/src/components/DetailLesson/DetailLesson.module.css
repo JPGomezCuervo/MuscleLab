@@ -214,4 +214,15 @@ background-color:#002141;
         font-weight: 900;
         padding-right: 1rem;
     }
+
+    .img{
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+    }
+
+    .PhoneInstructorContainer h2{
+        font-size: 1.5rem;
+        font-weight: 900;
+    }
 }

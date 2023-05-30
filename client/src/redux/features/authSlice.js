@@ -3,6 +3,7 @@ import { URL } from "../../utils/constants";
 import { pending, fulfilled, rejected } from "../../utils/constants";
 import axios from "axios";
 
+
 const fetchUserAuth = createAsyncThunk(
     'auth/fetchUser',async (id) => {
         try {
@@ -34,7 +35,7 @@ const authSlice = createSlice ({
     extraReducers: (builder) => {
         builder
             .addCase(fetchUserAuth.fulfilled, (state, action) => {
-                state.isActive = action.payload.status;
+                state.isActive = action.payload.user.membresia.status;
                 state.error = null;
                 state.status = fulfilled;
 

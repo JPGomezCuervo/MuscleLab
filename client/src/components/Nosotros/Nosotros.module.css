@@ -15,7 +15,7 @@
   
 }
 .BlockContainer{
-  height: 100vh;
+  height: 110vh;
   width: 50vw;
   box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
   border-radius: 1rem;
@@ -32,7 +32,7 @@
   font-weight: 500;
   font-size: 1.8rem;
   width: 80%;
-  height: 88%;
+  height: 90%;
   margin: 0 auto;
   text-align: justify;
   margin-top: 1rem;
@@ -46,6 +46,7 @@
   
 }
 .Button {
+  display: block;
   height: 3rem;
   color: #ffffff;
   width: 12rem;
@@ -57,6 +58,8 @@
   cursor: pointer;
   transition: 0.2s;
   margin: 0 auto;
+  text-align: center;
+  line-height: 3rem;
   text-align: center;
 }
 
@@ -82,5 +85,7 @@
 
   .Button {
     margin-bottom: 2rem;
+    text-align: center;
+    padding-left: 1.4rem;
   }
 }

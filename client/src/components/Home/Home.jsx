@@ -29,25 +29,25 @@ const Home = () => {
   }, [dispatch]);
 
   
-
   useEffect(() => {
     if (plansCLick) {
       plansRef.current.scrollIntoView({ behavior: "smooth" });
       dispatch(setPlansCLick(false));
     }
   }, [plansCLick, dispatch]);
-
+  
+  console.log(isActive);
   return (
     <>
       <Gallery handleOnclick={handleOnclick} />
       <ExtraInfo />
       {
-        !isActive ? null 
-        : (
-            <section ref={plansRef}>
-            <Plans/>
-            </section>
-        )
+        !isActive ? (
+          <section ref={plansRef}>
+          <Plans/>
+          </section>
+        ) 
+        : null
       }
     </>
   );

@@ -88,6 +88,26 @@ const DetailLesson = () => {
                 <h2><span>Tipo de ejercicio:  </span> {lesson?.types?.join(", ")}</h2>
                 <h2><span>Sucursal:  </span> {lesson?.office}</h2>
 
+                <div>
+                  <div className={style.PhoneInstructorContainer}>
+                  <h2>Instructor:</h2>
+                  <img
+                    src={brad} alt="instructor" 
+                    className={style.img} 
+                  />
+
+                  </div>
+                <img
+                  src={lesson?.image}
+                  alt="mujer boxeando"
+                  className={style.imagenDeporte}
+                />
+
+
+
+
+                </div>
+
               </div>
             </div>
             </>

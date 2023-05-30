@@ -94,7 +94,7 @@ const Login = () => {
 return (
     <div className={style.BGContainer}>
       
-      <div className={style.Container} onKeyDown={handleKeyLogin} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      <div className={style.Container} onKeyDown={handleKeyLogin} onMouseEnter={() => setIsHovered(true)}>
         <h1>Inicia Sesión</h1>
         <h2 className={style.Description}>Para continuar con MuscleLab</h2>
 
