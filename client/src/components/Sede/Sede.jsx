@@ -5,7 +5,7 @@ import fachada1 from "../../assets/images/sedes/fachada-1-gym.jpg";
 import fachada2 from "../../assets/images/sedes/fachada-2-gym.jpg";
 
 const Sede = ({ sede, index }) => {
-  const { name, location, scheduleDays, scheduleHours, id } = sede;
+  const { name, location, scheduleDays, scheduleHours, id, image} = sede;
   const card = index % 2 === 0 ? "Right" : "Left";
 
   return (
@@ -13,7 +13,7 @@ const Sede = ({ sede, index }) => {
       {card === "Right" ? (
         <div className={style.contenedor}>
           <div className={style.ImageContainer}>
-            <img src={fachada1} alt="fachada 1" />
+            <img src={image} alt="fachada 1" />
           </div>
 
           <div className={style.InfoContainer}>
@@ -41,7 +41,7 @@ const Sede = ({ sede, index }) => {
           </div>
 
           <div className={style.ImageContainer}>
-            <img src={fachada2} alt="fachada 2" />
+            <img src={image} alt="fachada 2" />
           </div>
         </div>
       )}

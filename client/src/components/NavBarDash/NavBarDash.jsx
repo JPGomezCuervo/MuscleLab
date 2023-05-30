@@ -10,14 +10,22 @@ import { Link } from "react-router-dom";
 
 
 const NavBardDash = () => {
+
+    const handleLogoCLick = () => {
+        window.location.href = '/';
+    };
+
+    const handleDashboardClick = () => {
+        window.location.href = '/dashboard';
+    };
     return(
         <nav className={style.NavBarDash}>
-            <div className={style.IconContainer}>
-                <img className={style.IconMan} src={iconMan} alt='Icono silueta de hombre' />
+            <div className={style.IconContainer} onClick={handleLogoCLick}>
+                <img className={style.IconMan} src={iconMan} alt='Icono silueta de hombre'/>
                 <h2>Muscle Lab</h2>
                 <img className={style.IconWeight} src={iconWeight} alt='Icono de pesa' />               
             </div>
-            <h2 className={style.Title}>Dashboard</h2>
+            <h2 className={style.Title} onClick={handleDashboardClick}>Dashboard</h2>
 
             <Link to={'/dashboard/membresias'} className={`${style.OptionContainer} ${style.OptionContainerMember}`}>
                 <img className={`${style.OptionImg} ${style.MemberIcon}`} src={MemberShipsIcon} alt="Membresias"/>

@@ -1,3 +1,4 @@
+
 import ExtraInfo from "../ExtraInfo/ExtraInfo";
 import Gallery from "../Gallery/Gallery";
 import Plans from "../Plans/Plans";
@@ -11,11 +12,14 @@ import {
   fetchAllMemberships,
   selectAllMemberships,
 } from "../../redux/features/membershipsSlice";
-const token = localStorage.getItem("token");
+import { selectIsActive } from "../../redux/features/authSlice";
+
 const Home = () => {
+  const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const plansCLick = useSelector(selectPlansClicked);
   const plansRef = useRef(null);
+  const isActive = useSelector(selectIsActive);
 
   const handleOnclick = () => {
     plansRef.current.scrollIntoView({ behavior: "smooth" });
@@ -24,21 +28,27 @@ const Home = () => {
     dispatch(fetchAllMemberships());
   }, [dispatch]);
 
-
+  
   useEffect(() => {
     if (plansCLick) {
       plansRef.current.scrollIntoView({ behavior: "smooth" });
       dispatch(setPlansCLick(false));
     }
   }, [plansCLick, dispatch]);
-
+  
+  console.log(isActive);
   return (
     <>
       <Gallery handleOnclick={handleOnclick} />
       <ExtraInfo />
-      <section ref={plansRef}>
-        <Plans />
-      </section>
+      {
+        !isActive ? (
+          <section ref={plansRef}>
+          <Plans/>
+          </section>
+        ) 
+        : null
+      }
     </>
   );
 };

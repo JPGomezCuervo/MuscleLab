@@ -4,6 +4,7 @@
 }
 
 .text{
+
   font-family: 'Montserrat-Medium';
   font-weight: 600;
   color: #013565;
@@ -15,6 +16,7 @@
   font-size: 1.3rem;
 }
 
+
   .Button{
     height: 4rem;
     width: 10rem;
@@ -23,7 +25,9 @@
     border-radius: 0.4rem;
     border: 0;
     font-family: "Montserrat-Bold";
+
     font-size: 1.5rem;
+
   }
   
   .Button:hover {
@@ -53,6 +57,7 @@
   .img{
     width: 3rem;
     height: 3rem;
+
   }
 
 
@@ -71,4 +76,5 @@
     border-radius: .4rem;
     min-height: 20rem;
     min-width: 30rem;
+
   }

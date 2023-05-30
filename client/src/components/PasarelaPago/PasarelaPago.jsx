@@ -9,6 +9,7 @@ import bicep from "../../assets/icons/Bicep.png";
 import clock from "../../assets/icons/clock.png";
 import dumbbell from "../../assets/icons/dumbbell.png"
 import jwt_decode from "jwt-decode";
+
 import ReactModal from "react-modal";
 
 const ErrorModal = ({ isOpen, closeModal, errorMessage }) => {
@@ -28,6 +29,7 @@ const ErrorModal = ({ isOpen, closeModal, errorMessage }) => {
 
 
 
+
 const PasarelaPago = () => {
 
     const memberships = useSelector(selectAllMemberships)
@@ -40,8 +42,10 @@ const PasarelaPago = () => {
 
     const selectedMembership = memberships.find((m) => m.id === selectedMembershipId);
 
+
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+
 
     const crearProducto = (event) => {
         event.preventDefault();
@@ -71,18 +75,22 @@ const PasarelaPago = () => {
 
                 })
                 .catch((error) => 
+
                 setErrorMessage(error.response.data.error),
                  setModalIsOpen(true)
                 )
               } else {
+
             console.log("No se encontró la membresía seleccionada");
         }
     };
+
 
     const closeModal = () => {
         setModalIsOpen(false);
         setErrorMessage('');
       };
+
 
 
     useEffect(() => {
@@ -131,7 +139,9 @@ const PasarelaPago = () => {
                 }
 
 
+
 <ErrorModal isOpen={modalIsOpen} closeModal={closeModal} errorMessage={errorMessage} />
+
             </div>
 
 

@@ -4,7 +4,7 @@ import img1 from '../../assets/images/home/hombre-joven-fitness-estudio.jpg';
 import img2 from '../../assets/images/home/mujer-pesas.jpg';
 import img3 from '../../assets/images/home/hombre-brazos-extendidos.jpg';
 import { useRef } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 const Gallery = ({handleOnclick}) => {
@@ -12,44 +12,57 @@ const Gallery = ({handleOnclick}) => {
     const slideShow = useRef(null);
     const images = [img1, img2, img3];
     const totalSlides = images.length;
-
+    const slideInterval = useRef(null);
+    
     const nextSlide = () => {
-        if (slideShow.current.children.length > 0) {
-            const firstElement = slideShow.current.children[0];
-            const sizeSlide = firstElement.offsetWidth;
-            
-            slideShow.current.style.transition = `300ms ease-out all`;
-            slideShow.current.style.transform = `translateX(-${sizeSlide}px)`;
+      if (slideShow.current.children.length > 0) {
+        const firstElement = slideShow.current.children[0];
+        const sizeSlide = firstElement.offsetWidth;
+        
+        slideShow.current.style.transition = `300ms ease-out all`;
+        slideShow.current.style.transform = `translateX(-${sizeSlide}px)`;
     
-            const transition = () => {
-                slideShow.current.style.transition = `none`;
-                slideShow.current.style.transform = `translateX(0)`;
-                slideShow.current.appendChild(firstElement);
-                slideShow.current.removeEventListener('transitionend', transition);
-                setCurrentSlide(currentSlide === totalSlides ? 1 : currentSlide + 1);
-            };
+        const transition = () => {
+          slideShow.current.style.transition = `none`;
+          slideShow.current.style.transform = `translateX(0)`;
+          slideShow.current.appendChild(firstElement);
+          slideShow.current.removeEventListener('transitionend', transition);
+          setCurrentSlide(currentSlide === totalSlides ? 1 : currentSlide + 1);
+        };
     
-            slideShow.current.addEventListener('transitionend', transition);
-        }
+        slideShow.current.addEventListener('transitionend', transition);
+      }
     };
     
     const prevSlide = () => {
-        if (slideShow.current.children.length > 0) {
-          const index = slideShow.current.children.length - 1;
-          const lastElement = slideShow.current.children[index];
-          const sizeSlide = lastElement.offsetWidth;
-      
-          slideShow.current.insertBefore(lastElement, slideShow.current.firstChild);
-          slideShow.current.style.transform = `translateX(-${sizeSlide}px)`;
-      
-          setTimeout(() => {
-            slideShow.current.style.transition = `300ms ease-out all`;
-            slideShow.current.style.transform = `translateX(0)`;
-          }, 50);
-          setCurrentSlide(currentSlide === 1 ? totalSlides : currentSlide - 1);
-        }
+      if (slideShow.current.children.length > 0) {
+        const index = slideShow.current.children.length - 1;
+        const lastElement = slideShow.current.children[index];
+        const sizeSlide = lastElement.offsetWidth;
+    
+        slideShow.current.insertBefore(lastElement, slideShow.current.firstChild);
+        slideShow.current.style.transform = `translateX(-${sizeSlide}px`;
+    
+        setTimeout(() => {
+          slideShow.current.style.transition = `300ms ease-out all`;
+          slideShow.current.style.transform = `translateX(0)`;
+        }, 50);
+        setCurrentSlide(currentSlide === 1 ? totalSlides : currentSlide - 1);
+      }
+    };
+    
+    useEffect(() => {
+      slideInterval.current = setInterval(nextSlide, 5000);
+    
+      return () => {
+        clearInterval(slideInterval.current);
       };
+    });
        
+    useEffect(() => {
+        nextSlide();
+
+    }, []);
 
 
     return (

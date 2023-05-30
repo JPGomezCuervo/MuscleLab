@@ -13,6 +13,7 @@
 }
 
 .Bar select{
+    cursor: pointer;
     display: inline;
     width: 13rem;
     padding-right: .6rem;

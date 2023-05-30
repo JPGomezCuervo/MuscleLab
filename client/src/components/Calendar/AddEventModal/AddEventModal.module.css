@@ -1,0 +1,37 @@
+.form{
+   
+}
+.input{
+   font-size: 1.12rem;
+   font-weight: 500; 
+   background: lightgray;
+}
+.label{
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.btn{
+    padding: 5px;
+    background: green;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn2{
+    padding: 5px;
+    color: #fff;
+    background: gray;
+    font-weight: 700;
+    border-radius: 15px 0px 15px 0px;
+    cursor: pointer;
+}
+.btn2:hover{
+    color: #fff;
+    background: #1a1a1a;
+}
+.btn:hover{
+    color: #fff;
+    background: blue;
+}
+
