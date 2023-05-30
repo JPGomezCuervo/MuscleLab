@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
-import style from "./UserUpdate.module.css";
+// import style from "./UserUpdate.module.css";
+import style from "../Profile/Profile.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { URL } from "../../utils/constants";
@@ -18,15 +19,16 @@ const UserUpdate = () => {
     password: "",
     phone: "",
   });
+
   useEffect(() => {
     axios.get(`${URL}/users/${id}`).then((response) => {
-      console.log(response);
+      console.log(response.data.user.detalle);
       setForm({
-        fullName: response.data.user.fullName,
-        email: response.data.user.email,
-        phone: response.data.user.phone,
-        isMonitor: response.data.user.isMonitor,
-        isAdmin: response.data.user.isAdmin,
+        fullName: response.data.user.detalle.fullName,
+        email: response.data.user.detalle.email,
+        phone: response.data.user.detalle.phone,
+        isMonitor: response.data.user.detalle.isMonitor,
+        isAdmin: response.data.user.detalle.isAdmin,
       });
     });
   }, [id]);
@@ -56,7 +58,7 @@ const UserUpdate = () => {
 
           <h1>{form.fullName}</h1>
           <div className={style.info}>
-            <label>Nombre de usuario</label>
+            <h2>Nombre de usuario</h2>
             <input
               type="text"
               name="fullName"
@@ -66,7 +68,7 @@ const UserUpdate = () => {
           </div>
 
           <div className={style.info}>
-            <label>Contraseña</label>
+            <h2>Contraseña</h2>
             <input
               type="password"
               name="password"
@@ -79,7 +81,7 @@ const UserUpdate = () => {
           )}
 
           <div className={style.info}>
-            <label>Numero de teléfono</label>
+            <h2>Numero de teléfono</h2>
             <input
               type="text"
               name="phone"

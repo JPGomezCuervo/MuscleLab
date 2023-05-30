@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { validate } from "./validate";
+import { URL } from "../../utils/constants";
 const Register = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -27,7 +28,7 @@ const Register = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/users/create", {
+      const response = await axios.post(`${URL}/users/create`, {
         fullName: form.email.split("@")[0],
         password: form.password,
         email: form.email,
