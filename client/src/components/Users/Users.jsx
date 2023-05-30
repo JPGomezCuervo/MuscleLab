@@ -128,10 +128,7 @@ const Users = () => {
   return (
     <div className={style.container}>
       <div className={style.container}>
-
         <h2 className={style.title}>Formulario de Usuarios</h2>
-        
-         
 
         <table className={style.table}>
           <thead>
@@ -227,38 +224,38 @@ const Users = () => {
                       {errors.edit && errors.password}
                     </p>
 
-                <input
-                  type="password"
-                  id="password"
-                  autoComplete="off"
-                  placeholder="Password"
-                  value={editUser.password}
-                  onChange={(e) => handleChange(e)}
-                  className={style.input}
-                />
-                <label htmlFor="email">Email:</label>
-                <p className={style.error}>{errors.edit && errors.email}</p>
-                <input
-                  type="email"
-                  id="email"
-                  autoComplete="off"
-                  name="email"
-                  placeholder="*Correo electronico"
-                  value={editUser.email}
-                  onChange={(e) => handleChange(e)}
-                  className={style.input}
-                />
-                <label htmlFor="phone" >Telefono:</label>
-                <p className={style.error}>{errors.edit && errors.phone}</p>
-                <input
-                  type="text"
-                  id="phone"
-                  name="phone"
-                  placeholder="*Telefono: XXXXXXXXXX "
-                  value={editUser.phone}
-                  onChange={(e) => handleChange(e)}
-                  className={style.input}
-                />
+                    <input
+                      type="password"
+                      id="password"
+                      autoComplete="off"
+                      placeholder="Password"
+                      value={editUser.password}
+                      onChange={(e) => handleChange(e)}
+                      className={style.input}
+                    />
+                    <label htmlFor="email">Email:</label>
+                    <p className={style.error}>{errors.edit && errors.email}</p>
+                    <input
+                      type="email"
+                      id="email"
+                      autoComplete="off"
+                      name="email"
+                      placeholder="*Correo electronico"
+                      value={editUser.email}
+                      onChange={(e) => handleChange(e)}
+                      className={style.input}
+                    />
+                    <label htmlFor="phone">Telefono:</label>
+                    <p className={style.error}>{errors.edit && errors.phone}</p>
+                    <input
+                      type="text"
+                      id="phone"
+                      name="phone"
+                      placeholder="*Telefono: XXXXXXXXXX "
+                      value={editUser.phone}
+                      onChange={(e) => handleChange(e)}
+                      className={style.input}
+                    />
 
                     {/* <label htmlFor="status">Status:</label>
               <input
@@ -296,9 +293,8 @@ const Users = () => {
           </div>
         )}
       </div>
-    
-    
-  )
-}
+    </div>
+  );
+};
 
 export default Users;
