@@ -72,7 +72,7 @@ function App() {
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/sedes" element={<Sedes />} />
         <Route path="/sedes/detalles/:id" element={<SedeHomeDetalle />} />
-        <Route path="/pagos" element={<PasarelaPago />} />
+        <Route path="/pagos/:id" element={<PasarelaPago />} />
 
         
         <Route path="/stripe" element={<StripeRender/>}/>
