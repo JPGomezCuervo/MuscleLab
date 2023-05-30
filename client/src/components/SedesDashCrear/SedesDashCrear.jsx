@@ -6,6 +6,8 @@ import arrowIcon from "../../assets/icons/arrow-yellow.png";
 import { validate } from "./validation";
 import { weekDays } from "../../utils/constants";
 import { URL } from "../../utils/constants";
+import ReactModal from "react-modal";
+
 
 const SedesDashCrear = () => {
   const [dias, setDias] = useState([]);
@@ -33,6 +35,28 @@ const [image, setImage] = useState("");
     scheduleHourFinish: "",
   });
 
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
+const [successModalOpen, setSuccessModalOpen] = useState(false);
+
+const openErrorModal = () => {
+  setErrorModalOpen(true);
+};
+
+const closeErrorModal = () => {
+  setErrorModalOpen(false);
+};
+
+const openSuccessModal = () => {
+  setSuccessModalOpen(true);
+};
+
+const closeSuccessModal = () => {
+  setSuccessModalOpen(false);
+  navigate("/dashboard/sedes")
+};
+
+
+
  const navigate = useNavigate();
 
   const generateHourOptions = () => {
@@ -55,14 +79,14 @@ const [image, setImage] = useState("");
         ...prevErrors,
         scheduleHourStart: "Debe seleccionar hora de inicio",
       }));
-      alert("Debe seleccionar hora de inicio");
+      //alert("Debe seleccionar hora de inicio");
       return false;
     } else if (!horaFin) {
       setErrors((prevErrors) => ({
         ...prevErrors,
         scheduleHourFinish: "Debe seleccionar hora de fin",
       }));
-      alert("Debe seleccionar hora de fin");
+     // alert("Debe seleccionar hora de fin");
       return false;
     } else {
       setSedes((prevSedes) => ({
@@ -102,7 +126,7 @@ const [image, setImage] = useState("");
         ...prevErrors,
         scheduleDays: "Debe seleccionar al menos un día",
       }));
-      alert("Debe seleccionar al menos un día");
+     
       return false;
     }
   };
@@ -131,21 +155,53 @@ const [image, setImage] = useState("");
     setHoraFin(value);
   };
 
- 
+ ///////////////////////////////////////////////////////////////////////////////////////
 
+  // const crearSede = () => {
+  //   if (!validatedays() || !validateHours() || errors.name || errors.location) {
+  //     console.error("Errores de validación:", errors);
+  //   } else {
+  //      const formData = new FormData();
+  //      formData.append("image", image)
+  //      formData.append("officeAttributes",JSON.stringify(sedes))
+  //     // console.log(JSON.stringify(sedes))
+  //      console.log(formData)
+  //     axios
+  //       .post(`${URL}/branchoffice/create`, formData)
+  //       .then((res) => {
+  //         alert("Sede creada exitosamente");
+  //         // Realizar acciones adicionales después de crear la sede si es necesario
+  //         setSedes({
+  //           name: "",
+  //           location: "",
+  //           scheduleDays: "",
+  //           scheduleHourStart: "",
+  //           scheduleHourFinish: "",
+  //           image: null,
+  //         });
+  //         // Redireccionar a la página correspondiente
+  //         navigate("/dashboard/sedes");
+  //       })
+  //      .catch((error)=> {
+  //       console.error("Error al crear la sede:", error);
+  //       // Manejar el error si es necesario
+  //     })
+  //   }
+  // };
+  //////////////////////////////////////////////////////////////////////////////////////////
   const crearSede = () => {
     if (!validatedays() || !validateHours() || errors.name || errors.location) {
       console.error("Errores de validación:", errors);
+      openErrorModal(); // Mostrar ventana modal de errores
     } else {
-       const formData = new FormData();
-       formData.append("image", image)
-       formData.append("officeAttributes",JSON.stringify(sedes))
-      // console.log(JSON.stringify(sedes))
-       console.log(formData)
+      const formData = new FormData();
+      formData.append("image", image);
+      formData.append("officeAttributes", JSON.stringify(sedes));
       axios
         .post(`${URL}/branchoffice/create`, formData)
         .then((res) => {
-          alert("Sede creada exitosamente");
+          // Mostrar ventana modal de éxito
+          openSuccessModal();
           // Realizar acciones adicionales después de crear la sede si es necesario
           setSedes({
             name: "",
@@ -155,16 +211,20 @@ const [image, setImage] = useState("");
             scheduleHourFinish: "",
             image: null,
           });
-          // Redireccionar a la página correspondiente
-          navigate("/dashboard/sedes");
+          // // Redireccionar a la página correspondiente después de un cierto tiempo
+          // setTimeout(() => {
+          //   navigate("/dashboard/sedes");
+          // }, 3000); // Redireccionar después de 3 segundos (ajusta el tiempo según tus necesidades)
         })
-       .catch((error)=> {
-        console.error("Error al crear la sede:", error);
-        // Manejar el error si es necesario
-      })
+        .catch((error) => {
+          console.error("Error al crear la sede:", error);
+          // Manejar el error si es necesario
+        });
     }
   };
   
+
+  ///////////////////////////////////////////////////////////////////////////////////////////
 
   const handleImageChange = (event) => {
     const name = event.target.name;
@@ -299,6 +359,31 @@ const [image, setImage] = useState("");
             Crear
           </button>
         </div>
+
+        <div className={style.BigBigContainer}>
+  {/* Resto del código del componente */}
+  <ReactModal
+    className={style.modal}
+    isOpen={errorModalOpen}
+    onRequestClose={closeErrorModal}
+    
+  >
+    <h2 className={style.text}>Error de validación</h2>
+    <p className={style.text}>Debe completar todos los datos requeridos.</p>
+    <button onClick={closeErrorModal} className={style.DeleteButton}>OK</button>
+  </ReactModal>
+
+  <ReactModal
+    className={style.modal}
+    isOpen={successModalOpen}
+    onRequestClose={closeSuccessModal}
+  >
+    <h2 className={style.text}>Sede creada exitosamente</h2>
+    <p className={style.text}>La sede ha sido creada con éxito.</p>
+    <button onClick={closeSuccessModal} className={style.SaveButton}>Aceptar</button>
+  </ReactModal>
+</div>
+
       </div>
     </div>
   );

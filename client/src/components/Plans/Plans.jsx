@@ -1,12 +1,16 @@
-import style from "./Plans.module.css";
-import {selectAllMemberships} from "../../redux/features/membershipsSlice";
-import muscleIcon from "../../assets/icons/Bicep.png";
-import muscleManIcon from "../../assets/icons/man-silhouette.png";
-import clockIcon from "../../assets/icons/clock.png";
-import checkIcon from "../../assets/icons/check.png";
-import { useSelector } from "react-redux";
 
-const Plans = () =>{
+import style from "./Plans.module.css"
+import { selectAllMemberships } from "../../redux/features/membershipsSlice"
+import muscleIcon from "../../assets/icons/Bicep.png"
+import muscleManIcon from "../../assets/icons/man-silhouette.png"
+import clockIcon from "../../assets/icons/clock.png"
+import checkIcon from "../../assets/icons/check.png"
+import { useSelector } from "react-redux"
+import { Link } from "react-router-dom";
+
+
+const Plans = () => {
+
 
     const memberships = useSelector(selectAllMemberships);
     
@@ -29,17 +33,22 @@ const Plans = () =>{
                                     <div key={index}>
                                         <div className={style.card}>
                                             <div className={style.firstcontent}>
+
                                                 <span>Nombre: {membership.name}</span>
 
                                                 <img className={style.MainIcon} src={clockIcon} alt="" />
                                                 <h4>Duracion: {membership.duration}</h4>
                                             </div>
-                                            <div className={style.secondcontent}>
+
+                                            <div class={style.secondcontent}>
                                                 <h4> Beneficios: {membership.benefits}</h4>
 
                                                 <h4>Precio: {membership.price}</h4>
+                                                
+                                                <Link to={`/pagos/${membership.id}`}>
+                                                    <button>Compra ahora</button>
+                                                </Link>
 
-                                                <button>Compra ahora </button>
                                             </div>
                                         </div>
 
@@ -47,12 +56,16 @@ const Plans = () =>{
 
 
                                     </div>
-                                ))}
-  </div>
-                        </div>
+                                )
+                            })}
+
+
+
                     </div>
                 </div>
-            
+            </div>
+        </div>
+
     )
 }
 

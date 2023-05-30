@@ -31,13 +31,18 @@ import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
 import StripeRender from "./components/StripeRender/StripeRender";
 import jwt_decode from "jwt-decode";
-
+import Modal from 'react-modal';
 import CreatePlan from './components/CreatePlan/CreatePlan'
 import PlanDashEditar from './components/EditarPlan/EditarPlan'
 import Review from "./components/Review/Review";
 import DashPlans from "./components/DashPlans/DashPlans";
 import UserUpdate from "./components/UserUpdate/UserUpdate";
+
+import PasarelaPago from "./components/PasarelaPago/PasarelaPago";
+Modal.setAppElement('#root')
+
 import { setIsAdmin, fetchUserAuth } from "./redux/features/authSlice";
+
 
 
 
@@ -84,7 +89,11 @@ function App() {
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/sedes" element={<Sedes />} />
         <Route path="/sedes/detalles/:id" element={<SedeHomeDetalle />} />
+
+        <Route path="/pagos/:id" element={<PasarelaPago/>}/>
+
         <Route path="/calendar" element={<Calendar />} />
+
 
 
         
