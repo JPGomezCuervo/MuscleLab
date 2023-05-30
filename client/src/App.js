@@ -38,10 +38,10 @@ import Review from "./components/Review/Review";
 import DashPlans from "./components/DashPlans/DashPlans";
 import UserUpdate from "./components/UserUpdate/UserUpdate";
 import PasarelaPago from "./components/PasarelaPago/PasarelaPago";
+import { setIsAdmin, fetchUserAuth } from "./redux/features/authSlice";
 
 Modal.setAppElement('#root')
 
-import { setIsAdmin, fetchUserAuth } from "./redux/features/authSlice";
 
 
 
