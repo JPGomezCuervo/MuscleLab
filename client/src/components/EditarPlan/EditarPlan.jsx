@@ -134,7 +134,7 @@ const PlanDashEditar = () => {
     <div className={style.MainConteiner}>
 
       <div>
-        <Link to="/dashboard/plans">
+        <Link to="/dashboard/membresias">
         <button>
           <img className={style.ArrowIcon} src={arrowIcon} alt="" />
         </button>
