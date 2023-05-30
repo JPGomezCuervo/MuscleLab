@@ -1,4 +1,4 @@
-.general{
+.general {
   padding-top: 150px;
 }
 .container {
@@ -48,6 +48,11 @@
   padding: 0.4rem 0.8rem;
 }
 .insignias span:nth-child(2) {
+  margin-left: 1rem;
+}
+.insignias span:nth-child(3) {
+  background-color: red;
+  border: 0.1rem solid red;
   margin-left: 1rem;
 }
 .Description {

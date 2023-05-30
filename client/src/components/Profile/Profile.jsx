@@ -20,7 +20,7 @@ const Profile = () => {
   const usuario = useSelector(selectUserByID);
 
   const user = usuario?.membresia ? usuario.detalle : usuario;
-
+  const membresia = usuario.membresia;
   const isAdmin = decoded.payload.isAdmin;
   const phone = user?.phone;
   const isMonitor = user?.isMonitor;
@@ -31,6 +31,7 @@ const Profile = () => {
         <div className={style.insignias}>
           {isAdmin ? <span> Admin</span> : <p></p>}
           {isMonitor ? <span> Profesor</span> : <p></p>}
+          {membresia ? <span>{membresia.name}</span> : <p></p>}
         </div>
 
         <h1>{user?.fullName}</h1>
