@@ -5,7 +5,7 @@ import { selectAllMemberships, fetchAllMemberships } from "../../redux/features/
 import { useSelector, useDispatch } from "react-redux";
 import style from "./PasarelaPago.module.css";
 import { URL } from "../../utils/constants";
-import bicep from "../../assets/icons/Bicep.png";
+import bicep from "../../assets/icons/Bicep.png"
 import clock from "../../assets/icons/clock.png";
 import dumbbell from "../../assets/icons/dumbbell.png"
 import jwt_decode from "jwt-decode";
