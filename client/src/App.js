@@ -26,6 +26,7 @@ import SedesDash from "./components/SedesDashboard/SedesDash";
 import SedesDashEditar from "./components/SedesDashEditar/SedesDashEditar";
 import SedesDashCrear from "./components/SedesDashCrear/SedesDashCrear";
 import SedeHomeDetalle from "./components/SedeHomeDetalle/SedeHomeDetalle";
+import Calendar from "./components/Calendar/Calendar";
 import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
 import StripeRender from "./components/StripeRender/StripeRender";
@@ -37,6 +38,7 @@ import Review from "./components/Review/Review";
 import DashPlans from "./components/DashPlans/DashPlans";
 import UserUpdate from "./components/UserUpdate/UserUpdate";
 import { setIsAdmin, fetchUserAuth } from "./redux/features/authSlice";
+
 
 
 function App() {
@@ -82,6 +84,8 @@ function App() {
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/sedes" element={<Sedes />} />
         <Route path="/sedes/detalles/:id" element={<SedeHomeDetalle />} />
+        <Route path="/calendar" element={<Calendar />} />
+
 
         
         <Route path="/stripe" element={<StripeRender/>}/>
