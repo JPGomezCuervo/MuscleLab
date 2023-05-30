@@ -72,7 +72,7 @@ const CreateTrainerDash = () => {
                 <a href='http://localhost:3000/dashboard/profesores'>
                     <img className={style.ArrowIcon} src={arrowIcon} alt="" />
                 </a>
-                <h2>Create Teacher</h2>
+                <h2>Crear Profesor</h2>
             </div>
             <div className={style.EditContainer}>
             <div className={style.Teacher}>{input.fullName}</div>
