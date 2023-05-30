@@ -315,7 +315,7 @@ class DetailLessonDash extends Component {
                 formData.append('image', this.state.lessonAttributes.image);
                 formData.append('lessonAttributes', JSON.stringify(this.state.lessonAttributes));
                 
-                axios.post(`${URL}/update/${this.props.id}`, formData)
+                axios.put(`${URL}/lessons/update/${this.props.id}`, formData)
                 .then((res) => {
                     console.log(res);
                     this.setState({

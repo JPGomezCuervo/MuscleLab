@@ -123,7 +123,6 @@ border-radius: .4rem;
 }
 
 .button{
-    margin: auto 0;
     height: 3rem;
     color: #ffffff;
     background-color:#013565;
@@ -134,8 +133,8 @@ border-radius: .4rem;
     font-size: 2rem;
     cursor: pointer;
     transition: .2s;
-    margin-left: 2rem;
-    margin-top: 3rem;
+    display: block;
+    margin: 0 auto;
 }
 
 .button:hover{
@@ -156,6 +155,11 @@ background-color:#002141;
     transition: .2s;
     margin-right: 3%;
     
+}
+.card h2{
+  display: block;
+  margin: 0 auto;
+  margin-top: 1rem;
 }
 
 .button3:hover{
@@ -178,7 +182,6 @@ background-color:#002141;
 }
 
 .rating {
-    padding-top: 2rem;
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
@@ -189,6 +192,7 @@ background-color:#002141;
   
   .rating input {
     appearance: unset;
+    display: none;
   }
   
   .rating label {
@@ -327,6 +331,10 @@ background-color:#002141;
     .PhoneInstructorContainer h2{
         font-size: 1.5rem;
         font-weight: 900;
+    }
+
+    .card{
+      width: 90%;
     }
 }
 

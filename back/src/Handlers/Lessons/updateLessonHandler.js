@@ -22,37 +22,39 @@ const upload = multer({ storage });
 
 const updateLessons = async (req, res) => {
   const { id } = req.params;
-  console.log("esta es la peticion", req.file);
+
   const lessonAttributes = JSON.parse(req.body.lessonAttributes);
-  console.log(lessonAttributes);
+
   const { 
-    effort, 
-    shortDescription, 
-    goals, 
-    name, 
-    description, 
-    scheduleDays , 
-    scheduleHourStart, 
-    scheduleHourFinish, 
-    isAvailable, 
+    effort,
+    shortDescription,
+    goals,
+    name,
+    description,
+    scheduleDays,
+    scheduleHourStart,
+    scheduleHourFinish,
+    isAvailable,
     monitor,
-    branchOffice,
+    branchoffice,
     types
   } = lessonAttributes;
   try {
 
-    let updatedImage = image;
-    if (image) {
+    let updatedImage = lessonAttributes.image;
+    if (req.file) {
       const uploadedImage = await cloudinary.uploader.upload(req.file.path);
       updatedImage = uploadedImage.secure_url;
-      fs.unlinkSync(req.file.path);
-    }
+    } else {
+      // En caso de que no se proporcione una nueva imagen, mantener la imagen existente
+      updatedImage = lessonAttributes.image;
+    }   
 
     const updatedLesson = await updateLesson(
       id,
       effort,
       shortDescription,
-      updatedImage.secure_url,
+      updatedImage,
       goals,
       name, 
       description, 
@@ -61,11 +63,15 @@ const updateLessons = async (req, res) => {
       scheduleHourFinish,
       isAvailable,
       monitor,
-      branchOffice,
+      branchoffice,
       types
     );
+
+    fs.unlinkSync(req.file.path);
+
     res.status(200).json(updatedLesson);
   } catch (error) {
+    console.log(error);
     res.status(400).json({ error: error.message });
   }
 };

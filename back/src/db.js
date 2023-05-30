@@ -80,6 +80,8 @@ LessonDetail.belongsTo(Lessons);
 LessonDetail.belongsToMany(BranchOffice, { through: "Lesson_BranchOffice" });
 BranchOffice.belongsToMany(LessonDetail, { through: "Lesson_BranchOffice" });
 
+LessonDetail.belongsToMany(ExercisesType, { through: "Lesson_ExercisesType" });
+ExercisesType.belongsToMany(LessonDetail, { through: "Lesson_ExercisesType" });
 
 User.hasMany(Reviews);  
 Reviews.belongsTo(User);

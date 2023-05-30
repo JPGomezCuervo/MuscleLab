@@ -36,7 +36,7 @@ const Home = () => {
     }
   }, [plansCLick, dispatch]);
   
-  console.log(isActive);
+
   return (
     <>
       <Gallery handleOnclick={handleOnclick} />

@@ -126,9 +126,9 @@ const Users = () => {
   //console.log("respuesta fetch editar", serverResponse.error);
 
   return (
-
     <div className={style.container}>
-      <div><Calendar/></div>
+      <div className={style.container}>
+
         <h2 className={style.title}>Formulario de Usuarios</h2>
         
          
