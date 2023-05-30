@@ -37,7 +37,6 @@ import PlanDashEditar from './components/EditarPlan/EditarPlan'
 import Review from "./components/Review/Review";
 import DashPlans from "./components/DashPlans/DashPlans";
 import UserUpdate from "./components/UserUpdate/UserUpdate";
-import PasarelaPago from "./components/PasarelaPago/PasarelaPago";
 
 import PasarelaPago from "./components/PasarelaPago/PasarelaPago";
 Modal.setAppElement('#root')

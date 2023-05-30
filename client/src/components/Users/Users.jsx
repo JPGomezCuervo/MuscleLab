@@ -127,11 +127,8 @@ const Users = () => {
 
   return (
 
-    <div className={styles.container}>
-      <div><Calendar/></div>
-        <h2 className={styles.title}>Formulario de Usuarios</h2>
-        
-      <table className={styles.table}>
+   
+          
 
     <div className={style.container}>
 
@@ -225,7 +222,7 @@ const Users = () => {
                   value={editUser.fullName}
                   onChange={(e) => handleChange(e)}
                   className={style.input}
-                />
+                  />
                 <label className={style.label} htmlFor="password">
                   Password:{" "}
                 </label>
@@ -239,7 +236,7 @@ const Users = () => {
                   value={editUser.password}
                   onChange={(e) => handleChange(e)}
                   className={style.input}
-                />
+                  />
                 <label htmlFor="email">Email:</label>
                 <p className={style.error}>{errors.edit && errors.email}</p>
                 <input
@@ -251,7 +248,7 @@ const Users = () => {
                   value={editUser.email}
                   onChange={(e) => handleChange(e)}
                   className={style.input}
-                />
+                  />
                 <label htmlFor="phone" >Telefono:</label>
                 <p className={style.error}>{errors.edit && errors.phone}</p>
                 <input
@@ -299,9 +296,9 @@ const Users = () => {
         </div>  
         </div>
       )}
-    
     </div>
-  );
-};
+    
+  )
+}
 
 export default Users;
