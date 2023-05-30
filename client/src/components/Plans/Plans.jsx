@@ -6,9 +6,7 @@ import clockIcon from "../../assets/icons/clock.png";
 import checkIcon from "../../assets/icons/check.png";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import gimnasio from "../../../src/assets/icons/gimnasio.png";
-import clock from "../../assets/icons/clock.png";
-import pilates from "../../assets/icons/pilates.png"
+
 
 const Plans = () => {
   const memberships = useSelector(selectAllMemberships);
