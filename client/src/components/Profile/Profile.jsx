@@ -8,20 +8,47 @@ import { fetchUserByID, selectUserByID } from "../../redux/features/usersSlice";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const user = useSelector(selectUserByID);
   const token = localStorage.getItem("token");
   const decoded = decodeJwt(token);
-  const id = decoded.payload.id;
-  const isAdmin = user.isAdmin;
   const dispatch = useDispatch();
+  const id = decoded.payload.id;
 
   useEffect(() => {
     dispatch(fetchUserByID(id));
   }, [dispatch, id]);
 
-  const phone = user.phone;
+  const usuario = useSelector(selectUserByID);
 
-  const isMonitor = user.isMonitor;
+  const user = usuario?.membresia ? usuario.detalle : usuario;
+  const membresia = usuario.membresia;
+  const isAdmin = decoded.payload.isAdmin;
+  const phone = user?.phone;
+  const isMonitor = user?.isMonitor;
+
+  const getInsigniaColor = () => {
+    if (membresia) {
+      const name = membresia.name;
+      if (name === "Standar") {
+        return "#CD7F32";
+      } else if (name === "Plus") {
+        return "#CCCCCC";
+      } else {
+        return "#FFD700";
+      }
+    }
+  };
+  const getBorderColor = () => {
+    if (membresia) {
+      const name = membresia.name;
+      if (name === "Standar") {
+        return "#CD7F32";
+      } else if (name === "Plus") {
+        return "#CCCCCC";
+      } else {
+        return "#FFD700";
+      }
+    }
+  };
 
   return (
     <div className={style.general}>
@@ -29,22 +56,50 @@ const Profile = () => {
         <div className={style.insignias}>
           {isAdmin ? <span> Admin</span> : <p></p>}
           {isMonitor ? <span> Profesor</span> : <p></p>}
+          {membresia ? (
+            <span
+              style={{
+                backgroundColor: getInsigniaColor(),
+                border: getBorderColor(),
+              }}
+            >
+              {membresia.name}
+            </span>
+          ) : (
+            <p></p>
+          )}
         </div>
 
-        <h1>{user.fullName}</h1>
+        <h1>{user?.fullName}</h1>
         <div className={style.info}>
           <h2>Nombre de Usuario</h2>
-          <p>{user.fullName}</p>
+          <p>{user?.fullName}</p>
         </div>
 
         <div className={style.info}>
           <h2>Email</h2>
-          <p>{user.email}</p>
+          <p>{user?.email}</p>
         </div>
         <div className={style.info}>
           <h2>Numero de teléfono</h2>
           {phone ? <p>{user.phone} </p> : <p>No proporcionado</p>}
         </div>
+
+        {membresia ? (
+          <div className={style.info}>
+            <h2>Membresia {membresia?.name}</h2>
+            <div className={style.membInfo}>
+              <h3>Inicio: </h3>
+              <p>
+                {membresia?.start.split("T")[0].split("-").reverse().join("-")}
+              </p>
+              <h3>Fin: </h3>
+              <p>{membresia?.end.split("T")[0].split("-").reverse().join("-")}</p>
+            </div>
+          </div>
+        ) : (
+          <p style={{ color: "red" }}>No tienes una membresía activa</p>
+        )}
         <hr />
         <Link to={`/profile/editar/${id}`}>
           <button className={style.ButtonEdit}>Editar perfil</button>

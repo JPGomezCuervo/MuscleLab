@@ -2,110 +2,58 @@ import React from "react";
 import style from "./SedesDash.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ReactModal from "react-modal";
 
 import {
-  fetchAllOffices,
+  fetchAllOfficesDashboard,
   selectAllOffices,
-  clearOffice,
-} from "../../redux/features/officesSlice";
+  clearOfficeDashboard,
+  selectStatus,
+} from "../../redux/features/officesDashSlice";
 import edit from "../../assets/icons/edit.png";
 import trash from "../../assets/icons/trash-bin.png";
 import { URL } from "../../utils/constants";
+import loadingGif from "../../assets/gifs/loading.gif";
 
 const SedesDash = () => {
   const sedes = useSelector(selectAllOffices);
+  const status = useSelector(selectStatus);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [serverResponse, setServerResponse] = useState(true);
+  const [serverResponse, setServerResponse] = useState(false);
   const [confirmationOpen, setConfirmationOpen] = useState(false);
-  const [confirmationId,setConfirmationId] = useState(null);
-  const [confirmationType,setConfirmationType] = useState(false);
+  const [confirmationId, setConfirmationId] = useState(null);
+  const [confirmationType, setConfirmationType] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchAllOffices());
-  }, [dispatch, serverResponse]);
-
-  // const removeSedeHandler = async (id) => {
-  //   //const id = event.target.name;
-  //   let text = "Esta acción no se podrá revertir!\nPulse OK o Cancelar.";
-  //   if (true) {
-  //     //console.log(id);
-  //     // Eliminar directamente del servidor
-  //    await fetch("https://musclelabii.onrender.com/branchoffice/delete/" + id, { method: "DELETE" })
-  //       .then((response) => {
-  //         if (response.status === 200) {
-  //           // Eliminación exitosa
-  //           setServerResponse(true);
-  //           alert("Borrado con éxito!");
-
-  //           dispatch(clearOffice(id));
-  //         } else if (response.status === 400) {
-  //           // Error en el servidor
-  //           setServerResponse(false);
-  //           return response.json();
-  //         } else {
-  //           // Otro código de estado
-  //           throw new Error("Error de red");
-  //         }
-  //       })
-  //       .then((data) => {
-  //         // Manejar el mensaje de error del servidor
-  //         if (data && data.error) {
-  //         // alert(data.error);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //       // alert(error.message);
-  //       });
-  //   } else {
-  //    //alert("Cancelado por el usuario");
-  //   }
-  // }
-
-  // const removeSedeHandler = async (id) => {
-  //   const confirmation = window.confirm(
-  //     "Esta acción no se podrá revertir!\nPulse OK o Cancelar."
-  //   );
-
-  //   if (confirmation) {
-  //     try {
-  //       await fetch(`${URL}/branchoffice/delete/${id}`, { method: "DELETE" });
-
-  //       setServerResponse(true);
-  //       alert("Borrado con éxito!");
-
-  //       dispatch(clearOffice(id));
-  //     } catch (error) {}
-  //   } else {
-  //     alert("Cancelado por el usuario");
-  //   }
-  // };
+    dispatch(fetchAllOfficesDashboard());
+  }, [dispatch]);
 
   const removeSedeHandler = async (id) => {
     setConfirmationOpen(true);
     setConfirmationId(id);
   };
-  
+
   const handleConfirmation = async (id) => {
-  try {
-    await fetch(`${URL}/branchoffice/delete/${id}`, { method: "DELETE" });
+    try {
+      await fetch(`${URL}/branchoffice/delete/${id}`, { method: "DELETE" });
 
-    setServerResponse(true);
-    // Mostrar el mensaje de éxito utilizando un modal de React o cualquier otro componente de notificación.
+      setServerResponse(true);
+      dispatch(clearOfficeDashboard(id));
+      setConfirmationType(true);
+    } catch (error) {
+      // Manejar el error si ocurre.
+    }
 
-    dispatch(clearOffice(id));
-      setConfirmationType(true)
+    setConfirmationOpen(false);
+  };
 
-  } catch (error) {
-    // Manejar el error si ocurre.
-  }
-
-  setConfirmationOpen(false);
-};
-
+  const eliminadoCorrectamente = () => {
+    setConfirmationType(false);
+  };
 
   return (
     <div className={style.BigBigContainer}>
@@ -118,61 +66,72 @@ const SedesDash = () => {
         <Link to="/dashboard/sedes/crear">
           <button className={style.button}>Crear Sede</button>
         </Link>
-
+        {status === "loading" && <img className={style.LoadingIcon} src={loadingGif} alt="" />}
         <div className={style.contenedor}>
           {sedes ? (
             sedes?.map((sede) => {
               return (
                 <div className={style.todo} key={sede.id}>
                   <div className={style.detalle}>
-                    <h2 className={style.texto}>Nombre: {sede.name}</h2>
-                    <h2 className={style.texto}>Dirección: {sede.location}</h2>
-                    <h2 className={style.texto}>
-                      Días: {sede.scheduleDays?.join(", ")}
-                    </h2>
-                    <h2 className={style.texto}>
-                      Horario de atanción: {sede.scheduleHourStart}hs -{" "}
-                      {sede.scheduleHourFinish}hs
-                    </h2>
+                    <img src={sede.image} alt="imagen" className={style.imagen} />
+                    <div className={style.info}>
+                      <h2 className={style.texto}>Nombre: {sede.name}</h2>
+                      <h2 className={style.texto}>Dirección: {sede.location}</h2>
+                      <h2 className={style.texto}>
+                        Días: {sede.scheduleDays?.join(", ")}
+                      </h2>
+                      <h2 className={style.texto}>
+                        Horario de atanción: {sede.scheduleHourStart}hs - {sede.scheduleHourFinish}hs
+                      </h2>
+                    </div>
 
                     <div className={style.divCont}>
-                      <Link to={`editar/${sede.id}`}>
-                        <button className={style.btnIcono1}>
-                          <img src={edit} alt="edit" className={style.icono} />
+                      <div className={style.botones}>
+                        <Link to={`editar/${sede.id}`}>
+                          <button className={style.btnIcono1}>
+                            <img src={edit} alt="edit" className={style.icono} />
+                          </button>
+                        </Link>
+                        <button
+                          className={style.btnIcono2}
+                          onClick={() => removeSedeHandler(sede.id)}
+                          name={sede.id}
+                        >
+                          <img src={trash} alt="trash" className={style.icono} />
                         </button>
-                      </Link>
-                      <button
-                        className={style.btnIcono2}
-                        onClick={() => removeSedeHandler(sede.id)}
-                        name={sede.id}
+                      </div>
+
+                      <ReactModal
+                        className={style.modal}
+                        isOpen={confirmationOpen}
+                        onRequestClose={() => setConfirmationOpen(true)}
                       >
-                        <img src={trash} alt="trash" className={style.icono} />
-                      </button>
+                        <h2 className={style.text}>Confirmación</h2>
+                        <p className={style.text}>Esta acción no se podrá revertir!</p>
+                        <p className={style.text}>Pulse OK o Cancelar.</p>
+                        <div className={style.botones}>
+                          <button className={style.SaveButton} onClick={() => handleConfirmation(confirmationId)}>
+                            OK
+                          </button>
+                          <button className={style.DeleteButton} onClick={() => setConfirmationOpen(false)}>
+                            Cancelar
+                          </button>
+                        </div>
+                      </ReactModal>
 
-  <ReactModal  className={style.modal}isOpen={confirmationOpen} onRequestClose={() => setConfirmationOpen(true)}>
-  <h2 className={style.text}>Confirmación</h2>
-  <p className={style.text}>Esta acción no se podrá revertir!</p>
-  <p className={style.text}>Pulse OK o Cancelar.</p>
-  <div className={style.botones}>
-  <button className={style.SaveButton} onClick={() => handleConfirmation(confirmationId)}>OK</button>
-  <button className={style.DeleteButton} onClick={() => setConfirmationOpen(false)}>Cancelar</button>
-  </div>
-</ReactModal>
-
-<ReactModal  className={style.modal} isOpen={confirmationType} onRequestClose={() => setConfirmationType(true)}>
-  <h2 className={style.text}>Confirmación</h2>
-  <p className={style.text}>Sede borrada con exito</p>
-  
-  <div className={style.botones}>
-  <button className={style.SaveButton} onClick={() => handleConfirmation(confirmationId)}>OK</button>
-
-  </div>
-  </ReactModal>
-{/* const handleDeleteOk = ()=>{
-  handleConfirmation(confirmationId)
-  setConfirmationOpen(false)
-} */}
-
+                      <ReactModal
+                        className={style.modal}
+                        isOpen={confirmationType}
+                        onRequestClose={() => setConfirmationType(true)}
+                      >
+                        <h2 className={style.text}>Confirmación</h2>
+                        <p className={style.text}>Sede borrada con éxito</p>
+                        <div className={style.botones}>
+                          <button className={style.SaveButton} onClick={eliminadoCorrectamente}>
+                            OK
+                          </button>
+                        </div>
+                      </ReactModal>
                     </div>
                   </div>
                 </div>

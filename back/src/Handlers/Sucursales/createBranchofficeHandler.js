@@ -20,8 +20,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const createNewBranchOffice = async (req, res) => {
-  const lessonAttributes = JSON.parse(req.body.lessonAttributes);
-  console.log(lessonAttributes);
+  console.log("este es el req.file: ", req.file);
+  console.log("este es el req.body: ", req.body);
+  const officeAttributes = JSON.parse(req.body.officeAttributes);
+  
   const {
     id,
     name,
@@ -29,9 +31,9 @@ const createNewBranchOffice = async (req, res) => {
     scheduleDays,
     scheduleHourStart,
     scheduleHourFinish,
-  } = lessonAttributes;
+  } = officeAttributes;
   try {
-    const uploadedImage = await cloudinary.uploader.upload(req.file.path);
+   const uploadedImage = await cloudinary.uploader.upload(req.file.path);
     
     const newBranchOffice = await createBranchOffice(
       id,
@@ -50,6 +52,7 @@ const createNewBranchOffice = async (req, res) => {
       branchOffice: newBranchOffice,
     });
   } catch (error) {
+    console.log(error)
     res.status(400).json(error.message);
   }
 };

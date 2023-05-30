@@ -5,6 +5,7 @@ import { fetchAllLessonTypes, selectAllLessonTypes } from '../../redux/features/
 import { useEffect, useState } from 'react';
 import FilterBar from '../FilterBar/FilterBar';
 import Lesson from '../Lesson/Lesson';
+import LessonMobile from '../LessonMobile/LessonMobile';
 
 const Lessons = () => {
     const dispatch = useDispatch();
@@ -20,21 +21,32 @@ const Lessons = () => {
     };
     
     useEffect(() => {
-        window.scrollTo({top: 0, left:0, behavior: 'auto'})
         dispatch(fetchAllLessons());
         dispatch(fetchAllLessonTypes());
     }, [dispatch]);
+    
+    useEffect(() => {
+        window.scrollTo({top: 0, left:0, behavior: 'auto'})
+
+    }, [])
 
     
 
     return (
             <div className={style.Frame}>  
-            <FilterBar lessonsAtributtes= {lessonTypes} retryButton ={retryButton} setRetryButton={setRetryButton}/>
+            <FilterBar lessonsAttributes= {lessonTypes} retryButton ={retryButton} setRetryButton={setRetryButton}/>
             <div className={style.Container}>
                 {error && <div className={style.Error}>{error}</div>}
                 {error && <button className ={style.RetryButton}onClick={handleRetryClick}>Intenta de nuevo</button>}
                 {lessons.map((lesson, index)=> {
                     return <Lesson key={lesson.id} lesson={lesson} index={index} />
+                })}
+            </div>
+            <div className={style.ContainerMobile}>
+                {error && <div className={style.Error}>{error}</div>}
+                {error && <button className ={style.RetryButton}onClick={handleRetryClick}>Intenta de nuevo</button>}
+                {lessons.map((lesson, index)=> {
+                    return <LessonMobile key={lesson.id} lesson={lesson} index={index} />
                 })}
             </div>
             </div>
