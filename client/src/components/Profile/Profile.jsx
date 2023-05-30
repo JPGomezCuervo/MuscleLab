@@ -84,6 +84,22 @@ const Profile = () => {
           <h2>Numero de teléfono</h2>
           {phone ? <p>{user.phone} </p> : <p>No proporcionado</p>}
         </div>
+
+        {membresia ? (
+          <div className={style.info}>
+            <h2>Membresia {membresia?.name}</h2>
+            <div className={style.membInfo}>
+              <h3>Inicio: </h3>
+              <p>
+                {membresia?.start.split("T")[0].split("-").reverse().join("-")}
+              </p>
+              <h3>Fin: </h3>
+              <p>{membresia?.end.split("T")[0].split("-").reverse().join("-")}</p>
+            </div>
+          </div>
+        ) : (
+          <p style={{ color: "red" }}>No tienes una membresía activa</p>
+        )}
         <hr />
         <Link to={`/profile/editar/${id}`}>
           <button className={style.ButtonEdit}>Editar perfil</button>

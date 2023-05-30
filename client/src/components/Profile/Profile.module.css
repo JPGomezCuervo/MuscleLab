@@ -30,6 +30,14 @@
   font-weight: 400;
   text-align: left;
 }
+.container h3 {
+  font-family: "Montserrat-Medium";
+  font-size: 1rem;
+  color: #202124;
+  font-weight: 400;
+  text-align: left;
+}
+
 .insignias {
   display: flex;
   justify-content: start;
@@ -51,7 +59,6 @@
   margin-left: 1rem;
 }
 .insignias span:nth-child(3) {
- 
   margin-left: 1rem;
 }
 .Description {
@@ -76,4 +83,9 @@
   cursor: pointer;
   width: 10rem;
   margin: 0 auto;
+}
+.membInfo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
