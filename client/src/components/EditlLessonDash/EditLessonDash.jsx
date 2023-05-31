@@ -327,7 +327,7 @@ class DetailLessonDash extends Component {
                      });
                 }).catch((err) => {
                     this.setState({
-                        serverErrorResponse: err.message,
+                        serverErrorResponse: 'La clase no pudo ser editada',
                         message: '',
                     });
                 });

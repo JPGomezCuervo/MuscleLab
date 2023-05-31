@@ -148,7 +148,7 @@ class EditLessonDash extends Component {
         });
         
     };
-    
+
     handleTrainerOptions = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -316,7 +316,7 @@ handleBranchOfficeOptions = (event) => {
         .then((res) => {
             console.log(res);
             this.setState({
-                serverResponse: res.data.message,
+                serverResponse: "La clase no pudo ser creada",
                 message: '',
              });
         }).catch((err) => {
