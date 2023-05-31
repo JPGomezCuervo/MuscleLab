@@ -110,7 +110,9 @@ const DetailLesson = () => {
             <>
               <div className={style.conteinerTodo}>
                 <h1 className={style.h1}>{lesson?.name}</h1>
-                <h2 className={style.text}>Rating promedio: {lesson?.averageStars}</h2>
+                <h2 className={style.text}>
+                  Rating promedio: {lesson?.averageStars}
+                </h2>
                 <div className={style.fondoinstrYHor}>
                   <div className={style.conjuntoMujerycaja}>
                     <div className={style.fondoMujer}>
@@ -143,30 +145,35 @@ const DetailLesson = () => {
                   <div className={style.fondoBrad}>
                     <h2 className={style.instructor}>Instructor:</h2>
                     <h2 className={style.instructor}>{lesson?.monitors}</h2>
+                    {usuario?.membresia ? (<>
                     <h2 className={style.instructor}>Añadir clase</h2>
-                    <img
-                      onClick={() => {
-                        handleAdd(lesson.id);
-                      }}
-                      src={plus}
-                      alt="instructor"
-                      className={style.img}
-                    />
+                      <img
+                        onClick={() => {
+                          handleAdd(lesson.id);
+                        }}
+                        src={plus}
+                        alt="instructor"
+                        className={style.img}
+                      />
+                      </>
+                    ) : (
+                      <div></div>
+                    )}
                   </div>
                 </div>
 
                 <div className={style.detalleparrafo}>
                   <p className={style.txt}>{lesson.description}</p>
                 </div>
-                <h2 className={style.text} >Comentarios:</h2>
-                <div className={style.detalleparrafo} >
+                <h2 className={style.text}>Comentarios:</h2>
+                <div className={style.detalleparrafo}>
                   {lesson?.reviews?.map((rev) => {
                     return (
-                      <div className={style.comment} >
+                      <div className={style.comment}>
                         <h4>{rev.user}</h4>
                         <p>{rev.description}</p>
                       </div>
-                    )
+                    );
                   })}
                 </div>
                 {usuario?.membresia ? (
