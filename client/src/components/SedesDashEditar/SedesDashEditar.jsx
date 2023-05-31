@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import style from "./SedesDashEditar.module.css";
+import style from "../SedesDashEditar/SedesDashEditar.module.css";
 import arrowIcon from "../../assets/icons/arrow-yellow.png";
 import { validate } from "../SedesDashCrear/validation";
 import { weekDays } from "../../utils/constants";
@@ -19,7 +19,7 @@ const SedesDashEditar = () => {
     scheduleHourStart: "",
     scheduleHourFinish: "",
   });
-  
+
   const [errors, setErrors] = useState({
     name: "",
     image: "",
@@ -44,7 +44,7 @@ const SedesDashEditar = () => {
           ),
           image: response.data.branchoffice.image,
         });
-        
+
         setDias(response.data.branchoffice.scheduleDays);
         setSedeEditada(response.data.branchoffice);
       })
@@ -320,7 +320,6 @@ const SedesDashEditar = () => {
             <div className={style.FileInput}>
               <label>Imagen*</label>
               <input
-                
                 id="image"
                 type="file"
                 name="image"
@@ -330,7 +329,7 @@ const SedesDashEditar = () => {
 
             {errors.image && <p className={style.Error}>{errors.image}</p>}
 
-            <div className={style.leftContainer}>
+            {/* <div className={style.leftContainer}>
               {imagePreviewUrl && (
                 <div className={style.ImageContainer}>
                   {<img src={imagePreviewUrl} alt="Tu imagen" />}
@@ -341,32 +340,33 @@ const SedesDashEditar = () => {
                   {sedes.image && <img src={sedes.image} alt="Tu imagen" />}
                 </div>
               )}
+            </div> */}
+            <div className={style.btn}>
+              <button
+                onClick={() => {
+                  if (
+                    errors.name ||
+                    errors.location ||
+                    !validateHours() ||
+                    !validatedays()
+                  ) {
+                    setModalErrorAbierta(true); // Abre la ventana modal de error si hay errores
+                  } else {
+                    setModalConfirmacionAbierta(true); // Abre la ventana modal de confirmación
+                  }
+                }}
+                className={style.SaveButton}
+              >
+                Guardar cambios
+              </button>
+              <button
+                type="button"
+                onClick={() => setModalConfirmacionAbierta1(true)}
+                className={style.DeleteButton}
+              >
+                Eliminar
+              </button>
             </div>
-
-            <button
-              onClick={() => {
-                if (
-                  errors.name ||
-                  errors.location ||
-                  !validateHours() ||
-                  !validatedays()
-                ) {
-                  setModalErrorAbierta(true); // Abre la ventana modal de error si hay errores
-                } else {
-                  setModalConfirmacionAbierta(true); // Abre la ventana modal de confirmación
-                }
-              }}
-              className={style.SaveButton}
-            >
-              Guardar cambios
-            </button>
-            <button
-              type="button"
-              onClick={() => setModalConfirmacionAbierta1(true)}
-              className={style.DeleteButton}
-            >
-              Eliminar
-            </button>
 
             <div className={style.content}>
               <ReactModal
