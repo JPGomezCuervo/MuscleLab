@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { URL } from "../../utils/constants";
 import style from "./DetailLesson.module.css";
 import brad from "../../assets/images/detail/brad.jpeg";
+import plus from "../../assets/icons/plus.png";
 import NavBar from "../NavBar/NavBar";
 import { useParams, Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
@@ -61,26 +62,11 @@ const DetailLesson = () => {
         setServerResponse(error.data);
       });
   };
-  // const validationDescription = (e) => {
-  //   if (e.target.value.length > 200) {
-  //     error.name = "La descripcion tiene mucho caracteres";
-  //   } else {
-  //     error.name = null;
-  //   }
-  // };
-  // const handleDescription = (e) => {
-  //   e.preventDefault();
-  //   validationDescription(e);
-  //   setInput({
-  //     ...input,
-  //     name: e.target.value,
-  //   });
-  // };
   const handleAdd = async (id) => {
-    console.log(decoded.id);
     const response = await axios.put(`${URL}/users/addlesson/${id}`, {
       idUser: decoded.id,
     });
+    alert(response);
     console.log(response);
   };
   return (
@@ -123,16 +109,17 @@ const DetailLesson = () => {
                   </div>
 
                   <div className={style.fondoBrad}>
+                    <h2 className={style.instructor}>Instructor:</h2>
+                    <h2 className={style.instructor}>{lesson?.monitors}</h2>
+                    <h2 className={style.instructor}>Añadir clase</h2>
                     <img
                       onClick={() => {
                         handleAdd(lesson.id);
                       }}
-                      src={brad}
+                      src={plus}
                       alt="instructor"
                       className={style.img}
                     />
-                    <h2 className={style.instructor}>Instructor:</h2>
-                    <h2 className={style.instructor}>{lesson?.monitors}</h2>
                   </div>
                 </div>
 
