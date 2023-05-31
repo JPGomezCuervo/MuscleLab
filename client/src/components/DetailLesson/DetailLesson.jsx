@@ -62,15 +62,37 @@ const DetailLesson = () => {
         setServerResponse(error.data);
       });
   };
+  const repeated = async (idUser, idLesson) => {
+    try {
+      const responseUser = await axios.get(`${URL}/users/${idUser}`);
+      const responseLesson = await axios.get(
+        `${URL}/lessons/detail/${idLesson}`
+      );
+
+      const clasesUsuario = responseUser.data.user.detalle.lessonDetails;
+      const claseSeleccionada = responseLesson.data.name;
+
+      return clasesUsuario.some((lesson) => lesson.name === claseSeleccionada);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
   const handleAdd = async (id) => {
     try {
-      const response = await axios.put(`${URL}/users/addlesson/${id}`, {
-        idUser: decoded.id,
-      });
-      console.log(response.data);
-      alert(response.data.exito);
+      const isRepeated = await repeated(decoded.id, id);
+
+      if (isRepeated) {
+        alert("El usuario ya tiene esa clase");
+      } else {
+        const response = await axios.put(`${URL}/users/addlesson/${id}`, {
+          idUser: decoded.id,
+        });
+
+        alert(response.data.exito);
+      }
     } catch (error) {
-      console.log(error.response.data);
       alert(error.response.data.error);
     }
   };
