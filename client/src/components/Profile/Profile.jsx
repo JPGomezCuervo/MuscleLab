@@ -54,9 +54,9 @@ const Profile = () => {
     }
   };
 
-  const deleteClass = async (id)=>{
+  const deleteClass = async (id) => {
     try {
-      const response=await axios.put(`${URL}/users/removeLesson/${id}`, {idUser:decoded.id});
+      const response = await axios.put(`${URL}/users/removeLesson/${id}`, { idUser: decoded.id });
       alert(response.data.success);
     } catch (error) {
       alert(error.message);
@@ -114,11 +114,7 @@ const Profile = () => {
           <div className={style.info}>
             <h2>Mis Clases</h2>
             {clases.map((clase, index) => (
-              <>
-                <p>{clase.name}</p>
-                {console.log(clase)}
-                <button onClick={()=>{deleteClass(clase.name)}} >X</button>
-              </>
+              <p>{clase.name}</p>
             ))}
           </div>
         ) : (
