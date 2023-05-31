@@ -71,9 +71,10 @@
     font-size: .9rem;
 }
 
-.FileInput  {
+.FileInput input  {
     background-color: #ffffff;
     text-align: center;
+    border: 0;
 }
 
 .FileInput input {
