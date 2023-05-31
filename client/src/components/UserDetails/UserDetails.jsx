@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { useAuth0 } from "@auth0/auth0-react";
 import style from '../UserDetails/UserDetails.module.css'; 
+import Calendar from '../Calendar/Calendar';
 
 
 function UserDetails() {
@@ -14,7 +15,7 @@ return (
     
      
     <div className={style.userDetails}>
-      {!isAuthenticated && <h3 className={style.userAccessCard}>Acceso denegado...</h3>}
+      {/* {!isAuthenticated && <h3 className={style.userAccessCard}>Acceso denegado...</h3>}
       {isAuthenticated &&
       <div className={style.userDetailsCard}>
         <div className={style.userDetailsHeader}>
@@ -57,8 +58,8 @@ return (
           
           <button className={style.userBtn3}>Ver medios de pago!</button>
 
-        </div>}
-      
+        </div>} */}
+      <Calendar/>
     </div>
   );
 }
