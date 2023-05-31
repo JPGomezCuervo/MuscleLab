@@ -8,10 +8,17 @@
     
     margin-top: 2rem;    
     display: flex;
-    flex-wrap: wrap;
-    height: 60vh;
+    flex-direction: column;
+   align-items: center;
+   width: auto;
 
 }
+.LoadingIcon {
+  position: absolute;
+  top: 50%;
+  left: 45rem;
+  transform: translate(-50%, -50%);
+  }
 
 /* .card{
     background-color: violet;
@@ -25,14 +32,14 @@
 } */
 
 .detalle {
-    box-sizing: border-box;
+    /* box-sizing: border-box;
     width: 35rem;
     height: 25rem;
     background: rgba(255, 255, 255, 0.58);
     border: 1px solid white;
     box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
     /* backdrop-filter: blur(6px); */
-    border-radius: 17px;
+    /* border-radius: 17px;
     text-align: center;
     cursor: pointer;
     transition: all 0.5s;
@@ -44,8 +51,30 @@
     margin-right: 3rem;
     user-select: none;
     font-weight: bolder;
+    color: black; */ 
+
+    box-sizing: border-box;
+    width: 75rem;
+    min-height: 17rem;
+    background: rgba(255, 255, 255, 0.58);
+    box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+    /* backdrop-filter: blur(6px); */
+    border-radius: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left:3rem;
+    margin-right: 3rem;
+    user-select: none;
+    font-weight: bolder;
     color: black;
   }
+
   
   .detalle:hover {
     border: 1px solid black;
@@ -64,8 +93,9 @@
 
 .todo{
     
-    width: 40rem;
-    margin-left: 2rem;
+    width: 80rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     
 }
 
@@ -151,3 +181,128 @@
 .button:hover{
 background-color:#002141;
 }
+/* //////////////////////// */
+
+
+.modal{
+ 
+  flex-direction: column;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+  background-color: white;
+  box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+  border-radius: .4rem;
+  min-height: 20rem;
+  min-width: 30rem;
+}
+
+
+
+.text{
+  font-family: 'Montserrat-Medium';
+  font-weight: 600;
+  color: #013565;
+  text-align: center;
+  width: 27rem;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  font-size: 1.5rem;
+}
+
+.botones{
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 15rem; 
+ margin-bottom: 1rem;
+
+}
+
+.modalButton{
+  height: 4rem;
+  width: 10rem;
+  color: #ffffff;
+  background-color: #ffc300;
+  border-radius: 0.4rem;
+  border: 0;
+  font-family: "Montserrat-Bold";
+  font-size: 2rem;
+
+}
+
+.modalButton:hover {
+  background-color: #ffaf00;
+}
+.modalButton:active {
+  background-color: #ffc300;
+}
+
+.contenedorBoton{
+  display: flex;
+  align-items: center;
+ 
+}
+
+.SaveButton {
+  height: 3rem;
+  color: #ffffff;
+  width: 13rem;
+  background-color: #ffc300;
+  border: 0;
+  border-radius: 0.4rem;
+  font-family: "Montserrat-Bold";
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: 0.2s;
+  display: block;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+
+.SaveButton:hover {
+  background-color: #ffaf00;
+}
+.SaveButton:active {
+  background-color: #ffc300;
+}
+
+.DeleteButton {
+  width: 12rem;
+  height: 3rem;
+  color: #ffffff;
+  background-color: #e11d1d;
+  border: 0;
+  border-radius: 0.4rem;
+  font-family: "Montserrat-Bold";
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: 0.2s;
+  float: right;
+  margin-right: 10%;
+  margin-top: 3rem;
+}
+
+.DeleteButton:hover {
+  background-color: rgb(182, 22, 22);
+}
+
+.DeleteButton:active {
+  background-color: #e11d1d;
+}
+
+
+.imagen{
+  width: 15rem;
+  height: 15rem;
+  border-radius: .8rem;
+  margin-left: 1rem;
+}
+

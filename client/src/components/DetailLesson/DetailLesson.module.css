@@ -123,7 +123,6 @@ border-radius: .4rem;
 }
 
 .button{
-    margin: auto 0;
     height: 3rem;
     color: #ffffff;
     background-color:#013565;
@@ -134,8 +133,8 @@ border-radius: .4rem;
     font-size: 2rem;
     cursor: pointer;
     transition: .2s;
-    margin-left: 2rem;
-    margin-top: 3rem;
+    display: block;
+    margin: 0 auto;
 }
 
 .button:hover{
@@ -157,9 +156,18 @@ background-color:#002141;
     margin-right: 3%;
     
 }
+.card h2{
+  display: block;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
 
 .button3:hover{
     background-color: #FFAF00;
+}
+
+.PhoneContainer{
+    display:none;
 }
 
 
@@ -172,3 +180,161 @@ background-color:#002141;
     margin-left: 3%;
     padding-right: 3rem;
 }
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    
+    --stroke: #666;
+    --fill: #ffc73a;
+  }
+  
+  .rating input {
+    appearance: unset;
+    display: none;
+  }
+  
+  .rating label {
+    cursor: pointer;
+  }
+  
+  .rating svg {
+    width: 3rem;
+    height: 3rem;
+    overflow: visible;
+    fill: transparent;
+    stroke: var(--stroke);
+    stroke-linejoin: bevel;
+    stroke-dasharray: 12;
+    animation: idle 4s linear infinite;
+    transition: stroke 0.2s, fill 0.5s;
+  }
+  
+  @keyframes idle {
+    from {
+      stroke-dashoffset: 24;
+    }
+  }
+  
+  .rating label:hover svg {
+    stroke: var(--fill);
+  }
+  
+  .rating input:checked ~ label svg {
+    transition: 0s;
+    animation: idle 4s linear infinite, yippee 0.75s backwards;
+    fill: var(--fill);
+    stroke: var(--fill);
+    stroke-opacity: 0;
+    stroke-dasharray: 0;
+    stroke-linejoin: miter;
+    stroke-width: 8px;
+  }
+  
+  @keyframes yippee {
+    0% {
+      transform: scale(1);
+      fill: var(--fill);
+      fill-opacity: 0;
+      stroke-opacity: 1;
+      stroke: var(--stroke);
+      stroke-dasharray: 10;
+      stroke-width: 1px;
+      stroke-linejoin: bevel;
+    }
+  
+    30% {
+      transform: scale(0);
+      fill: var(--fill);
+      fill-opacity: 0;
+      stroke-opacity: 1;
+      stroke: var(--stroke);
+      stroke-dasharray: 10;
+      stroke-width: 1px;
+      stroke-linejoin: bevel;
+    }
+  
+    30.1% {
+      stroke: var(--fill);
+      stroke-dasharray: 0;
+      stroke-linejoin: miter;
+      stroke-width: 8px;
+    }
+  
+    60% {
+      transform: scale(1.2);
+      fill: var(--fill);
+    }
+  }
+  .text{
+    background-color: #ffc73a;
+    width: 100%;
+    border-radius: 2rem;
+    
+  }
+  .card{
+    border-radius: 2rem; 
+    display: grid;
+    justify-content: center;
+    width: 60%;
+    margin: auto;
+    height: 26rem;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+  }
+
+
+@media screen and (max-width: 414px){
+    .PhoneContainer{
+        display: initial;
+        padding-top: 4rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-bottom: 2rem;
+        margin: 0 auto;
+        margin-bottom: 1.5rem;
+        background-color:white;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+        border-radius: .7rem;
+        
+    }
+    .conteinerTodo{
+        display: none;
+    }
+
+    .PhoneHorarios{
+        font-family: 'Montserrat-Regular';
+        font-weight: 100;
+        color: #013565;
+    }
+
+    .PhoneHorarios h2{
+        font-weight: 100;
+    }
+
+    .PhoneHorarios span{
+        display: inline-block;
+        font-weight: 900;
+        padding-right: 1rem;
+    }
+
+    .img{
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+    }
+
+    .PhoneInstructorContainer h2{
+        font-size: 1.5rem;
+        font-weight: 900;
+    }
+
+    .card{
+      width: 90%;
+    }
+}
+

@@ -2,9 +2,11 @@ const { BranchOffice } = require("../../db");
 let updateBranchOffice = async (
   id,
   name,
+  image,
   location,
   scheduleDays,
-  scheduleHours
+  scheduleHourStart,
+  scheduleHourFinish
 ) => {
   let toUpdate = await BranchOffice.findOne({ where: { id: id } });
   if (!toUpdate) {
@@ -12,11 +14,12 @@ let updateBranchOffice = async (
   }
   await toUpdate.update({
     name: name,
+    image,
     location: location,
     scheduleDays: scheduleDays,
-    scheduleHours: scheduleHours,
+    scheduleHourStart: scheduleHourStart,
+    scheduleHourFinish: scheduleHourFinish,
   });
   return `Sucursal ${toUpdate.name} fue editada con exito`;
-
 };
 module.exports = updateBranchOffice;

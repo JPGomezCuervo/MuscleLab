@@ -2,16 +2,22 @@ import React from "react";
 import style from "./NavBar.module.css";
 import iconMan from "../../assets/icons/man-silhouette.png";
 import iconWeight from "../../assets/icons/dumbbell.png";
+import menuIcon from "../../assets/icons/menu.png";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setPlansCLick } from "../../redux/features/utilsSlice";
 import SignUp from "../SignUp/SignUp";
-import { useAuth0 } from "@auth0/auth0-react";
-import axios from "axios";
 import adminIcon from "../../assets/icons/admin.png";
+import { selectIsActive, setIsActive } from "../../redux/features/authSlice";
+import { useSelector } from "react-redux";
+import jwt_decode from "jwt-decode";
+
 
 const NavBar = () => {
+  const token = localStorage.getItem("token");
+  const isAdmin = token ? jwt_decode(token).isAdmin : false;
   const dispatch = useDispatch();
+  const isActive = useSelector(selectIsActive);
 
   const handleClickLogo = () => {
     window.location.href = "/";
@@ -19,20 +25,9 @@ const NavBar = () => {
   const handleClickPlan = () => {
     dispatch(setPlansCLick(true));
   };
-
-  const {
-    loginWithPopup,
-    //loginWithRedirect,
-    logout,
-    user,
-    isLoading,
-    error,
-    isAuthenticated,
-    getAccessTokenSilent,
-  } = useAuth0();
-  const token = localStorage.getItem("token");
   const handleLogOut = () => {
     localStorage.removeItem("token");
+    dispatch(setIsActive(false));
   };
 
   return (
@@ -42,7 +37,7 @@ const NavBar = () => {
           <img
             className={style.IconMan}
             src={iconMan}
-            alt="Icono silueta de hombre"
+            alt=""
           />
           <h2>Muscle Lab</h2>
           <img
@@ -51,74 +46,127 @@ const NavBar = () => {
             alt="Icono de pesa"
           />
         </div>
-        <div className={style.OpcionsContainer}>
-          <Link to={"/sedes"}>
-            <p className={style.Navbutton}>Sedes</p>
-          </Link>
 
-          <a className={style.Navbutton} href="http://localhost:3000/clases">
-            Clases
-          </a>
+        <input
+          type="checkbox"
+          className={style.Checkbox}
+          name="checkbox"
+          id="checkbox"
+        />
+        <label className={style.Label} htmlFor="checkbox">
+          <img src={menuIcon} alt="" />
+        </label>
 
-          <Link to={"/nosotros"}>
-            <p className={style.Navbutton}>Nosotros</p>
-          </Link>
+        <div className={style.DropMenuPhoneContainer}>
+          <ul className={style.OptionsContainer}>
+            <li>
+              <Link to={"/sedes"}>
+                <p className={style.Navbutton}>Sedes</p>
+              </Link>
+            </li>
 
-          <Link to={"/contactanos"}>
-            <p className={style.Navbutton}>Contáctanos</p>
-          </Link>
+            <li>
+              <a className={style.Navbutton} href="/clases">
+                <p>Clases</p>
+              </a>
+            </li>
+
+            <li>
+              <Link to={"/nosotros"}>
+                <p className={style.Navbutton}>Nosotros</p>
+              </Link>
+            </li>
+
+            <li>
+              <Link to={"/contactanos"}>
+                <p className={style.Navbutton}>Contáctanos</p>
+              </Link>
+            </li>
+          </ul>
         </div>
-        <Link to={"/"} className={style.btnPlanes} onClick={handleClickPlan}>
-          <button className={style.btnPlanes}>Planes</button>
-        </Link>
+        {!isActive && (
+          <Link to={"/"} className={`${style.btnPlanes} ${style.BtnLink}`} onClick={handleClickPlan}>
+            <button className={style.btnPlanes}>Planes</button>
+          </Link>
 
-        <div className={style.LogOpcions}>
-          {/* <Link to={"/login"}> */}
+        )}
+
+        {token && !isActive && (<div className={style.LogOpciones2}>
+          {isAdmin && (
+            <Link to="dashboard/clases">
+              <button className={style.btnRegistro1}>dashboard</button>
+            </Link>
+          )}
           {token && (
-            <Link to="dashboard">
-              <button className={style.btnRegistro1} >dashboard</button>
+            <Link to="/profile">
+              <button className={style.btnRegistro1}>Mi Perfil</button>
             </Link>
           )}
-
-          <Link to="/login">
-            <button className={style.btnRegistro1} onClick={handleLogOut}>
-              logout
-            </button>
-          </Link>
-          {!isAuthenticated && (
-            <button className={style.btnRegistro1} onClick={loginWithPopup}>
-              Sign Up / Login
-            </button>
+          {token ? (
+            <Link to="/login">
+              <button className={style.btnRegistro1} onClick={handleLogOut}>
+                Cerrar Sesión
+              </button>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <button className={style.btnRegistro1} >
+                Iniciar sesión
+              </button>
+            </Link>
           )}
+        </div>)}
 
-          {error && <p>Authentication Error</p>}
-          {!error && isLoading && <p>Loading...</p>}
-          {!error && !isLoading && isAuthenticated && (
-            <button className={style.btnRegistro} onClick={logout}>
-              Cerrar sesion
-            </button>
+        {token && isActive && (
+          <div className={style.LogOpcions}>
+          {isAdmin && (
+            <Link to="dashboard/clases">
+              <button className={style.btnRegistro1}>dashboard</button>
+            </Link>
           )}
+          {token && (
+            <Link to="/profile">
+              <button className={style.btnRegistro1}>Mi Perfil</button>
+            </Link>
+          )}
+          {token ? (
+            <Link to="/login">
+              <button className={style.btnRegistro1} onClick={handleLogOut}>
+                Cerrar Sesión
+              </button>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <button className={style.btnRegistro1} >
+                Iniciar sesión
+              </button>
+            </Link>
+          )}        
+        </div>)}
 
-          {/* </Link> */}
-
-          {isAuthenticated && (
-            <div className={style.userLogin}>
-              <span className={style.userName}>
-                Hola, {user.name.split(" ")[0]}
-              </span>
+        {!token && !isActive && (
+          <div className={style.LogOpcions}>
+          {isAdmin && (
+            <Link to="dashboard/clases">
+              <button className={style.btnRegistro1}>dashboard</button>
+            </Link>
+          )}
+          {token && (
+            <Link to="/profile">
+              <button className={style.btnRegistro1}>Mi Perfil</button>
+            </Link>
+          )}
+          {!token && (
+            <div className={style.LogOpcions4}>
+            <Link to="/login">
+              <button className={style.btnRegistro4} >
+                Iniciar sesión
+              </button>
+            </Link>
             </div>
-          )}
-          {isAuthenticated && (
-            <Link to={"/user-face"}>
-              <img
-                className={style.adminIcon}
-                src={adminIcon}
-                alt={user.name}
-              />
-              {/* {<button className={style.btnRegistro}></button>} */}
-            </Link>
-          )}
-        </div>
+          )}        
+        </div>)}
+
       </nav>
     </>
   );

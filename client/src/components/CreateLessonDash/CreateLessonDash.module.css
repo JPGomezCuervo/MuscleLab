@@ -71,6 +71,17 @@
     font-size: .9rem;
 }
 
+.FileInput  {
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.FileInput input {
+    background-color: #ffffff;
+    text-align: center;
+    margin-left: 5.4rem;
+}
+
 .Teacher{
     background-color: #ffc300;
     color: #013565;
@@ -87,12 +98,13 @@
 
 .ImageContainer{
     margin: 0 auto;
-    width: 20rem;
-    height: 15rem;
+    width: 30rem;
+    height: 25rem;
 }
 .leftContainer img{
     width: 100%;
     height: 100%;
+    border: none;
 }
 
 .leftContainer select{
@@ -370,3 +382,8 @@
     margin-bottom: 2rem; 
     flex-direction: row;
 }
+
+.DetailContainer .Error {
+    color: #E11D1D;
+    font-family: 'Montserrat-Bold';
+  }

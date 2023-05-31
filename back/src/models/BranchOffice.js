@@ -14,15 +14,23 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
       location: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       scheduleDays: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: false,
+      },
+      scheduleHourStart: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      scheduleHours: {
+      scheduleHourFinish: {
         type: DataTypes.STRING,
         allowNull: false,
       },

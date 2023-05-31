@@ -64,6 +64,7 @@
 }
 
 .Title{
+    cursor: pointer;
     background-color: transparent;
     color: white;
     text-align: center;

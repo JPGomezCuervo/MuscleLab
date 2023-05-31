@@ -1,108 +1,326 @@
-.MainConteiner{
-    margin: 0 auto;
-    padding: 0 1rem;
-    padding-top: 2rem;
-    height: 40rem;
-    width: 40rem;
-    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
-    border-radius: .4rem;
-    background-color: rgb(255, 255, 255);
+.MainConteiner {
+  margin: 0 auto;
+  padding: 0 1rem;
+  padding-top: 2rem;
+  height: 40rem;
+  width: 50rem;
+  box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 0.4rem;
+  background-color: rgb(255, 255, 255);
 }
 
+.DaysContainer {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-top: 2rem;
+  justify-content: space-between;
+  text-align: center;
+  width: 100%;
+}
 .BigBigContainer {
-    position: absolute;
-    display: inline-block;
-    width: 80vw;
-  }
+  position: absolute;
+  display: inline-block;
+  width: 80vw;
+}
 
-.ArrowIcon{
-  margin-top: .6rem;
+.ArrowIcon {
+  margin-top: 0.6rem;
   height: 3.5rem;
   transform: rotate(90deg);
-  }
-
-.Description{
-margin-bottom: 1rem;
-width: 30vw;
-}
-.Description input{
-background-color: #f3f3f3;
-padding: 0 1rem;
-width: 100%;
-min-height: 3.5rem;
-margin-top: .4rem;
-margin-left: 2rem;
 }
 
-.SaveButton{
-height: 3rem;
-color: #ffffff;
-width: 13rem;
-background-color: #ffc300;
-border: 0;
-border-radius: 0.4rem;
-font-family: "Montserrat-Bold";
-font-size: 1.25rem;
-cursor: pointer;
-transition: 0.2s;
-display: block;
-margin: 0 auto;
+.Description {
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  width: 90%;
+}
+.Description input {
+  background-color: #f3f3f3;
+  padding: 0 1rem;
+  width: 100%;
+  min-height: 3.5rem;
+  margin-top: 0.4rem;
+  margin-left: 2rem;
 }
 
-.SaveButton:hover{
-background-color: #FFAF00;
-}
-.SaveButton:active{
-background-color: #ffc300;
-}
-
-.DeleteButton{
-margin-left: 12%;
-width: 12rem;
-height: 3rem;
-color: #ffffff;
-background-color: #E11D1D;
-border: 0;
-border-radius: 0.4rem;
-font-family: "Montserrat-Bold";
-font-size: 1.25rem;
-cursor: pointer;
-transition: 0.2s;
+.SaveButton {
+  height: 3rem;
+  color: #ffffff;
+  width: 13rem;
+  background-color: #ffc300;
+  border: 0;
+  border-radius: 0.4rem;
+  font-family: "Montserrat-Bold";
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: 0.2s;
+  display: block;
+  margin: 0 auto;
+  margin-top: 3rem;
 }
 
-.DeleteButton:hover{
-background-color: rgb(182, 22, 22);
+.SaveButton:hover {
+  background-color: #ffaf00;
+}
+.SaveButton:active {
+  background-color: #ffc300;
 }
 
-.DeleteButton:active{
-background-color: #E11D1D;
+
+
+.ButtonContainer {
+  margin: 0 auto;
+  margin-top: 15rem;
+  width: 27.5rem;
+  margin-bottom: 2rem;
 }
 
-.ButtonContainer{
-margin: 0 auto;
-margin-top: 15rem;
-width: 27.5rem;
-margin-bottom: 2rem;
+.texto {
+  font-family: "Montserrat-Bold";
+  font-size: 1.25rem;
+  margin-left: 1rem;
 }
 
-.texto{
-font-family: "Montserrat-Bold";
-font-size: 1.25rem;
-margin-left:1rem;
+.tex {
+  color: #013565;
+  font-family: "Montserrat-Bold";
+  font-size: 2rem;
+  margin-left: 1.3rem;
 }
 
-.tex{
-color: #013565;
-font-family:'Montserrat-Bold';
-font-size: 2rem;
-margin-left: 1.3rem;
-}
-
-.Navigation{
+.Navigation {
   display: flex;
   margin-top: 6rem;
 }
 
-.hr{
-color:#FFAF00
+.hr {
+  color: #ffaf00;
+}
+
+.errores{
+  background-color: #fcfcfc;
+  color: rgb(255, 0, 0);
+  font-size: 1.25rem;
+  height: 2rem;
+  width: fit-content;
+  margin-left: 3rem;
+  font-family:"Montserrat-Bold";
+  
+}
+
+.Options{
+  margin: 0 auto;
+  text-align: center;
+  width: fit-content;
+  display: block;
+  font-family: "Montserrat-Bold";
+  font-size: 1rem;
+  margin-bottom: .5rem;
+}
+
+.select{
+  font-family: "Montserrat-Bold";
+  font-size: 1.30rem;
+}
+
+.check{
+font-size: 1.20rem;
+}
+
+.horario{
+ margin-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+}
+
+
+.modal{
+ 
+  flex-direction: column;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+  background-color: white;
+  box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+  border-radius: .4rem;
+  min-height: 20rem;
+  min-width: 30rem;
+}
+
+
+
+.text{
+  font-family: 'Montserrat-Medium';
+  font-weight: 600;
+  color: #013565;
+  text-align: center;
+  width: 27rem;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  font-size: 1.5rem;
+}
+
+.botones{
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 40rem;
+}
+
+.modalButton{
+  height: 4rem;
+  width: 10rem;
+  color: #ffffff;
+  background-color: #ffc300;
+  border-radius: 0.4rem;
+  border: 0;
+  font-family: "Montserrat-Bold";
+  font-size: 2rem;
+}
+
+.modalButton:hover {
+  background-color: #ffaf00;
+}
+.modalButton:active {
+  background-color: #ffc300;
+}
+
+.contenedorBoton{
+  display: flex;
+  align-items: center;
+ 
+}
+.DeleteButton {
+  width: 12rem;
+  height: 3rem;
+  color: #ffffff;
+  background-color: #e11d1d;
+  border: 0;
+  border-radius: 0.4rem;
+  font-family: "Montserrat-Bold";
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: 0.2s;
+  float: right;
+  margin-right: 10%;
+}
+
+.DeleteButton:hover {
+  background-color: rgb(182, 22, 22);
+}
+
+.DeleteButton:active {
+  background-color: #e11d1d;
+}
+
+
+.DaysContainer input{
+  margin: 0;
+  width: 1rem;
+  height: fit-content;
+  padding: 0;
+}
+
+.DaysContainer p {
+  margin-top: 0;
+}
+
+.SelectorContainer{
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem; 
+  flex-direction: row;
+}
+
+.HourContainer select{
+  display: block;
+  margin: 0 auto;
+}
+
+.FileInput  {
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.FileInput label{
+  display: block;
+}
+
+.FileInput input{
+  background-color: transparent;
+  width: 14rem;
+}
+
+
+.modal{
+ 
+  flex-direction: column;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+  background-color: white;
+  box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+  border-radius: .4rem;
+  min-height: 20rem;
+  min-width: 30rem;
+}
+
+
+
+.text{
+  font-family: 'Montserrat-Medium';
+  font-weight: 600;
+  color: #013565;
+  text-align: center;
+  width: 27rem;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  font-size: 1.5rem;
+}
+
+.botones{
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 40rem;
+}
+
+.modalButton{
+  height: 4rem;
+  width: 10rem;
+  color: #ffffff;
+  background-color: #ffc300;
+  border-radius: 0.4rem;
+  border: 0;
+  font-family: "Montserrat-Bold";
+  font-size: 2rem;
+}
+
+.modalButton:hover {
+  background-color: #ffaf00;
+}
+.modalButton:active {
+  background-color: #ffc300;
+}
+
+.contenedorBoton{
+  display: flex;
+  align-items: center;
+ 
 }

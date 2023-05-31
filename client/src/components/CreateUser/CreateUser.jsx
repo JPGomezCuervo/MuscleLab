@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import styles from './CreateUser.module.css'
+//import { Link } from 'react-router-dom'
+import style from './CreateUser.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllUsers, selectAllUsers } from '../../redux/features/usersSlice';
 import validation from './validation';
@@ -89,19 +89,19 @@ const emailFiltered = mappedUsers && mappedUsers.filter((email) => mappedUsers.e
     
     return (
     
-        <div className={styles.containerCuerpoPpal}>
-           <a href='http://localhost:3000/dashboard/usuarios'><button className={styles.btnBack}>Volver usuarios</button></a>
-        <div className={styles.formContainer}>
-        <h2 className={styles.title1}>Crear usuario:</h2>
-          <form className={styles.form} onSubmit={(e) => createUserHandler(e)}>
+        <div className={style.containerCuerpoPpal}>
+           <a href='http://localhost:3000/dashboard/usuarios'><button className={style.btnBack}>Volver usuarios</button></a>
+        <div className={style.formContainer}>
+        <h2 className={style.title1}>Crear usuario:</h2>
+          <form className={style.form} onSubmit={(e) => createUserHandler(e)}>
             
-            <div className={styles.campos}>
+            <div className={style.campos}>
               
-              <label className={styles.label} htmlFor="name">
+              <label className={style.label} htmlFor="name">
                 Nombre completo*:{" "}
               </label>
               
-              <p className={styles.error}>{errors.fullName && errors.fullName}</p>
+              <p className={style.error}>{errors.fullName && errors.fullName}</p>
               
               <input
                 type="text"
@@ -110,14 +110,14 @@ const emailFiltered = mappedUsers && mappedUsers.filter((email) => mappedUsers.e
                 placeholder="*Nombre completo"
                 value={addUser.fullName}
                 onChange={(e) => handleChange(e)}
-                className={styles.inputName}
+                className={style.inputName}
               />
                
-               <label className={styles.label} htmlFor="password">
+               <label className={style.label} htmlFor="password">
                 Password:{" "}
               </label>
               
-              <p className={styles.error}>{errors.password && errors.password}</p>
+              <p className={style.error}>{errors.password && errors.password}</p>
               
               <input
                 type="password"
@@ -126,12 +126,12 @@ const emailFiltered = mappedUsers && mappedUsers.filter((email) => mappedUsers.e
                 placeholder="Password"
                 value={addUser.password}
                 onChange={(e) => handleChange(e)}
-                className={styles.inputPassword}
+                className={style.inputPassword}
               />
-              <label className={styles.label} htmlFor="email">
+              <label className={style.label} htmlFor="email">
                 Email*:{" "}
               </label>
-              <p className={styles.error}>
+              <p className={style.error}>
                 {errors.email && errors.email}
               </p>
               <input
@@ -141,12 +141,12 @@ const emailFiltered = mappedUsers && mappedUsers.filter((email) => mappedUsers.e
                 autoComplete="off"
                 value={addUser.email}
                 onChange={(e) => handleChange(e)}
-                className={styles.inputEmail}
+                className={style.inputEmail}
               />
-              <label className={styles.label} htmlFor="phone">
+              <label className={style.label} htmlFor="phone">
                 Telefono*:{" "}
               </label>
-                <p className={styles.error}>
+                <p className={style.error}>
                   {errors.phone && errors.phone}
                 </p>
               <input
@@ -156,15 +156,15 @@ const emailFiltered = mappedUsers && mappedUsers.filter((email) => mappedUsers.e
                 placeholder="*Telefono"
                 value={addUser.phone}
                 onChange={(e) => handleChange(e)}
-                className={styles.inputPhone}
+                className={style.inputPhone}
               />
               
               {errors.disabled ? 
-                <p className={styles.errorForm}>
+                <p className={style.errorForm}>
                     ⚠️ Datos incompletos! ⚠️</p> 
-                            : <p className={styles.validForm}>Todo en orden para dar de alta! ✔️</p> }
+                            : <p className={style.validForm}>Todo en orden para dar de alta! ✔️</p> }
               <button 
-                className={styles.btn} 
+                className={style.btn} 
                 type="submit"
                 disabled={errors.disabled}
                 >

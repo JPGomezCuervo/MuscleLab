@@ -1,16 +1,20 @@
-const { Lessons, LessonDetail, ExercisesType, User, BranchOffice } = require("../../db");
-const { Op } = require("sequelize");
+const {Lessons} = require("../../db");
 const {getDetailLesson}= require('./getDetail');
 
 const getEveryLesson =async ()=>{
     const lessonsRaw=await Lessons.findAll();
     const lessonsName= lessonsRaw.map(el=>el.name);
+    
+    
+
     const everyLesson= [];
     for(let i=0;i<lessonsName.length;i++){
         let some=await getDetailLesson(lessonsName[i]);
         some.map(el=>{
             let shortDescription=lessonsRaw.map(el=>{return{shortDescription:el.shortDescription, name:el.name}});
             for(let i=0;i<shortDescription.length;i++){
+                console.log(el.name, "este es el name");
+                console.log(shortDescription[i].name, "shortDescript");
                 if(el.name.includes(shortDescription[i].name)){
                     const objDetail = {
                         id: el.id,
@@ -19,6 +23,7 @@ const getEveryLesson =async ()=>{
                         effort: el.effort,
                         goals: el.goals,
                         shortDescription: shortDescription[i].shortDescription,
+                        description:el.description,
                         scheduleDays: el.scheduleDays,
                         scheduleHourStart: el.scheduleHourStart,
                         scheduleHourFinish: el.scheduleHourFinish,
@@ -27,6 +32,7 @@ const getEveryLesson =async ()=>{
                         monitors: el.monitors,
                         office: el.office
                       }
+                      
                     everyLesson.push(objDetail)
                 }
             }

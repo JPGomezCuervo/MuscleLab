@@ -16,7 +16,6 @@ const userLogin = async (email, password) => {
     const match = await bcryptjs.compare(password, toLogin.password);
     if (match) {
       const token = generateToken(toLogin);
-      console.log(token);
       return { success: true, token: token };
     } else {
       return {

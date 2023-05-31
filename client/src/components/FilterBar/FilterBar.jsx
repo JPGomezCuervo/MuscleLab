@@ -1,13 +1,12 @@
 import style from './FilterBar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderFromAtoZ, orderFromZtoA, orderFomHardestToEasiest, orderFromEasiestToHardest, sortByType, sortByIntensityandType, sortByIntensity, fetchAllLessons, clearLessons } from '../../redux/features/lessonsSlice';
+import { orderFromAtoZ, orderFromZtoA,  sortByType, sortByIntensityandType, sortByIntensity, fetchAllLessons, clearLessons } from '../../redux/features/lessonsSlice';
 import { setAlphabetFilter, selectAlphabetFilter, setIntensityFilter, selectIntensityFilter, setSelectedTypes, selectSelectedTypes, setSelectedIntensities, selectSelectedIntensities } from '../../redux/features/filtersSlice';
-import { useEffect, useState } from 'react';
+import { useEffect  } from 'react';
 import trashIcon from "../../assets/icons/trash-bin.png"
 
-const FilterBar = ({lessonsAtributtes, retryButton, setRetryButton}) => {
+const FilterBar = ({lessonsAttributes, retryButton, setRetryButton}) => {
     const dispatch = useDispatch();
-
     const alphabetFilter = useSelector(selectAlphabetFilter);
     const intensityFilter = useSelector(selectIntensityFilter);
     const selectedTypes = useSelector(selectSelectedTypes);
@@ -31,9 +30,13 @@ const FilterBar = ({lessonsAtributtes, retryButton, setRetryButton}) => {
             await dispatch(fetchAllLessons());
             dispatch(setSelectedIntensities([]));
             dispatch(sortByType(selectedTypes));
-        } 
-
-        
+            return 1;
+        }
+        dispatch(setIntensityFilter(!intensityFilter));
+        dispatch(setSelectedIntensities([]));
+        dispatch(clearLessons());
+        dispatch(fetchAllLessons());
+       
     };
 
     const handleTipoEjercicioClick = async () => {
@@ -43,6 +46,10 @@ const FilterBar = ({lessonsAtributtes, retryButton, setRetryButton}) => {
             dispatch(setSelectedTypes([]));
             dispatch(sortByIntensity(selectedIntensities));
         }
+        dispatch(setSelectedTypes([]));
+        dispatch(setAlphabetFilter(false));
+        dispatch(clearLessons());
+        dispatch(fetchAllLessons());
     };
 
     const handleTypeClick = (event) => {
@@ -105,10 +112,14 @@ return (
         <div className={style.FilterBar}>
             <p>Ordenar por:</p>
             <div className={style.OptionsContainer}>
-                <button className={(!alphabetFilter) ? (style.BtnOption) : (`${style.BtnOption} ${style.BtnOptionActive}`)} onClick={handleAlfabetoClick}><p>Alfabeto</p></button>
-
+                <button className={(!alphabetFilter) ? (style.BtnOption) : (`${style.BtnOption} ${style.BtnOptionActive}`)} onClick={handleAlfabetoClick}><p>Alfabeto</p>
+                <label className={style.Label} htmlFor="checkbox1">Alfabeto</label></button>
+                
                 <ul className={(selectedIntensities.length !== 0) ? `${style.BtnOptionType} ${style.BtnActive} `: (style.BtnOptionType) }>
                     <p onClick={handleIntensidadClick}>Intensidad</p>
+
+                    <label className={style.Label} htmlFor="checkbox2">Intensidad</label>
+                    <input type="checkbox" className={style.Checkbox} name="checkbox2" id="checkbox2"/>
 
                     <div className={style.DropMenuIntensityContainer}>
                         <ul className={style.DropMenuIntensity}>
@@ -128,12 +139,15 @@ return (
                 </ul>
 
                 <ul className={selectedTypes.length !== 0 ? `${style.BtnOptionType} ${style.BtnActive}` : style.BtnOptionType}>
-                    <p onClick={handleTipoEjercicioClick}>Tipo de ejercicio</p>
+                <p onClick={handleTipoEjercicioClick}>Tipo de ejercicio</p>
+                <label className={style.Label} htmlFor="checkbox3">Tipos</label>
+                <input type="checkbox" className={style.Checkbox} name="checkbox3" id="checkbox3"/>
+
                 <div className={style.DropMenuContainer}>
                     <ul className={style.DropMenu}>
-                        {lessonsAtributtes?.map((atribute) => {
+                        {lessonsAttributes?.map((atribute, index) => {
                             return(
-                                <li key={atribute.id}>
+                                <li key={atribute.id || index}>
                                     <button className={selectedTypes.includes(atribute) ? `${style.DropMenuBtn} ${style.Active}` : style.DropMenuBtn} onClick={handleTypeClick} name={atribute}>
                                         {atribute}
                                     </button>
@@ -144,8 +158,8 @@ return (
                     <button className={style.DeleteButton} onClick={handleOnDeleteType}>Borrar</button>
                 </div>
                 </ul>
-                
-                    <img className={selectedTypes.length !== 0 || selectedIntensities.length !== 0 || alphabetFilter !== false || intensityFilter !== false ? `${style.Trash} ${style.TrashActive}`: style.Trash} src={trashIcon} alt="Borrar filtros" onClick={handleDeleteAll} />
+
+                <img className={selectedTypes.length !== 0 || selectedIntensities.length !== 0 || alphabetFilter !== false || intensityFilter !== false ? `${style.Trash} ${style.TrashActive}`: style.Trash} src={trashIcon} alt="Borrar filtros" onClick={handleDeleteAll} />
         
                 <button className={style.FilterBtn} onClick={handleFilterClick}>filtrar</button>
             </div>
