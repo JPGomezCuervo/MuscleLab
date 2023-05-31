@@ -13,18 +13,21 @@ const Profile = () => {
   const decoded = decodeJwt(token);
   const dispatch = useDispatch();
   const id = decoded.payload.id;
-
   useEffect(() => {
     dispatch(fetchUserByID(id));
   }, [dispatch, id]);
 
   const usuario = useSelector(selectUserByID);
-
+  const suspendido =
+    usuario.deletedAt === null || usuario.deletedAt === undefined
+      ? false
+      : true;
   const user = usuario?.membresia ? usuario.detalle : usuario;
   const membresia = usuario.membresia;
   const isAdmin = decoded.payload.isAdmin;
   const phone = user?.phone;
   const isMonitor = user?.isMonitor;
+  const clases = usuario?.detalle?.lessonDetails;
 
   const getInsigniaColor = () => {
     if (membresia) {
@@ -62,8 +65,13 @@ const Profile = () => {
       </Link>
       <div className={style.container}>
         <div className={style.insignias}>
-          {isAdmin ? <span> Admin</span> : <p></p>}
-          {isMonitor ? <span> Profesor</span> : <p></p>}
+          {suspendido ? <p></p> : isAdmin ? <span> Admin</span> : <p></p>}
+          {suspendido ? <p></p> : isMonitor ? <span> Profesor</span> : <p></p>}
+          {suspendido ? (
+            <span style={{ backgroundColor: "red" }}>Cuenta Suspendida</span>
+          ) : (
+            <p></p>
+          )}
           {membresia ? (
             <span
               style={{
@@ -92,6 +100,16 @@ const Profile = () => {
           <h2>Numero de teléfono</h2>
           {phone ? <p>{user.phone} </p> : <p>No proporcionado</p>}
         </div>
+        {usuario?.detalle?.lessonDetails ? (
+          <div className={style.info}>
+            <h2>Mis Clases</h2>
+            {clases.map((clase, index) => (
+              <p>{clase.name}</p>
+            ))}
+          </div>
+        ) : (
+          <p></p>
+        )}
 
         {membresia ? (
           <div className={style.info}>
@@ -102,7 +120,9 @@ const Profile = () => {
                 {membresia?.start.split("T")[0].split("-").reverse().join("-")}
               </p>
               <h3>Fin: </h3>
-              <p>{membresia?.end.split("T")[0].split("-").reverse().join("-")}</p>
+              <p>
+                {membresia?.end.split("T")[0].split("-").reverse().join("-")}
+              </p>
             </div>
           </div>
         ) : (
