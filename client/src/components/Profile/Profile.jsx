@@ -17,7 +17,6 @@ const Profile = () => {
   }, [dispatch, id]);
 
   const usuario = useSelector(selectUserByID);
-  console.log(usuario.detalle.lessonDetails[0].name);
   const suspendido =
     usuario.deletedAt === null || usuario.deletedAt === undefined
       ? false
@@ -28,7 +27,6 @@ const Profile = () => {
   const phone = user?.phone;
   const isMonitor = user?.isMonitor;
   const clase = usuario?.detalle?.lessonDetails[0].name;
-  
 
   const getInsigniaColor = () => {
     if (membresia) {
@@ -94,14 +92,18 @@ const Profile = () => {
           <h2>Numero de teléfono</h2>
           {phone ? <p>{user.phone} </p> : <p>No proporcionado</p>}
         </div>
-        <div className={style.info}>
-          <h2>Mis Clases</h2>
-          {usuario?.detalle?.lessonDetails ? (
-            <p>{clase} </p>
-          ) : (
-            <p>No proporcionado</p>
-          )}
-        </div>
+        {usuario?.detalle?.lessonDetails ? (
+          <div className={style.info}>
+            <h2>Mis Clases</h2>
+            {usuario?.detalle?.lessonDetails ? (
+              <p>{clase} </p>
+            ) : (
+              <p>No tiene clases asignadas</p>
+            )}
+          </div>
+        ) : (
+          <></>
+        )}
 
         {membresia ? (
           <div className={style.info}>
