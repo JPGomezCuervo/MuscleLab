@@ -58,8 +58,8 @@
     font-family: 'Montserrat-Regular';
     font-weight: 300;
     color: #013565;
-    margin: 0;
-    margin-left: 15%;
+    margin: 0 auto;
+    text-align: center;
 
     
 }
@@ -82,6 +82,7 @@
     grid-template-columns: repeat(2,1fr);
     width: 70%;
     margin: 0 auto;
+
 }
 
 .SectionContainer{
@@ -116,3 +117,8 @@
 .InfoNameContainer{
     width: 50%;
 }
+
+.Name{
+    padding-left: 5rem;
+}
+

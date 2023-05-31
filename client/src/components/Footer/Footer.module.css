@@ -29,6 +29,7 @@
     margin: 0 auto;
     width: 70%;
     justify-content: center;
+    
 }
 .Container {
     border-top: .2rem solid #ffc300;
@@ -43,7 +44,7 @@
     
 }
 .Info p {
-    cursor: pointer;
+    
     text-decoration: none;
     color: #ffffff;
 }

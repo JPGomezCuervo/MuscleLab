@@ -145,7 +145,7 @@ const NavBar = () => {
         </div>)}
 
         {!token && !isActive && (
-          <div className={style.LogOpcions}>
+          <div className={style.LogOpciones4}>
           {isAdmin && (
             <Link to="dashboard/clases">
               <button className={style.btnRegistro1}>Dashboard</button>
