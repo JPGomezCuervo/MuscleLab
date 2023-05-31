@@ -174,6 +174,27 @@
     width: fit-content;
 }
 
+.LogOpciones4{
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+
+.btnRegistro4 {
+    padding: .3rem;
+    background-color: transparent;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    font-family: 'Montserrat-regular', sans-serif;
+    font-weight: 100;
+    font-size: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    width: 8rem;
+}
+
 .LogOpcion1{
     display: none;
 }

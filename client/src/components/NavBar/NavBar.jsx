@@ -117,7 +117,8 @@ const NavBar = () => {
           )}
         </div>)}
 
-        {token && isActive && (<div className={style.LogOpcions}>
+        {token && isActive && (
+          <div className={style.LogOpcions}>
           {isAdmin && (
             <Link to="dashboard/clases">
               <button className={style.btnRegistro1}>dashboard</button>
@@ -140,7 +141,30 @@ const NavBar = () => {
                 Iniciar sesión
               </button>
             </Link>
+          )}        
+        </div>)}
+
+        {!token && !isActive && (
+          <div className={style.LogOpcions}>
+          {isAdmin && (
+            <Link to="dashboard/clases">
+              <button className={style.btnRegistro1}>dashboard</button>
+            </Link>
           )}
+          {token && (
+            <Link to="/profile">
+              <button className={style.btnRegistro1}>Mi Perfil</button>
+            </Link>
+          )}
+          {!token && (
+            <div className={style.LogOpcions4}>
+            <Link to="/login">
+              <button className={style.btnRegistro4} >
+                Iniciar sesión
+              </button>
+            </Link>
+            </div>
+          )}        
         </div>)}
 
       </nav>
