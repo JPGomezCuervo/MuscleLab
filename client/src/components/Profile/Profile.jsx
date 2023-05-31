@@ -19,7 +19,10 @@ const Profile = () => {
 
   const usuario = useSelector(selectUserByID);
   console.log(usuario);
-  const suspendido = usuario.deletedAt === null || usuario.deletedAt === undefined ? true : false;
+  const suspendido =
+    usuario.deletedAt === null || usuario.deletedAt === undefined
+      ? false
+      : true;
   console.log(suspendido);
   const user = usuario?.membresia ? usuario.detalle : usuario;
   const membresia = usuario.membresia;
@@ -56,8 +59,13 @@ const Profile = () => {
     <div className={style.general}>
       <div className={style.container}>
         <div className={style.insignias}>
-          {isAdmin ? <span> Admin</span> : <p></p>}
-          {isMonitor ? <span> Profesor</span> : <p></p>}
+          {suspendido ? <p></p> : isAdmin ? <span> Admin</span> : <p></p>}
+          {suspendido ? <p></p> : isMonitor ? <span> Profesor</span> : <p></p>}
+          {suspendido ? (
+            <span style={{ backgroundColor: "red" }}>Cuenta Suspendida</span>
+          ) : (
+            <p></p>
+          )}
           {membresia ? (
             <span
               style={{
