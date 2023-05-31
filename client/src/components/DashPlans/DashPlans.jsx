@@ -39,16 +39,16 @@ const DashPlans = () =>{
                                         <div className={style.Title}><h2> {membership.name}</h2></div>
                                             <img className={style.MainIcon} src={clockIcon} alt="" />
                                 
-                                <h2>{membership.duration}</h2>
-                                <h2> {membership.benefits}</h2>
-                                <h2> {membership.price}</h2>
+                                <h2>Duración: {membership.duration}</h2>
+                                <h2>Beneficios: {membership.benefits}</h2>
+                                <h2>Precio: ${membership.price}</h2>
                                 
 
-                                <Link to={`editar/${membership.id}`}>
+                                {/* <Link to={`editar/${membership.id}`}>
                         <button className={style.btnIcono1}>
                           <img src={edit} alt="edit" className={style.icono} />
                         </button>
-                      </Link>
+                      </Link> */}
                                     </div>
                                     </div>
                                     )
