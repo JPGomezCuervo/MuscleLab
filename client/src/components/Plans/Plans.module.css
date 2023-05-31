@@ -34,9 +34,10 @@
 
 
 .PlanContainer1{
-    border: #bababa solid .1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
     padding-bottom: 1rem;
-    
 }
 
 .Plan .Title{
