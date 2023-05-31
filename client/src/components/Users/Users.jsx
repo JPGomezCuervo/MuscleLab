@@ -18,7 +18,7 @@ const Users = () => {
 
   useEffect(() => {
     dispatch(fetchAllUsers());
-  }, [serverResponse]); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serverResponse]); //eslint-disable-next-line react-hooks/exhaustive-deps
   //
   const [editUser, setEditUser] = useState({
     fullName: "",
@@ -65,6 +65,7 @@ const Users = () => {
         isMonitor: user.isMonitor,
         isAdmin: user.isAdmin,
         statusMembershipIdStatus: user.statusMemberShipIdStatus,
+        lessonDetails: user.lessonDetails,
       };
     });
 
@@ -163,7 +164,7 @@ const Users = () => {
                     {user.isMonitor ? "Entrenador" : "Deportista"}
                   </td>
                   <td className={style.td}>
-                    {user.statusMemberShipIdStatus ? "Activo" : "Inactivo"}
+                    {user.lessonDetails.length ? "Activo" : "Inactivo"}
                   </td>
                   <td className={style.btnCrud}>
                     <button
@@ -190,7 +191,7 @@ const Users = () => {
           <Link to={"crear"}>
             <button className={style.btnCrearUsuario}>Crear nuevo</button>
           </Link>
-          <Link to ="/dashboard/deletedusers">
+          <Link to="/dashboard/deletedusers">
             <button className={style.btnCrearUsuario}>
               Ver usuarios eliminados
             </button>
