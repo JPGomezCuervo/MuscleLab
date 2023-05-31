@@ -6,7 +6,7 @@ const removeLesson =async (idUser, idLesson)=>{
         throw new Error("No se encontro el usuario");
     }
     const membership=await StatusMemberships.findOne({where:{userId:userToAdd.id}});
-    const lessonAdded = await LessonDetail.findOne({where:{id:idLesson}});
+    const lessonAdded = await LessonDetail.findOne({where:{name:idLesson}});
     if(!lessonAdded){
         throw new Error("No se encontro la clase");
     }
