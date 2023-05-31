@@ -15,6 +15,7 @@ import NavBar from "../NavBar/NavBar";
 import { useParams, Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { fetchUserByID, selectUserByID } from "../../redux/features/usersSlice";
+import ReactModal from "react-modal";
 
 const DetailLesson = () => {
   const lesson = useSelector(selectAllLessons);
@@ -45,11 +46,36 @@ const DetailLesson = () => {
   const [serverResponse, setServerResponse] = useState("");
   // const [error, setError] = useState({});
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
+  const openModal = (message) => {
+    setModalMessage(message);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   const handleInputChange = (event, id) => {
     const name = event.target.name;
     const value = event.target.value;
     setInput({ ...input, [name]: value, lessonId: id });
   };
+
+  const [modalIsOpenRev, setModalIsOpenRev] = useState(false);
+  const [modalMessageRev, setModalMessageRev] = useState("");
+
+  const openModalRev = (message) => {
+    setModalMessageRev(message);
+    setModalIsOpenRev(true);
+  };
+
+  const closeModalRev = () => {
+    setModalIsOpenRev(false);
+  };
+
 
   const handlerReview = (event, id) => {
     axios
@@ -57,16 +83,22 @@ const DetailLesson = () => {
       .then((res) => {
         console.log(res);
         setServerResponse(res.data.message);
-        alert("Review Creada");
-        window.location.reload();
+        openModalRev("Review Creada");
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       })
       .catch((error) => {
         console.log(error);
         setServerResponse(error.data);
-        alert("No se pudo crear la review");
-        window.location.reload();
+        openModalRev("No se pudo crear la review");
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       });
   };
+
+
   const repeated = async (idUser, idLesson) => {
     try {
       const responseUser = await axios.get(`${URL}/users/${idUser}`);
@@ -89,16 +121,16 @@ const DetailLesson = () => {
       const isRepeated = await repeated(decoded.id, id);
 
       if (isRepeated) {
-        alert("El usuario ya tiene esa clase");
+        openModal("El usuario ya tiene esa clase");
       } else {
         const response = await axios.put(`${URL}/users/addlesson/${id}`, {
           idUser: decoded.id,
         });
 
-        alert(response.data.exito);
+        openModal(response.data.exito);
       }
     } catch (error) {
-      alert(error.response.data.error);
+      openModal(error.response.data.error);
     }
   };
   return (
@@ -146,7 +178,7 @@ const DetailLesson = () => {
                     <h2 className={style.instructor}>Instructor:</h2>
                     <h2 className={style.instructor}>{lesson?.monitors}</h2>
                     {usuario?.membresia ? (<>
-                    <h2 className={style.instructor}>Añadir clase</h2>
+                      <h2 className={style.instructor}>Añadir clase</h2>
                       <img
                         onClick={() => {
                           handleAdd(lesson.id);
@@ -155,11 +187,17 @@ const DetailLesson = () => {
                         alt="instructor"
                         className={style.img}
                       />
-                      </>
+                    </>
                     ) : (
                       <div></div>
                     )}
                   </div>
+
+                  <ReactModal isOpen={modalIsOpen} onRequestClose={closeModal} className={style.modal}>
+                    <h2 className={style.textModal}>Resultado</h2>
+                    <p className={style.textModal}>{modalMessage}</p>
+                    <button onClick={closeModal} className={style.SaveButton}>Aceptar</button>
+                  </ReactModal>
                 </div>
 
                 <div className={style.detalleparrafo}>
@@ -437,6 +475,12 @@ const DetailLesson = () => {
                         >
                           Enviar
                         </button>
+                        <ReactModal isOpen={modalIsOpenRev} onRequestClose={closeModalRev} className={style.modal}>
+                          <h2 className={style.textModal}>Resultado</h2>
+                          <p className={style.textModal}>{modalMessageRev}</p>
+                          {/* <button onClick={closeModalRev} className={style.SaveButton}>Aceptar</button> */}
+                        </ReactModal>
+
                       </div>
                     ) : (
                       <div></div>
