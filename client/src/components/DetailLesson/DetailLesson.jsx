@@ -63,11 +63,16 @@ const DetailLesson = () => {
       });
   };
   const handleAdd = async (id) => {
-    const response = await axios.put(`${URL}/users/addlesson/${id}`, {
-      idUser: decoded.id,
-    });
-    alert(response);
-    console.log(response);
+    try {
+      const response = await axios.put(`${URL}/users/addlesson/${id}`, {
+        idUser: decoded.id,
+      });
+      console.log(response.data);
+      alert(response.data.exito);
+    } catch (error) {
+      console.log(error.response.data);
+      alert(error.response.data.error);
+    }
   };
   return (
     <div>
