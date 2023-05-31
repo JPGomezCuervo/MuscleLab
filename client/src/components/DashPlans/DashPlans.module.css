@@ -3,10 +3,11 @@
     margin-top: 2rem;    
     display: flex;
     flex-wrap: wrap;
-    height: 60vh;
+    height: 95%;
     position: absolute;
     display: inline-block;
     width: 100%;
+    overflow-y: scroll;
 }
 
 .TitleContainer h1{
