@@ -20,7 +20,7 @@ const Users = () => {
  
   useEffect(() => {
     dispatch(fetchAllUsers());
-  }, [serverResponse]); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serverResponse]); //eslint-disable-next-line react-hooks/exhaustive-deps
   //
   const [editUser, setEditUser] = useState({
     fullName: "",
@@ -67,6 +67,7 @@ const Users = () => {
         isMonitor: user.isMonitor,
         isAdmin: user.isAdmin,
         statusMembershipIdStatus: user.statusMemberShipIdStatus,
+        lessonDetails: user.lessonDetails,
       };
     });
 
@@ -227,7 +228,7 @@ closeConfirmModal(); // Cerrar el modal de confirmación
                     {user.isMonitor ? "Entrenador" : "Deportista"}
                   </td>
                   <td className={style.td}>
-                    {user.statusMemberShipIdStatus ? "Activo" : "Inactivo"}
+                    {user.lessonDetails.length ? "Activo" : "Inactivo"}
                   </td>
                   <td className={style.btnCrud}>
                     <button

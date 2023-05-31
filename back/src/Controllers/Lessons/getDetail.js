@@ -86,7 +86,7 @@ const getDetailLesson = async (name) => {
     );
 
     const reviewCount = item.reviews.length;
-    const averageStars = reviewCount > 0 ? totalStars / reviewCount : 0;
+    const averageStars = Math.round(reviewCount > 0 ? totalStars / reviewCount : 0);
 
     const monitor = monitors.find((m) =>
       m.lesson.some((lesson) => lesson.name === item.name)

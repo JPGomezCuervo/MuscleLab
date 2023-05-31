@@ -245,7 +245,7 @@ const closeSuccessModal = () => {
     <div className={style.BigBigContainer}>
       <div>
         <div className={style.Navigation}>
-          <a href="https://muscle-lab-six.vercel.app/dashboard/sedes">
+          <a href="http://localhost:3000/dashboard/sedes">
             <img className={style.ArrowIcon} src={arrowIcon} alt="" />
           </a>
           <h1 className={style.tex}>Crear Sede</h1>

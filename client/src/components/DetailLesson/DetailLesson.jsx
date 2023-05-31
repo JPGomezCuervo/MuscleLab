@@ -10,23 +10,26 @@ import { useEffect, useState } from "react";
 import { URL } from "../../utils/constants";
 import style from "./DetailLesson.module.css";
 import brad from "../../assets/images/detail/brad.jpeg";
+import plus from "../../assets/icons/plus.png";
 import NavBar from "../NavBar/NavBar";
 import { useParams, Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import { fetchUserByID, selectUserByID } from "../../redux/features/usersSlice";
 
 const DetailLesson = () => {
   const lesson = useSelector(selectAllLessons);
-
-  //    if(Object.keys(lesson).length !== 0){
-  //     lesson?.map(el=> console.log(1))
-  //    }
 
   const dispatch = useDispatch();
   const params = useParams();
 
   const token = localStorage.getItem("token");
-
   const decoded = token ? jwt_decode(token) : false;
+  const idUser = decoded.id;
+
+  useEffect(() => {
+    dispatch(fetchUserByID(idUser));
+  }, [dispatch, idUser]);
+  const usuario = useSelector(selectUserByID);
 
   useEffect(() => {
     dispatch(fetchLessonByName(params.name));
@@ -49,39 +52,54 @@ const DetailLesson = () => {
   };
 
   const handlerReview = (event, id) => {
-    event.preventDefault();
     axios
       .post(`${URL}/reviews/create`, input)
       .then((res) => {
         console.log(res);
         setServerResponse(res.data.message);
+        alert("Review Creada");
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
         setServerResponse(error.data);
+        alert("No se pudo crear la review");
+        window.location.reload();
       });
   };
-  // const validationDescription = (e) => {
-  //   if (e.target.value.length > 200) {
-  //     error.name = "La descripcion tiene mucho caracteres";
-  //   } else {
-  //     error.name = null;
-  //   }
-  // };
-  // const handleDescription = (e) => {
-  //   e.preventDefault();
-  //   validationDescription(e);
-  //   setInput({
-  //     ...input,
-  //     name: e.target.value,
-  //   });
-  // };
+  const repeated = async (idUser, idLesson) => {
+    try {
+      const responseUser = await axios.get(`${URL}/users/${idUser}`);
+      const responseLesson = await axios.get(
+        `${URL}/lessons/detail/${idLesson}`
+      );
+
+      const clasesUsuario = responseUser.data.user.detalle.lessonDetails;
+      const claseSeleccionada = responseLesson.data.name;
+
+      return clasesUsuario.some((lesson) => lesson.name === claseSeleccionada);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
   const handleAdd = async (id) => {
-    console.log(decoded.id);
-    const response = await axios.put(`${URL}/users/addlesson/${id}`, {
-      idUser: decoded.id,
-    });
-    console.log(response);
+    try {
+      const isRepeated = await repeated(decoded.id, id);
+
+      if (isRepeated) {
+        alert("El usuario ya tiene esa clase");
+      } else {
+        const response = await axios.put(`${URL}/users/addlesson/${id}`, {
+          idUser: decoded.id,
+        });
+
+        alert(response.data.exito);
+      }
+    } catch (error) {
+      alert(error.response.data.error);
+    }
   };
   return (
     <div>
@@ -92,7 +110,7 @@ const DetailLesson = () => {
             <>
               <div className={style.conteinerTodo}>
                 <h1 className={style.h1}>{lesson?.name}</h1>
-                <h2 className={style.text}>Rating promedio:{lesson?.averageStars}</h2>
+                <h2 className={style.text}>Rating promedio: {lesson?.averageStars}</h2>
                 <div className={style.fondoinstrYHor}>
                   <div className={style.conjuntoMujerycaja}>
                     <div className={style.fondoMujer}>
@@ -123,24 +141,35 @@ const DetailLesson = () => {
                   </div>
 
                   <div className={style.fondoBrad}>
+                    <h2 className={style.instructor}>Instructor:</h2>
+                    <h2 className={style.instructor}>{lesson?.monitors}</h2>
+                    <h2 className={style.instructor}>Añadir clase</h2>
                     <img
                       onClick={() => {
                         handleAdd(lesson.id);
                       }}
-                      src={brad}
+                      src={plus}
                       alt="instructor"
                       className={style.img}
                     />
-                    <h2 className={style.instructor}>Instructor:</h2>
-                    <h2 className={style.instructor}>{lesson?.monitors}</h2>
                   </div>
                 </div>
 
                 <div className={style.detalleparrafo}>
                   <p className={style.txt}>{lesson.description}</p>
                 </div>
-
-                {token ? (
+                <h2 className={style.text} >Comentarios:</h2>
+                <div className={style.detalleparrafo} >
+                  {lesson?.reviews?.map((rev) => {
+                    return (
+                      <div className={style.comment} >
+                        <h4>{rev.user}</h4>
+                        <p>{rev.description}</p>
+                      </div>
+                    )
+                  })}
+                </div>
+                {usuario?.membresia ? (
                   <div className={style.card}>
                     <h2>Calificacion: {lesson?.name} </h2>
                     <div className={style.rating}>
