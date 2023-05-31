@@ -12,6 +12,14 @@
     
 
 }
+.TitleContainer h2{
+    color: #2b567d;
+    font-family: 'Montserrat-Light';
+    font-size: 1.2rem;
+    width: 45rem;
+    margin: 0 auto;
+    text-align: center;
+}
 
 
 .PlansContainer{
