@@ -1,7 +1,7 @@
 const {User, LessonDetail, StatusMemberships}= require('../../db');
 
-const removeLesson =async (name, idLesson)=>{
-    const userToAdd= await User.findOne({where:{fullName:name}});
+const removeLesson =async (idUser, idLesson)=>{
+    const userToAdd= await User.findOne({where:{id:idUser}});
     if(!userToAdd){
         throw new Error("No se encontro el usuario");
     }
@@ -10,8 +10,8 @@ const removeLesson =async (name, idLesson)=>{
     if(!lessonAdded){
         throw new Error("No se encontro la clase");
     }
-    userToAdd.removeLessonDetail(lessonAdded?.id);
     const remain=(membership.countRemain)+1;
+    userToAdd.removeLessonDetail(lessonAdded?.id);
     await membership.update({
         name:membership.name,
         status:membership.status,
