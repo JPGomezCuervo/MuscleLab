@@ -75,7 +75,6 @@ const PasarelaPago = () => {
 
                 })
                 .catch((error) => 
-
                 setErrorMessage(error.response.data.error),
                  setModalIsOpen(true)
                 )
@@ -99,11 +98,11 @@ const PasarelaPago = () => {
 
     const getImageUrl = (membershipId) => {
         switch (membershipId) {
-            case "1":
+            case "Standar":
                 return bicep;
-            case "2":
+            case "Plus":
                 return clock;
-            case "3":
+            case "Premium":
                 return dumbbell;
             default:
                 return "";
@@ -123,12 +122,12 @@ const PasarelaPago = () => {
                     selectedMembership
                         ?
                         <div className={style.card}>
-                            <img src={getImageUrl(selectedMembershipId)} alt="Membership Image" className={style.img} />
+                            <img src={getImageUrl(selectedMembership.name)} alt="Membership Image" className={style.img} />
 
                             <h2 className={style.text}>{selectedMembership.name}</h2>
-                            <h2 className={style.text}>{selectedMembership.price}</h2>
-                            <h2 className={style.text}>{selectedMembership.benefits}</h2>
-                            <h2 className={style.text}>{selectedMembership.duration}</h2>
+                            <h2 className={style.text}>Precio: {selectedMembership.price}</h2>
+                            <h2 className={style.text}>Beneficios: {selectedMembership.benefits}</h2>
+                            <h2 className={style.text}>Duración: {selectedMembership.duration}</h2>
                             <button type="submit" onClick={crearProducto} className={style.Button}>
                                 Pagar
                             </button>
