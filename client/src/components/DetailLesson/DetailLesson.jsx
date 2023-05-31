@@ -92,7 +92,7 @@ const DetailLesson = () => {
             <>
               <div className={style.conteinerTodo}>
                 <h1 className={style.h1}>{lesson?.name}</h1>
-                <h2 className={style.text}>{lesson?.averageStars}</h2>
+                <h2 className={style.text}>Rating promedio:{lesson?.averageStars}</h2>
                 <div className={style.fondoinstrYHor}>
                   <div className={style.conjuntoMujerycaja}>
                     <div className={style.fondoMujer}>

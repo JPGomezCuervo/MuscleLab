@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+const {nodemailer} = require('nodemailer')
 
 // create reusable transporter object using the default SMTP transport
 const transporter = nodemailer.createTransport({
