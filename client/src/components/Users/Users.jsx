@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import style from "./Users.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllUsers, selectAllUsers } from "../../redux/features/usersSlice";
 import validation from "../CreateUser/validation";
 //import Calendar from "../Calendar/Calendar";
+import ReactModal from 'react-modal';
 
 const Users = () => {
   //const [ initialServerData, setInitialServerData ] = useState([])
 
   const dispatch = useDispatch();
+  const navigate= useNavigate();
 
   const users = useSelector(selectAllUsers);
 
   const [serverResponse, setServerResponse] = useState(true);
   const [userSelectToEdit, setUserSelectToEdit] = useState(null);
-
+ 
   useEffect(() => {
     dispatch(fetchAllUsers());
   }, [serverResponse]); // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,24 +73,80 @@ const Users = () => {
   //console.log('usuarios desde FetchInit:',users);
   //console.log('usuariosMapeados:',mappedUsers);
 
+  const [confirmModalIsOpen, setConfirmModalIsOpen] = useState(false);
+  const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
+  const [serverResponse1, setServerResponse1] = useState('');
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [users1, setUsers1] = useState(users);
+
+ 
+  const openConfirmModal = (id) => {
+    setSelectedUserId(id);
+    setConfirmModalIsOpen(true);
+  };
+
+  const closeConfirmModal = () => {
+    setConfirmModalIsOpen(false);
+    setSuccessModalIsOpen(true)
+  };
+
+
+  const closeConfirmModales = () => {
+    setConfirmModalIsOpen(false);
+  };
+
+  const closeSuccessModal = () => {
+    setSuccessModalIsOpen(false);
+    setConfirmModalIsOpen(false);
+    navigate("/dashboard")
+  };
+
   //Delete user
-  const removeUserHandler = async (event) => {
-    const id = event.target.name;
+  // const removeUserHandler = async (event) => {
+  //   const id = event.target.name;
 
-    let text =
-      "Esta accion no se podra revertir!\nPulse OK para Aceptar o Cancelar.";
-    if (window.confirm(text) === true) {
-      await fetch("https://musclelabii.onrender.com/users/delete/" + id, {
-        method: "DELETE",
-      })
-        .then((response) => setServerResponse(response))
-        .catch((error) => setServerResponse(error));
+  //   let text =
+  //     "Esta accion no se podra revertir!\nPulse OK para Aceptar o Cancelar.";
+  //   if (window.confirm(text) === true) {
+  //     await fetch("https://musclelabii.onrender.com/users/delete/" + id, {
+  //       method: "DELETE",
+  //     })
+  //       .then((response) => setServerResponse(response))
+  //       .catch((error) => setServerResponse(error));
 
-      alert("Borrado con exito!");
-    } else {
-      alert("Cancelado por el usuario");
+  //     alert("Borrado con exito!");
+  //   } else {
+  //     alert("Cancelado por el usuario");
+  //   }
+  // };
+  //////////////////////////////////////////////////////////////////////
+  const removeUserHandler = async () => {
+    if (!selectedUserId) {
+      return;
+    }
+  
+    //closeConfirmModal(); // Cerrar el modal de confirmación
+  
+    try {
+      const response = await fetch(
+        "https://musclelabii.onrender.com/users/delete/" + selectedUserId,
+        {
+          method: "DELETE",
+        }
+      );
+      const updatedUsers = users1.filter((user) => user.id !== selectedUserId);
+setUsers1(updatedUsers);
+
+setServerResponse1(response);
+
+closeConfirmModal(); // Cerrar el modal de confirmación
+
+    } catch (error) {
+      setServerResponse1(error);
     }
   };
+
+  /////////////////////////////////////////////////////////////////////////
 
   const handleChange = (event) => {
     const { id, value } = event.target;
@@ -98,7 +156,9 @@ const Users = () => {
     setErrors(validation({ ...editUser, [id]: value }));
   };
 
-  const editUserHandler = (event) => {
+  ///////////////////////////////////////////////////////////
+
+   const editUserHandler = (event) => {
     let text = "Confirmar cambios!! \nPulse OK o Cancelar.";
 
     if (window.confirm(text) === true) {
@@ -118,7 +178,11 @@ const Users = () => {
     if (serverResponse.response) alert("Accion completada con exito!");
     if (serverResponse.error) alert("Algo salio mal, intente nuevamente");
   };
+//////////////////////////////////////////////////////////////////////////////
 
+
+
+////////////////////////////////////////////////////////////////////////////////////
   const userFiltered = mappedUsers?.filter(
     (user) => user.id === userSelectToEdit
   );
@@ -175,8 +239,8 @@ const Users = () => {
                     </button>
                     <button
                       className={style.btnEliminarUsuario}
-                      name={user.id}
-                      onClick={removeUserHandler}
+                      onClick={() => openConfirmModal(user.id)}
+                       // Pasar el id directamente al abrir el modal de confirmación
                     >
                       Borrar
                     </button>
@@ -186,11 +250,29 @@ const Users = () => {
             )}
           </tbody>
         </table>
+
+        <ReactModal isOpen={confirmModalIsOpen} onRequestClose={closeConfirmModal} className={style.modal}>
+        <h2 className={style.text}>Confirmar acción</h2>
+        <p className={style.text}>
+          Esta acción no se podrá revertir. ¿Está seguro de que desea eliminar el usuario?
+        </p>
+        <div className={style.botones}>
+          <button onClick={closeConfirmModales} className={style.DeleteButton}>Cancelar</button>
+          <button onClick={removeUserHandler} className={style.SaveButton}>Aceptar</button> {/* Llamar a removeUserHandler para borrar el usuario */}
+        </div>
+      </ReactModal>
+
+      <ReactModal isOpen={successModalIsOpen} onRequestClose={closeSuccessModal} className={style.modal}>
+        <h2 className={style.text}>Borrado exitoso</h2>
+        <p className={style.text}>El usuario ha sido borrado con éxito.</p>
+        <button onClick={closeSuccessModal} className={style.SaveButton}>OK</button>
+      </ReactModal>
+
         <div>
           <Link to={"crear"}>
             <button className={style.btnCrearUsuario}>Crear nuevo</button>
           </Link>
-          <Link to ="/dashboard/deletedusers">
+          <Link to="/dashboard/deletedusers">
             <button className={style.btnCrearUsuario}>
               Ver usuarios eliminados
             </button>
@@ -294,6 +376,7 @@ const Users = () => {
                   </button>
                 </div>
               ))}
+
             </div>
           </div>
         )}
