@@ -1,4 +1,5 @@
 const { User, StatusMemberships, Membership } = require('../../db.js');
+const SENDMAIL= require('./mailer.js');
 
 const fulfillOrder = async(session) => {
     // TODO: fill me in
@@ -29,6 +30,16 @@ const fulfillOrder = async(session) => {
             countRemain: classesToTake,
             userId: buyer.id
         });
+        const mail = {
+            from: "MuscleLba <musclelabgyms@gmail.com>", // sender address
+            to: userEmail, // receiver email
+            subject: "Compra Exitosa", // Subject line
+            text: `Compro su membresia ${membershipToAdd.name} con exito. Vence el ${final}`
+        }
+        SENDMAIL(mail, (info)=>{
+            console.log("Mail enviado");
+            console.log("Message Id:", info.messageId);
+        })
     }else{
         throw new Error("Pago no procesado");
     }
