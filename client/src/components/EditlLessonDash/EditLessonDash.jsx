@@ -55,7 +55,7 @@ class DetailLessonDash extends Component {
                 branchoffice: '',
             },
             horaInicio: '',
-            allowSubmit: true,
+            allowSubmit: false,
             message:'',
             serverResponse: '',
             serverErrorResponse: '',
@@ -171,36 +171,36 @@ class DetailLessonDash extends Component {
             }, () =>{
                 this.setState({
                     errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
-                })
+                }, () => {
+                    this.setState({
+                        allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
+                        });
+        
+            })
+            });
+    
+    };
+    
+    handleBranchOfficeOptions = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+            lessonAttributes: {
+                ...this.state.lessonAttributes,
+                [name]: [value],
+            },
+        }, () =>{
+            this.setState({
+                errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
             }, () => {
                 this.setState({
                     allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
                     });
-    
-        });
-    
+            })
+        }
+
+        );
     };
-    
-        handleBranchOfficeOptions = (event) => {
-            const name = event.target.name;
-            const value = event.target.value;
-            this.setState({
-                lessonAttributes: {
-                    ...this.state.lessonAttributes,
-                    [name]: [value],
-                },
-            }, () =>{
-                this.setState({
-                    errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
-                })
-            }
-            , () => {
-                this.setState({
-                    allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
-                    });
-            }
-            );
-        };
 
 
         handleHoursBox = (event) => {
@@ -317,7 +317,7 @@ class DetailLessonDash extends Component {
         
                 formData.append('image', this.state.lessonAttributes.image);
                 formData.append('lessonAttributes', JSON.stringify(this.state.lessonAttributes));
-                
+                console.log(formData)
                 axios.put(`${URL}/lessons/update/${this.props.id}`, formData)
                 .then((res) => {
                     console.log(res);
@@ -361,6 +361,10 @@ class DetailLessonDash extends Component {
 
             this.setState({
                 errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
+            },() => {
+                this.setState({
+                    allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
+                })
             })
 
         };

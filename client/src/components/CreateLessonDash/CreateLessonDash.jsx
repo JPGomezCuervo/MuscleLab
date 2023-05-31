@@ -148,7 +148,7 @@ class EditLessonDash extends Component {
         });
         
     };
-
+    
     handleTrainerOptions = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -160,36 +160,36 @@ class EditLessonDash extends Component {
         }, () =>{
             this.setState({
                 errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
-            })
+            }, () => {
+                this.setState({
+                    allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
+                    });
+    
+        })
+        });
+
+};
+
+handleBranchOfficeOptions = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState({
+        lessonAttributes: {
+            ...this.state.lessonAttributes,
+            [name]: [value],
+        },
+    }, () =>{
+        this.setState({
+            errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
         }, () => {
             this.setState({
                 allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
                 });
+        })
+    }
 
-    });
-
+    );
 };
-
-    handleBranchOfficeOptions = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        this.setState({
-            lessonAttributes: {
-                ...this.state.lessonAttributes,
-                [name]: [value],
-            },
-        }, () =>{
-            this.setState({
-                errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
-            })
-        }
-        , () => {
-            this.setState({
-                allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
-                });
-        }
-        );
-    };
 
     handleHoursBox = (event) => {
         const name = event.target.name;
