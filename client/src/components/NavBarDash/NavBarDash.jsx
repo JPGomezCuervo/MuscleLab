@@ -52,7 +52,7 @@ const NavBardDash = () => {
                 <h3>Clases</h3>
             </Link>
 
-            <a href="https://muscle-lab-six.vercel.app/">
+            <a href="http://localhost:3000/">
                 <button>
                     Página principal
                 </button>

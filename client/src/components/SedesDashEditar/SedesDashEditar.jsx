@@ -19,6 +19,7 @@ const SedesDashEditar = () => {
     scheduleHourStart: "",
     scheduleHourFinish: "",
   });
+  
   const [errors, setErrors] = useState({
     name: "",
     image: "",
@@ -41,6 +42,7 @@ const SedesDashEditar = () => {
           scheduleHourFinish: parseInt(
             response.data.branchoffice.scheduleHourFinish
           ),
+          image: response.data.branchoffice.image,
         });
         
         setDias(response.data.branchoffice.scheduleDays);
@@ -331,7 +333,7 @@ const SedesDashEditar = () => {
             <div className={style.leftContainer}>
               {imagePreviewUrl && (
                 <div className={style.ImageContainer}>
-                  {sedes.image && <img src={imagePreviewUrl} alt="Tu imagen" />}
+                  {<img src={imagePreviewUrl} alt="Tu imagen" />}
                 </div>
               )}
               {sedes.image && (

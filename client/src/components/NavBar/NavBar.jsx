@@ -94,7 +94,7 @@ const NavBar = () => {
         {token && !isActive && (<div className={style.LogOpciones2}>
           {isAdmin && (
             <Link to="dashboard/clases">
-              <button className={style.btnRegistro1}>dashboard</button>
+              <button className={style.btnRegistro1}>Dashboard</button>
             </Link>
           )}
           {token && (
@@ -121,7 +121,7 @@ const NavBar = () => {
           <div className={style.LogOpcions}>
           {isAdmin && (
             <Link to="dashboard/clases">
-              <button className={style.btnRegistro1}>dashboard</button>
+              <button className={style.btnRegistro1}>Dashboard</button>
             </Link>
           )}
           {token && (
@@ -148,7 +148,7 @@ const NavBar = () => {
           <div className={style.LogOpcions}>
           {isAdmin && (
             <Link to="dashboard/clases">
-              <button className={style.btnRegistro1}>dashboard</button>
+              <button className={style.btnRegistro1}>Dashboard</button>
             </Link>
           )}
           {token && (
