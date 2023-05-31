@@ -6,24 +6,28 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserByID, selectUserByID } from "../../redux/features/usersSlice";
 import { Link } from "react-router-dom";
-
+//import Calendar from "../Calendar/Calendar";
+import clock from '../../assets/icons/clock.png'
 const Profile = () => {
   const token = localStorage.getItem("token");
   const decoded = decodeJwt(token);
   const dispatch = useDispatch();
   const id = decoded.payload.id;
-
   useEffect(() => {
     dispatch(fetchUserByID(id));
   }, [dispatch, id]);
 
   const usuario = useSelector(selectUserByID);
-
+  const suspendido =
+    usuario.deletedAt === null || usuario.deletedAt === undefined
+      ? false
+      : true;
   const user = usuario?.membresia ? usuario.detalle : usuario;
   const membresia = usuario.membresia;
   const isAdmin = decoded.payload.isAdmin;
   const phone = user?.phone;
   const isMonitor = user?.isMonitor;
+  const clases = usuario?.detalle?.lessonDetails;
 
   const getInsigniaColor = () => {
     if (membresia) {
@@ -50,12 +54,34 @@ const Profile = () => {
     }
   };
 
+  const deleteClass = async (id) => {
+    try {
+      const response = await axios.put(`${URL}/users/removeLesson/${id}`, { idUser: decoded.id });
+      alert(response.data.success);
+    } catch (error) {
+      alert(error.message);
+    }
+    window.location.reload();
+  }
+
   return (
     <div className={style.general}>
+      <Link to={"/calendar"}>
+        <button
+          className={style.btnC}>
+          <img className={style.img}
+            src={clock} alt="reloj" />
+          Calendario</button>
+      </Link>
       <div className={style.container}>
         <div className={style.insignias}>
-          {isAdmin ? <span> Admin</span> : <p></p>}
-          {isMonitor ? <span> Profesor</span> : <p></p>}
+          {suspendido ? <p></p> : isAdmin ? <span> Admin</span> : <p></p>}
+          {suspendido ? <p></p> : isMonitor ? <span> Profesor</span> : <p></p>}
+          {suspendido ? (
+            <span style={{ backgroundColor: "red" }}>Cuenta Suspendida</span>
+          ) : (
+            <p></p>
+          )}
           {membresia ? (
             <span
               style={{
@@ -84,6 +110,16 @@ const Profile = () => {
           <h2>Numero de teléfono</h2>
           {phone ? <p>{user.phone} </p> : <p>No proporcionado</p>}
         </div>
+        {usuario?.detalle?.lessonDetails ? (
+          <div className={style.info}>
+            <h2>Mis Clases</h2>
+            {clases.map((clase, index) => (
+              <p>{clase.name}</p>
+            ))}
+          </div>
+        ) : (
+          <p></p>
+        )}
 
         {membresia ? (
           <div className={style.info}>
@@ -94,7 +130,9 @@ const Profile = () => {
                 {membresia?.start.split("T")[0].split("-").reverse().join("-")}
               </p>
               <h3>Fin: </h3>
-              <p>{membresia?.end.split("T")[0].split("-").reverse().join("-")}</p>
+              <p>
+                {membresia?.end.split("T")[0].split("-").reverse().join("-")}
+              </p>
             </div>
           </div>
         ) : (

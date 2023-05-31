@@ -35,8 +35,8 @@ server.post('/create_checkout',async (req,res)=>{
                 quantity: 1
             }],
             mode:'payment',
-            success_url: 'https://muscle-lab-six.vercel.app/profile',
-            cancel_url:'https://muscle-lab-six.vercel.app/'
+            success_url: 'http://localhost:3000/profile',
+            cancel_url:'http://localhost:3000/'
         });
         
         res.status(200).json({redirect_url:session.url});

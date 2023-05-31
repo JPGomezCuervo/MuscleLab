@@ -13,7 +13,7 @@ const Nosotros = ()=>(
                 <p>
                 En MuscleLab, contamos con instalaciones de última generación y una amplia variedad de equipos de alta calidad para entrenamiento cardiovascular y de fuerza. También ofrecemos clases grupales dinámicas, desde entrenamiento funcional hasta yoga y pilates. Nuestra comunidad se enfoca en el bienestar y te ayudamos a transformar tu cuerpo, mejorar tu salud y lograr un estilo de vida activo. ¡Únete a nosotros y descubre tu potencial físico en nuestro gimnasio acogedor!
                 </p>
-                <a href='https://muscle-lab-six.vercel.app/clases' className={style.Button}>Nuestras clases</a>
+                <a href='http://localhost:3000/clases' className={style.Button}>Nuestras clases</a>
             </div>
                  
 

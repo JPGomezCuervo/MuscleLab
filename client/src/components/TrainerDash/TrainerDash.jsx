@@ -23,8 +23,8 @@ const TrainerDash = () => {
             </div>
 
             <div className={style.TitleContainer}>
-                <h2 className={`${style.Title} ${style.Info}`}> Nombre</h2>
-                <h2 className={`${style.Title} ${style.Info}`}> Clase</h2>
+                <h2 className={`${style.Title} ${style.Info} ${style.Name}`}> Nombre</h2>
+                <h2 className={`${style.Title} ${style.Info} ${style.Class}`}> Clase</h2>
             </div>
             {status === "loading" && <img className={style.LoadingIcon} src={loadingGif} alt=""/>}
             <div className={style.BGContainer}>

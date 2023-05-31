@@ -1,7 +1,7 @@
 const {User, LessonDetail, StatusMemberships}= require('../../db');
 
-const addLesson =async (name, idLesson)=>{
-    const userToAdd= await User.findOne({where:{fullName:name}});
+const addLesson =async (idUser, idLesson)=>{
+    const userToAdd= await User.findOne({where:{id:idUser}});
     if(!userToAdd){
         throw new Error("No se encontro el usuario");
     }

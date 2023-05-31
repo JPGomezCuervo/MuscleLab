@@ -2,16 +2,17 @@
 .BigBigContainer {
   position: absolute;
   display: inline-block;
-  overflow-y: scroll;
+  
 }
 .contenedor{
     
     margin-top: 2rem;    
     display: flex;
     flex-direction: column;
-   align-items: center;
-   width: auto;
-
+    align-items: center;
+    width: auto;
+    height: 62vh;
+    overflow-y: scroll;
 }
 .LoadingIcon {
   position: absolute;

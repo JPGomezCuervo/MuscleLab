@@ -31,20 +31,17 @@ import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
 import StripeRender from "./components/StripeRender/StripeRender";
 import jwt_decode from "jwt-decode";
-import Modal from 'react-modal';
-import CreatePlan from './components/CreatePlan/CreatePlan'
-import PlanDashEditar from './components/EditarPlan/EditarPlan'
+import Modal from "react-modal";
+import CreatePlan from "./components/CreatePlan/CreatePlan";
+import PlanDashEditar from "./components/EditarPlan/EditarPlan";
 import Review from "./components/Review/Review";
 import DashPlans from "./components/DashPlans/DashPlans";
 import UserUpdate from "./components/UserUpdate/UserUpdate";
 import PasarelaPago from "./components/PasarelaPago/PasarelaPago";
 import { setIsAdmin, fetchUserAuth } from "./redux/features/authSlice";
+import DeletedUsers from "./components/DeletedUsers/DeletedUsers";
 
-Modal.setAppElement('#root')
-
-
-
-
+Modal.setAppElement("#root");
 
 function App() {
   const location = useLocation().pathname;
@@ -91,14 +88,11 @@ function App() {
         <Route path="/sedes/detalles/:id" element={<SedeHomeDetalle />} />
         <Route path="/pagos/:id" element={<PasarelaPago />} />
 
-        <Route path="/pagos/:id" element={<PasarelaPago/>}/>
+        <Route path="/pagos/:id" element={<PasarelaPago />} />
 
         <Route path="/calendar" element={<Calendar />} />
 
-
-
-        
-        <Route path="/stripe" element={<StripeRender/>}/>
+        <Route path="/stripe" element={<StripeRender />} />
         {/* <Route path='/dashboard' element={<LessonsDash/>}>
         <Route path= '/dashboard/lessons/detail/:id' element={<LessonsDash/>}/> 
       <Route/>  */}
@@ -106,7 +100,8 @@ function App() {
         {/* {isAdmin ? (
           <> */}
         <Route path="/dashboard" element={<LessonsDash />} />
-        <Route path="dashboard/clases" element={<LessonsDash />} />
+        <Route path="/dashboard/deletedusers" element={<DeletedUsers />} />
+        <Route path="/dashboard/clases" element={<LessonsDash />} />
         <Route path="/dashboard/clases/editar/:id" element={<Wrapper />} />
         <Route path="/dashboard/clases/crear" element={<Wrapper />} />
         <Route path="/dashboard/profesores" element={<TrainerDash />} />
@@ -128,7 +123,6 @@ function App() {
         <Route path="/dashboard/sedes/crear" element={<SedesDashCrear />} />
 
         <Route path="/profile/editar/:id" element={<UserUpdate />} />
-
         <Route path= '/dashboard/plans/crear' element={<CreatePlan/>}/>
       <Route path= '/dashboard/membresias/editar/:id' element={<PlanDashEditar/>}/>
       <Route path= '/dashboard/membresias' element={<DashPlans/>}/>
@@ -139,7 +133,6 @@ function App() {
         ) : ( */}
         <Route path="/denegado" element={<login />}></Route>
         {/* )} */}
-
       </Routes>
       {location.includes("dashboard") ? null : <Footer />}
     </>

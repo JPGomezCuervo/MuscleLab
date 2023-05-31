@@ -10,25 +10,6 @@ import clock from "../../assets/icons/clock.png";
 import pilates from "../../assets/icons/pilates.png"
 import jwt_decode from "jwt-decode";
 
-import ReactModal from "react-modal";
-
-const ErrorModal = ({ isOpen, closeModal, errorMessage }) => {
-    return (
-      <ReactModal
-        isOpen={isOpen}
-        onRequestClose={closeModal}
-        contentLabel="Error"
-        className={style.modal}
-      >
-        <h2 className={style.text}>Error</h2>
-        <p className={style.text}>{errorMessage}</p>
-        <button onClick={closeModal} className={style.Button}>Cerrar</button>
-      </ReactModal>
-    );
-  };
-
-
-
 
 const PasarelaPago = () => {
 
@@ -43,8 +24,7 @@ const PasarelaPago = () => {
     const selectedMembership = memberships.find((m) => m.id === selectedMembershipId);
 
 
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
+    
 
 
     const crearProducto = (event) => {
@@ -74,21 +54,13 @@ const PasarelaPago = () => {
 
                 })
                 .catch((error) => 
-
-                setErrorMessage(error.response.data.error),
-                 setModalIsOpen(true)
+                    0
                 )
               } else {
 
             console.log("No se encontró la membresía seleccionada");
         }
     };
-
-
-    const closeModal = () => {
-        setModalIsOpen(false);
-        setErrorMessage('');
-      };
 
 
 
@@ -128,7 +100,7 @@ const PasarelaPago = () => {
                             <h2 className={style.text}>{selectedMembership.name}</h2>
                             <hr  className={style.hr}/>
                         </div>
-                            <h2 className={style.text}>Precio: {selectedMembership.price}</h2>
+                            <h2 className={style.text}>Precio: ${selectedMembership.price}</h2>
                             <h2 className={style.text}> Beneficios: {selectedMembership.benefits}</h2>
                             <h2 className={style.text}>Duracion: {selectedMembership.duration}</h2>
                             <button type="submit" onClick={crearProducto} className={style.Button}>
@@ -142,10 +114,6 @@ const PasarelaPago = () => {
                         </div>
                         
                 }
-
-
-
-<ErrorModal isOpen={modalIsOpen} closeModal={closeModal} errorMessage={errorMessage} />
 
             </div>
 

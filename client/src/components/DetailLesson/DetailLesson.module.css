@@ -13,7 +13,7 @@
     flex-direction: column;
     align-items: center;
     box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 16px;
+    border-radius: 10px;
 }
 
 
@@ -31,8 +31,31 @@
     justify-content: center;
     font-family:'Montserrat-Bold';
     color:#013565;
+    width: fit-content;
+    padding-left: 1rem;
     font-size: 2rem;
     
+}
+
+.comment{
+  border: 1px solid rgba(16, 46, 46, 1);
+  background-color: #ffc73a;
+  float: left;
+  border-radius: 5px;
+  padding-left: 40px;
+  padding-right: 30px;
+  padding-top: 10px;
+  height: fit-content;
+  width: 50%;
+  overflow-x: hidden;
+}
+.comment h4,.comment span,.darker h4,.darker span{
+  display: inline;
+}
+
+.comment p,.comment span,.darker p,.darker span{
+  color: rgb(0, 0, 0);
+  overflow-x: hidden;
 }
 
 .txt{
@@ -52,7 +75,7 @@ border-radius: .4rem;
 
 .fondoBrad{
     display: block;
-    background-color: #ffc300;
+    background-color: #013565;
     width: 230px;
     height: 100%;
     border-radius: .4rem;
@@ -116,9 +139,13 @@ border-radius: .4rem;
 
 .detalleparrafo{
     background-color:#013565 ;
-    width: 100%;
+    width: 90%;
     min-height: 7rem;
-    display: flex;    
+    align-items: center;
+    padding-left: 7rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
     margin-top: 30px;
 }
 
@@ -338,3 +365,49 @@ background-color:#002141;
     }
 }
 
+.modal{
+  flex-direction: column;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+  background-color: white;
+  box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.2);
+  border-radius: .4rem;
+  min-height: 20rem;
+  min-width: 30rem;
+}
+.textModal{
+  font-family: 'Montserrat-Medium';
+  font-weight: 600;
+  color: #013565;
+  text-align: center;
+  width: 27rem;
+  padding: 2rem;
+  font-size: 3rem;
+}
+.SaveButton {
+  height: 3rem;
+  color: #ffffff;
+  width: 13rem;
+  background-color: #ffc300;
+  border: 0;
+  border-radius: 0.4rem;
+  font-family: "Montserrat-Bold";
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: 0.2s;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+.SaveButton:hover {
+  background-color: #ffaf00;
+}
+.SaveButton:active {
+  background-color: #ffc300;
+}

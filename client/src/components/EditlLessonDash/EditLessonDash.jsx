@@ -2,6 +2,7 @@ import style from './EditLessonDash.module.css';
 import arrowIcon from '../../assets/icons/arrow-yellow.png';
 import React, {Component} from 'react';
 import checkIcon from '../../assets/icons/check.png'
+import crossIcon from '../../assets/icons/cross.png'
 import { connect } from 'react-redux';
 import { fetchLessonsByID } from '../../redux/features/lessonsSlice';
 import { fetchAllLessonTypes } from '../../redux/features/typesSlice';
@@ -54,9 +55,10 @@ class DetailLessonDash extends Component {
                 branchoffice: '',
             },
             horaInicio: '',
-            allowSubmit: true,
+            allowSubmit: false,
             message:'',
             serverResponse: '',
+            serverErrorResponse: '',
             imagePreviewUrl: '',
         };
     };
@@ -128,8 +130,9 @@ class DetailLessonDash extends Component {
     
         generateBranchOfficeOptions = () => {
             return this.props.offices.map((office) => {
+                 
                 return (
-                    <option key={office.id} value={office.name} selected={(office === this.state.lessonAttributes.office)}>{office.name}</option>
+                    <option key={office.id} value={office.name} selected={(office.name === this.state.lessonAttributes.branchoffice)}>{office.name}</option>
                 )
             })
         };
@@ -168,36 +171,36 @@ class DetailLessonDash extends Component {
             }, () =>{
                 this.setState({
                     errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
-                })
+                }, () => {
+                    this.setState({
+                        allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
+                        });
+        
+            })
+            });
+    
+    };
+    
+    handleBranchOfficeOptions = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+            lessonAttributes: {
+                ...this.state.lessonAttributes,
+                [name]: [value],
+            },
+        }, () =>{
+            this.setState({
+                errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
             }, () => {
                 this.setState({
                     allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
                     });
-    
-        });
-    
+            })
+        }
+
+        );
     };
-    
-        handleBranchOfficeOptions = (event) => {
-            const name = event.target.name;
-            const value = event.target.value;
-            this.setState({
-                lessonAttributes: {
-                    ...this.state.lessonAttributes,
-                    [name]: [value],
-                },
-            }, () =>{
-                this.setState({
-                    errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
-                })
-            }
-            , () => {
-                this.setState({
-                    allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
-                    });
-            }
-            );
-        };
 
 
         handleHoursBox = (event) => {
@@ -314,18 +317,17 @@ class DetailLessonDash extends Component {
         
                 formData.append('image', this.state.lessonAttributes.image);
                 formData.append('lessonAttributes', JSON.stringify(this.state.lessonAttributes));
-                
+                console.log(formData)
                 axios.put(`${URL}/lessons/update/${this.props.id}`, formData)
                 .then((res) => {
                     console.log(res);
                     this.setState({
-                        serverResponse: res.data.message,
+                        serverResponse: 'Clase modificada con éxito',
                         message: '',
                      });
                 }).catch((err) => {
-                    console.log(err)
                     this.setState({
-                        serverResponse: err.message,
+                        serverErrorResponse: 'La clase no pudo ser editada',
                         message: '',
                     });
                 });
@@ -359,6 +361,10 @@ class DetailLessonDash extends Component {
 
             this.setState({
                 errors: validations(value, name, this.state.errors, this.state.lessonAttributes)
+            },() => {
+                this.setState({
+                    allowSubmit: Object.values(this.state.lessonAttributes).every((item) => Boolean(item)  === true) && Object.values(this.state.errors).every((item) => item === '')
+                })
             })
 
         };
@@ -403,11 +409,11 @@ class DetailLessonDash extends Component {
                         goals: res.payload.goals,
                         isAvailable: res.payload.isAvailable,
                         monitors: res.payload.monitors,
+                        branchoffice: res.payload.office,
 
                  }
              },
              () => {
-                
                 this.availabilityOption = this.state.lessonAttributes.isAvailable;
              });
          }) 
@@ -426,7 +432,7 @@ class DetailLessonDash extends Component {
       return (
         <form className={style.MainContainer}>
             <div className={style.Navigation}>
-                <a href='https://muscle-lab-six.vercel.app/dashboard/clases'>
+                <a href='http://localhost:3000/dashboard/clases'>
                     <img className={style.ArrowIcon} src={arrowIcon} alt="" />
                 </a>
                 <h2>{lessonAttributes.name}</h2>
@@ -628,7 +634,22 @@ class DetailLessonDash extends Component {
                         <h1>{this.state.serverResponse}</h1>
                         <img className={style.CheckIcon} src={checkIcon} alt="" />
                         <div>
-                            <a className={style.AdvertiseButton3} href='https://muscle-lab-six.vercel.app/dashboard/clases'>
+                            <a className={style.AdvertiseButton3} href='http://localhost:3000/dashboard/clases'>
+                                Volver a Clases
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                }
+
+                {this.state.serverErrorResponse && 
+                <div>
+                    <div className={style.AdvertiseContainer} ></div>
+                    <div className={style.Advertise}>
+                        <h1>{this.state.serverErrorResponse}</h1>
+                        <img className={style.CheckIcon} src={crossIcon} alt="" />
+                        <div>
+                            <a className={style.AdvertiseButton3} href='http://localhost:3000/dashboard/clases'>
                                 Volver a Clases
                             </a>
                         </div>

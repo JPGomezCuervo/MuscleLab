@@ -262,7 +262,6 @@ font-size: 1.20rem;
 
 
 .modal{
- 
   flex-direction: column;
   display: flex;
   position: fixed;
@@ -277,9 +276,6 @@ font-size: 1.20rem;
   min-height: 20rem;
   min-width: 30rem;
 }
-
-
-
 .text{
   font-family: 'Montserrat-Medium';
   font-weight: 600;
