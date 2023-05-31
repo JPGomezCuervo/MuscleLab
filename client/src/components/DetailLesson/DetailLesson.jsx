@@ -52,16 +52,19 @@ const DetailLesson = () => {
   };
 
   const handlerReview = (event, id) => {
-    event.preventDefault();
     axios
       .post(`${URL}/reviews/create`, input)
       .then((res) => {
         console.log(res);
         setServerResponse(res.data.message);
+        alert("Review Creada");
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
         setServerResponse(error.data);
+        alert("No se pudo crear la review");
+        window.location.reload();
       });
   };
   const repeated = async (idUser, idLesson) => {
@@ -107,7 +110,7 @@ const DetailLesson = () => {
             <>
               <div className={style.conteinerTodo}>
                 <h1 className={style.h1}>{lesson?.name}</h1>
-                <h2 className={style.text}>Rating promedio:{lesson?.averageStars}</h2>
+                <h2 className={style.text}>Rating promedio: {lesson?.averageStars}</h2>
                 <div className={style.fondoinstrYHor}>
                   <div className={style.conjuntoMujerycaja}>
                     <div className={style.fondoMujer}>
@@ -155,7 +158,17 @@ const DetailLesson = () => {
                 <div className={style.detalleparrafo}>
                   <p className={style.txt}>{lesson.description}</p>
                 </div>
-
+                <h2 className={style.text} >Comentarios:</h2>
+                <div className={style.detalleparrafo} >
+                  {lesson?.reviews?.map((rev) => {
+                    return (
+                      <div className={style.comment} >
+                        <h4>{rev.user}</h4>
+                        <p>{rev.description}</p>
+                      </div>
+                    )
+                  })}
+                </div>
                 {usuario?.membresia ? (
                   <div className={style.card}>
                     <h2>Calificacion: {lesson?.name} </h2>
