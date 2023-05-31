@@ -310,7 +310,6 @@ class EditLessonDash extends Component {
 
         formData.append('image', this.state.lessonAttributes.image);
         formData.append('lessonAttributes', JSON.stringify(this.state.lessonAttributes));
-        console.log(formData)
         axios.post(`${URL}/lessons/create`, formData)
         .then((res) => {
             console.log(res);
@@ -360,7 +359,7 @@ class EditLessonDash extends Component {
 
     handlePrevArrow = (event) => {
         event.preventDefault();
-        window.location.href = 'http://localhost:3000/dashboard/clases/';
+        window.location.href = 'https://muscle-lab-six.vercel.app/dashboard/clases/';
     };
 
 
@@ -580,7 +579,7 @@ class EditLessonDash extends Component {
                         {this.state.message && <button className={style.AdvertiseButton1} onClick={this.handleConfirmarClick}>Confirmar</button>}
                         {this.state.message && <button className={style.AdvertiseButton2} onClick={this.handleVolverClick}>Volver</button>}
                         
-                        {this.state.serverResponse && <a href='http://localhost:3000/dashboard/clases' className={style.AdvertiseButton3} >Volver</a>}
+                        {this.state.serverResponse && <a href='https://muscle-lab-six.vercel.app/dashboard/clases' className={style.AdvertiseButton3} >Volver</a>}
                
                     </div>
                 </div>

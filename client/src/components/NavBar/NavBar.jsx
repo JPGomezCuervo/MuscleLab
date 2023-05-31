@@ -7,15 +7,17 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setPlansCLick } from "../../redux/features/utilsSlice";
 import SignUp from "../SignUp/SignUp";
-import axios from "axios";
 import adminIcon from "../../assets/icons/admin.png";
+import { selectIsActive, setIsActive } from "../../redux/features/authSlice";
+import { useSelector } from "react-redux";
 import jwt_decode from "jwt-decode";
-import { useState, useRef } from "react";
+
 
 const NavBar = () => {
   const token = localStorage.getItem("token");
   const isAdmin = token ? jwt_decode(token).isAdmin : false;
   const dispatch = useDispatch();
+  const isActive = useSelector(selectIsActive);
 
   const handleClickLogo = () => {
     window.location.href = "/";
@@ -25,6 +27,7 @@ const NavBar = () => {
   };
   const handleLogOut = () => {
     localStorage.removeItem("token");
+    dispatch(setIsActive(false));
   };
 
   return (
@@ -81,12 +84,14 @@ const NavBar = () => {
             </li>
           </ul>
         </div>
+        {!isActive && (
+          <Link to={"/"} className={`${style.btnPlanes} ${style.BtnLink}`} onClick={handleClickPlan}>
+            <button className={style.btnPlanes}>Planes</button>
+          </Link>
 
-        <Link to={"/"} className={style.btnPlanes} onClick={handleClickPlan}>
-          <button className={style.btnPlanes}>Planes</button>
-        </Link>
+        )}
 
-        <div className={style.LogOpcions}>
+        {token && !isActive && (<div className={style.LogOpciones2}>
           {isAdmin && (
             <Link to="dashboard/clases">
               <button className={style.btnRegistro1}>dashboard</button>
@@ -100,17 +105,68 @@ const NavBar = () => {
           {token ? (
             <Link to="/login">
               <button className={style.btnRegistro1} onClick={handleLogOut}>
-                Cerrar sesion
+                Cerrar Sesión
               </button>
             </Link>
           ) : (
             <Link to="/login">
-              <button className={style.btnRegistro1} onClick={handleLogOut}>
+              <button className={style.btnRegistro1} >
                 Iniciar sesión
               </button>
             </Link>
           )}
-        </div>
+        </div>)}
+
+        {token && isActive && (
+          <div className={style.LogOpcions}>
+          {isAdmin && (
+            <Link to="dashboard/clases">
+              <button className={style.btnRegistro1}>dashboard</button>
+            </Link>
+          )}
+          {token && (
+            <Link to="/profile">
+              <button className={style.btnRegistro1}>Mi Perfil</button>
+            </Link>
+          )}
+          {token ? (
+            <Link to="/login">
+              <button className={style.btnRegistro1} onClick={handleLogOut}>
+                Cerrar Sesión
+              </button>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <button className={style.btnRegistro1} >
+                Iniciar sesión
+              </button>
+            </Link>
+          )}        
+        </div>)}
+
+        {!token && !isActive && (
+          <div className={style.LogOpcions}>
+          {isAdmin && (
+            <Link to="dashboard/clases">
+              <button className={style.btnRegistro1}>dashboard</button>
+            </Link>
+          )}
+          {token && (
+            <Link to="/profile">
+              <button className={style.btnRegistro1}>Mi Perfil</button>
+            </Link>
+          )}
+          {!token && (
+            <div className={style.LogOpcions4}>
+            <Link to="/login">
+              <button className={style.btnRegistro4} >
+                Iniciar sesión
+              </button>
+            </Link>
+            </div>
+          )}        
+        </div>)}
+
       </nav>
     </>
   );

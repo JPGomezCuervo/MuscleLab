@@ -29,7 +29,10 @@ const authSlice = createSlice ({
     initialState,
     reducers: {
         setIsAdmin: (state, action) => {
-            state.isAdmin = action.payload
+            state.isAdmin = action.payload;
+        },
+        setIsActive: (state, action) => {
+            state.isActive = action.payload;
         }
     },
     extraReducers: (builder) => {

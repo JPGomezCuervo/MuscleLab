@@ -6,7 +6,8 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserByID, selectUserByID } from "../../redux/features/usersSlice";
 import { Link } from "react-router-dom";
-
+//import Calendar from "../Calendar/Calendar";
+import clock from '../../assets/icons/clock.png' 
 const Profile = () => {
   const token = localStorage.getItem("token");
   const decoded = decodeJwt(token);
@@ -55,6 +56,13 @@ const Profile = () => {
 
   return (
     <div className={style.general}>
+      <Link to={"/calendar"}>
+        <button 
+            className={style.btnC}>
+        <img className={style.img} 
+              src={clock} alt="reloj"/> 
+        Calendario</button>
+      </Link>
       <div className={style.container}>
         <div className={style.insignias}>
           {suspendido ? <p></p> : isAdmin ? <span> Admin</span> : <p></p>}

@@ -4,7 +4,7 @@ import style from "./Users.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllUsers, selectAllUsers } from "../../redux/features/usersSlice";
 import validation from "../CreateUser/validation";
-import Calendar from "../Calendar/Calendar";
+//import Calendar from "../Calendar/Calendar";
 
 const Users = () => {
   //const [ initialServerData, setInitialServerData ] = useState([])
@@ -127,10 +127,6 @@ const Users = () => {
 
   return (
     <div className={style.container}>
-      <div>
-        <Calendar />
-      </div>
-
       <div className={style.container}>
         <h2 className={style.title}>Formulario de Usuarios</h2>
 
