@@ -70,6 +70,10 @@ const EditTrainerDash = () => {
         setServerResponse("");
 
     }
+    const handlePrevNav = (event) => {
+        event.preventDefault();
+        window.location.href = "/dashboard/profesores";
+    }
 
     const handleConfirmarClick = (event) =>{
         //Pide lessons para editar, mi pregunta es si en la tabla lecciones, ya debe existir la relacion con profesores
@@ -121,8 +125,8 @@ const EditTrainerDash = () => {
         <>
         <form className={style.MainContainer}>
             <div className={style.Navigation}>
-                <button>
-                    <img className={style.ArrowIcon} src={arrowIcon} alt="" />
+                <button onClick={handlePrevNav}>
+                    <img className={style.ArrowIcon} src={arrowIcon} alt=""/>
                 </button>
                 <h2>{user.fullName}</h2>
             </div>
@@ -215,7 +219,7 @@ const EditTrainerDash = () => {
                         <h1>{serverResponse}</h1>
                         <img className={style.CheckIcon} src={checkIcon} alt="" />
                         <div>
-                            <a className={style.AdvertiseButton3} href='https://muscle-lab-six.vercel.app/dashboard/profesores'>
+                            <a className={style.AdvertiseButton3} href='http://localhost:3000/dashboard/profesores'>
                                 Volver a Profesores
                             </a>
                         </div>

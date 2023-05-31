@@ -36,7 +36,7 @@
     height: 60vh;
     overflow-x: hidden;
     padding-right: 5rem;
-    padding-left: 1rem;
+    padding-left: 5rem;
     
 }
 
@@ -59,7 +59,7 @@
     font-weight: 300;
     color: #013565;
     margin: 0;
-    margin-left: 46%;
+    margin-left: 15%;
 
     
 }
@@ -109,7 +109,8 @@
 }
 
 .ClaseContainer{
-    margin-left: 10%;
+    margin: 0 auto;
+    padding-left: 8rem;
 }
 
 .InfoNameContainer{

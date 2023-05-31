@@ -128,8 +128,9 @@ class DetailLessonDash extends Component {
     
         generateBranchOfficeOptions = () => {
             return this.props.offices.map((office) => {
+                 
                 return (
-                    <option key={office.id} value={office.name} selected={(office === this.state.lessonAttributes.office)}>{office.name}</option>
+                    <option key={office.id} value={office.name} selected={(office.name === this.state.lessonAttributes.branchoffice)}>{office.name}</option>
                 )
             })
         };
@@ -403,11 +404,11 @@ class DetailLessonDash extends Component {
                         goals: res.payload.goals,
                         isAvailable: res.payload.isAvailable,
                         monitors: res.payload.monitors,
+                        branchoffice: res.payload.office,
 
                  }
              },
              () => {
-                
                 this.availabilityOption = this.state.lessonAttributes.isAvailable;
              });
          }) 
@@ -426,7 +427,7 @@ class DetailLessonDash extends Component {
       return (
         <form className={style.MainContainer}>
             <div className={style.Navigation}>
-                <a href='https://muscle-lab-six.vercel.app/dashboard/clases'>
+                <a href='http://localhost:3000/dashboard/clases'>
                     <img className={style.ArrowIcon} src={arrowIcon} alt="" />
                 </a>
                 <h2>{lessonAttributes.name}</h2>
@@ -628,7 +629,7 @@ class DetailLessonDash extends Component {
                         <h1>{this.state.serverResponse}</h1>
                         <img className={style.CheckIcon} src={checkIcon} alt="" />
                         <div>
-                            <a className={style.AdvertiseButton3} href='https://muscle-lab-six.vercel.app/dashboard/clases'>
+                            <a className={style.AdvertiseButton3} href='http://localhost:3000/dashboard/clases'>
                                 Volver a Clases
                             </a>
                         </div>
