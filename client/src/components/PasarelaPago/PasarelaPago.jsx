@@ -74,7 +74,6 @@ const PasarelaPago = () => {
 
                 })
                 .catch((error) => 
-
                 setErrorMessage(error.response.data.error),
                  setModalIsOpen(true)
                 )
