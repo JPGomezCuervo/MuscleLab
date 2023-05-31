@@ -75,7 +75,6 @@ const EditTrainerDash = () => {
         //Pide lessons para editar, mi pregunta es si en la tabla lecciones, ya debe existir la relacion con profesores
         event.preventDefault();
         if(message.includes("modificar")) {
-            console.log(JSON.stringify(input))
             axios.put(`${URL}/users/update/${id}`, input)
             .then((res) => {
                 console.log(res);
@@ -209,14 +208,14 @@ const EditTrainerDash = () => {
                 </div>
                 }
 
-            {serverResponse && 
+            {serverResponse.length  && 
                 <div>
                     <div className={style.AdvertiseContainer} ></div>
                     <div className={style.Advertise}>
                         <h1>{serverResponse}</h1>
                         <img className={style.CheckIcon} src={checkIcon} alt="" />
                         <div>
-                            <a className={style.AdvertiseButton3} href='http://localhost:3000/dashboard/profesores'>
+                            <a className={style.AdvertiseButton3} href='https://muscle-lab-six.vercel.app/dashboard/profesores'>
                                 Volver a Profesores
                             </a>
                         </div>

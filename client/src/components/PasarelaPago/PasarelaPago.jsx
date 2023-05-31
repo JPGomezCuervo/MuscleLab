@@ -5,9 +5,9 @@ import { selectAllMemberships, fetchAllMemberships } from "../../redux/features/
 import { useSelector, useDispatch } from "react-redux";
 import style from "./PasarelaPago.module.css";
 import { URL } from "../../utils/constants";
-import bicep from "../../assets/icons/Bicep.png";
+import gimnasio from "../../../src/assets/icons/gimnasio.png";
 import clock from "../../assets/icons/clock.png";
-import dumbbell from "../../assets/icons/dumbbell.png"
+import pilates from "../../assets/icons/pilates.png"
 import jwt_decode from "jwt-decode";
 
 import ReactModal from "react-modal";
@@ -70,7 +70,6 @@ const PasarelaPago = () => {
             axios
                 .post(`${URL}/payments/create_checkout`, product)
                 .then((res) => {
-                    console.log(res.data);
                     window.location.href = res.data.redirect_url;
 
                 })
@@ -95,15 +94,16 @@ const PasarelaPago = () => {
     useEffect(() => {
         dispatch(fetchAllMemberships())
     }, [dispatch])
+    console.log(gimnasio)
 
     const getImageUrl = (membershipId) => {
         switch (membershipId) {
             case "Standar":
-                return bicep;
+                return gimnasio;
             case "Plus":
                 return clock;
             case "Premium":
-                return dumbbell;
+                return pilates;
             default:
                 return "";
         }
@@ -123,18 +123,23 @@ const PasarelaPago = () => {
                         ?
                         <div className={style.card}>
                             <img src={getImageUrl(selectedMembership.name)} alt="Membership Image" className={style.img} />
-
+                        <div>
                             <h2 className={style.text}>{selectedMembership.name}</h2>
+                            <hr  className={style.hr}/>
+                        </div>
                             <h2 className={style.text}>Precio: {selectedMembership.price}</h2>
-                            <h2 className={style.text}>Beneficios: {selectedMembership.benefits}</h2>
-                            <h2 className={style.text}>Duración: {selectedMembership.duration}</h2>
+                            <h2 className={style.text}> Beneficios: {selectedMembership.benefits}</h2>
+                            <h2 className={style.text}>Duracion: {selectedMembership.duration}</h2>
                             <button type="submit" onClick={crearProducto} className={style.Button}>
                                 Pagar
                             </button>
                         </div>
                         :
+                        <div>
+                                <img src={gimnasio} alt="" className={style.img} />
                         <p>Membresía no encontrada</p>
-
+                        </div>
+                        
                 }
 
 

@@ -7,6 +7,7 @@ import {
   fetchLessonByName,
 } from "../../redux/features/lessonsSlice";
 import { useEffect, useState } from "react";
+import { URL } from "../../utils/constants";
 import style from "./DetailLesson.module.css";
 import brad from "../../assets/images/detail/brad.jpeg";
 import NavBar from "../NavBar/NavBar";
@@ -48,7 +49,6 @@ const DetailLesson = () => {
     const name = event.target.name;
     const value = event.target.value;
     setInput({ ...input, [name]: value, lessonId : id });
-    console.log(event, id, "HOLA");
 
   };
 
@@ -89,7 +89,7 @@ const DetailLesson = () => {
             <>
             <div className={style.conteinerTodo}>
               <h1 className={style.h1}>{lesson?.name}</h1>
-
+              <h2 className={style.text}>{lesson?.averageStars}</h2>
               <div className={style.fondoinstrYHor}>
                 <div className={style.conjuntoMujerycaja}>
                   <div className={style.fondoMujer}>
@@ -134,8 +134,8 @@ const DetailLesson = () => {
             {
               token?(
                 <div className={style.card}>
+                  <h2>Calificacion:  {lesson?.name} </h2>
                 <div className={style.rating}>
-                  
                   <input value={5} name="stars" id="star-1" type="radio" onChange={(e) => handleInputChange(e,lesson.id)} />
                   <label for="star-1">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
@@ -156,8 +156,6 @@ const DetailLesson = () => {
                   <label for="star-5">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
                   </label>
-                  <h2>{lesson?.name}</h2>
-                  <h2>Calificacion:  </h2>
                 </div>
 
                 <label htmlFor="">Comentario de la clase</label>
@@ -202,11 +200,40 @@ const DetailLesson = () => {
                   className={style.imagenDeporte}
                 />
 
+              {
+              token?(
+                <div className={style.card}>
+                  <h2>Calificacion:  {lesson?.name} </h2>
+                <div className={style.rating}>
+                  <input value={5} name="stars" id="star-1" type="radio" onChange={(e) => handleInputChange(e,lesson.id)} />
+                  <label for="star-1">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+                  </label>
+                  <input value={4} name="stars" id="star-2" type="radio" onChange={(e) => handleInputChange(e,lesson.id)} />
+                  <label for="star-2">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+                  </label>
+                  <input value={3} name="stars" id="star-3" type="radio" onChange={(e) => handleInputChange(e,lesson.id)} />
+                  <label for="star-3">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+                  </label>
+                  <input value={2} name="stars" id="star-4" type="radio" onChange={(e) => handleInputChange(e,lesson.id)} />
+                  <label for="star-4">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+                  </label>
+                  <input value={1} name="stars" id="star-5" type="radio" onChange={(e) => handleInputChange(e,lesson.id)} />
+                  <label for="star-5">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+                  </label>
+                </div>
 
+                <label htmlFor="">Comentario de la clase</label>
+                <input type="text" value={input.description} placeholder='Descripcion' onChange={(e) => handleInputChange(e,lesson.id)} name="description" className={style.text} />
 
-
-
-
+                <button onClick={handlerReview} className={style.button}>Enviar</button>
+              </div>
+              ):(<div></div>)
+            }
                 </div>
 
               </div>

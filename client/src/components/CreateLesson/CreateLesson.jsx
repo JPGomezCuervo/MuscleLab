@@ -8,6 +8,7 @@ import {
 import { useState, useEffect } from "react";
 import { validate } from "./Validation";
 import { weekDays } from "../../utils/constants";
+import { URL } from "../../utils/constants";
 
 const CreateLesson = () => {
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ const CreateLesson = () => {
       alert("Debe completar los campos obligatorios y corregir los errores.");
     } else {
       axios
-        .post("http://localhost:3001/lessons/create", form)
+        .post(`${URL}/lessons/create`, form)
         .then((res) => {
           alert("Lesson creada correctamente");
         })

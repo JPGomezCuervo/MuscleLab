@@ -9,34 +9,53 @@ import axios from "axios"
 import moment from "moment";
 import styles from "../Calendar/Calendar.module.css"
 
-import Events from "./EventsMocks/EventsMocks";
+//import Events from "./EventsMocks/EventsMocks";
 
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllUsers, selectAllUsers } from "../../redux/features/usersSlice";
 
-//pasar por props isAdmin, token, desde app.js ej: <Calendar isAdmin={isAdmin} />
+import decodeJwt from "../../utils/decodejwt";
+import { fetchUserByID, selectUserByID } from "../../redux/features/usersSlice";
+
 function Calendar() {
   const [modalOpen, setModalOpen] = useState(false);
   const [events, setEvents] = useState([])
   const calendarRef = useRef(null);
 
-  // const [serverResponse, setServerResponse] = useState(true);
-  // const [userSelect, setUserSelect] = useState(null);
-
-  const {
-    user,
-    isAuthenticated,
-    } = useAuth0();
-    
   const dispatch = useDispatch();
-  
   const location = useLocation().pathname;
-  
+
+  const token = localStorage.getItem("token");
+  const decoded = decodeJwt(token);
+  const id = decoded.payload.id;
+
   useEffect(() => {
-    setEvents(Events())
-    dispatch(fetchAllUsers())
+    dispatch(fetchUserByID(id));
+
+  }, [dispatch, id]);
+
+  const userTargeted = useSelector(selectUserByID);
+
+ // const memberUser = userTargeted?.membresia ? userTargeted.detalle : userTargeted;
+  const membership = userTargeted.membresia;
+  const membershipName = userTargeted?.detalle;
+  const isAdmin = decoded.payload.isAdmin;
+  
+  //console.log('title', membership?.name,'detalle:',userTargeted.detalle.lessonDetails);
+
+  const lessonName = userTargeted.detalle?.lessonDetails.map(lessonName=> lessonName.name)
+    //console.log('Nombre usuario logueado:',membershipName?.fullName);
+    const eventsUserFromApi = [{
+      title: `Plan: ${membership?.name}-Clases: ${lessonName}`,
+      start: membership?.start,
+      end: membership?.end
+    }]
+    //console.log('HolaDetalle!', eventsUserFromApi);  
+    //Events(), 
+  useEffect(() => {
+    setEvents(eventsUserFromApi)   
   }, [location]);
 
   const users = useSelector(selectAllUsers);
@@ -70,34 +89,34 @@ function Calendar() {
     }
     
   return (
-      
-  (isAuthenticated ) && (
+        
     <section className={styles.calendar}>
       <p 
-        
         style={{ 
-                fontWeight:"bold", 
-                fontSize:"1.25rem", 
-                padding:".2px",
-                color: "orange",
-                }} 
-                >MUSCLE LAB GYM <span 
-                style={{ 
-                  fontWeight:"bold", 
-                  fontSize:"1.1rem", 
-                  padding:"2px",
-                  color: "#fff",
-                  background:"orange",
-                  borderRadius:"3px",
+              fontWeight:"bold", 
+              fontSize:"1.25rem", 
+              padding:".2px",
+              color: "orange",
+              }} 
+              >MUSCLE LAB GYM <span 
+        style={{ 
+              fontWeight:"bold", 
+              fontSize:"1.15rem", 
+              padding:"2px",
+              color: "#fff",
+              background:"orange",
+              borderRadius:"3px",
                   
-                }}
-                >Calendario </span></p>
+              }}
+         >Calendario </span><span style={{fontSize:'1.5rem', textTransform:'uppercase' }}>{membershipName?.fullName}</span></p>
       <div className={styles.calendarBody} style={{ position: "relative", 
-                  zIndex: 0, 
+              zIndex: 0, 
                    }}>
-        {/**modificar para admin, isAdmin */}
-        {isAuthenticated && <button onClick={()=>setModalOpen(true)}>Nuevo Evento</button>}
         
+        {isAdmin && <button className={styles.btn1} onClick={()=>setModalOpen(true)}>Nuevo Evento</button>}
+        <Link to="/profile">
+           <button className={styles.btn2}>Atras</button>
+        </Link>
         <Fullcalendar
           
           ref={calendarRef}
@@ -107,9 +126,9 @@ function Calendar() {
           //eventAdd={event=>handleEventAdd(event)}          
           editable={true}
           eventDrop= {(info)=> 
-                  !window.confirm("No se puede cambiar la fecha de la clase!") ?
-                    info.revert() : info.revert()
-                    }
+            !window.confirm("No se puede cambiar la fecha de la clase!") ?
+            info.revert() : info.revert()
+                   }
           eventResize={false}          
           headerToolbar={
             {
@@ -126,7 +145,7 @@ function Calendar() {
               list:     "lista"
             }
             }
-          height={"48.5vh"}
+          height={"50vh"}
           
         />
       </div>
@@ -138,7 +157,8 @@ function Calendar() {
           dateSet={(date)=>handleDateSet(date)}
         />
       </div>
+      
     </section>
-  ));
+  );
 }
 export default Calendar

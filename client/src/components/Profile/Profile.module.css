@@ -94,3 +94,22 @@
   justify-content: space-around;
   align-items: center;
 }
+/*calendar button */
+.btnC{
+  width: fit-content;
+  inline-size: 140px;
+  border-radius: 7px;
+  margin-left: 30px;
+  color: #fff;
+  background: #ffc300;
+  font-weight: 600;
+  font-size: 0.95rem;  
+  cursor: pointer;
+}
+.btnC:hover{
+  color: #ffc300;
+  background: #f3f3f3;
+}
+  .img{
+      width: 15px;
+  }

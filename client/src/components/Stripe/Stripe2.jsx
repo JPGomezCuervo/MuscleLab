@@ -17,7 +17,6 @@ const ProductDisplay = () => {
     const crearProducto =  (event) => {
             event.preventDefault();
        // alert(product)
-        console.log("entree")
         //mandar email del user loggeado con TOKEN, cmabiar en el back
          axios.post("http://localhost:3001/payments/create_checkout", product)
          .then((res)=> {

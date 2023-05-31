@@ -5,10 +5,12 @@ import muscleManIcon from "../../assets/icons/man-silhouette.png";
 import clockIcon from "../../assets/icons/clock.png";
 import checkIcon from "../../assets/icons/check.png";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+
 
 const Plans = () => {
   const memberships = useSelector(selectAllMemberships);
+ 
 
   return (
     <div className={style.BGContainer}>
@@ -31,6 +33,7 @@ const Plans = () => {
                     <span>Nombre: {membership.name}</span>
 
                     <img className={style.MainIcon} src={clockIcon} alt="" />
+                    
                     <h4>Duracion: {membership.duration}</h4>
                   </div>
 

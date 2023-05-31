@@ -1,6 +1,7 @@
 .product{
     
-    padding-top: 12rem;
+    padding-top: 10rem;
+    margin-left: 3rem;
 }
 
 .text{
@@ -13,10 +14,15 @@
   margin: 0 auto;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
 
-
+.hr{
+  background-color:#ffaf00;
+  border: none;
+  height: 2px;
+  width: 47rem;
+}
   .Button{
     height: 4rem;
     width: 10rem;
@@ -55,8 +61,8 @@
   }
 
   .img{
-    width: 4rem;
-    height: 4rem;
+    width: 4.5rem;
+    height: 4.5rem;
 
   }
 
