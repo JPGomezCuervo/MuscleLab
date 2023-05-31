@@ -215,7 +215,7 @@ const EditTrainerDash = () => {
                         <h1>{serverResponse}</h1>
                         <img className={style.CheckIcon} src={checkIcon} alt="" />
                         <div>
-                            <a className={style.AdvertiseButton3} href='http://localhost:3000/dashboard/profesores'>
+                            <a className={style.AdvertiseButton3} href='https://muscle-lab-six.vercel.app/dashboard/profesores'>
                                 Volver a Profesores
                             </a>
                         </div>

@@ -9,7 +9,8 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 
-import style from "./Stripe.module.css"
+import style from "./Stripe.module.css";
+import { URL } from "../../utils/constants";
 
 // const stripePromise = loadStripe("pk_test_51NBkBJFPcDe3Fz6KkGQtdIbzgD3xZ5woXRgSC0H8e6FA2LAjFtVbF4jsO0mrWuJn6n4UvEvzevRn4WFoYkjMXMyI001wbQmVlN");
 
@@ -35,7 +36,7 @@ const Stripe  = ()=>{
         const { id } = paymentMethod;
         try {
           const { data } = await axios.post(
-            "http://localhost:3001/payments/checkout",
+            `${URL}/payments/checkout`,
             {
               id,
               amount: 10000, //cents
