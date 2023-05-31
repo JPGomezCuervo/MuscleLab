@@ -1,6 +1,7 @@
 import style from './CreateLessonDash.module.css';
 import arrowIcon from '../../assets/icons/arrow-yellow.png';
 import checkIcon from '../../assets/icons/check.png'
+import crossIcon from '../../assets/icons/cross.png'
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { fetchAllLessonTypes } from '../../redux/features/typesSlice';
@@ -54,6 +55,7 @@ class EditLessonDash extends Component {
             allowSubmit: false,
             message:'',
             serverResponse: '',
+            serverErrorResponse: ''
         };
     };
 
@@ -320,7 +322,7 @@ class EditLessonDash extends Component {
         }).catch((err) => {
             console.log(err)
             this.setState({
-                serverResponse: err.message,
+                serverErrorResponse: err.message,
                 message: '',
             });
         })
@@ -585,6 +587,21 @@ class EditLessonDash extends Component {
                 </div>
             </div>
             }
+
+            {this.state.serverErrorResponse && 
+                <div>
+                    <div className={style.AdvertiseContainer} ></div>
+                    <div className={style.Advertise}>
+                        <h1>{this.state.serverErrorResponse}</h1>
+                        <img className={style.CheckIcon} src={crossIcon} alt="" />
+                        <div>
+                            <a className={style.AdvertiseButton3} href='http://localhost:3000/dashboard/clases'>
+                                Volver a Clases
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                }
         </form>
         </>
       )  

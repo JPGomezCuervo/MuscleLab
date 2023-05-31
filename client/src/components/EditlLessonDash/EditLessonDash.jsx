@@ -2,6 +2,7 @@ import style from './EditLessonDash.module.css';
 import arrowIcon from '../../assets/icons/arrow-yellow.png';
 import React, {Component} from 'react';
 import checkIcon from '../../assets/icons/check.png'
+import crossIcon from '../../assets/icons/cross.png'
 import { connect } from 'react-redux';
 import { fetchLessonsByID } from '../../redux/features/lessonsSlice';
 import { fetchAllLessonTypes } from '../../redux/features/typesSlice';
@@ -57,6 +58,7 @@ class DetailLessonDash extends Component {
             allowSubmit: true,
             message:'',
             serverResponse: '',
+            serverErrorResponse: '',
             imagePreviewUrl: '',
         };
     };
@@ -320,13 +322,12 @@ class DetailLessonDash extends Component {
                 .then((res) => {
                     console.log(res);
                     this.setState({
-                        serverResponse: res.data.message,
+                        serverResponse: 'Clase modificada con éxito',
                         message: '',
                      });
                 }).catch((err) => {
-                    console.log(err)
                     this.setState({
-                        serverResponse: err.message,
+                        serverErrorResponse: err.message,
                         message: '',
                     });
                 });
@@ -628,6 +629,21 @@ class DetailLessonDash extends Component {
                     <div className={style.Advertise}>
                         <h1>{this.state.serverResponse}</h1>
                         <img className={style.CheckIcon} src={checkIcon} alt="" />
+                        <div>
+                            <a className={style.AdvertiseButton3} href='http://localhost:3000/dashboard/clases'>
+                                Volver a Clases
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                }
+
+                {this.state.serverErrorResponse && 
+                <div>
+                    <div className={style.AdvertiseContainer} ></div>
+                    <div className={style.Advertise}>
+                        <h1>{this.state.serverErrorResponse}</h1>
+                        <img className={style.CheckIcon} src={crossIcon} alt="" />
                         <div>
                             <a className={style.AdvertiseButton3} href='http://localhost:3000/dashboard/clases'>
                                 Volver a Clases
