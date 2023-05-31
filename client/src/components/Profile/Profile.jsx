@@ -12,23 +12,23 @@ const Profile = () => {
   const decoded = decodeJwt(token);
   const dispatch = useDispatch();
   const id = decoded.payload.id;
-
   useEffect(() => {
     dispatch(fetchUserByID(id));
   }, [dispatch, id]);
 
   const usuario = useSelector(selectUserByID);
-  console.log(usuario);
+  console.log(usuario.detalle.lessonDetails[0].name);
   const suspendido =
     usuario.deletedAt === null || usuario.deletedAt === undefined
       ? false
       : true;
-  console.log(suspendido);
   const user = usuario?.membresia ? usuario.detalle : usuario;
   const membresia = usuario.membresia;
   const isAdmin = decoded.payload.isAdmin;
   const phone = user?.phone;
   const isMonitor = user?.isMonitor;
+  const clase = usuario?.detalle?.lessonDetails[0].name;
+  
 
   const getInsigniaColor = () => {
     if (membresia) {
@@ -93,6 +93,14 @@ const Profile = () => {
         <div className={style.info}>
           <h2>Numero de teléfono</h2>
           {phone ? <p>{user.phone} </p> : <p>No proporcionado</p>}
+        </div>
+        <div className={style.info}>
+          <h2>Mis Clases</h2>
+          {usuario?.detalle?.lessonDetails ? (
+            <p>{clase} </p>
+          ) : (
+            <p>No proporcionado</p>
+          )}
         </div>
 
         {membresia ? (
