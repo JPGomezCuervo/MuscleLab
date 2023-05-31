@@ -7,6 +7,7 @@ import {
   fetchLessonByName,
 } from "../../redux/features/lessonsSlice";
 import { useEffect, useState } from "react";
+import { URL } from "../../utils/constants";
 import style from "./DetailLesson.module.css";
 import brad from "../../assets/images/detail/brad.jpeg";
 import NavBar from "../NavBar/NavBar";
@@ -88,7 +89,7 @@ const DetailLesson = () => {
             <>
             <div className={style.conteinerTodo}>
               <h1 className={style.h1}>{lesson?.name}</h1>
-
+              <h2 className={style.text}>{lesson?.averageStars}</h2>
               <div className={style.fondoinstrYHor}>
                 <div className={style.conjuntoMujerycaja}>
                   <div className={style.fondoMujer}>
