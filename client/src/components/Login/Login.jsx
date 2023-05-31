@@ -7,6 +7,8 @@ import { URL, clientId } from "../../utils/constants";
 import decodejwt from "../../utils/decodejwt";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import ReactModal from "react-modal";
+
 const Login = () => {
   const [user, setUser] = useState();
   const [email, setEmail] = useState("");
@@ -18,9 +20,21 @@ const Login = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  const [camposCompletar, setCamposCompletar] = useState(false);
+
+  const openModal = () => {
+    setCamposCompletar(true);
+  };
+
+  const closeModal = () => {
+    setCamposCompletar(false);
+  };
+
   const handleLogin = async () => {
     if (!email || !password) {
-      alert("complete los campos");
+      //alert("complete los campos");
+openModal();
     } else {
       try {
         const response = await axios.post(`${URL}/users/login`, {
@@ -89,11 +103,11 @@ const Login = () => {
   const handleKeyLogin = (event) => {
     if (event.key === "Enter") {
       handleLogin();
-   }
-};
-return (
+    }
+  };
+  return (
     <div className={style.BGContainer}>
-      
+
       <div className={style.Container} onKeyDown={handleKeyLogin} onMouseEnter={() => setIsHovered(true)}>
         <h1>Inicia Sesión</h1>
         <h2 className={style.Description}>Para continuar con MuscleLab</h2>
@@ -116,7 +130,7 @@ return (
             value={password}
             onChange={handlePasswordChange}
             className={`${style.Input} ${style.PasswordInput}`}
-            
+
           />
           <FontAwesomeIcon
             icon={showPassword ? faEyeSlash : faEye}
@@ -135,7 +149,16 @@ return (
           onSuccess={onSuccess}
           onFailure={onFailure}
         />
-
+        <ReactModal
+          className={style.modal}
+          isOpen={camposCompletar}
+          onRequestClose={closeModal}
+        >
+          <h2 className={style.text}>Debe completar todos los campos</h2>
+          <button onClick={closeModal} className={style.SaveButton}>
+    Aceptar
+  </button> 
+        </ReactModal>
         <hr></hr>
 
         <Link to="/register">

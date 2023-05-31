@@ -4,6 +4,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { validate } from "./validate";
 import { URL } from "../../utils/constants";
+import ReactModal from "react-modal";
+
 const Register = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -18,6 +20,17 @@ const Register = () => {
     email: "",
     password: "",
   });
+
+const [creadoExito, setCreadoExito] = useState(false);
+
+const openModal = () => {
+  setCreadoExito(true);
+};
+
+const closeModal = () => {
+  setCreadoExito(false);
+};
+
   const changeHandler = (event) => {
     const field = event.target.name;
     const value = event.target.value;
@@ -34,7 +47,8 @@ const Register = () => {
         email: form.email,
       });
       if (response.data.success) {
-        alert("Usuario creado con exito");
+        //alert("Usuario creado con exito");
+        openModal();
         localStorage.setItem("token", response.data.user.token);
         window.location.href = "/";
       }
@@ -70,6 +84,17 @@ const Register = () => {
         <button className={style.ButtonLogIn} onClick={handleRegister}>
           Regístrate
         </button>
+
+        <ReactModal
+  className={style.modal}
+  isOpen={creadoExito}
+  onRequestClose={closeModal}
+>
+  <h2 className={style.text}>¡Usuario creado con éxito!</h2>
+  {/* <button onClick={closeModal} className={style.SaveButton}>
+    Aceptar
+  </button> */}
+</ReactModal>
 
         <hr />
         <Link to="/login">
