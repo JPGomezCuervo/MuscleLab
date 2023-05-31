@@ -14,20 +14,22 @@ import plus from "../../assets/icons/plus.png";
 import NavBar from "../NavBar/NavBar";
 import { useParams, Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import { fetchUserByID, selectUserByID } from "../../redux/features/usersSlice";
 
 const DetailLesson = () => {
   const lesson = useSelector(selectAllLessons);
-
-  //    if(Object.keys(lesson).length !== 0){
-  //     lesson?.map(el=> console.log(1))
-  //    }
 
   const dispatch = useDispatch();
   const params = useParams();
 
   const token = localStorage.getItem("token");
-
   const decoded = token ? jwt_decode(token) : false;
+  const idUser = decoded.id;
+
+  useEffect(() => {
+    dispatch(fetchUserByID(idUser));
+  }, [dispatch, idUser]);
+  const usuario = useSelector(selectUserByID);
 
   useEffect(() => {
     dispatch(fetchLessonByName(params.name));
@@ -154,7 +156,7 @@ const DetailLesson = () => {
                   <p className={style.txt}>{lesson.description}</p>
                 </div>
 
-                {token ? (
+                {usuario?.membresia ? (
                   <div className={style.card}>
                     <h2>Calificacion: {lesson?.name} </h2>
                     <div className={style.rating}>
