@@ -26,7 +26,7 @@ const Profile = () => {
   const isAdmin = decoded.payload.isAdmin;
   const phone = user?.phone;
   const isMonitor = user?.isMonitor;
-  const clase = usuario?.detalle?.lessonDetails[0].name;
+  const clases = usuario?.detalle?.lessonDetails;
 
   const getInsigniaColor = () => {
     if (membresia) {
@@ -95,14 +95,12 @@ const Profile = () => {
         {usuario?.detalle?.lessonDetails ? (
           <div className={style.info}>
             <h2>Mis Clases</h2>
-            {usuario?.detalle?.lessonDetails ? (
-              <p>{clase} </p>
-            ) : (
-              <p>No tiene clases asignadas</p>
-            )}
+            {clases.map((clase, index) => (
+              <p>{clase.name}</p>
+            ))}
           </div>
         ) : (
-          <></>
+          <p></p>
         )}
 
         {membresia ? (
