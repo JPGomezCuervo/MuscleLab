@@ -45,6 +45,9 @@ const DetailLesson = () => {
   const [serverResponse, setServerResponse] = useState("");
   // const [error, setError] = useState({});
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
   const handleInputChange = (event, id) => {
     const name = event.target.name;
     const value = event.target.value;
