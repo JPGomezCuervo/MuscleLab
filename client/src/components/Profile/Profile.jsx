@@ -18,7 +18,9 @@ const Profile = () => {
   }, [dispatch, id]);
 
   const usuario = useSelector(selectUserByID);
-
+  console.log(usuario);
+  const suspendido = usuario.deletedAt === null || usuario.deletedAt === undefined ? true : false;
+  console.log(suspendido);
   const user = usuario?.membresia ? usuario.detalle : usuario;
   const membresia = usuario.membresia;
   const isAdmin = decoded.payload.isAdmin;
@@ -94,7 +96,9 @@ const Profile = () => {
                 {membresia?.start.split("T")[0].split("-").reverse().join("-")}
               </p>
               <h3>Fin: </h3>
-              <p>{membresia?.end.split("T")[0].split("-").reverse().join("-")}</p>
+              <p>
+                {membresia?.end.split("T")[0].split("-").reverse().join("-")}
+              </p>
             </div>
           </div>
         ) : (

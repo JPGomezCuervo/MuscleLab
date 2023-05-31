@@ -6,17 +6,25 @@ import {
 } from "../../redux/features/usersSlice";
 import axios from "axios";
 import { URL } from "../../utils/constants";
-import { useEffect } from "react";
-import trash from "../../assets/icons/trash-bin.png";
-
+import { useEffect, useState } from "react";
+import trash from "../../assets/icons/undo.png";
 const DeletedUsers = () => {
   const dispatch = useDispatch();
   const deleted = useSelector(selectDeletedUsers);
   const users = deleted.user;
-  console.log(users);
+  const [restored, setRestored] = useState(false);
   useEffect(() => {
     dispatch(fetchDeletedUsers());
-  }, [dispatch]);
+    setRestored(false);
+  }, [dispatch, restored]);
+
+  const handleRestore = async (userId) => {
+    console.log("vas a restaurar el elemento");
+    const response = await axios.put(`${URL}/users/restore/${userId}`);
+    alert("Usuario restaurado con éxito");
+    setRestored(true);
+  };
+
   return (
     <div className={style.MainContainer}>
       <div className={style.Navigator}>
@@ -37,6 +45,12 @@ const DeletedUsers = () => {
                 <h2 className={style.InfoName}>
                   {user.deletedAt.split("T")[0].split("-").reverse().join("-")}
                 </h2>
+                <img
+                  className={style.img}
+                  src={trash}
+                  alt="trash"
+                  onClick={() => handleRestore(user.id)}
+                />
               </div>
             </div>
           ))}
