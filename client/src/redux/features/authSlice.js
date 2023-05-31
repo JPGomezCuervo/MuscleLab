@@ -38,7 +38,7 @@ const authSlice = createSlice ({
     extraReducers: (builder) => {
         builder
             .addCase(fetchUserAuth.fulfilled, (state, action) => {
-                state.isActive = action.payload.user.membresia?.status;
+                state.isActive = action.payload.user?.membresia?.status;
                 state.error = null;
                 state.status = fulfilled;
 

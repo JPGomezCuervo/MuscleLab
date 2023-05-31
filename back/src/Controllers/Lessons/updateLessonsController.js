@@ -17,7 +17,6 @@ const updateLesson = async (
   branchoffice,
   types
 ) => {
-  console.log(id);
   const foundedDetail = await LessonDetail.findOne({
     where: {
       id: id,
@@ -27,7 +26,6 @@ const updateLesson = async (
       where: { isMonitor: true },
     },
   });
-  console.log(foundedDetail);
   const foundedLesson = await Lessons.findOne({
     where: {
       id: foundedDetail.lessonId,
