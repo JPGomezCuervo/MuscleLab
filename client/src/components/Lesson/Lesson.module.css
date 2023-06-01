@@ -1,5 +1,6 @@
 .Card {
     display: flex;
+    height: 70vh;
     
 }
 .ImageContainer {

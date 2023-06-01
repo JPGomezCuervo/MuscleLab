@@ -7,10 +7,8 @@ import checkIcon from "../../assets/icons/check.png";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 
-
 const Plans = () => {
   const memberships = useSelector(selectAllMemberships);
- 
 
   return (
     <div className={style.BGContainer}>
@@ -30,21 +28,20 @@ const Plans = () => {
               <div key={index}>
                 <div className={style.card}>
                   <div className={style.firstcontent}>
-                    <span>Nombre: {membership.name}</span>
+                    <span>{membership.name}</span>
 
                     <img className={style.MainIcon} src={clockIcon} alt="" />
-                    
+
                     <h4>Duracion: {membership.duration}</h4>
                   </div>
 
                   <div class={style.secondcontent}>
+                    <Link to={`/pagos/${membership.id}`}>
+                      <button className={style.button}>Compra ahora</button>
+                    </Link>
                     <h4> Beneficios: {membership.benefits}</h4>
 
                     <h4>Precio: {membership.price}</h4>
-
-                    <Link to={`/pagos/${membership.id}`}>
-                      <button>Compra ahora</button>
-                    </Link>
                   </div>
                 </div>
               </div>

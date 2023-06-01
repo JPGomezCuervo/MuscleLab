@@ -81,7 +81,7 @@ const SedesDash = () => {
                         Días: {sede.scheduleDays?.join(", ")}
                       </h2>
                       <h2 className={style.texto}>
-                        Horario de atanción: {sede.scheduleHourStart}hs - {sede.scheduleHourFinish}hs
+                        Horario de atención: {sede.scheduleHourStart}hs - {sede.scheduleHourFinish}hs
                       </h2>
                     </div>
 
