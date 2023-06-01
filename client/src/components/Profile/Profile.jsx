@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserByID, selectUserByID } from "../../redux/features/usersSlice";
 import { Link } from "react-router-dom";
 //import Calendar from "../Calendar/Calendar";
-import clock from '../../assets/icons/clock.png' 
+import clock from '../../assets/icons/clock.png'
 const Profile = () => {
   const token = localStorage.getItem("token");
   const decoded = decodeJwt(token);
@@ -54,14 +54,24 @@ const Profile = () => {
     }
   };
 
+  const deleteClass = async (id) => {
+    try {
+      const response = await axios.put(`${URL}/users/removeLesson/${id}`, { idUser: decoded.id });
+      alert(response.data.success);
+    } catch (error) {
+      alert(error.message);
+    }
+    window.location.reload();
+  }
+
   return (
     <div className={style.general}>
       <Link to={"/calendar"}>
-        <button 
-            className={style.btnC}>
-        <img className={style.img} 
-              src={clock} alt="reloj"/> 
-        Calendario</button>
+        <button
+          className={style.btnC}>
+          <img className={style.img}
+            src={clock} alt="reloj" />
+          Calendario</button>
       </Link>
       <div className={style.container}>
         <div className={style.insignias}>

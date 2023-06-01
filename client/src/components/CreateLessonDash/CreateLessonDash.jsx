@@ -316,13 +316,13 @@ handleBranchOfficeOptions = (event) => {
         .then((res) => {
             console.log(res);
             this.setState({
-                serverResponse: "La clase no pudo ser creada",
+                serverResponse: "Clase creada exitosamente!",
                 message: '',
              });
         }).catch((err) => {
             console.log(err)
             this.setState({
-                serverErrorResponse: err.message,
+                serverErrorResponse: "La clase no pudo ser creada",
                 message: '',
             });
         })
@@ -361,7 +361,7 @@ handleBranchOfficeOptions = (event) => {
 
     handlePrevArrow = (event) => {
         event.preventDefault();
-        window.location.href = 'http://localhost:3000/dashboard/clases/';
+        window.location.href = 'https://muscle-lab-six.vercel.app/dashboard/clases/';
     };
 
 
@@ -581,7 +581,7 @@ handleBranchOfficeOptions = (event) => {
                         {this.state.message && <button className={style.AdvertiseButton1} onClick={this.handleConfirmarClick}>Confirmar</button>}
                         {this.state.message && <button className={style.AdvertiseButton2} onClick={this.handleVolverClick}>Volver</button>}
                         
-                        {this.state.serverResponse && <a href='http://localhost:3000/dashboard/clases' className={style.AdvertiseButton3} >Volver</a>}
+                        {this.state.serverResponse && <a href='https://muscle-lab-six.vercel.app/dashboard/clases' className={style.AdvertiseButton3} >Volver</a>}
                
                     </div>
                 </div>
@@ -595,7 +595,7 @@ handleBranchOfficeOptions = (event) => {
                         <h1>{this.state.serverErrorResponse}</h1>
                         <img className={style.CheckIcon} src={crossIcon} alt="" />
                         <div>
-                            <a className={style.AdvertiseButton3} href='http://localhost:3000/dashboard/clases'>
+                            <a className={style.AdvertiseButton3} href='https://muscle-lab-six.vercel.app/dashboard/clases'>
                                 Volver a Clases
                             </a>
                         </div>

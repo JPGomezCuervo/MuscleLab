@@ -34,6 +34,7 @@ const Nosotros = () => {
                   GitHub
                 </a>
               </div>
+
             </div>
           ))}
         </div>
