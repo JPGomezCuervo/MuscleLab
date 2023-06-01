@@ -337,7 +337,7 @@ class DetailLessonDash extends Component {
                 axios.delete(`${URL}/lessons/delete/${this.props.id}`)
                 .then((res) => {
                     this.setState({
-                        serverResponse: res.data,
+                        serverResponse: "Clase eliminada correctamente",
                         message: ''});
                 }).catch((err) => {
                     this.setState({
@@ -607,7 +607,7 @@ class DetailLessonDash extends Component {
                         Guardar cambios
                     </button>
 
-                    <button className={style.DeleteButton} onClick={this.handleConfirmRemove} disabled={!this.state.allowSubmit}>
+                    <button className={style.DeleteButton} onClick={this.handleConfirmRemove}>
                         Eliminar clase
                     </button>
                 </div>
