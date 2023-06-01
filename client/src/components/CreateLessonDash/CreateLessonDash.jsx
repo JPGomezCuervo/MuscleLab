@@ -316,13 +316,13 @@ handleBranchOfficeOptions = (event) => {
         .then((res) => {
             console.log(res);
             this.setState({
-                serverResponse: "La clase no pudo ser creada",
+                serverResponse: "Clase creada exitosamente!",
                 message: '',
              });
         }).catch((err) => {
             console.log(err)
             this.setState({
-                serverErrorResponse: err.message,
+                serverErrorResponse: "La clase no pudo ser creada",
                 message: '',
             });
         })
