@@ -432,7 +432,7 @@ class DetailLessonDash extends Component {
       return (
         <form className={style.MainContainer}>
             <div className={style.Navigation}>
-                <a href='http://localhost:3000/dashboard/clases'>
+                <a href='https://muscle-lab-six.vercel.app/dashboard/clases'>
                     <img className={style.ArrowIcon} src={arrowIcon} alt="" />
                 </a>
                 <h2>{lessonAttributes.name}</h2>
@@ -634,7 +634,7 @@ class DetailLessonDash extends Component {
                         <h1>{this.state.serverResponse}</h1>
                         <img className={style.CheckIcon} src={checkIcon} alt="" />
                         <div>
-                            <a className={style.AdvertiseButton3} href='http://localhost:3000/dashboard/clases'>
+                            <a className={style.AdvertiseButton3} href='https://muscle-lab-six.vercel.app/dashboard/clases'>
                                 Volver a Clases
                             </a>
                         </div>
@@ -649,7 +649,7 @@ class DetailLessonDash extends Component {
                         <h1>{this.state.serverErrorResponse}</h1>
                         <img className={style.CheckIcon} src={crossIcon} alt="" />
                         <div>
-                            <a className={style.AdvertiseButton3} href='http://localhost:3000/dashboard/clases'>
+                            <a className={style.AdvertiseButton3} href='https://muscle-lab-six.vercel.app/dashboard/clases'>
                                 Volver a Clases
                             </a>
                         </div>
