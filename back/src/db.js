@@ -4,31 +4,28 @@ const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DATABASE_URL } = process.env;
 
-const isLocal = true; // Cambia esto a false si deseas utilizar la base de datos en línea
-
-let sequelize;
-
-if (isLocal) {
-  sequelize = new Sequelize(
-    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-    {
-      logging: false,
-      native: false,
-    }
-  );
-} else {
-  sequelize = new Sequelize(`${DATABASE_URL}`, {
-    logging: false,
-    native: false,
-    dialect: "postgres",
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
+//!Para la base online
+const sequelize = new Sequelize(`${DATABASE_URL}`, {
+  logging: false, // set to console.log to see the raw SQL queries
+  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+  dialect: "postgres",
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false, // En entornos de producción, debes configurar esto en `true` y proporcionar el certificado adecuado
     },
-  });
-}
+  },
+});
+
+//!PARA EL LOCALHOST
+// const sequelize = new Sequelize(
+//   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+//   {
+//     logging: false,
+//     native: false,
+//   }
+// );
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];

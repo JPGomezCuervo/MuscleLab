@@ -20,22 +20,23 @@
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 
-const isLocal = true; // Cambia esto a false si deseas trabajar en el entorno de deploy
-
+// Syncing all the models at once.
 conn
   .sync({ alter: true })
   .then(() => {
-    if (isLocal) {
-      server.listen(3001, () => {
-        console.log("Server listening on port 3001"); // eslint-disable-line no-console
-      });
-    } else {
-      server.listen(5432, () => {
-        console.log("Server listening on port 5432"); // eslint-disable-line no-console
-      });
-    }
+    server.listen(5432, () => {
+      console.log("Server listening on port 5432"); // eslint-disable-line no-console
+    });
   })
   .catch((error) => {
     console.error("Error syncing models:", error);
   });
+  //!para el local host
+// conn
+// .sync({ alter: true })
+// .then(() => {
+//   server.listen(3001, () => {
+//     console.log("Server listening on port 3001"); // eslint-disable-line no-console
+//   });
+// })
 
