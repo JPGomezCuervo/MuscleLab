@@ -99,7 +99,7 @@ const Users = () => {
   const closeSuccessModal = () => {
     setSuccessModalIsOpen(false);
     setConfirmModalIsOpen(false);
-    navigate("/dashboard/clases")
+    navigate("/dashboard/usuarios")
   };
 
   //Delete user
