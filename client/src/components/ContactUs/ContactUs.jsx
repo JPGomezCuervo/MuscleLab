@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import style from "./ContactUs.module.css";
+import { useState } from "react";
+import ReactModal from "react-modal";
 
 
 
@@ -10,6 +12,18 @@ const ContactUs = () => {
     
 }, []);
   const form = useRef();
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
+  const openModal = (message) => {
+    setModalMessage(message);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
   
   const sendEmail = (e) => {
     e.preventDefault();
@@ -23,11 +37,11 @@ const ContactUs = () => {
       .then(
         (result) => {
           console.log(result.text);
-          alert('Mensaje enviado correctamente')
+          openModal('Mensaje enviado correctamente')
         },
         (error) => {
           console.log(error.text);
-          alert('Intentelo nuevamente')
+          openModal('Intentelo nuevamente')
         }
       );
     e.target.reset();
@@ -109,6 +123,11 @@ const ContactUs = () => {
                 <input type="submit" value="ENVIAR" />
               </div>
             </form>
+            <ReactModal isOpen={modalIsOpen} onRequestClose={closeModal} className={style.modal}>
+                    <h2 className={style.textModal}>Resultado</h2>
+                    <p className={style.textModal}>{modalMessage}</p>
+                    <button onClick={closeModal} className={style.SaveButton}>Aceptar</button>
+                  </ReactModal>
           </div>
         </section>
       </>
