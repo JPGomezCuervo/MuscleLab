@@ -1,7 +1,7 @@
 .nav{
     padding-top: .6rem;
     padding-bottom: .6rem;
-    text-align: center;
+    padding-right: 2%;
     display: flex;
     background-color:#013565 ;
     min-height: 6rem;
@@ -9,7 +9,6 @@
     position: fixed;
     gap: 2%;
     left: 0;
-    width: 100vw;
     right: 0;
 }
 
@@ -45,7 +44,6 @@
     display: flex;
     align-items: center;
     margin-right: 3%;
-    margin-left: .8%;
     cursor: pointer;
 }
 
@@ -54,13 +52,14 @@
     color: #ffffff;
     width: 3rem;
     text-align: start;
-    margin-left: 4rem;
+    
 }
 
 .IconContainer .IconMan{
-    position: absolute;
+    position: relative;
     height: 5rem;
     width: 5rem;
+    left: 6%;
 
 }
 
@@ -97,7 +96,8 @@
 }
 
 .BtnLink {
-    margin-left: 20%;
+    align-self: center;
+    margin-left: auto;
 }
 
 .btnPlanes:hover{
@@ -117,69 +117,23 @@
     border: 0;
     font-size: larger;
     cursor: pointer;
-
 }
 
-
-.btnRegistro{
-    padding: .3rem;
+.Login{
     background-color: transparent;
     color: white;
-    border: 1px solid white;
-    border-radius: 5px;
     font-family: 'Montserrat-regular', sans-serif;
-    font-weight: 100;
-    /* font-size: 17px; */
-    font-size: 12px;
-    margin-left: 2rem;
-    margin-right: 1.5rem;
-    cursor: pointer;
-}
-.btnRegistro1{
-    padding: .3rem;
-    background-color: transparent;
-    color: white;
-    border: 0;
-    border-radius: 5px;
-    font-family: 'Montserrat-regular', sans-serif;
-    font-weight: 100;
     font-size: 1rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
     cursor: pointer;
     width: 8rem;
 }
 
-.btnInicioSesion{
-    background-color: transparent;
-    color: white;
-    border: 0;
-    font-family: 'Montserrat-regular', sans-serif;
-    font-size: 17px;
-    margin-left: 1%;
-    margin-right: 1%;
-    cursor: pointer;
-    width: 9rem;;  
-}
-
-.LogOpcions{
+.LogOptions {
     display: flex;
     align-items: center;
-    width: fit-content;
+}
+.MarginAuto{
     margin-left: auto;
-}
-.LogOpciones2{
-    display: flex;
-    align-items: center;
-    width: fit-content;
-}
-
-.LogOpciones4{
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    margin-left: 10%;
-    
 }
 
 .btnRegistro4 {
@@ -246,6 +200,10 @@
     .btnRegistro1{
         width: 5.9rem;
     }
+}
+
+@media screen and (max-width: 1280px) {
+    
 }
 
 @media screen and (max-width: 414px){
