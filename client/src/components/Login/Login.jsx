@@ -10,7 +10,6 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import ReactModal from "react-modal";
 
 const Login = () => {
-  const [user, setUser] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
