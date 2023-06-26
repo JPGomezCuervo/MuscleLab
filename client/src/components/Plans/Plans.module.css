@@ -243,3 +243,22 @@
    
 }
 
+@media screen and (max-width: 414px) {
+    .PlansContainer {
+        flex-direction: column-reverse;
+        gap: 1rem;
+    }
+    
+    .Plan2 {
+        border: #bababa solid .1rem;
+        
+    }
+
+    .Plan .Plan2 {
+        box-shadow: none;
+    }
+
+    .TitleContainer h2 {
+        width: 100%;
+    }
+}
