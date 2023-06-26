@@ -143,6 +143,10 @@
     margin-left: auto;
 }
 
+.SpecialLI .Login {
+    display: none;
+}
+
 @media screen and (max-width: 1366px){
 
 
@@ -212,6 +216,10 @@
 
     .LogOptions{
         display: none;
+    }
+
+    .SpecialLI .Login {
+        display: intial;
     }
 
 }
