@@ -221,3 +221,9 @@
     } 
     
 }
+
+@media screen and (max-width: 390px) {
+    .ArrowRight {
+        left: 19rem;
+    }
+}
