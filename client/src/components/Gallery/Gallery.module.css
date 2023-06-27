@@ -24,6 +24,7 @@
     width: 140rem;
 
 }
+
 .TextImg h2{
     font-size: 7rem;
     color: #ffc300;
@@ -226,10 +227,16 @@
     .ArrowRight {
         left: 19rem;
     }
+    .btnPlanes {
+        left: 6.5rem;
+    }
 }
 
 @media screen and (max-width: 360px) {
     .ArrowRight {
         left: 17.6rem;
+    }
+    .btnPlanes {
+        left: 5.8rem;
     }
 }
