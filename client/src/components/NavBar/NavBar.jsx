@@ -75,7 +75,8 @@ const NavBar = () => {
                 <p className={style.Navbutton}>Contáctanos</p>
               </Link>
             </li>
-            <li className={style.SpecialLI}>
+          </ul>
+            <div className={style.SpecialLI}>
               {!isActive && !token && (
                 <Link className={style.Login} to="/login">
                   Iniciar sesión
@@ -87,9 +88,9 @@ const NavBar = () => {
                   Mi Perfil
                 </Link>
               )}
-            </li>
+            </div>
             
-            <li className={style.SpecialLI}>
+            <div className={style.SpecialLI}>
               {token && (
                 <Link
                   className={style.Login}
@@ -99,8 +100,7 @@ const NavBar = () => {
                   Cerrar Sesión
                 </Link>
               )}
-            </li>
-          </ul>
+            </div>
         </div>
 
         {!isActive && (

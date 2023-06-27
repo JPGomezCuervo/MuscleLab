@@ -142,9 +142,15 @@
 .MarginAuto{
     margin-left: auto;
 }
+.SpecialLI {
+    display: flex;
+    justify-content: center;
+
+}
 
 .SpecialLI .Login {
-    display: none;
+    display: none; 
+    margin-bottom: 1rem;
 }
 
 @media screen and (max-width: 1366px){
@@ -219,7 +225,7 @@
     }
 
     .SpecialLI .Login {
-        display: intial;
+        display: initial;
     }
 
 }
