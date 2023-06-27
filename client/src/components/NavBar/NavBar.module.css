@@ -29,8 +29,9 @@
     text-decoration: none;
 }
 
-.OptionsContainer ul {
-    margin: 0;
+.OptionsContainer {
+    height: 100%;
+    width:fit-content;
 }
 
 .OptionsContainer li{
