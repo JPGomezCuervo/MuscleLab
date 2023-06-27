@@ -40,7 +40,7 @@
 
 .insignias {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 }
 .insignias span {
   color: #fff;
