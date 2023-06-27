@@ -96,15 +96,18 @@
   z-index: 1;
 }
 .PasswordInput {
-  position: relative;
   display: flex;
   align-items: center;
-  width: 29.6rem;
+  width: 100%
 }
 .Input {
   padding-right: 30px;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+@media screen and (max-width: 1366px) {
+
 }
 @media screen and (max-width: 414px){
 

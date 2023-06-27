@@ -5,7 +5,7 @@ import instagram from "../../assets/icons/instagram.png"
 import linkedin from "../../assets/icons/linkedin.png"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchAllOffices, selectAllOffices, selectStatus } from "../../redux/features/officesSlice"
+import { fetchAllOffices, selectAllOffices } from "../../redux/features/officesSlice"
 import { useEffect } from "react"
 const Footer = () =>{
     const dispatch = useDispatch();
