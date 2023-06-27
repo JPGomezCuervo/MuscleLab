@@ -148,4 +148,30 @@
       height: 450px;
     }
   }
+
+  @media screen and (max-width: 390px) {
+    .BoxLeft h2 {
+        font-size: 2.5rem;
+        width: 85%;
+    }
+
+    .BoxLeft img {
+        height: 3.5rem;
+        width: 3.5rem;
+        left: 8rem;
+    }
+  }
+
+  @media screen and (max-width: 360px) {
+    .BoxLeft h2 {
+        font-size: 2.3rem;
+        width: 85%;
+    }
+
+    .BoxLeft img {
+        height: 3.2rem;
+        width: 3.2rem;
+        left: 8rem;
+    }
+  }
   
