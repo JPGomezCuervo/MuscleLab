@@ -12,6 +12,14 @@
     right: 0;
 }
 
+.nav a {
+    margin-bottom: 0;
+}
+
+.nav ul {
+    margin: 0;
+}
+
 .Checkbox{
     display: none;
 }
