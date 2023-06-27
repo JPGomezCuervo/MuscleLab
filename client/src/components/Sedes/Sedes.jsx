@@ -22,7 +22,7 @@ useEffect(()=>{
 
 
     return (
-        <div>
+        <>
                 {status === "loading" && <img className={style.LoadingIcon} src={loadingGif} alt=""/>}
             <div className={style.Container}>
 
@@ -37,7 +37,7 @@ useEffect(()=>{
             }
             )}
             </div>
-        </div>
+        </>
     )
 }
 

@@ -1,5 +1,5 @@
-.Card {
-    display: flex;  
+.Container {
+    padding-top: 6%;  
 }
 
 .LoadingIcon {
