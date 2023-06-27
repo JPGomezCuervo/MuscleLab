@@ -1,8 +1,14 @@
 import React from "react";
 import style from "./Nosotros.module.css";
 import teamData from "./teamData";
+import { useEffect } from "react";
 
 const Nosotros = () => {
+
+  useEffect(() => {
+    window.scrollTo({top: 0, left:0, behavior: 'auto'})
+    
+}, []);
   return (
     <div className={style.MainContainer}>
       <h2>Nosotros</h2>

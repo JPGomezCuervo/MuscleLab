@@ -33,7 +33,7 @@ const Login = () => {
   const handleLogin = async () => {
     if (!email || !password) {
       //alert("complete los campos");
-openModal();
+      openModal();
     } else {
       try {
         const response = await axios.post(`${URL}/users/login`, {
@@ -104,10 +104,18 @@ openModal();
       handleLogin();
     }
   };
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
+  
   return (
     <div className={style.BGContainer}>
-
-      <div className={style.Container} onKeyDown={handleKeyLogin} onMouseEnter={() => setIsHovered(true)}>
+      <div
+        className={style.Container}
+        onKeyDown={handleKeyLogin}
+        onMouseEnter={() => setIsHovered(true)}
+      >
         <h1>Inicia Sesión</h1>
         <h2 className={style.Description}>Para continuar con MuscleLab</h2>
 
@@ -129,7 +137,6 @@ openModal();
             value={password}
             onChange={handlePasswordChange}
             className={`${style.Input} ${style.PasswordInput}`}
-
           />
           <FontAwesomeIcon
             icon={showPassword ? faEyeSlash : faEye}
@@ -139,7 +146,10 @@ openModal();
         </div>
         {passwordError && <p className={style.ErrorMessage}>{passwordError}</p>}
 
-        <button className={`${style.ButtonLogIn} ${isHovered && style.ButtonHover}`} onClick={handleLogin}>
+        <button
+          className={`${style.ButtonLogIn} ${isHovered && style.ButtonHover}`}
+          onClick={handleLogin}
+        >
           Iniciar sesión
         </button>
 
@@ -155,8 +165,8 @@ openModal();
         >
           <h2 className={style.text}>Debe completar todos los campos</h2>
           <button onClick={closeModal} className={style.SaveButton}>
-    Aceptar
-  </button> 
+            Aceptar
+          </button>
         </ReactModal>
         <hr></hr>
 
