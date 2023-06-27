@@ -35,6 +35,7 @@
     border-top: .2rem solid #ffc300;
     width: 100%;
     display: flex;
+    justify-content: space-evenly;
 
 }
 .Info{
