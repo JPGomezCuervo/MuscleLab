@@ -230,3 +230,10 @@
     }
 
 }
+
+@media screen and (max-width: 360px) {
+
+    .IconContainer {
+        margin: 0;
+    }
+}
