@@ -27,6 +27,10 @@ const NavBar = () => {
     dispatch(setIsActive(false));
   };
 
+  const uncheck = () => {
+    document.getElementById("checkbox").checked = false;
+  };
+
   return (
     <>
       <nav className={style.nav}>
@@ -53,54 +57,65 @@ const NavBar = () => {
         <div className={style.DropMenuPhoneContainer}>
           <ul className={style.OptionsContainer}>
             <li>
-              <Link to={"/sedes"}>
-                <p className={style.Navbutton}>Sedes</p>
+              <Link className={style.Navbutton} to={"/sedes"} onClick={uncheck}>
+                Sedes
               </Link>
             </li>
 
             <li>
-              <a className={style.Navbutton} href="/clases">
-                <p>Clases</p>
-              </a>
-            </li>
-
-            <li>
-              <Link to={"/nosotros"}>
-                <p className={style.Navbutton}>Nosotros</p>
+              <Link className={style.Navbutton} to="/clases" onClick={uncheck}>
+                Clases
               </Link>
             </li>
 
             <li>
-              <Link to={"/contactanos"}>
-                <p className={style.Navbutton}>Contáctanos</p>
+              <Link
+                className={style.Navbutton}
+                to={"/nosotros"}
+                onClick={uncheck}
+              >
+                Nosotros
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                className={style.Navbutton}
+                to={"/contactanos"}
+                onClick={uncheck}
+              >
+                Contáctanos
               </Link>
             </li>
           </ul>
-            <div className={style.SpecialLI}>
-              {!isActive && !token && (
-                <Link className={style.Login} to="/login">
-                  Iniciar sesión
-                </Link>
-              )}
+          <div className={style.SpecialLI}>
+            {!isActive && !token && (
+              <Link className={style.Login} to="/login" onClick={uncheck}>
+                Iniciar sesión
+              </Link>
+            )}
 
-              {token && (
-                <Link className={style.Login} to="/profile">
-                  Mi Perfil
-                </Link>
-              )}
-            </div>
-            
-            <div className={style.SpecialLI}>
-              {token && (
-                <Link
-                  className={style.Login}
-                  to="/login"
-                  onClick={handleLogOut}
-                >
-                  Cerrar Sesión
-                </Link>
-              )}
-            </div>
+            {token && (
+              <Link className={style.Login} to="/profile" onClick={uncheck}>
+                Mi Perfil
+              </Link>
+            )}
+          </div>
+
+          <div className={style.SpecialLI}>
+            {token && (
+              <Link
+                className={style.Login}
+                to="/login"
+                onClick={() => {
+                  handleLogOut();
+                  uncheck();
+                }}
+              >
+                Cerrar Sesión
+              </Link>
+            )}
+          </div>
         </div>
 
         {!isActive && (
@@ -111,7 +126,7 @@ const NavBar = () => {
 
         {!isActive && !token && (
           <div className={style.LogOptions}>
-            <Link className={style.Login} to="/login">
+            <Link className={style.Login} to="/login" onClick={uncheck}> 
               Iniciar sesión
             </Link>
           </div>
