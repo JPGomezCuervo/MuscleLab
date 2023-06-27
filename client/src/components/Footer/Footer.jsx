@@ -9,8 +9,7 @@ import { fetchAllOffices, selectAllOffices, selectStatus } from "../../redux/fea
 import { useEffect } from "react"
 const Footer = () =>{
     const dispatch = useDispatch();
-    const sedes = useSelector(selectAllOffices)
-    const status = useSelector(selectStatus)
+    const sedes = useSelector(selectAllOffices);
      
 
 
